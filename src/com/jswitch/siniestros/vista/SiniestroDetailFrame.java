@@ -1,9 +1,11 @@
 package com.jswitch.siniestros.vista;
 
+import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
+import com.jswitch.asegurados.vista.AseguradoDetailFrame;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
-import com.jswitch.asegurados.vista.AseguradoDetailFrame;
+import com.jswitch.asegurados.vista.BuscarAseguradoDialog;
 import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.base.modelo.Dominios;
 import com.jswitch.siniestros.controlador.DetalleSiniestroGridInternalController;
@@ -118,6 +120,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         textControl1.setRequired(true);
 
         codLookupControl1.setAttributeName("asegurado.persona.nombreLargo");
+        codLookupControl1.setLookupButtonVisible(false);
         codLookupControl1.setMaxCharacters(25);
         codLookupControl1.setRequired(true);
 
@@ -134,6 +137,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         codLookupControl2.setAttributeName("certificado.titular.persona.nombreLargo");
         codLookupControl2.setEnabledOnEdit(false);
         codLookupControl2.setEnabledOnInsert(false);
+        codLookupControl2.setLookupButtonVisible(false);
 
         comboBoxControl1.setAttributeName("asegurado.persona.sexo");
         comboBoxControl1.setDomainId(Dominios.Sexo().getDomainId());
@@ -180,18 +184,18 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(codLookupControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(codLookupControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(codLookupControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -205,10 +209,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, labelControl1, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, numericControl1, textControl1, textControl5});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl2, labelControl1, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, numericControl1, textControl5});
 
         form1.add(jPanel2);
 
@@ -361,7 +365,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         lookupAsegurado.addLookup2ParentLink("asegurado");
 
         codLookupControl1.setLookupController(lookupAsegurado);
-        codLookupControl1.setOpenDetail("asegurado", DefaultDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{AseguradoDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
+        codLookupControl1.setOpenDetail("asegurado", AseguradoDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{AseguradoDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 
         codLookupControl2.setLookupController(new LookupController());
         codLookupControl2.setOpenDetail("asegurado.certificado.titular", DefaultDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);

@@ -3,10 +3,7 @@ package com.jswitch.asegurados.controlador;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
-import java.util.ArrayList;
-import java.util.Map;
 import org.openswing.swing.client.GridControl;
-import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
@@ -21,9 +18,6 @@ public class AseguradosGridInternalController extends DefaultGridInternalControl
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName()
-                , miGrid, (BeanVO) persistentObject, true);
+        new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, true);
     }
-
-
 }

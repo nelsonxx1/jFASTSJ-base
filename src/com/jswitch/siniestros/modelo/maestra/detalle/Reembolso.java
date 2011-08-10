@@ -42,6 +42,8 @@ public class Reembolso extends DetalleSiniestro {
     private Date fechaConstitucion;
 
     public Reembolso() {
+        setPresupuestadoAjustado(0d);
+        setPresupuestadoInicial(0d);
     }
 
     public Date getFechaConstitucion() {

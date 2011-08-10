@@ -78,7 +78,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         Beneficiario b = (Beneficiario) persistentObject;
         b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
 
-        return super.updateRecord(oldPersistentObject, persistentObject);
+        return super.updateRecord(oldPersistentObject, b);
     }
 
     @Override

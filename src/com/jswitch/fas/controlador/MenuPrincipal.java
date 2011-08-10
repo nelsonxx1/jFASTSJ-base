@@ -42,6 +42,7 @@ import com.jswitch.polizas.modelo.maestra.Poliza;
 import com.jswitch.asegurados.modelo.maestra.Titular;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
 import com.jswitch.asegurados.vista.AseguradoGridFrame;
+import com.jswitch.asegurados.vista.BuscarAseguradoDialog;
 import com.jswitch.certificados.vista.CertificadosGridFrame;
 import com.jswitch.configuracion.controlador.ConfiguracionPrimaAllGridFrameController;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionPrima;
@@ -55,8 +56,6 @@ import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
-import com.jswitch.certificados.controlador.BuscarCertificadoDetailFrameController;
-import com.jswitch.certificados.vista.BuscarCertificadoDetailFrame;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
@@ -434,7 +433,9 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getSiniestroNuevo() {
-        new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, null, false);
+//new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, null, false)
+        BuscarAseguradoDialog dialog = new BuscarAseguradoDialog();
+        dialog.setVisible(true);
     }
 
     public void getApsNuevo() {
@@ -495,7 +496,7 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
-    public void getTest(){
-        new BuscarCertificadoDetailFrameController(BuscarCertificadoDetailFrame.class.getName(), null, null, false);
+    public void getTest() {
+        AUN_NO_FUN();
     }
 }

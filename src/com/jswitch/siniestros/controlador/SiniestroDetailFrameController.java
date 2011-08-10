@@ -8,6 +8,7 @@ import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
 import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
 import com.jswitch.siniestros.vista.detalle.CartaAvalDetailFrame;
@@ -30,6 +31,11 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     public SiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
 
+    }
+
+    public SiniestroDetailFrame getVista() {
+        
+        return (SiniestroDetailFrame) vista;
     }
 
     public SiniestroDetailFrameController(String detailFramePath, GridControl gridControl, Boolean aplicarLogicaNegocio, Asegurado asegurado) {

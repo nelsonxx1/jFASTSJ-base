@@ -15,6 +15,9 @@ public class Dominios {
                 Dominios.CategoriaReporte().getDomainId(),
                 Dominios.CategoriaReporte());
         domains.put(
+                Dominios.TipoBusqueda().getDomainId(),
+                Dominios.TipoBusqueda());
+        domains.put(
                 Dominios.CategoriaSiniestro().getDomainId(),
                 Dominios.CategoriaSiniestro());
         domains.put(
@@ -31,6 +34,21 @@ public class Dominios {
                 Dominios.TipoEnfermedad().getDomainId(),
                 Dominios.TipoEnfermedad());
         return domains;
+    }
+
+    public static enum TipoBusqueda {
+
+        TITULARES, ASEGURADOS, GRUPO_FAMILIAR
+    }
+
+    public static Domain TipoBusqueda() {
+        Domain dominio = new Domain("TipoBusqueda");
+        TipoBusqueda o[] = TipoBusqueda.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
     }
 
     public static enum CategoriaReporte {
@@ -79,6 +97,7 @@ public class Dominios {
     }
 
     public static enum TipoTramiteSiniestro {
+
         MEDICO, QUIRURGICO
     }
 
