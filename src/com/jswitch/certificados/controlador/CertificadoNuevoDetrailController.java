@@ -16,6 +16,7 @@ import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.polizas.modelo.maestra.Poliza;
 import java.util.Date;
+import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -63,37 +64,35 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
             s = HibernateUtil.getSessionFactory().openSession();
             //s = HibernateUtil.getSessionFactory().openSession();
             Transaction t = s.beginTransaction();
-            CertificadoNuevo data = (CertificadoNuevo) newPersistentObject;
-            data.setCertificado(new Certificado());
+            CertificadoNuevo certificadoNuevo = (CertificadoNuevo) newPersistentObject;
+            certificadoNuevo.setCertificado(new Certificado());
             AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
-            data.getCertificado().setAuditoria(ab);
-            data.getTitular().setAuditoria(ab);
-            addTipoPersona(data.getAsegurado().getPersona(), new String[]{
-                        "ASE", "TIT"
-                    });
-            if (data.getAsegurado().getId() == null) {
-                data.getAsegurado().setAuditoria(ab);
+            certificadoNuevo.getCertificado().setAuditoria(ab);
+            certificadoNuevo.getTitular().setAuditoria(ab);
+            //addTipoPersona(certificadoNuevo.getAsegurado().getPersona(), new String[]{"ASE", "TIT"});
+            if (certificadoNuevo.getAsegurado().getId() == null) {
+                certificadoNuevo.getAsegurado().setAuditoria(ab);
             }
 
             Parentesco p = (Parentesco) s.createQuery("FROM " + Parentesco.class.getName() + " WHERE nombre=:nombre").
                     setString("nombre", "TITULAR").
                     uniqueResult();
 
-            data.getAsegurado().setCertificado(data.getCertificado());
+            certificadoNuevo.getAsegurado().setCertificado(certificadoNuevo.getCertificado());
 
-            data.getAsegurado().setParentesco(p);
-            data.getTitular().setPersona(data.getAsegurado().getPersona());
-            data.getCertificado().setTitular(data.getTitular());
-            data.getCertificado().getAsegurados().add(data.getAsegurado());
-            poliza.getCertificados().add(data.getCertificado());
-            s.saveOrUpdate(data.getTitular());
-            s.saveOrUpdate(data.getAsegurado());
-            s.save(data.getCertificado());
+            certificadoNuevo.getAsegurado().setParentesco(p);
+            certificadoNuevo.getTitular().setPersona(certificadoNuevo.getAsegurado().getPersona());
+            certificadoNuevo.getCertificado().setTitular(certificadoNuevo.getTitular());
+            certificadoNuevo.getCertificado().getAsegurados().add(certificadoNuevo.getAsegurado());
+            poliza.getCertificados().add(certificadoNuevo.getCertificado());
+            s.saveOrUpdate(certificadoNuevo.getTitular());
+            s.saveOrUpdate(certificadoNuevo.getAsegurado());
+            s.save(certificadoNuevo.getCertificado());
             s.update(poliza);
             t.commit();
 
             vista.dispose();
-            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, data.getCertificado(), poliza, false);
+            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, certificadoNuevo.getCertificado(), poliza, false);
 
 
             return new VOResponse(newPersistentObject);
@@ -105,10 +104,14 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
     }
 
     void addTipoPersona(Persona persona, String[] tags) {
-
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
+
+            if (persona.getId() != null) {
+                Hibernate.initialize(persona);
+            }
+
             //Transaction t = s.beginTransaction();
             for (String string : tags) {
                 TipoPersona tp = (TipoPersona) s.createQuery("FROM " + TipoPersona.class.getName() + " T WHERE T.idPropio=:idP").
