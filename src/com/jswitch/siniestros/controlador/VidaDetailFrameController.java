@@ -4,11 +4,14 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -30,6 +33,11 @@ public class VidaDetailFrameController extends DefaultDetailFrameController {
     public VidaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.siniestro = siniestro;
+        if (!checkRamo()) {
+            vista.dispose();
+            JOptionPane.showMessageDialog(gridControl, "Detalle no Valido\n"
+                    + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     @Override
@@ -62,6 +70,23 @@ public class VidaDetailFrameController extends DefaultDetailFrameController {
             return super.insertRecord(vida);
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));
+        } finally {
+            s.close();
+        }
+    }
+
+    private boolean checkRamo() {
+        Session s = null;
+        try {
+
+            s = HibernateUtil.getSessionFactory().openSession();
+            Query q = s.createQuery("FROM " + Ramo.class.getName() + " C"
+                    + " WHERE C.nombre='VIDA'");
+
+            return true;// VOResponse(newPersistentObject);
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "checkRamo", ex);
+            return false;
         } finally {
             s.close();
         }

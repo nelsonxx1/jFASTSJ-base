@@ -44,12 +44,12 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
                     + " WHERE asegurado.id=?").setLong(0, ((Asegurado) getMainPanel().getVOModel().getValueObject()).getId()).list();
             if (!l.isEmpty()) {
                 if (l.size() < 2) {
-                    new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, (Siniestro) l.get(0), false);
+                    new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, (Siniestro) l.get(0), true);
                 } else {
                     new SiniestroGridFrameController(new VOListResponse(l, false, l.size()));
                 }
             } else {
-                new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, false, ((Asegurado) getMainPanel().getVOModel().getValueObject()));
+                new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, ((Asegurado) getMainPanel().getVOModel().getValueObject()));
             }
 
         } catch (Exception ex) {

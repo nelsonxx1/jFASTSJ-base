@@ -1,16 +1,16 @@
 package com.jswitch.asegurados.vista;
 
+import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.AseguradosGridInternalControllerWithData;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.asegurados.modelo.utilitario.BuscarAsegurado;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import com.jswitch.fas.modelo.Dominios.TipoBusqueda;
+import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.InternalFrame;
@@ -25,11 +25,17 @@ import org.openswing.swing.util.java.Consts;
  */
 public class BuscarAseguradoDialog extends InternalFrame {
 
-    private BuscarAsegurado asegurado;
+    private BuscarAsegurado buscarAsegurado;
     private AseguradosGridInternalControllerWithData gridAsegurado;
 
-    public BuscarAseguradoDialog() {
+    /* title se usa para decidir el funcionamiento de la vista
+     * si llega "Asignar Asegurado a Siniestro" es el de siniestros y si llega
+     * "Buscar Asegurado" abre el detalle de  Asegurado
+     * @param title String
+     */
+    public BuscarAseguradoDialog(String title) {
         initComponents();
+        setTitle(title);
         gridAsegurado = new AseguradosGridInternalControllerWithData(this);
         Buscar b = new Buscar();
         form1.setFormController(b);
@@ -39,7 +45,17 @@ public class BuscarAseguradoDialog extends InternalFrame {
         jButton1.addActionListener(b);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(((int) d.getWidth() - this.getWidth()) / 2, ((int) d.getHeight() - this.getHeight()) / 2);
+        this.getRootPane().setDefaultButton(jButton1);
         MDIFrame.add(this);
+    }
+
+    public void openNext(Asegurado asegurado) {
+        if (getTitle().compareTo("Asignar Asegurado a Siniestro") == 0) {
+            new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, asegurado);
+            this.dispose();
+        } else {
+            new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), null, asegurado, false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -280,20 +296,21 @@ public class BuscarAseguradoDialog extends InternalFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
-            asegurado = (BuscarAsegurado) form1.getVOModel().getValueObject();
-            asegurado.setTipoBusqueda((TipoBusqueda) comboBoxControl1.getValue());
-            asegurado.setRif(textControl1.getText().trim());
-            asegurado.setNombreLargo(textControl4.getText().trim());
 
-            if ((asegurado.getRif() == null || asegurado.getRif().isEmpty())
-                    && (asegurado.getNombreLargo() == null || asegurado.getNombreLargo().isEmpty())) {
+            buscarAsegurado = (BuscarAsegurado) form1.getVOModel().getValueObject();
+            buscarAsegurado.setTipoBusqueda((TipoBusqueda) comboBoxControl1.getValue());
+            buscarAsegurado.setRif(textControl1.getText().trim());
+            buscarAsegurado.setNombreLargo(textControl4.getText().trim());
+
+            if ((buscarAsegurado.getRif() == null || buscarAsegurado.getRif().isEmpty())
+                    && (buscarAsegurado.getNombreLargo() == null || buscarAsegurado.getNombreLargo().isEmpty())) {
                 JOptionPane.showMessageDialog(BuscarAseguradoDialog.this, "datos.insuficientes", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            gridAsegurado.setData(asegurado.getNombreLargo(), asegurado.getRif(), asegurado.getTipoBusqueda(), checkBoxControl1.isSelected());
-            //System.out.println(gridControl4.getController());
-            //gridControl4.getReloadButton().doClick();
+
+            gridAsegurado.setData(buscarAsegurado.getNombreLargo(), buscarAsegurado.getRif(), buscarAsegurado.getTipoBusqueda(), checkBoxControl1.isSelected());
             gridControl4.reloadData();
+
         }
     }
 }
