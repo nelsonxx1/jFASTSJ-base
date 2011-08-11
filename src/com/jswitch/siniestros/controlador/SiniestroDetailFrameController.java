@@ -20,6 +20,7 @@ import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
 import java.awt.event.ActionEvent;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
+import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
@@ -34,7 +35,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     }
 
     public SiniestroDetailFrame getVista() {
-        
+
         return (SiniestroDetailFrame) vista;
     }
 
@@ -52,6 +53,11 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         Siniestro s = (Siniestro) newPersistentObject;
         s.setCertificado(s.getAsegurado().getCertificado());
         return super.insertRecord(s);
+    }
+
+    @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+        return new VOResponse(persistentObject);
     }
 
     @Override

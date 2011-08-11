@@ -84,10 +84,14 @@ public class TitularGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("persona.rif.rif");
+        textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("persona.nombreLargo");
+        textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
         checkBoxColumn1.setColumnName("auditoria.activo");

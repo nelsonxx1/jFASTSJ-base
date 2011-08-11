@@ -91,6 +91,7 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         gridData.getColumnContainer().add(textColumn1);
 
         textColumn2.setColumnName("persona.nombreLargo");
+        textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
         checkBoxColumn1.setColumnName("auditoria.activo");

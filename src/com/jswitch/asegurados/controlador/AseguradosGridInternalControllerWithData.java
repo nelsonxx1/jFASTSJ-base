@@ -6,8 +6,6 @@ import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.fas.modelo.Dominios.TipoBusqueda;
-import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
-import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.SessionFactory;
@@ -27,7 +25,6 @@ public class AseguradosGridInternalControllerWithData extends DefaultGridInterna
     private String sql, name, rif;
     private boolean sw;
     private TipoBusqueda tb;
-    private Asegurado asegurado;
     private BuscarAseguradoDialog dialog;
 
     public AseguradosGridInternalControllerWithData(BuscarAseguradoDialog dialog) {
@@ -42,21 +39,9 @@ public class AseguradosGridInternalControllerWithData extends DefaultGridInterna
         this.tb = tb;
     }
 
-    public Asegurado getAsegurado() {
-        return asegurado;
-    }
-
-    public void setAsegurado(Asegurado asegurado) {
-        this.asegurado = asegurado;
-    }
-
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-
-        asegurado = (Asegurado) persistentObject;
-        dialog.dispose();
-        new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, false, asegurado);
-
+        dialog.openNext((Asegurado) persistentObject);
     }
 
     @Override

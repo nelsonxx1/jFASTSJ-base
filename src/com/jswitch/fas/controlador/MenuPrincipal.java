@@ -57,6 +57,10 @@ import com.jswitch.auditoria.vista.LogGridFrame;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
+import com.jswitch.configuracion.modelo.dominio.Cobertura;
+import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
+import com.jswitch.pagos.vista.CoberturaGridFrame;
+import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
@@ -90,7 +94,6 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.siniestros.controlador.APSDetailFrameController;
 import com.jswitch.siniestros.controlador.AyudaSocialDetailFrameController;
 import com.jswitch.siniestros.controlador.CartaAvalDetailFrameController;
-import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
@@ -103,7 +106,6 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.EtapaSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
-import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.TipoSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
 import com.jswitch.siniestros.vista.detalle.CartaAvalDetailFrame;
@@ -270,6 +272,10 @@ public class MenuPrincipal implements ClientFacade {
         new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), null, null, false);
     }
 
+    public void getBuscarAsegurado() {
+        new BuscarAseguradoDialog("Buscar Asegurado").setVisible(true);
+    }
+
     public void getAsegurados() {
         new AseguradoGridFrameController(AseguradoGridFrame.class.getName(), AseguradoDetailFrame.class.getName(), Asegurado.class.getName(), null);
     }
@@ -384,6 +390,18 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="polizas">
+    public void getConfiguracionCoberturas() {
+        new DefaultAllGridFrameController(ConfiguracionCoberturaGridFrame.class.getName(), null, ConfiguracionCobertura.class.getName(),
+                "Configuracion Cobertura");
+    }
+
+    public void getCoberturas() { 
+    new DefaultAllGridFrameController(CoberturaGridFrame.class.getName(), null, Cobertura.class.getName(),
+                "Listado de Coberturas");
+    }
+    // </editor-fold >
+
+    // <editor-fold defaultstate="collapsed" desc="polizas">
     public void getRamoCobertura() {
         new RamoCoberturaGridFrameController(RamosCoberturasGridFrame.class.getName(), null, Ramo.class.getName(), null);
 
@@ -434,8 +452,7 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getSiniestroNuevo() {
 //new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, null, false)
-        BuscarAseguradoDialog dialog = new BuscarAseguradoDialog();
-        dialog.setVisible(true);
+        new BuscarAseguradoDialog("Asignar Asegurado a Siniestro").setVisible(true);
     }
 
     public void getApsNuevo() {

@@ -1,4 +1,4 @@
-package com.jswitch.pagos.modelo.transaccional;
+package com.jswitch.pagos.modelo.maestra;
 
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
@@ -7,6 +7,8 @@ import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
+import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
+import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;

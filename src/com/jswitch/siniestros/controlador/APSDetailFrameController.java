@@ -101,7 +101,7 @@ public class APSDetailFrameController extends DefaultDetailFrameController {
             vista.setOwnerVO((BeanVO) newPersistentObject);
             beanVO = (BeanVO) newPersistentObject;
             if (gridControl != null) {
-                gridControl.reloadData();
+                gridControl.getReloadButton().doClick();
             }
             return new VOResponse(newPersistentObject);
         } catch (Exception ex) {

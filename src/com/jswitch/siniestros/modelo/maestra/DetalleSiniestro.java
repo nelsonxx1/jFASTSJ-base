@@ -9,7 +9,7 @@ import com.jswitch.fas.modelo.Dominios.TipoEnfermedad;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
-import com.jswitch.pagos.modelo.transaccional.Pago;
+import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import java.io.Serializable;
