@@ -55,7 +55,7 @@ public class AseguradosGridInternalControllerWithData extends DefaultGridInterna
 
         asegurado = (Asegurado) persistentObject;
         dialog.dispose();
-        new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, false, asegurado);
+        new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, asegurado);
 
     }
 

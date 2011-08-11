@@ -29,7 +29,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
-                  <Component id="form1" alignment="0" pref="639" max="32767" attributes="0"/>
+                  <Component id="form1" alignment="0" pref="643" max="32767" attributes="0"/>
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -41,8 +41,8 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="form1" min="-2" pref="174" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="form1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel12" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -60,7 +60,7 @@
                   <Component id="editButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="559" max="32767" attributes="0"/>
+                  <EmptySpace pref="561" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,32 +113,32 @@
                           <Group type="102" attributes="0">
                               <Component id="labelControl1" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textControl1" pref="461" max="32767" attributes="0"/>
+                              <Component id="textControl1" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl4" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="codLookupControl1" pref="461" max="32767" attributes="0"/>
+                              <Component id="codLookupControl1" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl3" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="codLookupControl2" pref="461" max="32767" attributes="0"/>
+                              <Component id="codLookupControl2" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl5" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="numericControl1" pref="461" max="32767" attributes="0"/>
+                              <Component id="numericControl1" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl6" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboBoxControl1" pref="461" max="32767" attributes="0"/>
+                              <Component id="comboBoxControl1" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl7" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textControl5" pref="461" max="32767" attributes="0"/>
+                              <Component id="textControl5" pref="385" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -149,9 +149,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelControl1" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <Component id="textControl1" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="textControl1" linkSize="4" max="32767" attributes="1"/>
+                          <Component id="labelControl1" linkSize="4" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -161,7 +161,7 @@
                               <Component id="labelControl3" linkSize="4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="codLookupControl1" min="-2" pref="23" max="-2" attributes="1"/>
+                              <Component id="codLookupControl1" linkSize="4" min="-2" max="-2" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="codLookupControl2" linkSize="4" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -174,7 +174,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="labelControl6" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboBoxControl1" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboBoxControl1" linkSize="4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -222,7 +222,8 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;numero&quot;" type="code"/>
                 </Property>
-                <Property name="required" type="boolean" value="true"/>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
+                <Property name="enabledOnInsert" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl1">
@@ -230,6 +231,8 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
                 </Property>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
+                <Property name="enabledOnInsert" type="boolean" value="false"/>
                 <Property name="lookupButtonVisible" type="boolean" value="false"/>
                 <Property name="maxCharacters" type="int" value="25"/>
                 <Property name="required" type="boolean" value="true"/>
@@ -296,7 +299,7 @@
               <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                  <Component id="gridData" pref="607" max="32767" attributes="0"/>
+                  <Component id="gridData" pref="609" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -306,7 +309,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="gridData" pref="169" max="32767" attributes="0"/>
+                  <Component id="gridData" pref="194" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -335,7 +338,7 @@
                       <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="159" max="32767" attributes="0"/>
+                      <EmptySpace pref="161" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

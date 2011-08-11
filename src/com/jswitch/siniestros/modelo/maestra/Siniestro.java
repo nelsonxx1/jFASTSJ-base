@@ -9,7 +9,6 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -22,16 +21,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.Past;
 
 /**
  *
  * @author Adrian
  */
 @Entity
+@Table(name = "SINI_Siniestro")
 public class Siniestro extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -43,11 +41,28 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
+     * 
+     */
+    @Column
+    @BusinessKey
+    private Long seq;
+    /**
+     *
+     */
+    @Column
+    @BusinessKey
+    private Integer ayo;
+    /**
+     *
+     */
+    @Column
+    @BusinessKey
+    private Integer mes;
+    /**
      *
      */
     @Column
     private String numero;
-    
     /**
      *
      */
@@ -159,5 +174,29 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
 
     public void setRamo(Ramo ramo) {
         this.ramo = ramo;
+    }
+
+    public Integer getAyo() {
+        return ayo;
+    }
+
+    public void setAyo(Integer ayo) {
+        this.ayo = ayo;
+    }
+
+    public Integer getMes() {
+        return mes;
+    }
+
+    public void setMes(Integer mes) {
+        this.mes = mes;
+    }
+
+    public Long getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Long seq) {
+        this.seq = seq;
     }
 }
