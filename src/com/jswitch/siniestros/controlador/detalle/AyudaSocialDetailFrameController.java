@@ -1,16 +1,15 @@
-package com.jswitch.siniestros.controlador;
+package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
-import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
-import com.jswitch.siniestros.vista.detalle.FunerarioDetailFrame;
+import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
+import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
 import org.hibernate.Query;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -20,44 +19,43 @@ import org.openswing.swing.message.receive.java.ValueObject;
  *
  * @author orlandobcrra
  */
-public class FunerarioDetailFrameController extends DefaultDetailFrameController {
+public class AyudaSocialDetailFrameController extends DetalleSiniestroDetailFrameController {
 
-    public FunerarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
-        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-    }
-    private Siniestro siniestro;
-
-    public FunerarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
+    public AyudaSocialDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.siniestro = siniestro;
     }
 
+    public AyudaSocialDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+    }
+
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
-        Funerario fune = (Funerario) persistentObject;
-        TipoPersona tp = ((FunerarioDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
+        AyudaSocial ca = (AyudaSocial) persistentObject;
+
+        TipoPersona tp = ((AyudaSocialDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
         if (tp != null) {
-            fune.setTipoPersona(tp);
+            ca.setTipoPersona(tp);
         }
-        return super.updateRecord(oldPersistentObject, fune);
+        return super.updateRecord(oldPersistentObject, ca);
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        Funerario fune = (Funerario) newPersistentObject;
-        TipoPersona tp = ((FunerarioDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
-        if (tp != null) {
-            fune.setTipoPersona(tp);
-        }
-        fune.setSiniestro(siniestro);
+        AyudaSocial ca = (AyudaSocial) newPersistentObject;
+        TipoPersona tp = ((AyudaSocialDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
+        ca.setTipoPersona(tp);
+        ca.setSiniestro(siniestro);
         Session s = null;
         try {
+            vista.saveGridsData();
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
                     + " WHERE C.nombre='CARTA COMPROMISO'");
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
-            fune.setEtapaSiniestro(et);            
-            return super.insertRecord(fune);            
+            ca.setEtapaSiniestro(et);
+            return super.insertRecord(ca);
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));
         } finally {

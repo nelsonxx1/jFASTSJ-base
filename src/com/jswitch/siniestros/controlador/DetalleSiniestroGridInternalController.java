@@ -1,5 +1,12 @@
 package com.jswitch.siniestros.controlador;
 
+import com.jswitch.siniestros.controlador.detalle.AyudaSocialDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.FunerarioDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.ReembolsoDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.APSDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.VidaDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.CartaAvalDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.EmergenciaDetailFrameController;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
