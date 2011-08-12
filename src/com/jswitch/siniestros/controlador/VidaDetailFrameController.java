@@ -78,11 +78,15 @@ public class VidaDetailFrameController extends DefaultDetailFrameController {
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            Query q = s.createQuery("FROM " + Plan.class.getName() + " C"
-                    + " WHERE sumasAseguradas.diagnostico.especialidad.ramo.nombre='VIDA'"
-                    + " AND id=?");
-            Plan r = (Plan) q.setLong(0, siniestro.getAsegurado().getPlan().getId()).uniqueResult();
-            return (r != null)
+            Query q = s.createQuery("SELECT 1 AS SW FROM " + Plan.class.getName() + " P "
+                    + " JOIN P.sumasAseguradas S "
+                    + " WHERE S.diagnostico.especialidad.ramo.nombre='VIDA'"
+                    + " AND P.id=?");
+//                        Query q = s.createQuery("FROM " + Plan.class.getName() + " C"
+//                    + " WHERE C.sumasAseguradas.diagnostico.especialidad.ramo.nombre='VIDA'"
+//                    + " AND C.id=?");
+            int r = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list().size();
+            return (r == 1)
                     ? true : false;
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "checkRamo", ex);

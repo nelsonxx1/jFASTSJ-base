@@ -111,8 +111,10 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
 
         labelControl2.setLabel("asegurado.persona");
 
+        codLookupControl1.setAllowOnlyNumbers(true);
         codLookupControl1.setAttributeName("persona.nombreLargo");
         codLookupControl1.setControllerMethodName("getPersonaNueva");
+        codLookupControl1.setMaxCharacters(50);
         codLookupControl1.setRequired(true);
 
         labelControl3.setLabel("asegurado.parentesco");
@@ -120,18 +122,24 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         codLookupControl2.setAllowOnlyNumbers(true);
         codLookupControl2.setAttributeName("parentesco.nombre");
         codLookupControl2.setControllerMethodName("getParentesco");
+        codLookupControl2.setMaxCharacters(50);
+        codLookupControl2.setRequired(true);
 
         labelControl4.setLabel("asegurado.plazoEspera");
 
         codLookupControl3.setAllowOnlyNumbers(true);
         codLookupControl3.setAttributeName("plazoEspera.nombre");
         codLookupControl3.setControllerMethodName("getPlazoEspera");
+        codLookupControl3.setMaxCharacters(50);
+        codLookupControl3.setRequired(true);
 
         labelControl5.setLabel("asegurado.plan");
 
         codLookupControl4.setAllowOnlyNumbers(true);
         codLookupControl4.setAttributeName("plan.nombre");
         codLookupControl4.setControllerMethodName("getPlan");
+        codLookupControl4.setMaxCharacters(50);
+        codLookupControl4.setRequired(true);
 
         dateControl1.setAttributeName("fechaIngresoFondo");
         dateControl1.setRequired(true);
@@ -260,7 +268,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(numericControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl2, codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, labelControl1, labelControl11, labelControl12, labelControl13, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, numericControl1});
@@ -285,7 +293,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
