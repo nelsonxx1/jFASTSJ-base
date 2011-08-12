@@ -4,13 +4,12 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.configuracion.modelo.dominio.Ramo;
+import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
@@ -78,12 +77,13 @@ public class VidaDetailFrameController extends DefaultDetailFrameController {
     private boolean checkRamo() {
         Session s = null;
         try {
-
             s = HibernateUtil.getSessionFactory().openSession();
-            Query q = s.createQuery("FROM " + Ramo.class.getName() + " C"
-                    + " WHERE C.nombre='VIDA'");
-
-            return true;// VOResponse(newPersistentObject);
+            Query q = s.createQuery("FROM " + Plan.class.getName() + " C"
+                    + " WHERE sumasAseguradas.diagnostico.especialidad.ramo.nombre='VIDA'"
+                    + " AND id=?");
+            Plan r = (Plan) q.setLong(0, siniestro.getAsegurado().getPlan().getId()).uniqueResult();
+            return (r != null)
+                    ? true : false;
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "checkRamo", ex);
             return false;
