@@ -1,5 +1,8 @@
 package com.jswitch.siniestros.modelo.maestra;
 
+import com.jswitch.base.modelo.entidades.Documento;
+import com.jswitch.base.modelo.entidades.NotaTecnica;
+import com.jswitch.base.modelo.entidades.Observacion;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -125,6 +128,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Pago> pagos = new HashSet<Pago>();
+    /**
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BusinessKey(exclude = Method.ALL)
+    private Set<Observacion> observaciones = new HashSet<Observacion>(0);
+    /**
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BusinessKey(exclude = Method.ALL)
+    private Set<NotaTecnica> notasTecnicas = new HashSet<NotaTecnica>(0);
+    /**
+     * Coleccion de documentos anexos
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BusinessKey(exclude = Method.ALL)
+    private Set<Documento> documentos = new HashSet<Documento>(0);
     /**
      */
     @Version
@@ -265,5 +284,29 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     public void setSiniestro(Siniestro siniestro) {
         this.siniestro = siniestro;
+    }
+
+    public Set<Documento> getDocumentos() {
+        return documentos;
+    }
+
+    public void setDocumentos(Set<Documento> documentos) {
+        this.documentos = documentos;
+    }
+
+    public Set<NotaTecnica> getNotasTecnicas() {
+        return notasTecnicas;
+    }
+
+    public void setNotasTecnicas(Set<NotaTecnica> notasTecnicas) {
+        this.notasTecnicas = notasTecnicas;
+    }
+
+    public Set<Observacion> getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(Set<Observacion> observaciones) {
+        this.observaciones = observaciones;
     }
 }

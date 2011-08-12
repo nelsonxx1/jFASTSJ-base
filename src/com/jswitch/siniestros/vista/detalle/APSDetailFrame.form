@@ -37,7 +37,7 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="381" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="413" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -201,7 +201,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                          <EmptySpace pref="42" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -363,7 +363,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="337" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="369" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -398,9 +398,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="211" max="32767" attributes="0"/>
+                          <EmptySpace pref="243" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl4" alignment="0" pref="311" max="32767" attributes="2"/>
+                      <Component id="gridControl4" alignment="0" pref="343" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -494,8 +494,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="rows" type="int" value="3"/>
                     <Property name="horizontalGap" type="int" value="2"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -539,7 +539,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="337" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="369" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -574,9 +574,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="211" max="32767" attributes="0"/>
+                          <EmptySpace pref="243" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl5" alignment="0" pref="311" max="32767" attributes="2"/>
+                      <Component id="gridControl5" alignment="0" pref="343" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -664,8 +664,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="rows" type="int" value="3"/>
                     <Property name="horizontalGap" type="int" value="2"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -680,6 +680,28 @@
               </SubComponents>
             </Container>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel6">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Documentos Anexos">
+                <Property name="tabTitle" type="java.lang.String" value="Documentos Anexos"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="651" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="369" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
@@ -698,7 +720,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="337" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="369" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

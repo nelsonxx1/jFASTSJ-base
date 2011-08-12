@@ -1,5 +1,6 @@
 package com.jswitch.siniestros.vista;
 
+import com.jswitch.siniestros.vista.*;
 import com.jswitch.base.controlador.util.DefaultLookupControllerPorNombre;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
