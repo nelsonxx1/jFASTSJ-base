@@ -1,18 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.jswitch.siniestros.controlador;
+package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
-import com.jswitch.siniestros.modelo.maestra.detalle.APS;
-import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
+import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
+import com.jswitch.siniestros.vista.detalle.EmergenciaDetailFrame;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.openswing.swing.client.GridControl;
@@ -24,36 +19,35 @@ import org.openswing.swing.message.receive.java.ValueObject;
  *
  * @author orlandobcrra
  */
-public class APSDetailFrameController extends DefaultDetailFrameController {
+public class EmergenciaDetailFrameController extends DetalleSiniestroDetailFrameController {
 
-    public APSDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+    public EmergenciaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
-    private Siniestro siniestro;
 
-    public APSDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
+    public EmergenciaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.siniestro = siniestro;
     }
 
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
-        APS aps = (APS) persistentObject;
-        TipoPersona tp = ((APSDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
+        Emergencia emergencia = (Emergencia) persistentObject;
+        TipoPersona tp = ((EmergenciaDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
         if (tp != null) {
-            aps.setTipoPersona(tp);
+            emergencia.setTipoPersona(tp);
         }
-        return super.updateRecord(oldPersistentObject, aps);
+        return super.updateRecord(oldPersistentObject, emergencia);
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        APS aps = (APS) newPersistentObject;
-        TipoPersona tp = ((APSDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
+        Emergencia emergencia = (Emergencia) newPersistentObject;
+        TipoPersona tp = ((EmergenciaDetailFrame) vista).getLookupPersonaPago().getTipoPersona();
         if (tp != null) {
-            aps.setTipoPersona(tp);
+            emergencia.setTipoPersona(tp);
         }
-        aps.setSiniestro(siniestro);
+        emergencia.setSiniestro(siniestro);
         Session s = null;
         try {
             vista.saveGridsData();
@@ -61,8 +55,8 @@ public class APSDetailFrameController extends DefaultDetailFrameController {
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
                     + " WHERE C.nombre='CARTA COMPROMISO'");
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
-            aps.setEtapaSiniestro(et);
-            return super.insertRecord(aps);
+            emergencia.setEtapaSiniestro(et);
+            return super.insertRecord(emergencia);
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));
         } finally {

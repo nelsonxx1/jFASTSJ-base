@@ -1,7 +1,6 @@
-package com.jswitch.siniestros.controlador;
+package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.maestra.Plan;
@@ -22,12 +21,11 @@ import org.openswing.swing.message.receive.java.ValueObject;
  *
  * @author orlandobcrra
  */
-public class VidaDetailFrameController extends DefaultDetailFrameController {
+public class VidaDetailFrameController extends DetalleSiniestroDetailFrameController {
 
     public VidaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
-    private Siniestro siniestro;
 
     public VidaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
