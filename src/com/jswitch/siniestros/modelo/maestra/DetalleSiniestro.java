@@ -29,6 +29,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -42,6 +43,7 @@ import javax.persistence.Version;
  * @author Adrian
  */
 @Entity
+@Table(name="SINI_DetalleSiniestro")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class DetalleSiniestro extends BeanVO implements Serializable, Auditable {
 
