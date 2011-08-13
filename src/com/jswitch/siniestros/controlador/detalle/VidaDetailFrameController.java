@@ -80,9 +80,6 @@ public class VidaDetailFrameController extends DetalleSiniestroDetailFrameContro
                     + " JOIN P.sumasAseguradas S "
                     + " WHERE S.diagnostico.especialidad.ramo.nombre='VIDA'"
                     + " AND P.id=?");
-//                        Query q = s.createQuery("FROM " + Plan.class.getName() + " C"
-//                    + " WHERE C.sumasAseguradas.diagnostico.especialidad.ramo.nombre='VIDA'"
-//                    + " AND C.id=?");
             int r = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list().size();
             return (r == 1)
                     ? true : false;

@@ -42,7 +42,7 @@ public class DesgloseCobertura extends BeanVO implements Serializable, Auditable
      *
      */
     @Column
-    private Double montoAmaparado;
+    private Double montoAmparado;
      /**
      * 
      */
@@ -108,12 +108,12 @@ public class DesgloseCobertura extends BeanVO implements Serializable, Auditable
         this.detalle = detalle;
     }
 
-    public Double getMontoAmaparado() {
-        return montoAmaparado;
+    public Double getMontoAmparado() {
+        return montoAmparado;
     }
 
-    public void setMontoAmaparado(Double montoAmaparado) {
-        this.montoAmaparado = montoAmaparado;
+    public void setMontoAmparado(Double montoAmaparado) {
+        this.montoAmparado = montoAmaparado;
     }
 
     public Double getMontoFacturado() {

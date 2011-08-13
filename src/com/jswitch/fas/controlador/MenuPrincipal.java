@@ -64,6 +64,7 @@ import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
+import com.jswitch.pagos.controlador.PagoDetailFrameController;
 import com.jswitch.persona.controlador.PersonasGridController;
 import com.jswitch.persona.controlador.mant.TipoPersonaGridFrameController;
 import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
@@ -91,6 +92,7 @@ import com.jswitch.rol.modelo.MenuByRol;
 import com.jswitch.rol.modelo.Rol;
 import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
+import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.siniestros.controlador.detalle.APSDetailFrameController;
 import com.jswitch.siniestros.controlador.detalle.AyudaSocialDetailFrameController;
 import com.jswitch.siniestros.controlador.detalle.CartaAvalDetailFrameController;
@@ -395,8 +397,8 @@ public class MenuPrincipal implements ClientFacade {
                 "Configuracion Cobertura");
     }
 
-    public void getCoberturas() { 
-    new DefaultAllGridFrameController(CoberturaGridFrame.class.getName(), null, Cobertura.class.getName(),
+    public void getCoberturas() {
+        new DefaultAllGridFrameController(CoberturaGridFrame.class.getName(), null, Cobertura.class.getName(),
                 "Listado de Coberturas");
     }
     // </editor-fold >
@@ -514,6 +516,6 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getTest() {
-        AUN_NO_FUN();
+        new PagoDetailFrameController(PagoDetailFrame.class.getName(), null, null, true);
     }
 }
