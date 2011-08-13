@@ -1,6 +1,8 @@
 package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
+import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
+import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -30,12 +32,15 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public Response loadData(Class valueObjectClass) {
+        System.out.println("aui");
         Session s = HibernateUtil.getSessionFactory().openSession();
         DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, ((DetalleSiniestro) beanVO).getId());
         Hibernate.initialize(sin.getNotasTecnicas());
         Hibernate.initialize(sin.getObservaciones());
         Hibernate.initialize(sin.getDocumentos());
+        Hibernate.initialize(sin.getPagos());
         s.close();
+        System.out.println("aquiiiiiii2");
         beanVO = sin;
         return new VOResponse(beanVO);
     }
