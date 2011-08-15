@@ -11,7 +11,6 @@ import com.jswitch.base.controlador.sistema.usuarios.UsuarioDetailController;
 import com.jswitch.base.controlador.sistema.usuarios.UsuariosGridController;
 import com.jswitch.base.controlador.util.DefaultAllGridFrameController;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
-import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.Encabezado;
 import com.jswitch.base.modelo.entidades.Licencia;
@@ -97,6 +96,7 @@ import com.jswitch.siniestros.controlador.detalle.APSDetailFrameController;
 import com.jswitch.siniestros.controlador.detalle.AyudaSocialDetailFrameController;
 import com.jswitch.siniestros.controlador.detalle.CartaAvalDetailFrameController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
+import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
@@ -470,31 +470,31 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getApsGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), APSDetailFrame.class.getName(), APS.class.getName(), "APS");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), APSDetailFrame.class.getName(), APS.class.getName(), "APS");
     }
 
     public void getCartaAvalGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), CartaAvalDetailFrame.class.getName(), CartaAval.class.getName(), "Carta Aval");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), CartaAvalDetailFrame.class.getName(), CartaAval.class.getName(), "Carta Aval");
     }
 
     public void getAyudaSocialGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), AyudaSocialDetailFrame.class.getName(), AyudaSocial.class.getName(), "Ayuda Social");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), AyudaSocialDetailFrame.class.getName(), AyudaSocial.class.getName(), "Ayuda Social");
     }
 
     public void getEmergenciaGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), EmergenciaDetailFrame.class.getName(), Emergencia.class.getName(), "Emergencia");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), EmergenciaDetailFrame.class.getName(), Emergencia.class.getName(), "Emergencia");
     }
 
     public void getReembolsoGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), ReembolsoDetailFrame.class.getName(), Reembolso.class.getName(), "Reembolso");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), ReembolsoDetailFrame.class.getName(), Reembolso.class.getName(), "Reembolso");
     }
 
     public void getFunerarioGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), FunerarioDetailFrame.class.getName(), Funerario.class.getName(), "Funerario");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), FunerarioDetailFrame.class.getName(), Funerario.class.getName(), "Funerario");
     }
 
     public void getVidaGrid() {
-        new DefaultGridFrameController(DetalleSiniestroGridFrame.class.getName(), VidaDetailFrame.class.getName(), Vida.class.getName(), "Funerario");
+        new DetalleSiniestroGridFrameController(DetalleSiniestroGridFrame.class.getName(), VidaDetailFrame.class.getName(), Vida.class.getName(), "Funerario");
     }
 
     public void getEtapaSiniestro() {

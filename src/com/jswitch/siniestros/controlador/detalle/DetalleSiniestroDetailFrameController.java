@@ -5,6 +5,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.pagos.controlador.PagoDetailFrameController;
 import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, ((DetalleSiniestro) beanVO).getId());
         Hibernate.initialize(sin.getNotasTecnicas());
         Hibernate.initialize(sin.getObservaciones());
+        Hibernate.initialize(sin.getPagos());
         Hibernate.initialize(sin.getDocumentos());
         s.close();
         beanVO = sin;
@@ -45,6 +47,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new PagoDetailFrameController(Pago.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
+        new PagoDetailFrameController(PagoDetailFrame.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
     }
 }

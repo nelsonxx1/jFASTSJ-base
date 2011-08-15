@@ -40,13 +40,14 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Pago pago = (Pago) newPersistentObject;
         pago.setEstatusPago(EstatusPago.PENDIENTE);
+        detalleSiniestro.getPagos().add(pago);
         insertDetalle(detalleSiniestro);
         return super.insertRecord(pago);
     }
 
     @Override
-    public Response logicaNegocio(ValueObject persistentObject) {
-        Pago pago = (Pago) persistentObject;
+public Response logicaNegocio(ValueObject persistentObject) {
+    Pago pago = (Pago) persistentObject;
         Date fF = pago.getFechaFactura();
         Date fR = pago.getFechaRecepcion();
         if (fF.compareTo(fR) > 0) {
