@@ -11,6 +11,7 @@ import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.siniestros.controlador.SiniestroLookupController;
 import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
+import com.jswitch.siniestros.controlador.detalle.ReembolsoDetailFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
@@ -25,12 +26,12 @@ import org.openswing.swing.util.java.Consts;
  * @author Luis Adrian
  */
 public class ReembolsoDetailFrame extends DefaultDetailFrame {
-
+    
     private PersonaTipoLookupController lookupPersonaPago = new PersonaTipoLookupController();
-
+    
     public ReembolsoDetailFrame() {
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -594,11 +595,11 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
     public BeanVO getBeanVO() {
         return (BeanVO) form1.getVOModel().getValueObject();
     }
-
+    
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
-
+        
         lookupPersonaPago.addLookup2ParentLink("personaPago");
         codLookupControl1.setLookupController(lookupPersonaPago);
         codLookupControl1.setOpenDetail("personaPago",
@@ -616,12 +617,12 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
         SiniestroLookupController e = new SiniestroLookupController(EtapaSiniestro.class.getName(), Reembolso.class.getName());
         e.addLookup2ParentLink("etapaSiniestro");
         codLookupControl4.setLookupController(e);
-
+        insertButton8.addActionListener((ReembolsoDetailFrameController) formController);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
-
-
-
+        
+        
+        
         if (addToMDIFrame) {
             pack();
         } else {
@@ -629,7 +630,7 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
         }
         MDIFrame.add(this);
     }
-
+    
     @Override
     public void setOwnerVO(BeanVO beanVO) {
         //controllerBeneficiarios.setBeanVO(beanVO);
@@ -642,12 +643,12 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
         //controllerDocumentos.setBeanVO(beanVO, id);
         reloadGridsData();
     }
-
+    
     @Override
     public Form getMainPanel() {
         return form1;
     }
-
+    
     @Override
     public void modeChanged(int currentMode) {
         if (currentMode == Consts.INSERT) {
@@ -659,7 +660,7 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
             setEnableGridInternalButtons(true);
         }
     }
-
+    
     private void setEnableGridInternalButtons(boolean enabled) {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -743,15 +744,15 @@ public class ReembolsoDetailFrame extends DefaultDetailFrame {
     @Override
     public void reloadGridsData() {
     }
-
+    
     @Override
     public void clearGridsData() {
     }
-
+    
     @Override
     public void saveGridsData() {
     }
-
+    
     public PersonaTipoLookupController getLookupPersonaPago() {
         return lookupPersonaPago;
     }

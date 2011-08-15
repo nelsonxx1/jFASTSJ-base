@@ -3,8 +3,11 @@ package com.jswitch.siniestros.controlador.detalle;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.pagos.controlador.PagoDetailFrameController;
+import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import java.awt.event.ActionEvent;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -38,5 +41,10 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         s.close();
         beanVO = sin;
         return new VOResponse(beanVO);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        new PagoDetailFrameController(Pago.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
     }
 }

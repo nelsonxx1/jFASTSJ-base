@@ -5,11 +5,14 @@
 package com.jswitch.pagos.controlador;
 
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
+import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -22,14 +25,22 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class PagoDetailFrameController extends DefaultDetailFrameController {
 
+    private DetalleSiniestro detalleSiniestro;
+
     public PagoDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+    }
+
+    public PagoDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
+        super(detailFramePath, gridControl, null, aplicarLogicaNegocio);
+        this.detalleSiniestro = beanVO;
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Pago pago = (Pago) newPersistentObject;
         pago.setEstatusPago(EstatusPago.PENDIENTE);
+        insertDetalle(detalleSiniestro);
         return super.insertRecord(pago);
     }
 
@@ -53,5 +64,19 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
         }
 
         return new VOResponse(pago);
+    }
+
+    private void insertDetalle(DetalleSiniestro detalleSiniestro) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.update(detalleSiniestro);
+            s.getTransaction().commit();
+        } catch (Exception ex) {
+        } finally {
+            s.close();
+        }
+
     }
 }
