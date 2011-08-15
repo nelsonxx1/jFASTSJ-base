@@ -5,7 +5,6 @@
 package com.jswitch.pagos.controlador;
 
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
-import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import java.util.ArrayList;
 import org.openswing.swing.client.GridControl;

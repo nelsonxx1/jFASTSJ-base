@@ -53,7 +53,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
    
