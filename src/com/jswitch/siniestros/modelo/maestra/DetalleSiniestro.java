@@ -14,6 +14,7 @@ import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
+import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -33,6 +34,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 /**
@@ -46,7 +48,7 @@ import javax.persistence.Version;
  * @author Adrian
  */
 @Entity
-@Table(name="SINI_DetalleSiniestro")
+@Table(name = "SINI_DetalleSiniestro")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class DetalleSiniestro extends BeanVO implements Serializable, Auditable {
 
@@ -146,6 +148,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
+    /**
+     * 
+     */
+    @Transient
+    protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
     /**
      */
     @Version
