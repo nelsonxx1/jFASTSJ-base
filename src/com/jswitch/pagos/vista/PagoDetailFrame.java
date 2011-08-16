@@ -12,6 +12,7 @@ import com.jswitch.pagos.controlador.DesgloseSumaAseguradaGridInternalController
 import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
+import java.awt.event.ActionListener;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -356,11 +357,6 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         jPanel13.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
 
         insertButton6.setButtonId("asegurado");
-        insertButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertButton6ActionPerformed(evt);
-            }
-        });
         jPanel13.add(insertButton6);
         jPanel13.add(editButton6);
         jPanel13.add(deleteButton6);
@@ -411,21 +407,15 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-private void insertButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButton6ActionPerformed
-    new DesgloseSumaAseguradaDetailFrameController(DesgloseSumaAseguradaDetailFrame.class.getName(), gridControl4, false,(Pago)getBeanVO());
-}//GEN-LAST:event_insertButton6ActionPerformed
-
     public BeanVO getBeanVO() {
         return (BeanVO) form1.getVOModel().getValueObject();
     }
 
-    public GridControl getGridAsegurado() {
+    public GridControl getGridDesgloseSumaAsegurada() {
         return gridControl4;
     }
 
-    public GridControl getGridBeneficiario() {
-        return gridControl5;
-    }
+
 
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
@@ -447,7 +437,7 @@ private void insertButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         CoberturaLookupController lookupCobertura = new CoberturaLookupController();
         lookupCobertura.addLookup2ParentLink("cobertura");
         codLookupColumn2.setLookupController(lookupCobertura);
-
+        insertButton6.addActionListener((ActionListener) formController);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
 

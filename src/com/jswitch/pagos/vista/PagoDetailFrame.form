@@ -596,9 +596,6 @@
                       <Connection code="&quot;asegurado&quot;" type="code"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertButton6ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="org.openswing.swing.client.EditButton" name="editButton6">
                 </Component>

@@ -5,7 +5,10 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.vista.DesgloseSumaAseguradaDetailFrame;
+import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.awt.event.ActionEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
@@ -88,5 +91,9 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
             s.close();
         }
 
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        new DesgloseSumaAseguradaDetailFrameController(DesgloseSumaAseguradaDetailFrame.class.getName(), ((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada(), false, (Pago) getBeanVO());
     }
 }
