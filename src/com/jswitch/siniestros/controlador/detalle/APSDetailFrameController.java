@@ -3,11 +3,15 @@ package com.jswitch.siniestros.controlador.detalle;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.pagos.controlador.DiagnosticoSiniestroDetailFrameController;
+import com.jswitch.pagos.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
+import java.awt.event.ActionEvent;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.openswing.swing.client.GridControl;
@@ -62,5 +66,10 @@ public class APSDetailFrameController extends DetalleSiniestroDetailFrameControl
         } finally {
             s.close();
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        new DiagnosticoSiniestroDetailFrameController(((APSDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO);
     }
 }

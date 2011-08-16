@@ -38,11 +38,13 @@ public class Tratamiento extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      *
      */
     @ManyToOne
+    @BusinessKey
     private Diagnostico diagnostico;
     /**
      */
