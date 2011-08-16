@@ -31,7 +31,8 @@ import org.openswing.swing.util.java.Consts;
 
 /**
  *
- * @author Luis Adrian
+ * @author Orlando Becerra
+ * @author Luis Adrian * 
  */
 public class ReembolsoDetailFrame extends DefaultDetailFrame {
 
