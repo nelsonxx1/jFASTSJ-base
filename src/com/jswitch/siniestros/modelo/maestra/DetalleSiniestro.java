@@ -149,6 +149,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
     /**
+     * Coleccion de documentos anexos
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BusinessKey(exclude = Method.ALL)
+    private Set<DiagnosticoSiniestro> diagnosticoSiniestros = new HashSet<DiagnosticoSiniestro>(0);
+    /**
      * 
      */
     @Transient
@@ -317,5 +323,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     public void setObservaciones(Set<Observacion> observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public Set<DiagnosticoSiniestro> getDiagnosticoSiniestros() {
+        return diagnosticoSiniestros;
+    }
+
+    public void setDiagnosticoSiniestros(Set<DiagnosticoSiniestro> diagnosticoSiniestros) {
+        this.diagnosticoSiniestros = diagnosticoSiniestros;
     }
 }

@@ -119,5 +119,5 @@ public class SiniestroLookupController extends DefaultLookupController {
                 s.close();
             }
         }
-    }
+    }  
 }
