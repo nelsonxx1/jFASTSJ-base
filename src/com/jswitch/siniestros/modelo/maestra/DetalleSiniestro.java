@@ -46,6 +46,7 @@ import javax.persistence.Version;
 /**
  *
  * @author Adrian
+ * 
  */
 @Entity
 @Table(name = "SINI_DetalleSiniestro")
