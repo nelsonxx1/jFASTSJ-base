@@ -14,13 +14,8 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
-import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
-import com.jswitch.siniestros.vista.detalle.CartaAvalDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroChousser;
-import com.jswitch.siniestros.vista.detalle.EmergenciaDetailFrame;
-import com.jswitch.siniestros.vista.detalle.FunerarioDetailFrame;
 import com.jswitch.siniestros.vista.detalle.ReembolsoDetailFrame;
-import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -97,25 +92,25 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         if (beanVO != null) {
             switch (DetalleSiniestroChousser.showDialog()) {
                 case 0:
-                    new APSDetailFrameController(APSDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new APSDetailFrameController(APSDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 1:
-                    new AyudaSocialDetailFrameController(AyudaSocialDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new AyudaSocialDetailFrameController(AyudaSocialDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 2:
-                    new CartaAvalDetailFrameController(CartaAvalDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new CartaAvalDetailFrameController(CartaAvalDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 3:
-                    new EmergenciaDetailFrameController(EmergenciaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new EmergenciaDetailFrameController(EmergenciaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 4:
-                    new FunerarioDetailFrameController(FunerarioDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new FunerarioDetailFrameController(FunerarioDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 5:
                     new ReembolsoDetailFrameController(ReembolsoDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
                 case 6:
-                    new VidaDetailFrameController(VidaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
+                    //new VidaDetailFrameController(VidaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
                     break;
             }
         }

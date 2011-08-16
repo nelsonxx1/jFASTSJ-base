@@ -21,12 +21,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
-import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
-import com.jswitch.siniestros.vista.detalle.CartaAvalDetailFrame;
-import com.jswitch.siniestros.vista.detalle.EmergenciaDetailFrame;
-import com.jswitch.siniestros.vista.detalle.FunerarioDetailFrame;
 import com.jswitch.siniestros.vista.detalle.ReembolsoDetailFrame;
-import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Query;
@@ -50,25 +45,25 @@ public class DetalleSiniestroGridInternalController extends DefaultGridInternalC
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         if (persistentObject instanceof APS) {
-            new APSDetailFrameController(APSDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new APSDetailFrameController(APSDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
         if (persistentObject instanceof CartaAval) {
-            new CartaAvalDetailFrameController(CartaAvalDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new CartaAvalDetailFrameController(CartaAvalDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
         if (persistentObject instanceof AyudaSocial) {
-            new AyudaSocialDetailFrameController(AyudaSocialDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new AyudaSocialDetailFrameController(AyudaSocialDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
           if (persistentObject instanceof Emergencia) {
-            new EmergenciaDetailFrameController(EmergenciaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new EmergenciaDetailFrameController(EmergenciaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
         if (persistentObject instanceof Funerario) {
-            new FunerarioDetailFrameController(FunerarioDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new FunerarioDetailFrameController(FunerarioDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
         if (persistentObject instanceof Reembolso) {
             new ReembolsoDetailFrameController(ReembolsoDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
          if (persistentObject instanceof Vida) {
-            new VidaDetailFrameController(VidaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
+            //new VidaDetailFrameController(VidaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false);
         }
     }
 

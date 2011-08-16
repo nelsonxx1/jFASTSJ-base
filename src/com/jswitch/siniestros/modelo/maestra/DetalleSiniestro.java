@@ -40,8 +40,6 @@ import javax.persistence.Version;
 /**
  *
  * EMERGENCIA, CARTA_AVAL, REEMBOLSO, ATENCION_MEDICA_PRIMARIA, ATENCION_MEDICA_HOGAR, ODONTOLOGIA, FUNERARIO, VIDA
- *
- * @author Personal
  */
 /**
  *
