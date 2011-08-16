@@ -659,7 +659,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         } else {
             setBounds(0, 0, 0, 0);
         }
-        MDIFrame.add(this);
+        MDIFrame.add(this);        
     }
 
     @Override

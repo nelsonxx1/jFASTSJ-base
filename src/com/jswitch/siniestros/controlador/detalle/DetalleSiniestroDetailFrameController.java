@@ -39,6 +39,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         Hibernate.initialize(sin.getNotasTecnicas());
         Hibernate.initialize(sin.getObservaciones());
         Hibernate.initialize(sin.getPagos());
+        Hibernate.initialize(sin.getDiagnosticoSiniestros());
         Hibernate.initialize(sin.getDocumentos());
         s.close();
         beanVO = sin;
