@@ -32,7 +32,7 @@ import org.openswing.swing.util.java.Consts;
 /**
  *
  * @author Orlando Becerra
- * @author Luis Adrian * 
+ * @author Luis Adrian 
  */
 public class ReembolsoDetailFrame extends DefaultDetailFrame {
 
