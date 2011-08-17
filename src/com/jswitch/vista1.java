@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Subselect;
 
 /**
- * jaja prueba
+ * jaja prueba 2
  * @author Personal
  */
 @Entity
