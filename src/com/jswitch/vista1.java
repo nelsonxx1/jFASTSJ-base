@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 /**
  * jaja prueba 5
- * @author Personal
+ * @author Personal ----
  */
 @Entity
 public class vista1 extends BeanVO implements Serializable {
