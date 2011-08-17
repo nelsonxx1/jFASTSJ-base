@@ -43,6 +43,12 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
      */
     @ManyToOne()
     @BusinessKey(exclude = Method.ALL)
+    private DetalleSiniestro detalleSiniestro;
+    /**
+     *
+     */
+    @ManyToOne()
+    @BusinessKey(exclude = Method.ALL)
     private Diagnostico diagnostico;
     /**
      *
@@ -74,6 +80,8 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     private AuditoriaBasica auditoria;
 
     public DiagnosticoSiniestro() {
+        montoPagado = 0d;
+        montoPendiente = 0d;
     }
 
     public Long getId() {
@@ -130,5 +138,13 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
 
     public void setTratamientos(Set<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
+    }
+
+    public DetalleSiniestro getDetalleSiniestro() {
+        return detalleSiniestro;
+    }
+
+    public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
+        this.detalleSiniestro = detalleSiniestro;
     }
 }

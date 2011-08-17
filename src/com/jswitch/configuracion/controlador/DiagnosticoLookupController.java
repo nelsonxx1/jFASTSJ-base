@@ -80,9 +80,9 @@ public class DiagnosticoLookupController extends DefaultLookupController {
                         //return new VOListResponse(new ArrayList(marca.getModelos()), false, marca.getModelos().size());
                         Session s = null;
                         try {
-                            String sql = "SELECT DISTINCT C FROM " + Diagnostico.class.getName()
-                                    + " C LEFT JOIN C.especialidad T "
-                                    + "WHERE T.ramo.id =?  AND C.auditoria.activo=?";
+                            String sql = "FROM " + Diagnostico.class.getName()
+                                    + " C WHERE C.especialidad.ramo.id =?  AND C.auditoria.activo=? "
+                                    + "ORDER BY C.especialidad.nombre, C.nombre";
                             SessionFactory sf = HibernateUtil.getSessionFactory();
                             s = sf.openSession();
                             List l = s.createQuery(sql).setLong(0, ramo.getId()).setBoolean(1, Boolean.TRUE).list();

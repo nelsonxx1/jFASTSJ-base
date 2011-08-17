@@ -9,6 +9,7 @@ import com.jswitch.base.modelo.entidades.Observacion;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
+import com.jswitch.pagos.controlador.DiagnosticoSiniestroGridInternalController;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.reporte.modelo.Reporte;
@@ -18,7 +19,9 @@ import com.jswitch.siniestros.controlador.detalle.reportes.ReporteGridInternalCo
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
+import java.awt.event.ActionListener;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -32,6 +35,7 @@ import org.openswing.swing.util.java.Consts;
 public class APSDetailFrame extends DefaultDetailFrame {
 
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
+    protected DefaultGridInternalController controllerDiagnosticoSiniesto;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
     protected DefaultGridInternalController controllerReportes;
@@ -111,7 +115,26 @@ public class APSDetailFrame extends DefaultDetailFrame {
         jPanel3 = new javax.swing.JPanel();
         gridReportes = new org.openswing.swing.client.GridControl();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
-        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        gridDiagnosticos = new org.openswing.swing.client.GridControl();
+        decimalColumn6 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn11 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
+        checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateTimeColumn4 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateTimeColumn5 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        jPanel17 = new javax.swing.JPanel();
+        insertButton8 = new org.openswing.swing.client.InsertButton();
+        editButton7 = new org.openswing.swing.client.EditButton();
+        deleteButton7 = new org.openswing.swing.client.DeleteButton();
+        saveButton8 = new org.openswing.swing.client.SaveButton();
+        reloadButton8 = new org.openswing.swing.client.ReloadButton();
 
         setTitle("APS");
 
@@ -271,7 +294,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
                     .addComponent(codLookupControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, codLookupControl3, comboBoxControl1, dateControl1, dateControl2, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, textControl1});
@@ -346,8 +369,8 @@ public class APSDetailFrame extends DefaultDetailFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
-            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addContainerGap(293, Short.MAX_VALUE))
+            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -363,7 +386,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -421,8 +444,8 @@ public class APSDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addContainerGap(293, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -438,7 +461,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
@@ -516,7 +539,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)))
+                        .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -533,7 +556,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
@@ -566,28 +589,118 @@ public class APSDetailFrame extends DefaultDetailFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
         jTabbedPane1.addTab("Reportes", jPanel3);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+        jPanel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        gridDiagnosticos.setDeleteButton(deleteButton7);
+        gridDiagnosticos.setEditButton(editButton7);
+        gridDiagnosticos.setMaxNumberOfRowsOnInsert(4);
+        gridDiagnosticos.setReloadButton(reloadButton8);
+        gridDiagnosticos.setSaveButton(saveButton8);
+        gridDiagnosticos.setValueObjectClassName(DiagnosticoSiniestro.class.getName());
+
+        decimalColumn6.setColumnName("id");
+        decimalColumn6.setColumnRequired(false);
+        decimalColumn6.setColumnVisible(false);
+        decimalColumn6.setPreferredWidth(40);
+        gridDiagnosticos.getColumnContainer().add(decimalColumn6);
+
+        decimalColumn1.setColumnName("montoPendiente");
+        gridDiagnosticos.getColumnContainer().add(decimalColumn1);
+
+        decimalColumn2.setColumnName("montoPagado");
+        gridDiagnosticos.getColumnContainer().add(decimalColumn2);
+
+        textColumn6.setColumnName("diagnostico.nombre");
+        textColumn6.setMaxCharacters(1024);
+        gridDiagnosticos.getColumnContainer().add(textColumn6);
+
+        textColumn11.setColumnName("diagnostico.especialidad.nombre");
+        textColumn11.setMaxCharacters(1024);
+        gridDiagnosticos.getColumnContainer().add(textColumn11);
+
+        textColumn12.setColumnName("diagnostico.especialidad.ramo.nombre");
+        textColumn12.setMaxCharacters(1024);
+        gridDiagnosticos.getColumnContainer().add(textColumn12);
+
+        checkBoxColumn1.setColumnName("auditoria.activo");
+        gridDiagnosticos.getColumnContainer().add(checkBoxColumn1);
+
+        textColumn10.setColumnName("auditoria.usuarioInsert");
+        textColumn10.setColumnRequired(false);
+        gridDiagnosticos.getColumnContainer().add(textColumn10);
+
+        dateTimeColumn4.setColumnName("auditoria.fechaInsert");
+        dateTimeColumn4.setColumnRequired(false);
+        gridDiagnosticos.getColumnContainer().add(dateTimeColumn4);
+
+        textColumn7.setColumnFilterable(true);
+        textColumn7.setColumnName("auditoria.usuarioUpdate");
+        textColumn7.setColumnRequired(false);
+        textColumn7.setColumnSortable(true);
+        gridDiagnosticos.getColumnContainer().add(textColumn7);
+
+        dateTimeColumn5.setColumnFilterable(true);
+        dateTimeColumn5.setColumnName("auditoria.fechaUpdate");
+        dateTimeColumn5.setColumnRequired(false);
+        dateTimeColumn5.setColumnSortable(true);
+        gridDiagnosticos.getColumnContainer().add(dateTimeColumn5);
+
+        jPanel17.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
+        jPanel17.add(insertButton8);
+        jPanel17.add(editButton7);
+        jPanel17.add(deleteButton7);
+        jPanel17.add(saveButton8);
+        jPanel17.add(reloadButton8);
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+            .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Diagnostico Siniestro", jPanel7);
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 664, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 417, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Diagnostico Siniestro", jPanel8);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -605,7 +718,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -655,6 +768,15 @@ public class APSDetailFrame extends DefaultDetailFrame {
         gridReportes.setGridDataLocator(controllerReportes);
         gridReportes.setController(controllerReportes);
 
+        controllerDiagnosticoSiniesto =
+                new DiagnosticoSiniestroGridInternalController(DetalleSiniestro.class.getName(), "getDiagnosticoSiniestros", gridDiagnosticos);
+        gridDiagnosticos.setGridDataLocator(controllerDiagnosticoSiniesto);
+        gridDiagnosticos.setController(controllerDiagnosticoSiniesto);
+
+
+
+
+
         lookupPersonaPago.addLookup2ParentLink("personaPago");
         codLookupControl1.setLookupController(lookupPersonaPago);
         codLookupControl1.setOpenDetail("personaPago",
@@ -666,6 +788,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         SiniestroLookupController e = new SiniestroLookupController(EtapaSiniestro.class.getName(), APS.class.getName());
         e.addLookup2ParentLink("etapaSiniestro");
         codLookupControl3.setLookupController(e);
+        insertButton8.addActionListener((ActionListener) formController);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
         if (addToMDIFrame) {
@@ -673,7 +796,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         } else {
             setBounds(0, 0, 0, 0);
         }
-        MDIFrame.add(this);        
+        MDIFrame.add(this);
     }
 
     @Override
@@ -683,6 +806,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
             id = ((DetalleSiniestro) beanVO).getId();
         }
         controllerDocumentosAnexosX.setBeanVO(beanVO, id);
+        controllerDiagnosticoSiniesto.setBeanVO(beanVO);
         controllerObservaciones.setBeanVO(beanVO);
         controllerNotasTecnicas.setBeanVO(beanVO);
         controllerReportes.setBeanVO(beanVO);
@@ -710,6 +834,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         jPanel11.setVisible(enabled);
         jPanel13.setVisible(enabled);
         jPanel15.setVisible(enabled);
+        jPanel17.setVisible(enabled);
     }
 
     @Override
@@ -717,6 +842,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         gridControl4.reloadData();
         gridControl5.reloadData();
         gridControl3.reloadData();
+        gridDiagnosticos.reloadData();
     }
 
     @Override
@@ -724,6 +850,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         gridControl4.clearData();
         gridControl3.clearData();
         gridControl5.clearData();
+        gridDiagnosticos.clearData();
     }
 
     @Override
@@ -731,6 +858,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
         gridControl3.getSaveButton().doClick();
         gridControl4.getSaveButton().doClick();
         gridControl5.getSaveButton().doClick();
+        gridDiagnosticos.getSaveButton().doClick();
     }
 
     public PersonaTipoLookupController getLookupPersonaPago() {
@@ -738,6 +866,7 @@ public class APSDetailFrame extends DefaultDetailFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumn1;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn2;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
@@ -750,22 +879,31 @@ public class APSDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn3;
+    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn4;
+    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn5;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn4;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn6;
     private org.openswing.swing.client.DeleteButton deleteButton5;
     private org.openswing.swing.client.DeleteButton deleteButton6;
+    private org.openswing.swing.client.DeleteButton deleteButton7;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.EditButton editButton5;
     private org.openswing.swing.client.EditButton editButton6;
+    private org.openswing.swing.client.EditButton editButton7;
     private org.openswing.swing.client.FilterButton filterButton5;
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControl3;
     private org.openswing.swing.client.GridControl gridControl4;
     private org.openswing.swing.client.GridControl gridControl5;
+    private org.openswing.swing.client.GridControl gridDiagnosticos;
     private org.openswing.swing.client.GridControl gridReportes;
     private org.openswing.swing.client.InsertButton insertButton5;
     private org.openswing.swing.client.InsertButton insertButton6;
     private org.openswing.swing.client.InsertButton insertButton7;
+    private org.openswing.swing.client.InsertButton insertButton8;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -774,12 +912,14 @@ public class APSDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl1;
     private org.openswing.swing.client.LabelControl labelControl2;
@@ -792,18 +932,29 @@ public class APSDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.ReloadButton reloadButton5;
     private org.openswing.swing.client.ReloadButton reloadButton6;
     private org.openswing.swing.client.ReloadButton reloadButton7;
+    private org.openswing.swing.client.ReloadButton reloadButton8;
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.SaveButton saveButton5;
     private org.openswing.swing.client.SaveButton saveButton6;
     private org.openswing.swing.client.SaveButton saveButton7;
+    private org.openswing.swing.client.SaveButton saveButton8;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn10;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn11;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn7;
     private org.openswing.swing.table.columns.client.TextColumn textColumn8;
     private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     private org.openswing.swing.client.TextControl textControl1;
     private org.openswing.swing.client.TextControl textControl2;
     // End of variables declaration//GEN-END:variables
+
+    public GridControl getGridDiagnosticos() {
+        return gridDiagnosticos;
+    }
 }
