@@ -1,26 +1,14 @@
 package com.jswitch.siniestros.controlador;
 
-import com.jswitch.siniestros.controlador.detalle.AyudaSocialDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.FunerarioDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.ReembolsoDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.APSDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.VidaDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.CartaAvalDetailFrameController;
-import com.jswitch.siniestros.controlador.detalle.EmergenciaDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
-import com.jswitch.siniestros.vista.detalle.APSDetailFrame;
-import com.jswitch.siniestros.vista.detalle.AyudaSocialDetailFrame;
-import com.jswitch.siniestros.vista.detalle.CartaAvalDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroChousser;
-import com.jswitch.siniestros.vista.detalle.EmergenciaDetailFrame;
-import com.jswitch.siniestros.vista.detalle.FunerarioDetailFrame;
-import com.jswitch.siniestros.vista.detalle.ReembolsoDetailFrame;
-import com.jswitch.siniestros.vista.detalle.VidaDetailFrame;
+import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -76,7 +64,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
         Long seq = null;
         try {
-            seq= ((BigInteger) s.createSQLQuery("SELECT nextval('seq_siniestro');").uniqueResult()).longValue();
+            seq = ((BigInteger) s.createSQLQuery("SELECT nextval('seq_siniestro');").uniqueResult()).longValue();
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "logicaNegocioDespuesSave", ex));
         }
@@ -84,7 +72,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         DecimalFormat nf = new DecimalFormat("00000");
         SimpleDateFormat df = new SimpleDateFormat("yyMM-");
         Siniestro siniestro = (Siniestro) persistentObject;
-        
+
         siniestro.setNumero(df.format(c.getTime()) + nf.format(seq));
         siniestro.setAyo(c.get(Calendar.YEAR));
         siniestro.setMes(c.get(Calendar.MONTH + 1));
@@ -95,28 +83,9 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     @Override
     public void actionPerformed(ActionEvent e) {
         if (beanVO != null) {
-            switch (DetalleSiniestroChousser.showDialog()) {
-                case 0:
-                    new APSDetailFrameController(APSDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 1:
-                    new AyudaSocialDetailFrameController(AyudaSocialDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 2:
-                    new CartaAvalDetailFrameController(CartaAvalDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 3:
-                    new EmergenciaDetailFrameController(EmergenciaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 4:
-                    new FunerarioDetailFrameController(FunerarioDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 5:
-                    new ReembolsoDetailFrameController(ReembolsoDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
-                case 6:
-                    new VidaDetailFrameController(VidaDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO);
-                    break;
+            Class c = DetalleSiniestroChousser.showDialog();
+            if (c != null && c.getClass() != null) {
+                new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO, c);
             }
         }
     }

@@ -40,8 +40,6 @@ import javax.persistence.Version;
 /**
  *
  * EMERGENCIA, CARTA_AVAL, REEMBOLSO, ATENCION_MEDICA_PRIMARIA, ATENCION_MEDICA_HOGAR, ODONTOLOGIA, FUNERARIO, VIDA
- *
- * @author Personal
  */
 /**
  *
@@ -127,6 +125,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @ManyToOne
     private EtapaSiniestro etapaSiniestro;
+    /**
+     * 
+     */
+    @Transient
+     private transient String tipoDetalle;
     /**
      *
      */
@@ -332,5 +335,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     public void setDiagnosticoSiniestros(Set<DiagnosticoSiniestro> diagnosticoSiniestros) {
         this.diagnosticoSiniestros = diagnosticoSiniestros;
+    }
+
+    public String getTipoDetalle() {    
+        String s=this.getClass().getName();
+        return s.substring(s.lastIndexOf(".")+1);
     }
 }

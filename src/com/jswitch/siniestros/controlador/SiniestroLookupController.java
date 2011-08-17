@@ -84,9 +84,7 @@ public class SiniestroLookupController extends DefaultLookupController {
                 q.setBoolean(0, true);
                 q.setBoolean(1, true);
                 List l = q.list();
-                ArrayList li = new ArrayList(l);
-
-                return new VOListResponse(li, false, li.size());
+                return new VOListResponse(l, false, l.size());
             } catch (Exception ex) {
                 LoggerUtil.error(this.getClass(), "loadData", ex);
                 return new ErrorResponse(ex.getMessage());
@@ -102,7 +100,7 @@ public class SiniestroLookupController extends DefaultLookupController {
 
                 String sql = "FROM " + classFullName
                         + " C WHERE C." + att
-                        + "=? AND C.auditoria.activo=? AND upper(C.nombre) like ?";
+                        + "=? AND C.auditoria.activo=? AND upper(C.nombre) like upper(?)";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Query q = s.createQuery(sql);
@@ -110,8 +108,7 @@ public class SiniestroLookupController extends DefaultLookupController {
                 q.setBoolean(1, true);
                 q.setString(2, "%" + code.toUpperCase().trim() + "%");
                 List l = q.list();
-                ArrayList list = new ArrayList(l);
-                return new VOListResponse(list, false, list.size());
+                return new VOListResponse(l, false, l.size());
             } catch (Exception ex) {
                 LoggerUtil.error(this.getClass(), "validateCode", ex);
                 return new ErrorResponse(ex.getMessage());
@@ -119,5 +116,5 @@ public class SiniestroLookupController extends DefaultLookupController {
                 s.close();
             }
         }
-    }  
+    }
 }

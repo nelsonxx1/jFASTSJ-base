@@ -10,10 +10,19 @@
  */
 package com.jswitch.siniestros.vista.detalle;
 
+import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
+import com.jswitch.siniestros.modelo.maestra.detalle.APS;
+import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
+import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
+import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
+import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
+import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
+import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import javax.swing.JButton;
 
 /**
@@ -23,8 +32,18 @@ import javax.swing.JButton;
 public class DetalleSiniestroChousser extends javax.swing.JDialog {
 
     /** Creates new form DetalleSiniestroChousser */
+    private HashMap<String, Class> tipos = new HashMap<String, Class>(0);
+
     public DetalleSiniestroChousser() {
+
         this.setModal(true);
+        tipos.put("APS", APS.class);
+        tipos.put("Ayuda Social", AyudaSocial.class);
+        tipos.put("Carta Aval", CartaAval.class);
+        tipos.put("Emergencia", Emergencia.class);
+        tipos.put("Gastos Funerarios", Funerario.class);
+        tipos.put("Reembolso", Reembolso.class);
+        tipos.put("Vida", Vida.class);
         initComponents();
         Evento e = new Evento();
         jButton1.addActionListener(e);
@@ -49,40 +68,22 @@ public class DetalleSiniestroChousser extends javax.swing.JDialog {
         }
     }
     private String resp = "";
-    private String tipos[] = {"APS", "Ayuda Social", "Carta Aval", "Emergencia", "Gastos Funerarios", "Reembolso", "Vida"};
 
     /**
-     * posibles opciones seleccionadas por el analista para ver que tipo de detalle
-     * de siniestro desea:
-     * <p>
-     * -1. Cerrar<br/>
-     * &nbsp;0. APS<br/>
-     * &nbsp;1. Ayuda Social<br/>
-     * &nbsp;2. Carta Aval<br/>
-     * &nbsp;3. Emergencia<br/>
-     * &nbsp;4. Gastos Funerarios<br/>
-     * &nbsp;5. Reembolso<br/>
-     * &nbsp;6. Vida<br/>
-     * </p>
-     * @return selected Option index
+     *
+     * @return selected Class Type
+     * 
      */
-    public static int showDialog() {
+    public static Class showDialog() {
         DetalleSiniestroChousser d = null;
         try {
             d = new DetalleSiniestroChousser();
             d.setVisible(true);
-            for (int i = 0; i < d.tipos.length; i++) {
-                if (d.resp.equals(d.tipos[i])) {
-                    return i;
-                }
-            }
+            return d.tipos.get(d.resp);
         } finally {
             d.dispose();
         }
-
-        return -1;
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.

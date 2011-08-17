@@ -33,9 +33,10 @@ public class PersonaTipoLookupController extends DefaultLookupController {
 
     private TipoPersona tipoPersona;
     private String[] tp;
-/**
- * pone por defauld clinicas laboratiorios y medicos
- */
+
+    /**
+     * pone por defauld clinicas laboratiorios y medicos
+     */
     public PersonaTipoLookupController() {
         this(new String[]{"CLI", "LAB", "MED"});
     }
@@ -47,23 +48,16 @@ public class PersonaTipoLookupController extends DefaultLookupController {
         this.setCodeSelectionWindow(PersonaTipoLookupController.TREE_GRID_FRAME);
         this.getLookupDataLocator().setNodeNameAttribute("nombre");
         this.setLookupValueObjectClassName(Persona.class.getName());
-        //this.addLookup2ParentLink("marcaModelo");
         this.setAllColumnVisible(false);
         this.setVisibleColumn("rif.rif", true);
         this.setVisibleColumn("nombreLargo", true);
-
-        //this.setVisibleColumn("marca.nombre", true);
-        //this.setVisibleColumn("nombre", true);
         this.setPreferredWidthColumn("rif.rif", 100);
         this.setPreferredWidthColumn("nombreLargo", 200);
-        //this.setPreferredWidthColumn("nombre", 200);
-        //this.setPreferredWidthColumn("marca.nombre", 150);
         this.setFilterableColumn("rif.rif", true);
         this.setFilterableColumn("nombreLargo", true);
-        //this.setFilterableColumn("marca.nombre", true);
-        //this.setSortableColumn("marca.nombre", true);
-        //this.setSortableColumn("nombre", true);
         this.setSortedColumn("nombreLargo", Consts.ASC_SORTED);
+
+        addLookup2ParentLink("personaPago");
 
     }
 

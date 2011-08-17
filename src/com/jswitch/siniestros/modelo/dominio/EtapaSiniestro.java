@@ -36,6 +36,7 @@ public class EtapaSiniestro extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      *
