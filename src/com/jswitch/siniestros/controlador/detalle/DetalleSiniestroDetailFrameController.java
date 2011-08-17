@@ -5,6 +5,7 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.pagos.controlador.DiagnosticoSiniestroDetailFrameController;
 import com.jswitch.pagos.controlador.PagoDetailFrameController;
 import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
@@ -104,7 +105,12 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new PagoDetailFrameController(PagoDetailFrame.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
+        if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
+            new PagoDetailFrameController(PagoDetailFrame.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
+        }
+        if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
+            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO);
+        }
     }
 
     @Override
