@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * jaja prueba 2
+ * jaja prueba 5
  * @author Personal
  */
 @Entity
