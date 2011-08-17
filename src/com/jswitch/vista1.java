@@ -13,7 +13,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class vista1 extends BeanVO implements Serializable {
-
+//asdfasdf
     /**
      *
      */
