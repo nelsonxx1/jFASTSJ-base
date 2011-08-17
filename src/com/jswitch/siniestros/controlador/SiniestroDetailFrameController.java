@@ -4,7 +4,9 @@ import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameCon
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
+import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroChousser;
@@ -14,6 +16,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
@@ -37,7 +40,6 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     }
 
     public SiniestroDetailFrameController(String detailFramePath, GridControl gridControl, Boolean aplicarLogicaNegocio, Asegurado asegurado) {
-
         super(detailFramePath,
                 gridControl,
                 null, aplicarLogicaNegocio);
@@ -46,6 +48,16 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
 
         vista.getMainPanel().getVOModel().setValue("certificado", asegurado.getCertificado());
         vista.getMainPanel().pull("certificado");
+    }
+
+    @Override
+    public Response loadData(Class valueObjectClass) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Siniestro sin = (Siniestro) s.get(Siniestro.class, ((Siniestro) beanVO).getId());
+        Hibernate.initialize(sin.getDetalleSiniestro());
+        s.close();
+        beanVO = sin;
+        return new VOResponse(beanVO);
     }
 
     @Override

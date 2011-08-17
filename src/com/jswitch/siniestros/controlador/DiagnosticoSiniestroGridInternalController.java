@@ -1,8 +1,8 @@
-package com.jswitch.pagos.controlador;
+package com.jswitch.siniestros.controlador;
 
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.pagos.vista.DiagnosticoSiniestroDetailFrame;
+import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ValueObject;
 

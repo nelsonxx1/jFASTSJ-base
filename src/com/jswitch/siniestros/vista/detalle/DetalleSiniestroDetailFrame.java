@@ -9,7 +9,7 @@ import com.jswitch.base.modelo.entidades.Observacion;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
-import com.jswitch.pagos.controlador.DiagnosticoSiniestroGridInternalController;
+import com.jswitch.siniestros.controlador.DiagnosticoSiniestroGridInternalController;
 import com.jswitch.pagos.controlador.PagoGridInternalController;
 import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
