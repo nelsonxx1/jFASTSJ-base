@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * jaja prueba 6
- * @author Personal
+ * jaja prueba 5
+ * @author Personal ----
  */
 @Entity
 public class vista1 extends BeanVO implements Serializable {
