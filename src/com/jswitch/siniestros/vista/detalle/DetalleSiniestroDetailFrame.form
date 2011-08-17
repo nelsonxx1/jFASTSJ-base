@@ -40,7 +40,7 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="500" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="561" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -89,6 +89,12 @@
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="APS.class.getName()" type="code"/>
             </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton1"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton1"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -108,7 +114,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -162,47 +168,47 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl18" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl4" linkSize="7" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl18" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl4" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl6" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl5" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl6" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl5" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelControl7" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl7" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl13" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl4" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl13" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl4" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl14" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl5" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl14" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl5" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl15" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="comboBoxControl2" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl15" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboBoxControl2" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl16" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl6" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl16" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl6" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl17" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl7" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl17" linkSize="7" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl7" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl2" linkSize="7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="114" max="32767" attributes="0"/>
+                          <Component id="checkBoxControl2" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="196" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -290,6 +296,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -305,6 +312,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl18">
@@ -338,6 +346,12 @@
           <Properties>
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="CartaAval.class.getName()" type="code"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton1"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton1"/>
             </Property>
           </Properties>
           <Constraints>
@@ -429,62 +443,62 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl43" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl17" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl43" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl17" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl44" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl14" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl44" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl14" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl45" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl10" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl45" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl10" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl46" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl11" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl46" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl11" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl47" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboBoxControl5" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl47" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="comboBoxControl5" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl48" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl18" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl48" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl18" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl49" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl19" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl49" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl19" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl53" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl20" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl53" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl20" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl51" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="numericControl1" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl51" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="numericControl1" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl52" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="numericControl2" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl52" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="numericControl2" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl50" linkSize="15" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl15" linkSize="15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl50" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl15" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl6" linkSize="15" min="-2" pref="23" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="checkBoxControl6" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="109" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -532,7 +546,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;personaPago.nombreLargo&quot;" type="code"/>
                     </Property>
-                    <Property name="maxCharacters" type="int" value="30"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -551,6 +565,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -582,6 +597,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl49">
@@ -619,7 +635,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;analistaNegociador.nombreLargo&quot;" type="code"/>
                     </Property>
-                    <Property name="maxCharacters" type="int" value="30"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -660,6 +676,12 @@
           <Properties>
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Emergencia.class.getName()" type="code"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton1"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton1"/>
             </Property>
           </Properties>
           <Constraints>
@@ -738,6 +760,21 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="textControl13" pref="348" max="32767" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labelControl56" linkSize="14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="codLookupControl21" pref="348" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labelControl55" linkSize="14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="numericControl3" pref="348" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labelControl54" linkSize="14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="numericControl4" pref="348" max="32767" attributes="0"/>
+                              </Group>
                               <Component id="checkBoxControl5" linkSize="14" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -749,62 +786,77 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl32" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl14" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl32" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl14" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl33" linkSize="13" min="-2" max="-2" attributes="1"/>
-                              <Component id="textControl9" linkSize="13" min="-2" max="-2" attributes="1"/>
+                              <Component id="labelControl33" linkSize="13" min="-2" pref="25" max="-2" attributes="1"/>
+                              <Component id="textControl9" linkSize="13" min="-2" pref="25" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl34" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl8" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl34" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl8" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl35" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl9" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl35" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl9" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl36" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl10" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl36" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl10" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl37" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl11" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl37" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl11" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl38" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl12" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl38" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl12" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl39" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboBoxControl4" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl39" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="comboBoxControl4" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl41" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl16" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl41" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl16" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl40" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl15" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl40" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl15" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl42" linkSize="13" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl13" linkSize="13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl42" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl13" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl5" linkSize="13" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="labelControl56" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl21" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="labelControl55" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="numericControl3" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="labelControl54" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="numericControl4" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="checkBoxControl5" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -910,6 +962,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl40">
@@ -922,6 +975,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -953,6 +1007,46 @@
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
                   </Properties>
                 </Component>
+                <Component class="org.openswing.swing.client.LabelControl" name="labelControl54">
+                  <Properties>
+                    <Property name="label" type="java.lang.String" value="presupuestadoAjustado"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.LabelControl" name="labelControl55">
+                  <Properties>
+                    <Property name="label" type="java.lang.String" value="presupuestadoInicial"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.LabelControl" name="labelControl56">
+                  <Properties>
+                    <Property name="label" type="java.lang.String" value="analistaNegociador"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl21">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;analistaNegociador.nombreLargo&quot;" type="code"/>
+                    </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
+                    <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.NumericControl" name="numericControl3">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;presupuestadoInicial&quot;" type="code"/>
+                    </Property>
+                    <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.NumericControl" name="numericControl4">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;presupuestadoAjustado&quot;" type="code"/>
+                    </Property>
+                    <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -961,6 +1055,12 @@
           <Properties>
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="com.jswitch.siniestros.modelo.maestra.detalle.Funerario.class.getName()" type="code"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton1"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton1"/>
             </Property>
           </Properties>
           <Constraints>
@@ -1025,36 +1125,36 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl19" linkSize="9" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl8" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl19" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl8" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl20" linkSize="9" pref="28" max="32767" attributes="1"/>
-                              <Component id="textControl5" linkSize="9" min="-2" max="-2" attributes="1"/>
+                              <Component id="labelControl20" linkSize="9" pref="25" max="32767" attributes="1"/>
+                              <Component id="textControl5" linkSize="9" min="-2" pref="25" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl21" linkSize="9" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl6" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl21" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl6" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl23" linkSize="9" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl10" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl23" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl10" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl22" linkSize="9" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl9" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl22" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl9" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl24" linkSize="9" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl6" linkSize="9" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl24" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl6" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl3" linkSize="9" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxControl3" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="448" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1111,6 +1211,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl22">
@@ -1123,6 +1224,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -1302,7 +1404,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl1" linkSize="5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="46" max="32767" attributes="0"/>
+                          <EmptySpace pref="107" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1351,7 +1453,7 @@
                     </Property>
                     <Property name="enabledOnEdit" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
-                    <Property name="maxCharacters" type="int" value="30"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.TextControl" name="textControl1">
@@ -1369,6 +1471,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -1400,6 +1503,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl10">
@@ -1435,7 +1539,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;analistaNegociador.nombreLargo&quot;" type="code"/>
                     </Property>
-                    <Property name="maxCharacters" type="int" value="30"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -1465,6 +1569,12 @@
           <Properties>
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Vida.class.getName()" type="code"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton1"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton1"/>
             </Property>
           </Properties>
           <Constraints>
@@ -1534,41 +1644,41 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl25" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl11" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl25" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl11" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl26" linkSize="11" pref="28" max="32767" attributes="1"/>
-                              <Component id="textControl7" linkSize="11" min="-2" max="-2" attributes="1"/>
+                              <Component id="labelControl26" linkSize="11" pref="25" max="32767" attributes="1"/>
+                              <Component id="textControl7" linkSize="11" min="-2" pref="25" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl27" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateControl7" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl27" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="dateControl7" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl28" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboBoxControl3" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl28" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="comboBoxControl3" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl30" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl13" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl30" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl13" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl29" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="codLookupControl12" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl29" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl12" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl31" linkSize="11" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl8" linkSize="11" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelControl31" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="textControl8" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl4" linkSize="11" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkBoxControl4" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="414" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1641,6 +1751,7 @@
                     </Property>
                     <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl29">
@@ -1653,6 +1764,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="maxCharacters" type="int" value="25"/>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -1733,12 +1845,10 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControl6" alignment="0" pref="390" max="32767" attributes="2"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
+                          <EmptySpace pref="363" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="gridControl6" alignment="0" pref="463" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1910,7 +2020,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="426" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -1945,9 +2055,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="300" max="32767" attributes="0"/>
+                          <EmptySpace pref="361" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl4" alignment="0" pref="400" max="32767" attributes="2"/>
+                      <Component id="gridControl4" alignment="0" pref="461" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2086,7 +2196,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="426" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2121,9 +2231,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="300" max="32767" attributes="0"/>
+                          <EmptySpace pref="361" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl5" alignment="0" pref="400" max="32767" attributes="2"/>
+                      <Component id="gridControl5" alignment="0" pref="461" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2252,11 +2362,11 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="426" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gridReportes" pref="402" max="32767" attributes="2"/>
+                          <Component id="gridReportes" pref="463" max="32767" attributes="2"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2313,7 +2423,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="426" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2353,7 +2463,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                          <Component id="gridControl3" pref="388" max="32767" attributes="1"/>
+                          <Component id="gridControl3" pref="449" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

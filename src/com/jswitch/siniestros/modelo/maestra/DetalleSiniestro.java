@@ -126,6 +126,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @ManyToOne
     private EtapaSiniestro etapaSiniestro;
     /**
+     * 
+     */
+    @Transient
+     private transient String tipoDetalle;
+    /**
      *
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -330,5 +335,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     public void setDiagnosticoSiniestros(Set<DiagnosticoSiniestro> diagnosticoSiniestros) {
         this.diagnosticoSiniestros = diagnosticoSiniestros;
+    }
+
+    public String getTipoDetalle() {    
+        String s=this.getClass().getName();
+        return s.substring(s.lastIndexOf(".")+1);
     }
 }
