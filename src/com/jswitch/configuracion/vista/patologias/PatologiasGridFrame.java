@@ -81,6 +81,8 @@ public class PatologiasGridFrame extends DefaultGridFrame {
         reloadButton7 = new org.openswing.swing.client.ReloadButton();
         exportButton7 = new org.openswing.swing.client.ExportButton();
 
+        setTitle("Lista de Patologias por Ramo");
+
         jPanelR.setBorder(javax.swing.BorderFactory.createTitledBorder("Ramo"));
 
         ramo.setDeleteButton(deleteButtonR);
@@ -124,8 +126,8 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             jPanelRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRLayout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addComponent(ramo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addComponent(ramo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ramos", jPanelR);
@@ -174,8 +176,8 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             jPanelELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelELayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addComponent(especialidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addComponent(especialidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Especialidades", jPanelE);
@@ -227,8 +229,8 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             jPanelDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addComponent(diagnostico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addComponent(diagnostico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Diagnosticos", jPanelD);
@@ -283,8 +285,8 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             jPanelTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addComponent(tratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addComponent(tratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Tratamientos", jPanelT);
@@ -302,7 +304,7 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
