@@ -1,4 +1,4 @@
-package com.jswitch.pagos.controlador;
+package com.jswitch.siniestros.controlador;
 
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -6,7 +6,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
-import com.jswitch.pagos.vista.DiagnosticoSiniestroDetailFrame;
+import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.awt.event.ActionEvent;
@@ -48,24 +48,24 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         DiagnosticoSiniestro ds = (DiagnosticoSiniestro) newPersistentObject;
         ds.setDetalleSiniestro(detalleSin);
+        detalleSin.getDiagnosticoSiniestros().add(ds);
         Response res = super.insertRecord(ds);
-//        detalleSin.getDiagnosticoSiniestros().add(ds);
 //        insertAlGrid(detalleSin);
         return res;
     }
 
-//    private void insertAlGrid(BeanVO bean) {
-//        Session s = null;
-//        try {
-//            s = HibernateUtil.getSessionFactory().openSession();
-//            s.beginTransaction();
-//            s.update(bean);
-//            s.getTransaction().commit();
-//        } catch (Exception ex) {
-//        } finally {
-//            s.close();
-//        }
-//    }
+    private void insertAlGrid(BeanVO bean) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.update(bean);
+            s.getTransaction().commit();
+        } catch (Exception ex) {
+        } finally {
+            s.close();
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

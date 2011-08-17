@@ -1,4 +1,4 @@
-package com.jswitch.pagos.vista;
+package com.jswitch.siniestros.vista;
 
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;

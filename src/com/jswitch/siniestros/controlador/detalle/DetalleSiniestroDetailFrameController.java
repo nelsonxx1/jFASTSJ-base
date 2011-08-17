@@ -5,7 +5,7 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.maestra.Plan;
-import com.jswitch.pagos.controlador.DiagnosticoSiniestroDetailFrameController;
+import com.jswitch.siniestros.controlador.DiagnosticoSiniestroDetailFrameController;
 import com.jswitch.pagos.controlador.PagoDetailFrameController;
 import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
@@ -146,7 +146,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     ((DetalleSiniestro) newPersistentObject).setTipoPersona(tp);
                 }
             }
-            ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);
+            ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);            
+            siniestro.getDetalleSiniestro().add((DetalleSiniestro) newPersistentObject);
             return super.insertRecord((newPersistentObject));
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));
