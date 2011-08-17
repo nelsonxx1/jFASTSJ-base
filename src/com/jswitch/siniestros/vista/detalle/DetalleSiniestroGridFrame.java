@@ -158,7 +158,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    public void inicializar(GridDataLocator gridDataLocator, GridController gridController, String valueObjectClassName, String titulo, boolean addToMDIFrame) {
+    public void inicializar(GridDataLocator gridDataLocator, GridController gridController, String valueObjectClassName, String title, boolean addToMDIFrame) {
         initComponents();
         setTitle(title);
         gridData.setGridDataLocator(gridDataLocator);
