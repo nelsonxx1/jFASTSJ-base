@@ -22,6 +22,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -146,7 +147,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     ((DetalleSiniestro) newPersistentObject).setTipoPersona(tp);
                 }
             }
-            ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);            
+            ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);
             siniestro.getDetalleSiniestro().add((DetalleSiniestro) newPersistentObject);
             return super.insertRecord((newPersistentObject));
         } catch (Exception ex) {
@@ -164,8 +165,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     + " JOIN P.sumasAseguradas S "
                     + " WHERE S.diagnostico.especialidad.ramo.nombre='" + nombreRamo + "'"
                     + " AND P.id=?");
-            int r = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list().size();
-            return (r == 1)
+            List l = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list();
+            return (l != null && l.size() > 0)
                     ? true : false;
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "checkRamo", ex);

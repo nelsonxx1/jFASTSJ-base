@@ -133,7 +133,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<Pago> pagos = new HashSet<Pago>();
     /**

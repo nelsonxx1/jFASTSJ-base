@@ -5,10 +5,8 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.Pago;
-import com.jswitch.pagos.vista.DesgloseSumaAseguradaDetailFrame;
 import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
-import java.awt.event.ActionEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
@@ -29,20 +27,25 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
 
     public PagoDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+        detalleSiniestro = ((Pago) beanVO).getDetalleSiniestro();
+        ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
     }
 
     public PagoDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
-        super(detailFramePath, gridControl, null, aplicarLogicaNegocio);
+        super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
+        ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Pago pago = (Pago) newPersistentObject;
         pago.setEstatusPago(EstatusPago.PENDIENTE);
-        Response res = super.insertRecord(pago);
+        pago.setDetalleSiniestro(detalleSiniestro);
         detalleSiniestro.getPagos().add(pago);
-        insertAlGrid(detalleSiniestro);
+        System.out.println(pago.getId());
+        Response res = super.insertRecord(newPersistentObject);
+        System.out.println(pago.getId());
         return res;
     }
 
@@ -77,23 +80,5 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
         }
 
         return new VOResponse(pago);
-    }
-
-    private void insertAlGrid(DetalleSiniestro detalleSiniestro) {
-        Session s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            s.update(detalleSiniestro);
-            s.getTransaction().commit();
-        } catch (Exception ex) {
-        } finally {
-            s.close();
-        }
-
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        new DesgloseSumaAseguradaDetailFrameController(DesgloseSumaAseguradaDetailFrame.class.getName(), ((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada(), false, (Pago) getBeanVO());
     }
 }

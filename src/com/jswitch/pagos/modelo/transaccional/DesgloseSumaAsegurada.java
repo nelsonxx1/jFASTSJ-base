@@ -49,14 +49,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      *
      */
     @Column
-    private String detalle;
-    /**
-     *
-     */
-    @OneToMany(fetch = FetchType.LAZY)
-    @BusinessKey(exclude = Method.ALL)
-    private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
-   
+    private String detalle;   
     /**
      *
      */
@@ -120,16 +113,4 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
     public void setMonto(Double monto) {
         this.monto = monto;
     }
-
-    public Set<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(Set<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
- 
-
-
 }

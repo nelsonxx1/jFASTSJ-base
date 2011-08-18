@@ -9,6 +9,7 @@ import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -46,6 +47,12 @@ public class Pago extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
+    /**
+     *
+     */
+    @ManyToOne()
+    @BusinessKey(exclude = Method.ALL)
+    private DetalleSiniestro detalleSiniestro;
     /**
      *
      */
@@ -494,5 +501,11 @@ public class Pago extends BeanVO implements Serializable, Auditable {
         this.valorUT = valorUT;
     }
 
- 
+    public DetalleSiniestro getDetalleSiniestro() {
+        return detalleSiniestro;
+    }
+
+    public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
+        this.detalleSiniestro = detalleSiniestro;
+    }
 }

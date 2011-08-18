@@ -1,4 +1,4 @@
-package com.jswitch.siniestros.controlador;
+package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.base.controlador.logger.LoggerUtil;

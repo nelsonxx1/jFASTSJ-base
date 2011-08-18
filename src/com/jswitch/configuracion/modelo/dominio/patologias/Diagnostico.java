@@ -46,6 +46,7 @@ public class Diagnostico extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     private transient String nombreLargo;
     /**

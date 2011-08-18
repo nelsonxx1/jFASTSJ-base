@@ -48,7 +48,7 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
      *
      */
     @ManyToOne()
-    @BusinessKey(exclude = Method.ALL)
+    @BusinessKey
     private Diagnostico diagnostico;
     /**
      *
