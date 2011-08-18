@@ -40,6 +40,7 @@ public class Especialidad extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      *
@@ -49,7 +50,7 @@ public class Especialidad extends BeanVO implements Serializable, Auditable {
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="especialidad")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "especialidad")
     @BusinessKey(exclude = Method.ALL)
     private Set<Diagnostico> diagnosticos = new HashSet<Diagnostico>(0);
     /**
@@ -113,6 +114,4 @@ public class Especialidad extends BeanVO implements Serializable, Auditable {
     public void setRamo(Ramo ramo) {
         this.ramo = ramo;
     }
-
-    
 }

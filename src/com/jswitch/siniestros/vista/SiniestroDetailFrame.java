@@ -7,7 +7,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.base.modelo.Dominios;
-import com.jswitch.siniestros.controlador.DetalleSiniestroGridInternalController;
+import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridInternalController;
 import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.controlador.TitularAseguradoLookupController;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
