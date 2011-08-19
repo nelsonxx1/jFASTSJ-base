@@ -48,7 +48,6 @@ public class Diagnostico extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey
     private String nombre;
-    private transient String nombreLargo;
     /**
      *
      */
@@ -115,16 +114,5 @@ public class Diagnostico extends BeanVO implements Serializable, Auditable {
 
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
-    }
-
-    public String getNombreLargo() {
-        if (especialidad != null) {
-            this.nombreLargo = especialidad.getNombre() + " - " + nombre;
-        }
-        return nombreLargo;
-    }
-
-    public void setNombreLargo(String nombreLargo) {
-        this.nombreLargo = nombreLargo;
     }
 }

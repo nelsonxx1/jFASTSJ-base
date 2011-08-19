@@ -6,8 +6,12 @@ import com.jswitch.base.controlador.util.DefaultLookupDataLocator;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.dominio.patologias.Especialidad;
+import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JTree;
@@ -21,29 +25,45 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
-import org.openswing.swing.message.send.java.FilterWhereClause;
 import org.openswing.swing.tree.java.OpenSwingTreeNode;
 import org.openswing.swing.util.java.Consts;
 import org.openswing.swing.util.server.HibernateUtils;
 
 /**
- * @author bc
+ * @author adrian
  */
-public class DiagnosticoLookupController extends DefaultLookupController {
+public class DiagnosticoPorPlanLookupController extends DefaultLookupController {
 
-    public DiagnosticoLookupController() {
+    private Plan plan;
+    private String nombreRamo;
+
+    public DiagnosticoPorPlanLookupController() {
         this.setLookupDataLocator(new MarcaModeloLookupDataLocator(Diagnostico.class.getName()));
         this.setFramePreferedSize(new Dimension(500, 500));
-        this.setCodeSelectionWindow(DiagnosticoLookupController.TREE_GRID_FRAME);
+        this.setCodeSelectionWindow(DiagnosticoPorPlanLookupController.TREE_GRID_FRAME);
         this.getLookupDataLocator().setNodeNameAttribute("nombre");
         this.setLookupValueObjectClassName(Diagnostico.class.getName());
         this.setAllColumnVisible(false);
         this.setVisibleColumn("nombre", true);
         this.setPreferredWidthColumn("nombre", 300);
-        this.setFilterableColumn("nombre", true);
-        this.setSortableColumn("nombre", true);
-        this.setSortedColumn("nombre", Consts.ASC_SORTED);
+        this.nombreRamo = null;
 
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    public String getNombreRamo() {
+        return nombreRamo;
+    }
+
+    public void setNombreRamo(String nombreRamo) {
+        this.nombreRamo = nombreRamo;
     }
 
     class MarcaModeloLookupDataLocator extends DefaultLookupDataLocator {
@@ -68,28 +88,22 @@ public class DiagnosticoLookupController extends DefaultLookupController {
                     }
                     Especialidad especialidad = (Especialidad) ob;
                     if (especialidad.getId() != -1) {
-                        filteredColumns.put(
-                                "especialidad.id",
-                                new FilterWhereClause[]{
-                                    new FilterWhereClause("especialidad.id", "=", especialidad.getId()),
-                                    null
-                                });
-                        //return new VOListResponse(new ArrayList(marca.getModelos()), false, marca.getModelos().size());
                         Session s = null;
                         try {
-                            String sql = "FROM " + Diagnostico.class.getName()
-                                    + " C WHERE C.auditoria.activo=?";
+                            String sql = "SELECT C.diagnostico as T FROM "
+                                    + SumaAsegurada.class.getName()
+                                    + " C WHERE C.diagnostico.especialidad.id=? AND C.plan.id=? "
+                                    + "AND C.diagnostico.auditoria.activo=?";
                             SessionFactory sf = HibernateUtil.getSessionFactory();
                             s = sf.openSession();
                             Response res = HibernateUtils.getAllFromQuery(
-                                    //     de,
                                     filteredColumns,
                                     currentSortedColumns,
                                     currentSortedVersusColumns,
                                     valueObjectType,
                                     sql,
-                                    new Object[]{ new Boolean(true)},
-                                    new Type[]{ new BooleanType()},
+                                    new Object[]{especialidad.getId(), plan.getId(), new Boolean(true)},
+                                    new Type[]{new LongType(), new LongType(), new BooleanType()},
                                     "C",
                                     sf,
                                     s);
@@ -114,18 +128,39 @@ public class DiagnosticoLookupController extends DefaultLookupController {
 
         @Override
         public Response getTreeModel(JTree tree) {
-
+            if (plan == null) {
+                return new VOResponse(new DefaultTreeModel(new OpenSwingTreeNode()));
+            }
             Session s = null;
+            String validateRamo = "";
+            if (getNombreRamo() != null && !getNombreRamo().isEmpty()) {
+                validateRamo = " AND M.diagnostico.especialidad.ramo.nombre='" + getNombreRamo() + "' ";
+            }
             try {
                 OpenSwingTreeNode root = new OpenSwingTreeNode(null);
                 s = HibernateUtil.getSessionFactory().openSession();
-                List<Especialidad> especialidades = s.createQuery("FROM " + Especialidad.class.getName()
-                        + " M WHERE M.auditoria.activo=? "
-                        + " ORDER BY M.ramo.nombre,M.nombre").//.setCacheable(true)
-                        setBoolean(0, Boolean.TRUE).
+                List<Especialidad> especialidades = s.createQuery("SELECT DISTINCT M.diagnostico.especialidad FROM "
+                        + SumaAsegurada.class.getName()
+                        + " M WHERE M.plan.id= ? "
+                        + validateRamo
+                        + "AND M.diagnostico.especialidad.auditoria.activo=? ").
+                        setLong(0, plan.getId()).//.setCacheable(true)
+                        setBoolean(1, Boolean.TRUE).
                         list();
+
+                Collections.sort(especialidades, new Comparator<Especialidad>() {
+
+                    @Override
+                    public int compare(Especialidad o1, Especialidad o2) {
+                        int ramo = o1.getRamo().getNombre().compareTo(o2.getRamo().getNombre());
+                        if (ramo == 0) {
+                            return o1.getNombre().compareTo(o2.getNombre());
+                        }
+                        return ramo;
+                    }
+                });
                 for (Especialidad especialidad : especialidades) {
-                    getRamo(especialidad, root).add(new OpenSwingTreeNode(especialidad, false));
+                    getNodoRamo(especialidad, root).add(new OpenSwingTreeNode(especialidad, false));
                 }
 
                 return new VOResponse(new DefaultTreeModel(root));
@@ -138,7 +173,7 @@ public class DiagnosticoLookupController extends DefaultLookupController {
             }
         }
 
-        public OpenSwingTreeNode getRamo(Especialidad especialidad, OpenSwingTreeNode root) {
+        private OpenSwingTreeNode getNodoRamo(Especialidad especialidad, OpenSwingTreeNode root) {
             for (int i = 0; i < root.getChildCount(); i++) {
                 if (((OpenSwingTreeNode) root.getChildAt(i)).getUserObject().equals(especialidad.getRamo())) {
                     return (OpenSwingTreeNode) root.getChildAt(i);

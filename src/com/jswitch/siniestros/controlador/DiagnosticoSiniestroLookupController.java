@@ -33,19 +33,17 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
         this.setLookupGridController(new DefaultLookupGridController());
         setLookupValueObjectClassName(DiagnosticoSiniestro.class.getName());
         setAllColumnVisible(false);
+        setVisibleColumn("diagnostico.especialidad.ramo.nombre", true);
+        setVisibleColumn("diagnostico.especialidad.nombre", true);
         setVisibleColumn("diagnostico.nombre", true);
         setVisibleColumn("montoPendiente", true);
         setVisibleColumn("montoPagado", true);
-        setPreferredWidthColumn("diagnostico.nombre", 250);
+        setPreferredWidthColumn("diagnostico.especialidad.ramo.nombre", 70);
+        setPreferredWidthColumn("diagnostico.especialidad.nombre", 100);
+        setPreferredWidthColumn("diagnostico.nombre", 100);
         setPreferredWidthColumn("montoPendiente", 50);
         setPreferredWidthColumn("montoPagado", 50);
-        setSortableColumn("diagnostico.nombre", true);
-        setSortedColumn("diagnostico.nombre", Consts.ASC_SORTED, 0);
-        setSortableColumn("montoPendiente", true);
-        setSortableColumn("montoPagado", true);
-        setFilterableColumn("montoPendiente", true);
-        setFilterableColumn("montoPagado", true);
-        setFramePreferedSize(new java.awt.Dimension(380, 340));
+        setFramePreferedSize(new java.awt.Dimension(400, 340));
         setCodeSelectionWindow(GRID_FRAME);
         setOnInvalidCode(ON_INVALID_CODE_RESTORE_FOCUS);
 

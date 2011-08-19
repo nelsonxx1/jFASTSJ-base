@@ -118,7 +118,4 @@ public class Ramo extends BeanVO implements Serializable, Auditable {
         this.especialidades = especialidades;
     }
 
-    public String getNombreLargo() {
-        return this.nombre;
-    }
 }
