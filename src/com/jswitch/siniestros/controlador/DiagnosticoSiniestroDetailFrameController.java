@@ -5,7 +5,6 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
-import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
@@ -26,12 +25,15 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
 
     public DiagnosticoSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+        detalleSin = ((DiagnosticoSiniestro) beanVO).getDetalleSiniestro();
+        ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
     }
     private DetalleSiniestro detalleSin;
 
     public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin) {
         super(DiagnosticoSiniestroDetailFrame.class.getName(), migrid, null, b);
         this.detalleSin = detalleSin;
+        ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
     }
 
     @Override
@@ -52,19 +54,6 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         Response res = super.insertRecord(ds);
 //        insertAlGrid(detalleSin);
         return res;
-    }
-
-    private void insertAlGrid(BeanVO bean) {
-        Session s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            s.update(bean);
-            s.getTransaction().commit();
-        } catch (Exception ex) {
-        } finally {
-            s.close();
-        }
     }
 
     @Override

@@ -37,6 +37,7 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      */

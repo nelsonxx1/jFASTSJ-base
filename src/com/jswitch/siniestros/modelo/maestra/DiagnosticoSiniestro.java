@@ -84,6 +84,13 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
         montoPendiente = 0d;
     }
 
+    public DiagnosticoSiniestro(DetalleSiniestro detalleSiniestro, Diagnostico diagnostico, Double montoPendiente) {
+        this.detalleSiniestro = detalleSiniestro;
+        this.diagnostico = diagnostico;
+        this.montoPendiente = montoPendiente;
+        this.montoPagado = 0d;
+    }
+
     public Long getId() {
         return id;
     }

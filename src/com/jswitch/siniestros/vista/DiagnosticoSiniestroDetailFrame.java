@@ -3,9 +3,10 @@ package com.jswitch.siniestros.vista;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
-import com.jswitch.configuracion.controlador.DiagnosticoLookupController;
+import com.jswitch.configuracion.controlador.DiagnosticoPorPlanLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
 import com.jswitch.pagos.controlador.TratamientoGridInternalController2;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.awt.event.ActionListener;
 import org.openswing.swing.client.GridControl;
@@ -21,6 +22,7 @@ import org.openswing.swing.util.java.Consts;
 public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
     private DefaultGridInternalController tratamientos;
+    private DiagnosticoPorPlanLookupController lookupDiagnostico;
 
     public DiagnosticoSiniestroDetailFrame() {
     }
@@ -289,11 +291,15 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         return gridControl4;
     }
 
+    public void setDetalleSiniestro(DetalleSiniestro de) {
+        lookupDiagnostico.setPlan(de.getSiniestro().getAsegurado().getPlan());
+    }
+
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
 
-        DiagnosticoLookupController lookupDiagnostico = new DiagnosticoLookupController();
+        lookupDiagnostico = new DiagnosticoPorPlanLookupController();
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupControl1.setLookupController(lookupDiagnostico);
         insertButton6.addActionListener((ActionListener) formController);

@@ -44,6 +44,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private Siniestro siniestro;
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Class tipoDetalle) {
+        this.siniestro = ((DetalleSiniestro) beanVO).getSiniestro();
+
         if (tipoDetalle.equals(Vida.class) && !checkRamo("VIDA")) {
             JOptionPane.showMessageDialog(gridControl, "Ramo Vida no aplica\n"
                     + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);

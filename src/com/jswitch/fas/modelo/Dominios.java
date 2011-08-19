@@ -113,7 +113,7 @@ public class Dominios {
 
     public static enum TratamientoEfectuado {
 
-        MEDICO, QUIRURGICO
+        DESCONOCIDO, MEDICO, QUIRURGICO
     }
 
     public static Domain TratamientoEfectuado() {

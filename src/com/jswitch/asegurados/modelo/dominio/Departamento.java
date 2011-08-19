@@ -37,6 +37,7 @@ public class Departamento extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      */

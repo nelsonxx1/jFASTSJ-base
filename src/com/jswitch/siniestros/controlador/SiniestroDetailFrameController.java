@@ -6,11 +6,13 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.controlador.detalle.DetalleVidaNuevoDetrailController;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroChousser;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
+import com.jswitch.siniestros.vista.detalle.DetalleVidaNuevoDetailFrame;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -97,7 +99,11 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         if (beanVO != null) {
             Class c = DetalleSiniestroChousser.showDialog();
             if (c != null && c.getClass() != null) {
-                new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO, c);
+                if (c.equals(Vida.class)) {
+                    new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), gridControl, null, (Siniestro) beanVO, false);
+                } else {
+                    new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), gridControl, null, false, (Siniestro) beanVO, c);
+                }
             }
         }
     }

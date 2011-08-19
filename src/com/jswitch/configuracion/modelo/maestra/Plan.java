@@ -40,6 +40,7 @@ public class Plan extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      *
