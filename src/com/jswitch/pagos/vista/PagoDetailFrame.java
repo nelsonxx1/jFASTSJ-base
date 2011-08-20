@@ -5,10 +5,11 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.CoberturaLookupController;
 import com.jswitch.pagos.controlador.DesgloseCoberturaGridInternalController;
-import com.jswitch.siniestros.controlador.DiagnosticoSiniestroLookupController;
+import com.jswitch.pagos.controlador.DesgloseSumaAseguradaGridInternalController;
 import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
+import com.jswitch.siniestros.controlador.DiagnosticoSiniestroLookupController;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
@@ -18,14 +19,13 @@ import org.openswing.swing.util.java.Consts;
 
 /**
  *
- * @author bc
+ * @author adrian
  */
 public class PagoDetailFrame extends DefaultDetailFrame {
 
-    private DefaultGridInternalController desgloseSumaAsegurada;
+    private DesgloseSumaAseguradaGridInternalController desgloseSumaAsegurada;
     private DefaultGridInternalController desgloseCobertura;
     private DiagnosticoSiniestroLookupController lookupDiagnostico;
-//    private DefaultGridInternalController controllerBeneficiarios;
 
     public PagoDetailFrame() {
     }
@@ -37,49 +37,31 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         jPanel1 = new javax.swing.JPanel();
         editButton1 = new org.openswing.swing.client.EditButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
+        reloadButton1 = new org.openswing.swing.client.ReloadButton();
         form1 = new org.openswing.swing.form.client.Form();
         jPanel2 = new javax.swing.JPanel();
-        labelControl2 = new org.openswing.swing.client.LabelControl();
-        labelControl3 = new org.openswing.swing.client.LabelControl();
-        checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
-        textControl1 = new org.openswing.swing.client.TextControl();
-        textControl2 = new org.openswing.swing.client.TextControl();
-        labelControl4 = new org.openswing.swing.client.LabelControl();
-        labelControl5 = new org.openswing.swing.client.LabelControl();
-        labelControl6 = new org.openswing.swing.client.LabelControl();
-        dateControl1 = new org.openswing.swing.client.DateControl();
         dateControl2 = new org.openswing.swing.client.DateControl();
+        labelControl2 = new org.openswing.swing.client.LabelControl();
+        textControl1 = new org.openswing.swing.client.TextControl();
+        dateControl1 = new org.openswing.swing.client.DateControl();
+        labelControl4 = new org.openswing.swing.client.LabelControl();
+        textControl2 = new org.openswing.swing.client.TextControl();
+        labelControl6 = new org.openswing.swing.client.LabelControl();
+        labelControl5 = new org.openswing.swing.client.LabelControl();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel12 = new javax.swing.JPanel();
-        gridControl4 = new org.openswing.swing.client.GridControl();
-        decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        codLookupColumn3 = new org.openswing.swing.table.columns.client.CodLookupColumn();
-        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
-        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
-        checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
-        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
-        jPanel13 = new javax.swing.JPanel();
-        insertButton6 = new org.openswing.swing.client.InsertButton();
-        editButton6 = new org.openswing.swing.client.EditButton();
-        deleteButton6 = new org.openswing.swing.client.DeleteButton();
-        saveButton6 = new org.openswing.swing.client.SaveButton();
-        reloadButton6 = new org.openswing.swing.client.ReloadButton();
-        filterButton6 = new org.openswing.swing.client.FilterButton();
         jPanel14 = new javax.swing.JPanel();
         gridControl5 = new org.openswing.swing.client.GridControl();
         decimalColumn5 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn2 = new org.openswing.swing.table.columns.client.CodLookupColumn();
-        textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        decimalColumn6 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         checkBoxColumn2 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        textColumn11 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateTimeColumn4 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         jPanel15 = new javax.swing.JPanel();
         insertButton7 = new org.openswing.swing.client.InsertButton();
         editButton7 = new org.openswing.swing.client.EditButton();
@@ -87,9 +69,27 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         saveButton7 = new org.openswing.swing.client.SaveButton();
         reloadButton7 = new org.openswing.swing.client.ReloadButton();
         filterButton7 = new org.openswing.swing.client.FilterButton();
+        jPanel16 = new javax.swing.JPanel();
+        gridControl6 = new org.openswing.swing.client.GridControl();
+        decimalColumn7 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
+        codLookupColumn3 = new org.openswing.swing.table.columns.client.CodLookupColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn8 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        checkBoxColumn3 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateTimeColumn3 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        jPanel17 = new javax.swing.JPanel();
+        insertButton8 = new org.openswing.swing.client.InsertButton();
+        editButton8 = new org.openswing.swing.client.EditButton();
+        deleteButton8 = new org.openswing.swing.client.DeleteButton();
+        saveButton8 = new org.openswing.swing.client.SaveButton();
+        reloadButton8 = new org.openswing.swing.client.ReloadButton();
+        filterButton8 = new org.openswing.swing.client.FilterButton();
 
         setTitle("Pago");
-        setPreferredSize(new java.awt.Dimension(675, 542));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,13 +100,16 @@ public class PagoDetailFrame extends DefaultDetailFrame {
                 .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(536, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -114,32 +117,29 @@ public class PagoDetailFrame extends DefaultDetailFrame {
 
         form1.setVOClassName(Pago.class.getName());
         form1.setEditButton(editButton1);
+        form1.setReloadButton(reloadButton1);
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridLayout(1, 2));
 
+        dateControl2.setAttributeName("fechaRecepcion");
+        dateControl2.setRequired(true);
+
         labelControl2.setLabel("numeroFactura");
-
-        labelControl3.setLabel("auditoria.activo");
-
-        checkBoxControl1.setAttributeName("auditoria.activo");
 
         textControl1.setAttributeName("numeroFactura");
         textControl1.setRequired(true);
 
-        textControl2.setAttributeName("numeroControl");
-        textControl2.setRequired(true);
-
-        labelControl4.setLabel("numeroControl");
-
-        labelControl5.setLabel("fechaFactura");
-
-        labelControl6.setLabel("fechaRecepcion");
-
         dateControl1.setAttributeName("fechaFactura");
         dateControl1.setRequired(true);
 
-        dateControl2.setAttributeName("fechaRecepcion");
-        dateControl2.setRequired(true);
+        labelControl4.setLabel("numeroControl");
+
+        textControl2.setAttributeName("numeroControl");
+        textControl2.setRequired(true);
+
+        labelControl6.setLabel("fechaRecepcion");
+
+        labelControl5.setLabel("fechaFactura");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,31 +147,27 @@ public class PagoDetailFrame extends DefaultDetailFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl2, labelControl3, labelControl4, labelControl5, labelControl6});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl2, labelControl4, labelControl5, labelControl6});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,100 +184,16 @@ public class PagoDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(121, 121, 121))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, dateControl1, dateControl2, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, textControl1, textControl2});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl1, dateControl2, labelControl2, labelControl4, labelControl5, labelControl6, textControl1, textControl2});
 
         form1.add(jPanel2);
-
-        gridControl4.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
-        gridControl4.setDeleteButton(deleteButton6);
-        gridControl4.setEditButton(editButton6);
-        gridControl4.setEditOnSingleRow(true);
-        gridControl4.setFilterButton(filterButton6);
-        gridControl4.setInsertButton(insertButton6);
-        gridControl4.setMaxNumberOfRowsOnInsert(4);
-        gridControl4.setReloadButton(reloadButton6);
-        gridControl4.setSaveButton(saveButton6);
-        gridControl4.setValueObjectClassName(DesgloseSumaAsegurada.class.getName());
-
-        decimalColumn4.setColumnName("id");
-        decimalColumn4.setColumnRequired(false);
-        decimalColumn4.setColumnVisible(false);
-        decimalColumn4.setPreferredWidth(40);
-        gridControl4.getColumnContainer().add(decimalColumn4);
-
-        codLookupColumn3.setColumnName("diagnostico.nombre");
-        codLookupColumn3.setEditableOnEdit(true);
-        codLookupColumn3.setEditableOnInsert(true);
-        gridControl4.getColumnContainer().add(codLookupColumn3);
-
-        textColumn3.setColumnName("diagnostico.especialidad.nombre");
-        gridControl4.getColumnContainer().add(textColumn3);
-
-        textColumn4.setColumnName("diagnostico.especialidad.ramo.nombre");
-        gridControl4.getColumnContainer().add(textColumn4);
-
-        decimalColumn2.setColumnName("monto");
-        decimalColumn2.setDecimals(2);
-        decimalColumn2.setEditableOnEdit(true);
-        decimalColumn2.setEditableOnInsert(true);
-        gridControl4.getColumnContainer().add(decimalColumn2);
-
-        textColumn1.setColumnName("detalle");
-        textColumn1.setColumnRequired(false);
-        textColumn1.setEditableOnEdit(true);
-        textColumn1.setEditableOnInsert(true);
-        gridControl4.getColumnContainer().add(textColumn1);
-
-        checkBoxColumn1.setColumnName("auditoria.activo");
-        gridControl4.getColumnContainer().add(checkBoxColumn1);
-
-        textColumn8.setColumnName("auditoria.usuarioInsert");
-        textColumn8.setColumnRequired(false);
-        gridControl4.getColumnContainer().add(textColumn8);
-
-        dateTimeColumn1.setColumnName("auditoria.fechaInsert");
-        dateTimeColumn1.setColumnRequired(false);
-        gridControl4.getColumnContainer().add(dateTimeColumn1);
-
-        jPanel13.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
-
-        insertButton6.setButtonId("asegurado");
-        jPanel13.add(insertButton6);
-        jPanel13.add(editButton6);
-        jPanel13.add(deleteButton6);
-        jPanel13.add(saveButton6);
-        jPanel13.add(reloadButton6);
-        jPanel13.add(filterButton6);
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addComponent(gridControl4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Desglose Suma Asegurada", jPanel12);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -293,7 +205,7 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         gridControl5.setMaxNumberOfRowsOnInsert(4);
         gridControl5.setReloadButton(reloadButton7);
         gridControl5.setSaveButton(saveButton7);
-        gridControl5.setValueObjectClassName(DesgloseCobertura.class.getName());
+        gridControl5.setValueObjectClassName(DesgloseSumaAsegurada.class.getName());
 
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
@@ -301,37 +213,38 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         decimalColumn5.setPreferredWidth(40);
         gridControl5.getColumnContainer().add(decimalColumn5);
 
-        textColumn2.setColumnName("cobertura.ramo.nombre");
+        textColumn2.setColumnName("diagnosticoSiniestro.diagnostico.especialidad.ramo.nombre");
+        textColumn2.setColumnSortable(true);
         gridControl5.getColumnContainer().add(textColumn2);
 
-        codLookupColumn2.setColumnName("cobertura.nombre");
+        textColumn4.setColumnName("diagnosticoSiniestro.diagnostico.especialidad.nombre");
+        textColumn4.setColumnSortable(true);
+        gridControl5.getColumnContainer().add(textColumn4);
+
+        codLookupColumn2.setColumnName("diagnosticoSiniestro.diagnostico.nombre");
+        codLookupColumn2.setColumnSortable(true);
         codLookupColumn2.setEditableOnEdit(true);
         codLookupColumn2.setEditableOnInsert(true);
         gridControl5.getColumnContainer().add(codLookupColumn2);
 
-        textColumn5.setColumnName("detalle");
-        textColumn5.setColumnRequired(false);
-        textColumn5.setEditableOnEdit(true);
-        textColumn5.setEditableOnInsert(true);
-        gridControl5.getColumnContainer().add(textColumn5);
-
-        decimalColumn1.setColumnName("montoFacturado");
+        decimalColumn1.setColumnName("monto");
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setDecimals(2);
         decimalColumn1.setEditableOnEdit(true);
         decimalColumn1.setEditableOnInsert(true);
         gridControl5.getColumnContainer().add(decimalColumn1);
 
-        decimalColumn3.setColumnName("montoAmparado");
-        decimalColumn3.setDecimals(2);
-        decimalColumn3.setEditableOnEdit(true);
-        decimalColumn3.setEditableOnInsert(true);
-        gridControl5.getColumnContainer().add(decimalColumn3);
-
-        decimalColumn6.setColumnName("montoNoAmparado");
-        decimalColumn6.setColumnRequired(false);
-        gridControl5.getColumnContainer().add(decimalColumn6);
+        textColumn5.setColumnFilterable(true);
+        textColumn5.setColumnName("detalle");
+        textColumn5.setColumnRequired(false);
+        textColumn5.setColumnSortable(true);
+        textColumn5.setEditableOnEdit(true);
+        textColumn5.setEditableOnInsert(true);
+        gridControl5.getColumnContainer().add(textColumn5);
 
         checkBoxColumn2.setColumnName("auditoria.activo");
+        checkBoxColumn2.setColumnRequired(false);
+        checkBoxColumn2.setEditableOnEdit(true);
         gridControl5.getColumnContainer().add(checkBoxColumn2);
 
         textColumn9.setColumnName("auditoria.usuarioInsert");
@@ -341,6 +254,14 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         dateTimeColumn2.setColumnName("auditoria.fechaInsert");
         dateTimeColumn2.setColumnRequired(false);
         gridControl5.getColumnContainer().add(dateTimeColumn2);
+
+        textColumn11.setColumnName("auditoria.usuarioUpdate");
+        textColumn11.setColumnRequired(false);
+        gridControl5.getColumnContainer().add(textColumn11);
+
+        dateTimeColumn4.setColumnName("auditoria.fechaInsert");
+        dateTimeColumn4.setColumnRequired(false);
+        gridControl5.getColumnContainer().add(dateTimeColumn4);
 
         jPanel15.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
 
@@ -359,18 +280,105 @@ public class PagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Desglose Cobertura", jPanel14);
-        jPanel14.getAccessibleContext().setAccessibleName("Beneficiarios");
+        jTabbedPane1.addTab("Suma Asegurada", jPanel14);
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        gridControl6.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
+        gridControl6.setDeleteButton(deleteButton8);
+        gridControl6.setEditButton(editButton8);
+        gridControl6.setFilterButton(filterButton8);
+        gridControl6.setInsertButton(insertButton8);
+        gridControl6.setMaxNumberOfRowsOnInsert(4);
+        gridControl6.setReloadButton(reloadButton8);
+        gridControl6.setSaveButton(saveButton8);
+        gridControl6.setValueObjectClassName(DesgloseCobertura.class.getName());
+
+        decimalColumn7.setColumnName("id");
+        decimalColumn7.setColumnRequired(false);
+        decimalColumn7.setColumnVisible(false);
+        decimalColumn7.setPreferredWidth(40);
+        gridControl6.getColumnContainer().add(decimalColumn7);
+
+        textColumn3.setColumnName("cobertura.ramo.nombre");
+        gridControl6.getColumnContainer().add(textColumn3);
+
+        codLookupColumn3.setColumnName("cobertura.nombre");
+        codLookupColumn3.setEditableOnEdit(true);
+        codLookupColumn3.setEditableOnInsert(true);
+        gridControl6.getColumnContainer().add(codLookupColumn3);
+
+        textColumn6.setColumnName("detalle");
+        textColumn6.setColumnRequired(false);
+        textColumn6.setEditableOnEdit(true);
+        textColumn6.setEditableOnInsert(true);
+        gridControl6.getColumnContainer().add(textColumn6);
+
+        decimalColumn2.setColumnName("montoFacturado");
+        decimalColumn2.setDecimals(2);
+        decimalColumn2.setEditableOnEdit(true);
+        decimalColumn2.setEditableOnInsert(true);
+        gridControl6.getColumnContainer().add(decimalColumn2);
+
+        decimalColumn4.setColumnName("montoAmparado");
+        decimalColumn4.setDecimals(2);
+        decimalColumn4.setEditableOnEdit(true);
+        decimalColumn4.setEditableOnInsert(true);
+        gridControl6.getColumnContainer().add(decimalColumn4);
+
+        decimalColumn8.setColumnName("montoNoAmparado");
+        decimalColumn8.setColumnRequired(false);
+        gridControl6.getColumnContainer().add(decimalColumn8);
+
+        checkBoxColumn3.setColumnName("auditoria.activo");
+        gridControl6.getColumnContainer().add(checkBoxColumn3);
+
+        textColumn10.setColumnName("auditoria.usuarioInsert");
+        textColumn10.setColumnRequired(false);
+        gridControl6.getColumnContainer().add(textColumn10);
+
+        dateTimeColumn3.setColumnName("auditoria.fechaInsert");
+        dateTimeColumn3.setColumnRequired(false);
+        gridControl6.getColumnContainer().add(dateTimeColumn3);
+
+        jPanel17.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
+
+        insertButton8.setButtonId("beneficiario");
+        jPanel17.add(insertButton8);
+        jPanel17.add(editButton8);
+        jPanel17.add(deleteButton8);
+        jPanel17.add(saveButton8);
+        jPanel17.add(reloadButton8);
+        jPanel17.add(filterButton8);
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -379,8 +387,8 @@ public class PagoDetailFrame extends DefaultDetailFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
-                    .addComponent(form1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                    .addComponent(form1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -389,19 +397,15 @@ public class PagoDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public BeanVO getBeanVO() {
-        return (BeanVO) form1.getVOModel().getValueObject();
-    }
-
     public GridControl getGridDesgloseSumaAsegurada() {
-        return gridControl4;
+        return gridControl5;
     }
 
     public void createDiagnostocoCodLookup(DetalleSiniestro detalleSiniestro) {
@@ -411,65 +415,62 @@ public class PagoDetailFrame extends DefaultDetailFrame {
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
+
         desgloseSumaAsegurada =
-                new DefaultGridInternalController(Pago.class.getName(), "getDesgloseSumaAsegurada", gridControl4);
-        gridControl4.setGridDataLocator(desgloseSumaAsegurada);
-        gridControl4.setController(desgloseSumaAsegurada);
+                new DesgloseSumaAseguradaGridInternalController(Pago.class.getName(), "getDesgloseSumaAsegurada", gridControl5);
+        gridControl5.setGridDataLocator(desgloseSumaAsegurada);
+        gridControl5.setController(desgloseSumaAsegurada);
 
         desgloseCobertura =
-                new DesgloseCoberturaGridInternalController(Pago.class.getName(), "getDesgloseCobertura", gridControl5);
-        gridControl5.setGridDataLocator(desgloseCobertura);
-        gridControl5.setController(desgloseCobertura);
+                new DesgloseCoberturaGridInternalController(Pago.class.getName(), "getDesgloseCobertura", gridControl6);
+        gridControl6.setGridDataLocator(desgloseCobertura);
+        gridControl6.setController(desgloseCobertura);
 
         lookupDiagnostico = new DiagnosticoSiniestroLookupController();
-        lookupDiagnostico.addLookup2ParentLink("diagnostico", "diagnostico");
-        codLookupColumn3.setLookupController(lookupDiagnostico);
+        lookupDiagnostico.addLookup2ParentLink("diagnosticoSiniestro");
+        codLookupColumn2.setLookupController(lookupDiagnostico);
 
         CoberturaLookupController lookupCobertura = new CoberturaLookupController();
         lookupCobertura.addLookup2ParentLink("cobertura");
-        codLookupColumn2.setLookupController(lookupCobertura);
+        codLookupColumn3.setLookupController(lookupCobertura);
+
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
-
         if (addToMDIFrame) {
             pack();
         } else {
             setBounds(0, 0, 0, 0);
         }
 
-
         MDIFrame.add(this);
     }
 
     @Override
     public void saveGridsData() {
-//gridControl4.save();
-//gridControl5.save();
+        gridControl5.getSaveButton().doClick();
+        gridControl6.getSaveButton().doClick();
     }
 
     @Override
     public void reloadGridsData() {
-        gridControl4.reloadData();
-        gridControl5.reloadData();
+        gridControl5.getReloadButton().doClick();
+        gridControl6.getReloadButton().doClick();
     }
 
     @Override
     public void clearGridsData() {
-        gridControl4.clearData();
         gridControl5.clearData();
+        gridControl6.clearData();
     }
 
     @Override
     public void setOwnerVO(BeanVO beanVO) {
-        desgloseCobertura.setBeanVO(beanVO);
-        desgloseSumaAsegurada.setBeanVO(beanVO);
         Long id = null;
         if (beanVO != null) {
-            System.out.println("beanVO - diferente de NULL");
-            //id = ((Vehiculo) beanVO).getId();
+            id = ((Pago) beanVO).getId();
         }
-        //controllerDocumentos.setBeanVO(beanVO, id);
-
+        desgloseSumaAsegurada.setBeanVO(beanVO);
+        desgloseCobertura.setBeanVO(beanVO);
         reloadGridsData();
     }
 
@@ -491,60 +492,61 @@ public class PagoDetailFrame extends DefaultDetailFrame {
     }
 
     private void setEnableGridInternalButtons(boolean enabled) {
-        jPanel13.setVisible(enabled);
         jPanel15.setVisible(enabled);
+        jPanel17.setVisible(enabled);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
-    private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn3;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn2;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn3;
     private org.openswing.swing.client.DateControl dateControl1;
     private org.openswing.swing.client.DateControl dateControl2;
-    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
+    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn3;
+    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn4;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn4;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn6;
-    private org.openswing.swing.client.DeleteButton deleteButton6;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn7;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn8;
     private org.openswing.swing.client.DeleteButton deleteButton7;
+    private org.openswing.swing.client.DeleteButton deleteButton8;
     private org.openswing.swing.client.EditButton editButton1;
-    private org.openswing.swing.client.EditButton editButton6;
     private org.openswing.swing.client.EditButton editButton7;
-    private org.openswing.swing.client.FilterButton filterButton6;
+    private org.openswing.swing.client.EditButton editButton8;
     private org.openswing.swing.client.FilterButton filterButton7;
+    private org.openswing.swing.client.FilterButton filterButton8;
     private org.openswing.swing.form.client.Form form1;
-    private org.openswing.swing.client.GridControl gridControl4;
     private org.openswing.swing.client.GridControl gridControl5;
-    private org.openswing.swing.client.InsertButton insertButton6;
+    private org.openswing.swing.client.GridControl gridControl6;
     private org.openswing.swing.client.InsertButton insertButton7;
+    private org.openswing.swing.client.InsertButton insertButton8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl2;
-    private org.openswing.swing.client.LabelControl labelControl3;
     private org.openswing.swing.client.LabelControl labelControl4;
     private org.openswing.swing.client.LabelControl labelControl5;
     private org.openswing.swing.client.LabelControl labelControl6;
-    private org.openswing.swing.client.ReloadButton reloadButton6;
+    private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.ReloadButton reloadButton7;
+    private org.openswing.swing.client.ReloadButton reloadButton8;
     private org.openswing.swing.client.SaveButton saveButton1;
-    private org.openswing.swing.client.SaveButton saveButton6;
     private org.openswing.swing.client.SaveButton saveButton7;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.client.SaveButton saveButton8;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn10;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn11;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     private org.openswing.swing.client.TextControl textControl1;
     private org.openswing.swing.client.TextControl textControl2;

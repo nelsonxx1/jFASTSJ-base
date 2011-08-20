@@ -1,26 +1,20 @@
 package com.jswitch.pagos.modelo.transaccional;
 
-import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
-import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
+import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 @Entity
@@ -39,7 +33,13 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      */
     @ManyToOne
     @BusinessKey
-    private Diagnostico diagnostico;
+    private DiagnosticoSiniestro diagnosticoSiniestro;
+    /**
+     * Diagnostico al cual se esta cubriendo
+     */
+    @ManyToOne
+    @BusinessKey
+    private Pago pago;
     /**
      * 
      */
@@ -66,14 +66,17 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
     }
 
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -90,12 +93,20 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
         this.optLock = optLock;
     }
 
-    public Diagnostico getDiagnostico() {
-        return diagnostico;
+    public DiagnosticoSiniestro getDiagnosticoSiniestro() {
+        return diagnosticoSiniestro;
     }
 
-    public void setDiagnostico(Diagnostico diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setDiagnosticoSiniestro(DiagnosticoSiniestro diagnosticoSiniestro) {
+        this.diagnosticoSiniestro = diagnosticoSiniestro;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 
     public String getDetalle() {

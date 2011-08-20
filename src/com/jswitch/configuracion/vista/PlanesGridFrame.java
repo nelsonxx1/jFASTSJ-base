@@ -3,7 +3,7 @@ package com.jswitch.configuracion.vista;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
-import com.jswitch.configuracion.controlador.CoberturaPlanGridInternalController;
+import com.jswitch.configuracion.controlador.SumaAseguradaPlanGridInternalController;
 import com.jswitch.configuracion.controlador.DiagnosticoLookupController;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.configuracion.modelo.maestra.Plan;
@@ -206,7 +206,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
         codLookupColumn1.setLookupController(lookupDiagnostico);
 
         controllerSumaAsegurada =
-                new CoberturaPlanGridInternalController(Plan.class.getName(), "getSumasAseguradas", gridControl1);
+                new SumaAseguradaPlanGridInternalController(Plan.class.getName(), "getSumasAseguradas", gridControl1);
         gridControl1.setGridDataLocator(controllerSumaAsegurada);
         gridControl1.setController(controllerSumaAsegurada);
 

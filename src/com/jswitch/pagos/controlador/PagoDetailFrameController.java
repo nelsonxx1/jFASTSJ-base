@@ -29,12 +29,14 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         detalleSiniestro = ((Pago) beanVO).getDetalleSiniestro();
         ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        ((DesgloseSumaAseguradaGridInternalController) (((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
 
     public PagoDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
         ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        ((DesgloseSumaAseguradaGridInternalController) (((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
 
     @Override
@@ -43,9 +45,8 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
         pago.setEstatusPago(EstatusPago.PENDIENTE);
         pago.setDetalleSiniestro(detalleSiniestro);
         detalleSiniestro.getPagos().add(pago);
-        System.out.println(pago.getId());
         Response res = super.insertRecord(newPersistentObject);
-        System.out.println(pago.getId());
+        gridControl.getReloadButton().doClick();
         return res;
     }
 

@@ -97,6 +97,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         numericControl1.setAttributeName("montoPendiente");
         numericControl1.setDecimals(2);
+        numericControl1.setMinValue(-2.147483647E9);
         numericControl1.setRequired(true);
 
         labelControl3.setLabel("auditoria.activo");
@@ -323,8 +324,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
     @Override
     public void saveGridsData() {
-//gridControl4.save();
-//gridControl5.save();
+//        gridControl4.save();
     }
 
     @Override

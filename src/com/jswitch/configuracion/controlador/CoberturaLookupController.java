@@ -16,6 +16,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.type.BooleanType;
+import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
@@ -23,6 +25,7 @@ import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.send.java.FilterWhereClause;
 import org.openswing.swing.tree.java.OpenSwingTreeNode;
 import org.openswing.swing.util.java.Consts;
+import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  * @author bc
@@ -80,11 +83,21 @@ public class CoberturaLookupController extends DefaultLookupController {
                         Session s = null;
                         try {
                             String sql = "FROM " + Cobertura.class.getName()
-                                    + " C WHERE C.ramo.id =?  AND C.auditoria.activo=?";
+                                    + " C WHERE  C.auditoria.activo=?";
                             SessionFactory sf = HibernateUtil.getSessionFactory();
                             s = sf.openSession();
-                            List l = s.createQuery(sql).setLong(0, ramo.getId()).setBoolean(1, Boolean.TRUE).list();
-                            return new VOListResponse(l, false, l.size());
+                            Response res = HibernateUtils.getAllFromQuery(
+                                    filteredColumns,
+                                    currentSortedColumns,
+                                    currentSortedVersusColumns,
+                                    valueObjectType,
+                                    sql,
+                                    new Object[]{ new Boolean(true)},
+                                    new Type[]{ new BooleanType()},
+                                    "C",
+                                    sf,
+                                    s);
+                            return res;
                         } catch (Exception ex) {
                             LoggerUtil.error(this.getClass(), "loadData", ex);
                             return new ErrorResponse(ex.getMessage());

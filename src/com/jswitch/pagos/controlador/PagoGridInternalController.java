@@ -29,6 +29,6 @@ public class PagoGridInternalController extends DefaultGridInternalController {
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new PagoDetailFrameController(PagoDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.FALSE);
+        new PagoDetailFrameController(PagoDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.TRUE);
     }
 }

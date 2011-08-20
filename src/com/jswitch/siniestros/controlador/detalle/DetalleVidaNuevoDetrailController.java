@@ -91,7 +91,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
                     getPlan().getId()).
                     list();
             if (l != null && l.size() > 0) {
-                return l.get(0).getSumaAsegurada() * beneficiario.getIndemnizacion();
+                return l.get(0).getSumaAsegurada() * beneficiario.getIndemnizacion() / 100;
             }
 
         } catch (Exception ex) {
