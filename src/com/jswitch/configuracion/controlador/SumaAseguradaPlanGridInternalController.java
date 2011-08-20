@@ -25,9 +25,9 @@ import org.openswing.swing.message.receive.java.ValueObject;
  *
  * @author bc
  */
-public class CoberturaPlanGridInternalController extends DefaultGridInternalController {
+public class SumaAseguradaPlanGridInternalController extends DefaultGridInternalController {
 
-    public CoberturaPlanGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid,DefaultGridInternalController... listSubGrids) {
+    public SumaAseguradaPlanGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid,DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);//(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
     }
 

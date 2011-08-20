@@ -214,7 +214,7 @@ public class Pago extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="pago")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**

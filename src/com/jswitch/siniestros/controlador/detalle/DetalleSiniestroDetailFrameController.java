@@ -44,13 +44,15 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private Siniestro siniestro;
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Class tipoDetalle) {
-        this.siniestro = ((DetalleSiniestro) beanVO).getSiniestro();
+        if (beanVO != null) {
+            this.siniestro = ((DetalleSiniestro) beanVO).getSiniestro();
+        }
 
         if (tipoDetalle.equals(Vida.class) && !checkRamo("VIDA")) {
             JOptionPane.showMessageDialog(gridControl, "Ramo Vida no aplica\n"
                     + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);
             return;
-        } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNERARIO")) {
+        } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNERARIOS")) {
             JOptionPane.showMessageDialog(gridControl, "Ramo Funerario no aplica\n"
                     + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -85,6 +87,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         etapaInicial.put(Vida.class, "CARTA COMPROMISO");
 
 
+
     }
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro, Class tipoDetalle) {
@@ -109,7 +112,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     @Override
     public void actionPerformed(ActionEvent e) {
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
-            new PagoDetailFrameController(PagoDetailFrame.class.getName(), gridControl, (DetalleSiniestro) beanVO, true);
+            new PagoDetailFrameController(PagoDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
         }
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
             new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO);

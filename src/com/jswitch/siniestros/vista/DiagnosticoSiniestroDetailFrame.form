@@ -194,6 +194,7 @@
                   <Connection code="&quot;montoPendiente&quot;" type="code"/>
                 </Property>
                 <Property name="decimals" type="int" value="2"/>
+                <Property name="minValue" type="double" value="-2.147483647E9"/>
                 <Property name="required" type="boolean" value="true"/>
               </Properties>
             </Component>

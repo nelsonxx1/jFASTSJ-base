@@ -139,11 +139,12 @@ public class DiagnosticoPorPlanLookupController extends DefaultLookupController 
             try {
                 OpenSwingTreeNode root = new OpenSwingTreeNode(null);
                 s = HibernateUtil.getSessionFactory().openSession();
-                List<Especialidad> especialidades = s.createQuery("SELECT DISTINCT M.diagnostico.especialidad FROM "
+                String sql = "SELECT DISTINCT M.diagnostico.especialidad FROM "
                         + SumaAsegurada.class.getName()
                         + " M WHERE M.plan.id= ? "
                         + validateRamo
-                        + "AND M.diagnostico.especialidad.auditoria.activo=? ").
+                        + "AND M.diagnostico.especialidad.auditoria.activo=? ";
+                List<Especialidad> especialidades = s.createQuery(sql).
                         setLong(0, plan.getId()).//.setCacheable(true)
                         setBoolean(1, Boolean.TRUE).
                         list();

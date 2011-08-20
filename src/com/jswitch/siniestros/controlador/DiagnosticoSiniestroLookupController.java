@@ -13,22 +13,23 @@ import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.type.BooleanType;
-import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
+import org.openswing.swing.message.send.java.FilterWhereClause;
 import org.openswing.swing.util.java.Consts;
 import org.openswing.swing.util.server.HibernateUtils;
 
 /**
- * @author bc
+ * @author adrian
  */
 public class DiagnosticoSiniestroLookupController extends DefaultLookupController {
 
     DetalleSiniestro detalleSiniestro;
 
     public DiagnosticoSiniestroLookupController() {
+        this.detalleSiniestro = null;
         this.setLookupDataLocator(new DiagnosticoSiniestroLookupDataLocator(DiagnosticoSiniestro.class.getName()));
         this.setLookupGridController(new DefaultLookupGridController());
         setLookupValueObjectClassName(DiagnosticoSiniestro.class.getName());
@@ -43,6 +44,17 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
         setPreferredWidthColumn("diagnostico.nombre", 100);
         setPreferredWidthColumn("montoPendiente", 50);
         setPreferredWidthColumn("montoPagado", 50);
+        setFilterableColumn("diagnostico.especialidad.ramo.nombre", true);
+        setFilterableColumn("diagnostico.especialidad.nombre", true);
+        setFilterableColumn("diagnostico.nombre", true);
+        setFilterableColumn("montoPendiente", true);
+        setFilterableColumn("montoPagado", true);
+        setSortableColumn("diagnostico.especialidad.ramo.nombre", true);
+        setSortableColumn("diagnostico.especialidad.nombre", true);
+        setSortableColumn("diagnostico.nombre", true);
+        setSortableColumn("montoPendiente", true);
+        setSortableColumn("montoPagado", true);
+        setSortedColumn("diagnostico.especialidad.ramo.nombre", Consts.ASC_SORTED);
         setFramePreferedSize(new java.awt.Dimension(400, 340));
         setCodeSelectionWindow(GRID_FRAME);
         setOnInvalidCode(ON_INVALID_CODE_RESTORE_FOCUS);
@@ -70,8 +82,13 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
                 Session s = null;
                 try {
                     String sql = "FROM " + DiagnosticoSiniestro.class.getName()
-                            + " C WHERE C.detalleSiniestro.id = ?";// + detalleSiniestro.getId() ;
-                    sql += " AND C.auditoria.activo=?";
+                            + " C WHERE C.auditoria.activo=? AND C.montoPendiente > 0";
+                    filteredColumns.put(
+                            "detalleSiniestro.id",
+                            new FilterWhereClause[]{
+                                new FilterWhereClause("detalleSiniestro.id", "=", detalleSiniestro.getId()),
+                                null
+                            });
                     SessionFactory sf = HibernateUtil.getSessionFactory();
                     s = sf.openSession();
                     Response res = HibernateUtils.getAllFromQuery(
@@ -80,8 +97,8 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
                             currentSortedVersusColumns,
                             valueObjectType,
                             sql,
-                            new Object[]{detalleSiniestro.getId(), new Boolean(true)},
-                            new Type[]{new LongType(), new BooleanType()},
+                            new Object[]{new Boolean(true)},
+                            new Type[]{new BooleanType()},
                             "C",
                             sf,
                             s);
@@ -101,23 +118,26 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
 
         @Override
         public Response validateCode(String code) {
-
-            Session s = null;
-            try {
-                String sql = "FROM " + DiagnosticoSiniestro.class.getName()
-                        + " C WHERE C.detalleSiniestro.id = ?";// + detalleSiniestro.getId() ;
-                sql += " AND C.auditoria.activo=? AND upper(C.diagnosticoSiniestro.diagnostico.nombre) like ?";
-                s = HibernateUtil.getSessionFactory().openSession();
-                List list = s.createQuery(sql).
-                        setLong(0, detalleSiniestro.getId()).
-                        setBoolean(1, true).
-                        setString(2, "%" + code.toUpperCase().trim() + "%").list();
-                return new VOListResponse(list, false, list.size());
-            } catch (Exception ex) {
-                LoggerUtil.error(this.getClass(), "validateCode", ex);
-                return new ErrorResponse(ex.getMessage());
-            } finally {
-                s.close();
+            if (detalleSiniestro != null) {
+                Session s = null;
+                try {
+                    String sql = "FROM " + DiagnosticoSiniestro.class.getName()
+                            + " C WHERE C.detalleSiniestro.id = ?";// + detalleSiniestro.getId() ;
+                    sql += " AND C.auditoria.activo=? AND upper(C.diagnostico.nombre) like ?";
+                    s = HibernateUtil.getSessionFactory().openSession();
+                    List list = s.createQuery(sql).
+                            setLong(0, detalleSiniestro.getId()).
+                            setBoolean(1, Boolean.TRUE).
+                            setString(2, "%" + code.toUpperCase().trim() + "%").list();
+                    return new VOListResponse(list, false, list.size());
+                } catch (Exception ex) {
+                    LoggerUtil.error(this.getClass(), "validateCode", ex);
+                    return new ErrorResponse(ex.getMessage());
+                } finally {
+                    s.close();
+                }
+            } else {
+                return new VOListResponse();
             }
         }
     }
