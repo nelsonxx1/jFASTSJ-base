@@ -37,6 +37,7 @@ public class PatologiasGridFrame extends DefaultGridFrame {
         jPanelR = new javax.swing.JPanel();
         ramo = new org.openswing.swing.client.GridControl();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn11 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel9 = new javax.swing.JPanel();
         insertButtonR = new org.openswing.swing.client.InsertButton();
         editButtonR = new org.openswing.swing.client.EditButton();
@@ -105,6 +106,12 @@ public class PatologiasGridFrame extends DefaultGridFrame {
         textColumn2.setUpperCase(true);
         ramo.getColumnContainer().add(textColumn2);
 
+        textColumn11.setColumnName("idPropio");
+        textColumn11.setEditableOnInsert(true);
+        textColumn11.setTrimText(true);
+        textColumn11.setUpperCase(true);
+        ramo.getColumnContainer().add(textColumn11);
+
         jPanel9.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
         jPanel9.add(insertButtonR);
         jPanel9.add(editButtonR);
@@ -120,14 +127,14 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             .addGroup(jPanelRLayout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ramo, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                .addComponent(ramo, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
         );
         jPanelRLayout.setVerticalGroup(
             jPanelRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRLayout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addComponent(ramo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap(175, Short.MAX_VALUE))
+            .addComponent(ramo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ramos", jPanelR);
@@ -170,14 +177,14 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             .addGroup(jPanelELayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(especialidad, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                .addComponent(especialidad, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
         );
         jPanelELayout.setVerticalGroup(
             jPanelELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelELayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addComponent(especialidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap(175, Short.MAX_VALUE))
+            .addComponent(especialidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Especialidades", jPanelE);
@@ -223,14 +230,14 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             .addGroup(jPanelDLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(diagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                .addComponent(diagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
         );
         jPanelDLayout.setVerticalGroup(
             jPanelDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addComponent(diagnostico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap(175, Short.MAX_VALUE))
+            .addComponent(diagnostico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Diagnosticos", jPanelD);
@@ -279,14 +286,14 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             .addGroup(jPanelTLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                .addComponent(tratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
         );
         jPanelTLayout.setVerticalGroup(
             jPanelTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addComponent(tratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap(175, Short.MAX_VALUE))
+            .addComponent(tratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Tratamientos", jPanelT);
@@ -304,7 +311,7 @@ public class PatologiasGridFrame extends DefaultGridFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -415,6 +422,7 @@ public class PatologiasGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.SaveButton saveButtonR;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn10;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn11;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;

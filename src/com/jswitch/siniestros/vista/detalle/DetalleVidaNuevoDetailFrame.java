@@ -158,7 +158,7 @@ public class DetalleVidaNuevoDetailFrame extends DefaultDetailFrame {
 
     public void setPlanToLookup(Plan plan) {
         lookupDiagnostico.setPlan(plan);
-        lookupDiagnostico.setNombreRamo("VIDA");
+        lookupDiagnostico.setIdPropioRamo("VIDA");
     }
 
     @Override

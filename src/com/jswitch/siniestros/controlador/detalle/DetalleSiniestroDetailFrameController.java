@@ -1,9 +1,12 @@
 package com.jswitch.siniestros.controlador.detalle;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroDetailFrameController;
 import com.jswitch.pagos.controlador.PagoDetailFrameController;
@@ -32,6 +35,7 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.java.Consts;
 
 /**
@@ -44,32 +48,27 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private Siniestro siniestro;
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Class tipoDetalle) {
-        if (beanVO != null) {
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, tipoDetalle, null);
+    }
+
+    public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Class tipoDetalle, Siniestro siniestro) {
+        this.siniestro = siniestro;
+        if (siniestro == null && beanVO != null) {
             this.siniestro = ((DetalleSiniestro) beanVO).getSiniestro();
         }
-
         if (tipoDetalle.equals(Vida.class) && !checkRamo("VIDA")) {
-            JOptionPane.showMessageDialog(gridControl, "Ramo Vida no aplica\n"
-                    + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(gridControl, ClientSettings.getInstance().getResources().getResource("noRamo.vida"), General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
-        } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNERARIOS")) {
-            JOptionPane.showMessageDialog(gridControl, "Ramo Funerario no aplica\n"
-                    + "para este Asegurado", "Caution", JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNE")) {
+            JOptionPane.showMessageDialog(gridControl, ClientSettings.getInstance().getResources().getResource("noRamo.funerario"), General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
-
         this.gridControl = gridControl;
         this.beanVO = beanVO;
         this.aplicarLogicaNegocio = aplicarLogicaNegocio;
-
-
         vista = new DetalleSiniestroDetailFrame();
         ((DetalleSiniestroDetailFrame) vista).setTipo(tipoDetalle);
         vista.inicializar(this, true);
-
-
-
         if (beanVO != null) {
             vista.getMainPanel().reload();
             vista.getMainPanel().setMode(Consts.READONLY);
@@ -85,14 +84,10 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         etapaInicial.put(Funerario.class, "CARTA COMPROMISO");
         etapaInicial.put(Reembolso.class, "CARTA COMPROMISO");
         etapaInicial.put(Vida.class, "CARTA COMPROMISO");
-
-
-
     }
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro, Class tipoDetalle) {
-        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, tipoDetalle);
-        this.siniestro = siniestro;
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, tipoDetalle, siniestro);
     }
 
     @Override
@@ -125,6 +120,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         if (tp != null) {
             ((DetalleSiniestro) persistentObject).setTipoPersona(tp);
         }
+        System.out.println("ENTRO " + ((Auditable) persistentObject).getId() + " " + persistentObject);
         return super.updateRecord(oldPersistentObject, persistentObject);
     }
 
@@ -139,6 +135,13 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
 
+            String idPropio = (newPersistentObject instanceof Vida) ? "VIDA"
+                    : (newPersistentObject instanceof Funerario) ? "FUNE" : "HCM";
+            q = s.createQuery("FROM " + Ramo.class.getName() + " C"
+                    + " WHERE C.idPropio='" + idPropio + "'");
+            Ramo ramo = (Ramo) q.uniqueResult();
+            ((DetalleSiniestro) newPersistentObject).setRamo(ramo);
+            
             if (newPersistentObject instanceof Reembolso) {
                 q = s.createQuery("FROM " + TipoPersona.class.getName() + " C"
                         + " WHERE C.idPropio='TIT'");
@@ -152,6 +155,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     ((DetalleSiniestro) newPersistentObject).setTipoPersona(tp);
                 }
             }
+
             ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);
             siniestro.getDetalleSiniestro().add((DetalleSiniestro) newPersistentObject);
             return super.insertRecord((newPersistentObject));
@@ -168,7 +172,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("SELECT 1 AS SW FROM " + Plan.class.getName() + " P "
                     + " JOIN P.sumasAseguradas S "
-                    + " WHERE S.diagnostico.especialidad.ramo.nombre='" + nombreRamo + "'"
+                    + " WHERE S.diagnostico.especialidad.ramo.idPropio='" + nombreRamo + "'"
                     + " AND P.id=?");
             List l = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list();
             return (l != null && l.size() > 0)

@@ -7,6 +7,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
+import com.jswitch.fas.controlador.Principal;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -15,6 +16,8 @@ import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
 import com.jswitch.siniestros.vista.detalle.DetalleVidaNuevoDetailFrame;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
@@ -47,8 +50,10 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         s.close();
         List<Beneficiario> beneficiarios = new ArrayList<Beneficiario>(sin.getBeneficiarios());
         DetalleVida detalleVida = (DetalleVida) newPersistentObject;
-
-        for (Beneficiario beneficiario : beneficiarios) {
+        Double indemnizacion = getIndemValue(detalleVida.getDiagnostico());
+        Double asignado = 0d;
+        for (int i = 0; i < beneficiarios.size(); i++) {
+            Beneficiario beneficiario = beneficiarios.get(i);
             Vida vida = new Vida();
             vida.setPersonaPago(beneficiario.getPersona());
             vida.setFechaDefuncion(detalleVida.getFechaDefuncion());
@@ -66,10 +71,12 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
             vida.setTipoPersona(tp);
             vida.setTratamientoEfectuado(TratamientoEfectuado.DESCONOCIDO);
             super.insertRecord(vida);
-            DiagnosticoSiniestro ds =
-                    new DiagnosticoSiniestro(vida,
-                    detalleVida.getDiagnostico(),
-                    getIndemValue(beneficiario, detalleVida.getDiagnostico()));
+            Double indem = (i < beneficiarios.size() - 1)
+                    ? Principal.truncar(indemnizacion * beneficiario.getIndemnizacion() / 100)
+                    : indemnizacion - asignado;
+            asignado += indem;
+            DiagnosticoSiniestro ds = new DiagnosticoSiniestro(vida,
+                    detalleVida.getDiagnostico(), indem);
             vida.getDiagnosticoSiniestros().add(ds);
             super.insertRecord(ds);
         }
@@ -77,7 +84,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         return new VOResponse(newPersistentObject);
     }
 
-    private Double getIndemValue(Beneficiario beneficiario, Diagnostico diagnostico) {
+    private Double getIndemValue(Diagnostico diagnostico) {
 
         Session s = null;
         try {
@@ -91,7 +98,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
                     getPlan().getId()).
                     list();
             if (l != null && l.size() > 0) {
-                return l.get(0).getSumaAsegurada() * beneficiario.getIndemnizacion() / 100;
+                return l.get(0).getSumaAsegurada();
             }
 
         } catch (Exception ex) {

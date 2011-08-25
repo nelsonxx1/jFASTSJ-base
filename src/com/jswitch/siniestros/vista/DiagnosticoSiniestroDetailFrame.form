@@ -265,6 +265,8 @@
                   <Connection code="&quot;montoPagado&quot;" type="code"/>
                 </Property>
                 <Property name="decimals" type="int" value="2"/>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
+                <Property name="enabledOnInsert" type="boolean" value="false"/>
                 <Property name="required" type="boolean" value="true"/>
               </Properties>
             </Component>

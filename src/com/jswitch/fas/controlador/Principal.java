@@ -1,5 +1,3 @@
-
-
 package com.jswitch.fas.controlador;
 
 import com.jswitch.base.controlador.General;
@@ -54,6 +52,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
 import oracle.help.Help;
@@ -533,5 +534,10 @@ public class Principal implements MDIController, LoginController {
         if (helpManager != null) {
             helpManager.addComponent(component, topicId, true, true);
         }
+    }
+
+    public static Double truncar(Double d) {
+        BigDecimal b = new BigDecimal(123456789.1111).setScale(2, RoundingMode.DOWN).round(MathContext.UNLIMITED);
+        return b.doubleValue();
     }
 }

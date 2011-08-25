@@ -2,7 +2,7 @@
 
 <Form version="1.2" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="title" type="java.lang.String" value="Pago"/>
+    <Property name="title" type="java.lang.String" value="Liquidacion de Siniestro"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
@@ -26,7 +26,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jTabbedPane1" alignment="0" pref="654" max="32767" attributes="0"/>
-                  <Component id="form1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="form1" alignment="0" pref="654" max="32767" attributes="0"/>
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -38,9 +38,9 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="form1" min="-2" pref="128" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="283" max="32767" attributes="0"/>
+              <Component id="form1" min="-2" pref="177" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" pref="253" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -66,7 +66,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="editButton1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -114,26 +114,36 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="labelControl3" linkSize="18" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="textControl3" pref="489" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl6" linkSize="18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dateControl2" pref="554" max="32767" attributes="1"/>
+                              <Component id="dateControl2" pref="489" max="32767" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl5" linkSize="18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dateControl1" pref="554" max="32767" attributes="1"/>
+                              <Component id="dateControl1" pref="489" max="32767" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl2" linkSize="18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textControl1" pref="554" max="32767" attributes="1"/>
+                              <Component id="textControl1" pref="489" max="32767" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelControl4" linkSize="18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textControl2" pref="554" max="32767" attributes="1"/>
+                              <Component id="textControl2" pref="489" max="32767" attributes="1"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelControl7" linkSize="18" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="numericControl1" pref="489" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -142,11 +152,16 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="labelControl2" linkSize="17" min="-2" max="-2" attributes="0"/>
-                          <Component id="textControl1" linkSize="17" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelControl3" linkSize="20" pref="21" max="32767" attributes="1"/>
+                          <Component id="textControl3" linkSize="17" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="labelControl2" linkSize="20" max="32767" attributes="1"/>
+                          <Component id="textControl1" linkSize="17" alignment="1" min="-2" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -163,7 +178,12 @@
                           <Component id="labelControl6" linkSize="17" min="-2" max="-2" attributes="0"/>
                           <Component id="dateControl2" linkSize="17" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="labelControl7" linkSize="17" min="-2" max="-2" attributes="0"/>
+                          <Component id="numericControl1" linkSize="17" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -221,6 +241,35 @@
                 <Property name="label" type="java.lang.String" value="fechaFactura"/>
               </Properties>
             </Component>
+            <Component class="org.openswing.swing.client.LabelControl" name="labelControl7">
+              <Properties>
+                <Property name="label" type="java.lang.String" value="totalFacturado"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.client.NumericControl" name="numericControl1">
+              <Properties>
+                <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;totalFacturado&quot;" type="code"/>
+                </Property>
+                <Property name="decimals" type="int" value="2"/>
+                <Property name="required" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.client.LabelControl" name="labelControl3">
+              <Properties>
+                <Property name="label" type="java.lang.String" value="detalleSiniestro.ramo.nombre"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.client.TextControl" name="textControl3">
+              <Properties>
+                <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;detalleSiniestro.ramo.nombre&quot;" type="code"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
+                <Property name="enabledOnInsert" type="boolean" value="false"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -259,9 +308,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <EmptySpace pref="112" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl5" alignment="0" pref="242" max="32767" attributes="2"/>
+                  <Component id="gridControl5" alignment="0" pref="212" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -457,9 +506,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <EmptySpace pref="112" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl6" alignment="0" pref="242" max="32767" attributes="2"/>
+                  <Component id="gridControl6" alignment="0" pref="212" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -467,17 +516,11 @@
             <Container class="org.openswing.swing.client.GridControl" name="gridControl6">
               <Properties>
                 <Property name="defaultQuickFilterCriteria" type="int" value="1"/>
-                <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="deleteButton8"/>
-                </Property>
                 <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="editButton8"/>
                 </Property>
                 <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="filterButton8"/>
-                </Property>
-                <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="insertButton8"/>
                 </Property>
                 <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
                 <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -503,28 +546,11 @@
                     <Property name="preferredWidth" type="int" value="40"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
-                  <Properties>
-                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;cobertura.ramo.nombre&quot;" type="code"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.table.columns.client.CodLookupColumn" name="codLookupColumn3">
                   <Properties>
                     <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;cobertura.nombre&quot;" type="code"/>
                     </Property>
-                    <Property name="editableOnEdit" type="boolean" value="true"/>
-                    <Property name="editableOnInsert" type="boolean" value="true"/>
-                  </Properties>
-                </Component>
-                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
-                  <Properties>
-                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;detalle&quot;" type="code"/>
-                    </Property>
-                    <Property name="columnRequired" type="boolean" value="false"/>
                     <Property name="editableOnEdit" type="boolean" value="true"/>
                     <Property name="editableOnInsert" type="boolean" value="true"/>
                   </Properties>
@@ -555,6 +581,16 @@
                       <Connection code="&quot;montoNoAmparado&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
+                  <Properties>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;detalle&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnRequired" type="boolean" value="false"/>
+                    <Property name="editableOnEdit" type="boolean" value="true"/>
+                    <Property name="editableOnInsert" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.CheckBoxColumn" name="checkBoxColumn3">
@@ -591,16 +627,7 @@
                 <Property name="verticalGap" type="int" value="2"/>
               </Layout>
               <SubComponents>
-                <Component class="org.openswing.swing.client.InsertButton" name="insertButton8">
-                  <Properties>
-                    <Property name="buttonId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;beneficiario&quot;" type="code"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.EditButton" name="editButton8">
-                </Component>
-                <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton8">
                 </Component>
                 <Component class="org.openswing.swing.client.SaveButton" name="saveButton8">
                 </Component>

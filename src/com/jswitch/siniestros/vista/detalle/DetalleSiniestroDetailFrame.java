@@ -332,8 +332,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
 
         formAPS.setVOClassName(APS.class.getName());
-        formAPS.setEditButton(editButton1);
-        formAPS.setSaveButton(saveButton1);
         formAPS.setLayout(new java.awt.GridLayout(1, 2));
 
         labelControl6.setLabel("detalleSiniestro.personaPago");
@@ -471,7 +469,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(codLookupControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl2, labelControl13, labelControl14, labelControl15, labelControl16, labelControl17, labelControl18, labelControl6, labelControl7, textControl4});
@@ -481,8 +479,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("APS", formAPS);
 
         formAyudaSocial.setVOClassName(AyudaSocial.class.getName());
-        formAyudaSocial.setEditButton(editButton1);
-        formAyudaSocial.setSaveButton(saveButton1);
         formAyudaSocial.setLayout(new java.awt.BorderLayout());
 
         labelControl57.setLabel("detalleSiniestro.personaPago");
@@ -660,7 +656,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jPanel24Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl7, codLookupControl22, codLookupControl23, codLookupControl24, codLookupControl25, comboBoxControl6, dateControl12, dateControl13, labelControl57, labelControl58, labelControl59, labelControl60, labelControl61, labelControl62, labelControl63, labelControl64, labelControl65, labelControl66, labelControl67, numericControl5, numericControl6, textControl16, textControl17});
@@ -670,8 +666,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Ayuda Social", formAyudaSocial);
 
         formCartaAval.setVOClassName(CartaAval.class.getName());
-        formCartaAval.setEditButton(editButton1);
-        formCartaAval.setSaveButton(saveButton1);
         formCartaAval.setLayout(new java.awt.BorderLayout());
 
         labelControl43.setLabel("detalleSiniestro.personaPago");
@@ -849,7 +843,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jPanel20Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl6, codLookupControl17, codLookupControl18, codLookupControl19, codLookupControl20, comboBoxControl5, dateControl10, dateControl11, labelControl43, labelControl44, labelControl45, labelControl46, labelControl47, labelControl48, labelControl49, labelControl50, labelControl51, labelControl52, labelControl53, numericControl1, numericControl2, textControl14, textControl15});
@@ -859,8 +853,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Carta Aval", formCartaAval);
 
         formEmergencia.setVOClassName(Emergencia.class.getName());
-        formEmergencia.setEditButton(editButton1);
-        formEmergencia.setSaveButton(saveButton1);
         formEmergencia.setLayout(new java.awt.GridLayout(1, 2));
 
         labelControl32.setLabel("detalleSiniestro.personaPago");
@@ -1074,7 +1066,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(numericControl4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel19Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl5, codLookupControl14, codLookupControl15, codLookupControl16, codLookupControl21, comboBoxControl4, dateControl8, dateControl9, labelControl32, labelControl33, labelControl34, labelControl35, labelControl36, labelControl37, labelControl38, labelControl39, labelControl40, labelControl41, labelControl42, labelControl54, labelControl55, labelControl56, numericControl3, numericControl4, textControl10, textControl11, textControl12, textControl13, textControl9});
@@ -1084,8 +1076,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Emergencia", formEmergencia);
 
         formFunenario.setVOClassName(com.jswitch.siniestros.modelo.maestra.detalle.Funerario.class.getName());
-        formFunenario.setEditButton(editButton1);
-        formFunenario.setSaveButton(saveButton1);
+        formFunenario.setPreferredSize(new java.awt.Dimension(662, 474));
         formFunenario.setLayout(new java.awt.GridLayout(1, 2));
 
         labelControl19.setLabel("detalleSiniestro.personaPago");
@@ -1095,7 +1086,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl21.setLabel("detalleSiniestro.fechaDefuncion");
 
         dateControl6.setAttributeName("fechaDefuncion");
-        dateControl6.setEnabledOnInsert(false);
         dateControl6.setRequired(true);
 
         codLookupControl8.setAttributeName("personaPago.nombreLargo");
@@ -1206,8 +1196,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Funenarios", formFunenario);
 
         formRembolso.setVOClassName(Reembolso.class.getName());
-        formRembolso.setEditButton(editButton1);
-        formRembolso.setSaveButton(saveButton1);
         formRembolso.setLayout(new java.awt.GridLayout(1, 0));
 
         labelControl3.setLabel("detalleSiniestro.personaPago");
@@ -1372,7 +1360,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, comboBoxControl1, dateControl1, dateControl2, dateControl3, labelControl1, labelControl10, labelControl11, labelControl12, labelControl2, labelControl3, labelControl4, labelControl5, labelControl8, labelControl9, textControl1, textControl2});
@@ -1382,8 +1370,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Rembolso", formRembolso);
 
         formVida.setVOClassName(Vida.class.getName());
-        formVida.setEditButton(editButton1);
-        formVida.setSaveButton(saveButton1);
+        formVida.setPreferredSize(new java.awt.Dimension(662, 474));
         formVida.setLayout(new java.awt.GridLayout(1, 2));
 
         labelControl25.setLabel("detalleSiniestro.personaPago");
@@ -1397,6 +1384,10 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         dateControl7.setRequired(true);
 
         codLookupControl11.setAttributeName("personaPago.nombreLargo");
+        codLookupControl11.setEnableCodBox(false);
+        codLookupControl11.setEnabledOnEdit(false);
+        codLookupControl11.setEnabledOnInsert(false);
+        codLookupControl11.setLookupButtonVisible(false);
         codLookupControl11.setMaxCharacters(25);
         codLookupControl11.setRequired(true);
 
@@ -1593,8 +1584,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(367, Short.MAX_VALUE))
-            .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap(358, Short.MAX_VALUE))
+            .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout DiagnosticosLayout = new javax.swing.GroupLayout(Diagnosticos);
@@ -1610,7 +1601,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         DiagnosticosLayout.setVerticalGroup(
             DiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(DiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DiagnosticosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1695,8 +1686,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addContainerGap(360, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pagosLayout = new javax.swing.GroupLayout(pagos);
@@ -1716,7 +1707,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Pagos", pagos);
+        jTabbedPane1.addTab("Liquidacion", pagos);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -1782,8 +1773,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(367, Short.MAX_VALUE))
-            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap(358, Short.MAX_VALUE))
+            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -1799,7 +1790,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1869,8 +1860,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(367, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap(358, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -1886,7 +1877,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1964,7 +1955,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DocAnexosLayout = new javax.swing.GroupLayout(DocAnexos);
@@ -1980,7 +1971,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -2013,11 +2004,11 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         ReportesLayout.setVerticalGroup(
             ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
             .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(ReportesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -2041,7 +2032,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -2095,46 +2086,55 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridDiagnosticos.setGridDataLocator(controllerDiagnosticoSiniesto);
         gridDiagnosticos.setController(controllerDiagnosticoSiniesto);
 
-        lookupPersonaPago = new PersonaTipoLookupController();
+        String[] tipoPersonaPago = null;
+        if (tipoDetalle.equals(Funerario.class)) {
+            tipoPersonaPago = new String[]{"CLI", "FUN", "MED"};
+        } else if (tipoDetalle.equals(Vida.class)) {
+            tipoPersonaPago = new String[]{"BEN"};
+
+        } else {
+            tipoPersonaPago = new String[]{"CLI", "MED", "LAB"};
+        }
+        lookupPersonaPago = new PersonaTipoLookupController(tipoPersonaPago);
         PersonaLookupControllerPorNombre p = new PersonaLookupControllerPorNombre("NEG");
         p.addLookup2ParentLink("analistaNegociador");
         SiniestroLookupController tipoController = new SiniestroLookupController(TipoSiniestro.class.getName(), tipoDetalle.getName());
         tipoController.addLookup2ParentLink("tipoSiniestro");
         SiniestroLookupController estadoController = new SiniestroLookupController(EtapaSiniestro.class.getName(), tipoDetalle.getName());
         estadoController.addLookup2ParentLink("etapaSiniestro");
-        CodLookupControl persona = null, negociador = null, tipoSiniestro = null, estadoSiniestro = null;
+        CodLookupControl persona = null, negociador = null, tipoSiniestro = null, etapaSiniestro = null;
         if (tipoDetalle.equals(APS.class)) {
             persona = codLookupControl5;
             tipoSiniestro = codLookupControl6;
-            estadoSiniestro = codLookupControl7;
+            etapaSiniestro = codLookupControl7;
         } else if (tipoDetalle.equals(AyudaSocial.class)) {
             persona = codLookupControl22;
             negociador = codLookupControl25;
             tipoSiniestro = codLookupControl23;
-            estadoSiniestro = codLookupControl24;
+            etapaSiniestro = codLookupControl24;
         } else if (tipoDetalle.equals(CartaAval.class)) {
             persona = codLookupControl17;
             negociador = codLookupControl20;
             tipoSiniestro = codLookupControl18;
-            estadoSiniestro = codLookupControl9;
+            etapaSiniestro = codLookupControl9;
         } else if (tipoDetalle.equals(Emergencia.class)) {
             persona = codLookupControl14;
             negociador = codLookupControl21;
             tipoSiniestro = codLookupControl16;
-            estadoSiniestro = codLookupControl15;
+            etapaSiniestro = codLookupControl15;
         } else if (tipoDetalle.equals(Funerario.class)) {
             persona = codLookupControl8;
             tipoSiniestro = codLookupControl10;
-            estadoSiniestro = codLookupControl9;
+            etapaSiniestro = codLookupControl9;
         } else if (tipoDetalle.equals(Reembolso.class)) {
             persona = codLookupControl1;
             negociador = codLookupControl2;
             tipoSiniestro = codLookupControl3;
-            estadoSiniestro = codLookupControl4;
+            etapaSiniestro = codLookupControl4;
         } else if (tipoDetalle.equals(Vida.class)) {
             persona = codLookupControl11;
             tipoSiniestro = codLookupControl13;
-            estadoSiniestro = codLookupControl12;
+            etapaSiniestro = codLookupControl12;
         }
         if (persona != null) {
             persona.setLookupController(lookupPersonaPago);
@@ -2150,9 +2150,11 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         }
         if (tipoSiniestro != null) {
             tipoSiniestro.setLookupController(tipoController);
+            tipoSiniestro.setControllerMethodName("getTipoSiniestro");
         }
-        if (estadoSiniestro != null) {
-            estadoSiniestro.setLookupController(estadoController);
+        if (etapaSiniestro != null) {
+            etapaSiniestro.setLookupController(estadoController);
+            etapaSiniestro.setControllerMethodName("getEtapaSiniestro");
         }
 //----------------------------------------------
 
@@ -2294,7 +2296,9 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
     }
 
     public void removeForms() {
+        Form form = null;
         if (tipoDetalle.equals(APS.class)) {
+            form = formAPS;
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formCartaAval);
             jTabbedPane1.remove(formEmergencia);
@@ -2302,6 +2306,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formRembolso);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(AyudaSocial.class)) {
+            form = formAyudaSocial;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formCartaAval);
             jTabbedPane1.remove(formEmergencia);
@@ -2309,6 +2314,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formRembolso);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(CartaAval.class)) {
+            form = formCartaAval;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formEmergencia);
@@ -2316,6 +2322,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formRembolso);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(Emergencia.class)) {
+            form = formEmergencia;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formCartaAval);
@@ -2323,6 +2330,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formRembolso);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(Funerario.class)) {
+            form = formFunenario;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formCartaAval);
@@ -2330,6 +2338,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formRembolso);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(Reembolso.class)) {
+            form = formRembolso;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formCartaAval);
@@ -2337,6 +2346,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formFunenario);
             jTabbedPane1.remove(formVida);
         } else if (tipoDetalle.equals(Vida.class)) {
+            form = formVida;
             jTabbedPane1.remove(formAPS);
             jTabbedPane1.remove(formAyudaSocial);
             jTabbedPane1.remove(formCartaAval);
@@ -2344,12 +2354,15 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jTabbedPane1.remove(formFunenario);
             jTabbedPane1.remove(formRembolso);
         }
+        form.setEditButton(editButton1);
+        form.setSaveButton(saveButton1);
         this.pack();
     }
 
     public GridControl getGridDiagnosticos() {
         return gridDiagnosticos;
     }
+
     public GridControl getGridPagos() {
         return gridControl6;
     }

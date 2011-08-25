@@ -32,7 +32,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      * Diagnostico al cual se esta cubriendo
      */
     @ManyToOne
-    @BusinessKey
+    @BusinessKey(exclude= Method.ALL)
     private DiagnosticoSiniestro diagnosticoSiniestro;
     /**
      * Diagnostico al cual se esta cubriendo

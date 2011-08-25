@@ -8,6 +8,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.fas.modelo.Dominios.TipoEnfermedad;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
 import com.jswitch.persona.modelo.maestra.Persona;
@@ -121,6 +122,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey
     private Double presupuestadoAjustado;
     /**
+     * 
+     */
+    @ManyToOne
+    @BusinessKey(exclude = Method.ALL)
+    private Ramo ramo;
+    /**
      * Coleccion de etapas de siniestro y las fechas de los cambios de la persona
      */
     @ManyToOne
@@ -129,11 +136,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * 
      */
     @Transient
-     private transient String tipoDetalle;
+    private transient String tipoDetalle;
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="detalleSiniestro")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<Pago> pagos = new HashSet<Pago>();
     /**
@@ -155,7 +162,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      * Coleccion de documentos anexos
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="detalleSiniestro")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<DiagnosticoSiniestro> diagnosticoSiniestros = new HashSet<DiagnosticoSiniestro>(0);
     /**
@@ -177,6 +184,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     public DetalleSiniestro() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -193,10 +201,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.optLock = optLock;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
@@ -337,8 +347,16 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.diagnosticoSiniestros = diagnosticoSiniestros;
     }
 
-    public String getTipoDetalle() {    
-        String s=this.getClass().getName();
-        return s.substring(s.lastIndexOf(".")+1);
+    public Ramo getRamo() {
+        return ramo;
+    }
+
+    public void setRamo(Ramo ramo) {
+        this.ramo = ramo;
+    }
+
+    public String getTipoDetalle() {
+        String s = this.getClass().getName();
+        return s.substring(s.lastIndexOf(".") + 1);
     }
 }
