@@ -27,7 +27,7 @@ import org.openswing.swing.util.java.Consts;
 import org.openswing.swing.util.server.HibernateUtils;
 
 /**
- * @author bc
+ * @author adrian
  */
 public class PersonaTipoLookupController extends DefaultLookupController {
 
@@ -37,10 +37,6 @@ public class PersonaTipoLookupController extends DefaultLookupController {
     /**
      * pone por defauld clinicas laboratiorios y medicos
      */
-    public PersonaTipoLookupController() {
-        this(new String[]{"CLI", "LAB", "MED"});
-    }
-
     public PersonaTipoLookupController(String[] tiposPersona) {
         this.tp = tiposPersona;
         this.setLookupDataLocator(new MarcaModeloLookupDataLocator(Persona.class.getName()));

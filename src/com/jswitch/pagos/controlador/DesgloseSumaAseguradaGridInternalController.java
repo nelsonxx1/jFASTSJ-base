@@ -1,16 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.NotaTecnica;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -35,18 +35,35 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
 
     @Override
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
-        for (Object object :
-                persistentObjects) {
-            DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
-            for (DiagnosticoSiniestro diagnosticoSiniestro :
-                    detalleSiniestro.getDiagnosticoSiniestros()) {
-                if (desgloseSumaAsegurada.getDiagnosticoSiniestro().getId().compareTo(diagnosticoSiniestro.getId()) == 0) {
-                    pagarDiagnostico(diagnosticoSiniestro, desgloseSumaAsegurada.getMonto());
+        for (int i = 0; i < rowNumbers.length; i++) {
+            DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(i));
+            DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(i));
+            for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
+                if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
+                    pagarDiagnostico(ds,
+                            desgloseSumaAsegurada.getMonto() - oldDesgloseSumaAsegurada.getMonto());
                     break;
                 }
             }
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
+    }
+
+    @Override
+    public Response deleteRecords(ArrayList persistentObjects) throws Exception {
+        for (Object object :
+                persistentObjects) {
+            DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
+            for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
+                if (ds.getId() == desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) {
+                    pagarDiagnostico(ds,
+                            desgloseSumaAsegurada.getMonto() * -1);
+                    break;
+                }
+            }
+        }
+        return super.deleteRecords(persistentObjects);
+
     }
 
     @Override
@@ -57,13 +74,14 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
             DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
             desgloseSumaAsegurada.setPago(pago);
             pago.getDesgloseSumaAsegurada().add(desgloseSumaAsegurada);
-            for (DiagnosticoSiniestro diagnosticoSiniestro :
-                    detalleSiniestro.getDiagnosticoSiniestros()) {
-                if (desgloseSumaAsegurada.getDiagnosticoSiniestro().getId().compareTo(diagnosticoSiniestro.getId()) == 0) {
-                    pagarDiagnostico(diagnosticoSiniestro, desgloseSumaAsegurada.getMonto());
+            for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
+                if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
+                    pagarDiagnostico(ds,
+                            desgloseSumaAsegurada.getMonto());
                     break;
                 }
             }
+
         }
         return super.insertRecords(rowNumbers, newValueObjects);
     }
@@ -72,10 +90,17 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         Double montoPendiente = diagnosticoSiniestro.getMontoPendiente(), montoPagado = diagnosticoSiniestro.getMontoPagado();
         montoPendiente -= monto;
         montoPagado += monto;
+        NotaTecnica notaTecnica = null;
         if (montoPendiente < 0) {
-            JOptionPane.showMessageDialog(miGrid,
-                    ClientSettings.getInstance().getResources().getResource("Pago.Exedido"),
-                    "", JOptionPane.INFORMATION_MESSAGE);
+            do {
+                String nota = JOptionPane.showInputDialog(miGrid,
+                        ClientSettings.getInstance().getResources().getResource("Pago.Exedido"),
+                        "", JOptionPane.INFORMATION_MESSAGE);
+                if (nota != null) {
+                    notaTecnica = new NotaTecnica(nota,
+                            new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
+                }
+            } while (notaTecnica == null);
         }
         diagnosticoSiniestro.setMontoPagado(montoPagado);
         diagnosticoSiniestro.setMontoPendiente(montoPendiente);
@@ -83,6 +108,11 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         s = HibernateUtil.getSessionFactory().openSession();
         s.beginTransaction();
         s.update(diagnosticoSiniestro);
+        if (notaTecnica != null) {
+            s.save(notaTecnica);
+            detalleSiniestro.getNotasTecnicas().add(notaTecnica);
+            s.update(detalleSiniestro);
+        }
         s.getTransaction().commit();
         s.close();
     }

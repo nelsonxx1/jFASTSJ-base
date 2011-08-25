@@ -6,6 +6,7 @@ import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
 import com.jswitch.base.vista.util.DefaultGridFrame;
+import com.jswitch.configuracion.controlador.CoberturaLookupController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 
@@ -32,6 +33,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
         checkBoxColumn5 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn4 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
@@ -81,6 +83,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         gridData.setExportButton(exportButton1);
         gridData.setFunctionId("Mantenimiento");
         gridData.setInsertButton(insertButton1);
+        gridData.setMaxNumberOfRowsOnInsert(20);
         gridData.setReloadButton(reloadButton1);
         gridData.setSaveButton(saveButton1);
         gridData.setValueObjectClassName(ConfiguracionCobertura.class.getName());
@@ -91,6 +94,9 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnVisible(false);
         decimalColumn1.setPreferredWidth(50);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn1.setColumnName("cobertura.ramo.nombre");
+        gridData.getColumnContainer().add(textColumn1);
 
         codLookupColumn1.setColumnName("cobertura.nombre");
         codLookupColumn1.setEditableOnEdit(true);
@@ -144,9 +150,8 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,6 +186,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     private javax.swing.JPanel jPanel2;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     // End of variables declaration//GEN-END:variables
@@ -195,7 +201,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         gridData.setValueObjectClassName(valueObjectClassName);
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-        DefaultLookupControllerPorNombre l = new DefaultLookupControllerPorNombre(Cobertura.class.getName());
+        CoberturaLookupController l = new CoberturaLookupController();
         l.addLookup2ParentLink("cobertura");
         codLookupColumn1.setLookupController(l);
 

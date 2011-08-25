@@ -128,6 +128,8 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         numericControl2.setAttributeName("montoPagado");
         numericControl2.setDecimals(2);
+        numericControl2.setEnabledOnEdit(false);
+        numericControl2.setEnabledOnInsert(false);
         numericControl2.setRequired(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

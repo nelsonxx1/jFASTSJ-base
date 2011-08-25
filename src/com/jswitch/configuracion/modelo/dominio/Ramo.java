@@ -40,6 +40,13 @@ public class Ramo extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String nombre;
     /**
+     * Nombre 
+     */
+    @Column(unique = true)
+    @Size(min = 1, max = 120)
+    @BusinessKey
+    private String idPropio;
+    /**
      */
     @Version
     @Column
@@ -70,14 +77,17 @@ public class Ramo extends BeanVO implements Serializable, Auditable {
         this.auditoria = auditoria;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -118,4 +128,11 @@ public class Ramo extends BeanVO implements Serializable, Auditable {
         this.especialidades = especialidades;
     }
 
+    public String getIdPropio() {
+        return idPropio;
+    }
+
+    public void setIdPropio(String idPropio) {
+        this.idPropio = idPropio;
+    }
 }

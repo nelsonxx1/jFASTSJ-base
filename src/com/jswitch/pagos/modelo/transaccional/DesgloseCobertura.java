@@ -43,7 +43,7 @@ public class DesgloseCobertura extends BeanVO implements Serializable, Auditable
      */
     @Column
     private Double montoAmparado;
-     /**
+    /**
      * 
      */
     @Column
@@ -67,15 +67,26 @@ public class DesgloseCobertura extends BeanVO implements Serializable, Auditable
     public DesgloseCobertura() {
     }
 
+    public DesgloseCobertura(Cobertura cobertura, AuditoriaBasica auditoria) {
+        this.cobertura = cobertura;
+        this.montoFacturado = 0d;
+        this.montoAmparado = 0d;
+        this.montoNoAmparado = 0d;
+        this.detalle = "";
+        this.auditoria = auditoria;
+    }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -131,5 +142,4 @@ public class DesgloseCobertura extends BeanVO implements Serializable, Auditable
     public void setMontoNoAmparado(Double montoNoAmparado) {
         this.montoNoAmparado = montoNoAmparado;
     }
-    
 }

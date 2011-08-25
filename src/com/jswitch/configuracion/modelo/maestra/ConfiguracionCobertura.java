@@ -34,6 +34,11 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
     @BusinessKey
     private Cobertura cobertura;
     /**
+     * booleano que dice si aplica no para la base imponible
+     */
+    @Column
+    private Boolean baseInponible;
+    /**
      * 
      */
     @Column
@@ -43,7 +48,6 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
      */
     @Column
     private Boolean islr;
-   
     /**
      */
     @Version
@@ -54,20 +58,21 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
-   
 
     public ConfiguracionCobertura() {
     }
 
-
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -108,4 +113,11 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
         this.iva = iva;
     }
 
+    public Boolean getBaseInponible() {
+        return baseInponible;
+    }
+
+    public void setBaseInponible(Boolean baseInponible) {
+        this.baseInponible = baseInponible;
+    }
 }

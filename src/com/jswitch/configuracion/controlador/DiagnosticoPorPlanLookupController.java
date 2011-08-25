@@ -35,7 +35,7 @@ import org.openswing.swing.util.server.HibernateUtils;
 public class DiagnosticoPorPlanLookupController extends DefaultLookupController {
 
     private Plan plan;
-    private String nombreRamo;
+    private String idPropioRamo;
 
     public DiagnosticoPorPlanLookupController() {
         this.setLookupDataLocator(new MarcaModeloLookupDataLocator(Diagnostico.class.getName()));
@@ -46,7 +46,7 @@ public class DiagnosticoPorPlanLookupController extends DefaultLookupController 
         this.setAllColumnVisible(false);
         this.setVisibleColumn("nombre", true);
         this.setPreferredWidthColumn("nombre", 300);
-        this.nombreRamo = null;
+        this.idPropioRamo = null;
 
     }
 
@@ -58,12 +58,12 @@ public class DiagnosticoPorPlanLookupController extends DefaultLookupController 
         this.plan = plan;
     }
 
-    public String getNombreRamo() {
-        return nombreRamo;
+    public String getIdPropioRamo() {
+        return idPropioRamo;
     }
 
-    public void setNombreRamo(String nombreRamo) {
-        this.nombreRamo = nombreRamo;
+    public void setIdPropioRamo(String idPropio) {
+        this.idPropioRamo = idPropio;
     }
 
     class MarcaModeloLookupDataLocator extends DefaultLookupDataLocator {
@@ -133,8 +133,8 @@ public class DiagnosticoPorPlanLookupController extends DefaultLookupController 
             }
             Session s = null;
             String validateRamo = "";
-            if (getNombreRamo() != null && !getNombreRamo().isEmpty()) {
-                validateRamo = " AND M.diagnostico.especialidad.ramo.nombre='" + getNombreRamo() + "' ";
+            if (getIdPropioRamo() != null && !getIdPropioRamo().isEmpty()) {
+                validateRamo = " AND M.diagnostico.especialidad.ramo.idPropio='" + getIdPropioRamo() + "' ";
             }
             try {
                 OpenSwingTreeNode root = new OpenSwingTreeNode(null);

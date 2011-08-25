@@ -1,7 +1,11 @@
 package com.jswitch.siniestros.controlador;
 
+import com.jswitch.base.controlador.General;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
@@ -9,10 +13,13 @@ import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import org.hibernate.Hibernate;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.lookup.client.LookupParent;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
@@ -23,9 +30,10 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFrameController {
 
-    public DiagnosticoSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+    public DiagnosticoSiniestroDetailFrameController(String detailFramePath, GridControl gridControl,
+            BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-        detalleSin = ((DiagnosticoSiniestro) beanVO).getDetalleSiniestro();
+        this.detalleSin = ((DiagnosticoSiniestro) beanVO).getDetalleSiniestro();
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
     }
     private DetalleSiniestro detalleSin;
@@ -42,8 +50,48 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         DiagnosticoSiniestro sin = (DiagnosticoSiniestro) s.get(DiagnosticoSiniestro.class, ((DiagnosticoSiniestro) beanVO).getId());
         Hibernate.initialize(sin.getTratamientos());
         s.close();
+        detalleSin.getDiagnosticoSiniestros().remove((DiagnosticoSiniestro) beanVO);
+        detalleSin.getDiagnosticoSiniestros().add(sin);
         beanVO = sin;
         return new VOResponse(beanVO);
+    }
+
+    @Override
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+        Session s = null;
+        try {
+            vista.saveGridsData();
+            s = HibernateUtil.getSessionFactory().openSession();
+            //s = HibernateUtil.getSessionFactory().openSession();
+            //AuditLogInterceptor.INSTANCE2.setSession(s);
+            Transaction t = s.beginTransaction();
+            if (persistentObject instanceof Auditable) {
+                AuditoriaBasica ab = ((Auditable) persistentObject).getAuditoria();
+                ab.setFechaUpdate(new Date());
+                ab.setUsuarioUpdate(General.usuario.getUserName());
+            }
+            if (aplicarLogicaNegocio) {
+                Response response = logicaNegocioConCambioEnVista(persistentObject, false);
+                if (response.isError()) {
+                    return response;
+                }
+                persistentObject = (ValueObject) ((VOResponse) response).getVo();
+            }
+            s.update(persistentObject);
+            t.commit();
+            if (linkForm != null && attributeName != null) {
+                linkForm.getVOModel().setValue(attributeName, persistentObject);
+                linkForm.pull(attributeName);
+            }
+            if (gridControl != null) {
+                gridControl.reloadData();
+            }
+            return new VOResponse(persistentObject);
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "updateRecord", ex));
+        } finally {
+            s.close();
+        }
     }
 
     @Override

@@ -382,7 +382,7 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="polizas">
+    // <editor-fold defaultstate="collapsed" desc="Coberturas">
     public void getConfiguracionCoberturas() {
         new DefaultAllGridFrameController(ConfiguracionCoberturaGridFrame.class.getName(), null, ConfiguracionCobertura.class.getName(),
                 "Configuracion Cobertura");
