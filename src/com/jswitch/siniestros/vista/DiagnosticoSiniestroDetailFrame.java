@@ -49,6 +49,8 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl6 = new org.openswing.swing.client.LabelControl();
         numericControl2 = new org.openswing.swing.client.NumericControl();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
         jPanel12 = new javax.swing.JPanel();
         gridControl4 = new org.openswing.swing.client.GridControl();
         decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
@@ -200,6 +202,13 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         form1.add(jPanel2);
 
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        textAreaControl1.setAttributeName("tratamientoEscrito");
+        jPanel3.add(textAreaControl1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Tratamiento Escrito", jPanel3);
+
         gridControl4.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
         gridControl4.setDeleteButton(deleteButton6);
         gridControl4.setEditOnSingleRow(true);
@@ -301,7 +310,6 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
-
         lookupDiagnostico = new DiagnosticoPorPlanLookupController();
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupControl1.setLookupController(lookupDiagnostico);
@@ -310,7 +318,8 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
                 new TratamientoGridInternalController2(DiagnosticoSiniestro.class.getName(), "getTratamientos", gridControl4);
         gridControl4.setGridDataLocator(tratamientos);
         gridControl4.setController(tratamientos);
-
+        form1.addLinkedPanel(jPanel3);
+        
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
 
@@ -319,8 +328,6 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         } else {
             setBounds(0, 0, 0, 0);
         }
-
-
         MDIFrame.add(this);
     }
 
@@ -342,11 +349,11 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     @Override
     public void setOwnerVO(BeanVO beanVO) {
         tratamientos.setBeanVO(beanVO);
-        Long id = null;
-        if (beanVO != null) {
-            System.out.println("beanVO - diferente de NULL");
-            //id = ((Vehiculo) beanVO).getId();
-        }
+//        Long id = null;
+//        if (beanVO != null) {
+//            System.out.println("beanVO - diferente de NULL");
+//            //id = ((Vehiculo) beanVO).getId();
+//        }
 
         reloadGridsData();
     }
@@ -387,6 +394,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl1;
     private org.openswing.swing.client.LabelControl labelControl2;
@@ -397,6 +405,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.NumericControl numericControl1;
     private org.openswing.swing.client.NumericControl numericControl2;
     private org.openswing.swing.client.SaveButton saveButton1;
+    private org.openswing.swing.client.TextAreaControl textAreaControl1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
