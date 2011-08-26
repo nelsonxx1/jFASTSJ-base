@@ -7,11 +7,12 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
-import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
+import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import org.hibernate.Hibernate;
@@ -31,17 +32,21 @@ import org.openswing.swing.message.receive.java.ValueObject;
 public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFrameController {
 
     public DiagnosticoSiniestroDetailFrameController(String detailFramePath, GridControl gridControl,
-            BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+            BeanVO beanVO, Boolean aplicarLogicaNegocio, DefaultDetailFrame frame) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.detalleSin = ((DiagnosticoSiniestro) beanVO).getDetalleSiniestro();
+        this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
     }
     private DetalleSiniestro detalleSin;
+    private DefaultDetailFrame frame;
 
-    public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin) {
+    public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin, DefaultDetailFrame frame) {
         super(DiagnosticoSiniestroDetailFrame.class.getName(), migrid, null, b);
         this.detalleSin = detalleSin;
+        this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
+
     }
 
     @Override
@@ -62,8 +67,6 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         try {
             vista.saveGridsData();
             s = HibernateUtil.getSessionFactory().openSession();
-            //s = HibernateUtil.getSessionFactory().openSession();
-            //AuditLogInterceptor.INSTANCE2.setSession(s);
             Transaction t = s.beginTransaction();
             if (persistentObject instanceof Auditable) {
                 AuditoriaBasica ab = ((Auditable) persistentObject).getAuditoria();
@@ -106,6 +109,13 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource().equals(((DiagnosticoSiniestroDetailFrame) vista).getjButton1())) {
+            new MantenimientoDiagnosticoDetailFrameController(frame,
+                    false, (DiagnosticoSiniestro) vista.getMainPanel().getVOModel().getValueObject(), detalleSin);
+            vista.dispose();
+            return;
+        }
         TratamientoLookupController t = new TratamientoLookupController(((DiagnosticoSiniestro) getBeanVO()).getDiagnostico());
         t.addLookup2ParentLink("tratamiento");
         t.openLookupFrame(vista, new TratamientoLookupParent());

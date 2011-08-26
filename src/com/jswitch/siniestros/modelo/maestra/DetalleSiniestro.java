@@ -18,7 +18,9 @@ import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -147,12 +149,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
-    private Set<Observacion> observaciones = new HashSet<Observacion>(0);
+    private List<Observacion> observaciones = new ArrayList<Observacion>(0);
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
-    private Set<NotaTecnica> notasTecnicas = new HashSet<NotaTecnica>(0);
+    private List<NotaTecnica> notasTecnicas = new ArrayList<NotaTecnica>(0);
     /**
      * Coleccion de documentos anexos
      */
@@ -323,19 +325,19 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.documentos = documentos;
     }
 
-    public Set<NotaTecnica> getNotasTecnicas() {
+    public List<NotaTecnica> getNotasTecnicas() {
         return notasTecnicas;
     }
 
-    public void setNotasTecnicas(Set<NotaTecnica> notasTecnicas) {
+    public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
         this.notasTecnicas = notasTecnicas;
     }
 
-    public Set<Observacion> getObservaciones() {
+    public List<Observacion> getObservaciones() {
         return observaciones;
     }
 
-    public void setObservaciones(Set<Observacion> observaciones) {
+    public void setObservaciones(List<Observacion> observaciones) {
         this.observaciones = observaciones;
     }
 

@@ -57,6 +57,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
+import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 import com.jswitch.pagos.vista.CoberturaGridFrame;
 import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
@@ -92,10 +93,12 @@ import com.jswitch.rol.modelo.Rol;
 import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.vista.PagoDetailFrame;
+import com.jswitch.siniestros.controlador.MantenimientoDiagnosticoDetailFrameController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
 import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
@@ -104,6 +107,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.EtapaSiniestroGridFrame;
+import com.jswitch.siniestros.vista.MantenimientoDiagnosticoDetailFrame;
 import com.jswitch.siniestros.vista.TipoSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
@@ -498,6 +502,5 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getTest() {
-        new PagoDetailFrameController(PagoDetailFrame.class.getName(), null, null, true);
     }
 }

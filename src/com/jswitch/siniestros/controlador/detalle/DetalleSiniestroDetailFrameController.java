@@ -110,7 +110,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             new PagoDetailFrameController(PagoDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
         }
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
-            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO);
+            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO, vista);
         }
     }
 
@@ -141,7 +141,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     + " WHERE C.idPropio='" + idPropio + "'");
             Ramo ramo = (Ramo) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setRamo(ramo);
-            
+
             if (newPersistentObject instanceof Reembolso) {
                 q = s.createQuery("FROM " + TipoPersona.class.getName() + " C"
                         + " WHERE C.idPropio='TIT'");

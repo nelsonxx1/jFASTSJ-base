@@ -9,10 +9,12 @@ import com.jswitch.pagos.controlador.TratamientoGridInternalController2;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
+import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.java.Consts;
 
 /**
@@ -34,6 +36,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         jPanel1 = new javax.swing.JPanel();
         editButton1 = new org.openswing.swing.client.EditButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
+        jButton1 = new javax.swing.JButton();
         form1 = new org.openswing.swing.form.client.Form();
         jPanel2 = new javax.swing.JPanel();
         labelControl1 = new org.openswing.swing.client.LabelControl();
@@ -69,6 +72,8 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         setTitle("Diagnostico Siniestro");
         setPreferredSize(new java.awt.Dimension(675, 542));
 
+        jButton1.setText(ClientSettings.getInstance().getResources().getResource("manteniminetoDiagnostico"));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,15 +83,19 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
                 .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -99,6 +108,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         numericControl1.setAttributeName("montoPendiente");
         numericControl1.setDecimals(2);
+        numericControl1.setEnabledOnEdit(false);
         numericControl1.setMinValue(-2.147483647E9);
         numericControl1.setRequired(true);
 
@@ -314,12 +324,13 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupControl1.setLookupController(lookupDiagnostico);
         insertButton6.addActionListener((ActionListener) formController);
+        jButton1.addActionListener((ActionListener) formController);
         tratamientos =
                 new TratamientoGridInternalController2(DiagnosticoSiniestro.class.getName(), "getTratamientos", gridControl4);
         gridControl4.setGridDataLocator(tratamientos);
         gridControl4.setController(tratamientos);
         form1.addLinkedPanel(jPanel3);
-        
+
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
 
@@ -378,6 +389,10 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     private void setEnableGridInternalButtons(boolean enabled) {
         jPanel13.setVisible(enabled);
     }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
@@ -390,6 +405,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControl4;
     private org.openswing.swing.client.InsertButton insertButton6;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;

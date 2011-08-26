@@ -2,6 +2,7 @@ package com.jswitch.siniestros.controlador;
 
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ValueObject;
@@ -12,12 +13,15 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class DiagnosticoSiniestroGridInternalController extends DefaultGridInternalController {
 
-    public DiagnosticoSiniestroGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, DefaultGridInternalController... listSubGrids) {
+    DefaultDetailFrame vista;
+
+    public DiagnosticoSiniestroGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, DefaultDetailFrame vista, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
+        this.vista = vista;
     }
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new DiagnosticoSiniestroDetailFrameController(DiagnosticoSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.FALSE);
+        new DiagnosticoSiniestroDetailFrameController(DiagnosticoSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.FALSE, vista);
     }
 }
