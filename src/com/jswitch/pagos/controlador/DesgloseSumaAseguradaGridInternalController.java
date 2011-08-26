@@ -14,6 +14,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.util.client.ClientSettings;
 
@@ -37,30 +38,45 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
         for (int i = 0; i < rowNumbers.length; i++) {
             DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(i));
-            DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(i));
+            DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) oldPersistentObjects.get(i));
+            if (logicaNegocio(desgloseSumaAsegurada)) {
+                persistentObjects.remove(i);
+                oldPersistentObjects.remove(i);
+                i--;
+                continue;
+            }
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
                     pagarDiagnostico(ds,
                             desgloseSumaAsegurada.getMonto() - oldDesgloseSumaAsegurada.getMonto());
-                    break;
                 }
             }
+        }
+        if (persistentObjects.isEmpty()) {
+            return new ErrorResponse("logicaNegocioDSA");
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
 
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
-        for (Object object :
-                persistentObjects) {
+        for (int i = 0; i < persistentObjects.size(); i++) {
+            Object object = persistentObjects.get(i);
             DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
+            if (logicaNegocio(desgloseSumaAsegurada)) {
+                persistentObjects.remove(object);
+                i--;
+                continue;
+            }
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
-                if (ds.getId() == desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) {
+                if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
                     pagarDiagnostico(ds,
                             desgloseSumaAsegurada.getMonto() * -1);
-                    break;
                 }
             }
+        }
+        if (persistentObjects.isEmpty()) {
+            return new ErrorResponse("logicaNegocioDSA");
         }
         return super.deleteRecords(persistentObjects);
 
@@ -69,21 +85,39 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
         Pago pago = (Pago) beanVO;
-        for (Object object :
-                newValueObjects) {
+        for (int i = 0; i < newValueObjects.size(); i++) {
+            Object object = newValueObjects.get(i);
             DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
+            if (logicaNegocio(desgloseSumaAsegurada)) {
+                newValueObjects.remove(object);
+                i--;
+                continue;
+            }
             desgloseSumaAsegurada.setPago(pago);
             pago.getDesgloseSumaAsegurada().add(desgloseSumaAsegurada);
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
                     pagarDiagnostico(ds,
                             desgloseSumaAsegurada.getMonto());
-                    break;
                 }
             }
 
         }
+        if (newValueObjects.isEmpty()) {
+            return new ErrorResponse("logicaNegocioDSA");
+        }
         return super.insertRecords(rowNumbers, newValueObjects);
+    }
+
+    private boolean logicaNegocio(DesgloseSumaAsegurada asegurada) {
+        Pago pago = (Pago) beanVO;
+        Double liquidado = asegurada.getMonto();
+        for (DesgloseSumaAsegurada desgloseSumaAsegurada : pago.getDesgloseSumaAsegurada()) {
+            if (asegurada.getId() == null || desgloseSumaAsegurada.getId().compareTo(asegurada.getId()) != 0) {
+                liquidado += desgloseSumaAsegurada.getMonto();
+            }
+        }
+        return liquidado > pago.getTotalFacturado();
     }
 
     private void pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto) {

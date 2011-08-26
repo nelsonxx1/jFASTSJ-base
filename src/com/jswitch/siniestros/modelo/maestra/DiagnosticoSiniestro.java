@@ -63,6 +63,12 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     @BusinessKey
     private Double montoPagado;
     /**
+     * 
+     */
+    @Column
+    @BusinessKey
+    private String tratamientoEscrito;
+    /**
      * Detalles
      */
     @OneToMany(fetch = FetchType.LAZY)
@@ -91,6 +97,7 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
         this.montoPagado = 0d;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -107,10 +114,12 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
         this.optLock = optLock;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
@@ -154,4 +163,13 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
         this.detalleSiniestro = detalleSiniestro;
     }
+
+    public String getTratamientoEscrito() {
+        return tratamientoEscrito;
+    }
+
+    public void setTratamientoEscrito(String tratamientoEscrito) {
+        this.tratamientoEscrito = tratamientoEscrito;
+    }
+    
 }
