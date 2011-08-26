@@ -67,7 +67,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         this.beanVO = beanVO;
         this.aplicarLogicaNegocio = aplicarLogicaNegocio;
         vista = new DetalleSiniestroDetailFrame();
-        ((DetalleSiniestroDetailFrame) vista).setTipo(tipoDetalle);
+        ((DetalleSiniestroDetailFrame) vista).setTipo(tipoDetalle,beanVO);
+        
         vista.inicializar(this, true);
         if (beanVO != null) {
             vista.getMainPanel().reload();

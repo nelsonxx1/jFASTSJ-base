@@ -51,17 +51,19 @@ public class Pago extends BeanVO implements Serializable, Auditable {
      *
      */
     @ManyToOne()
-    @BusinessKey(exclude = Method.ALL)
+    @BusinessKey
     private DetalleSiniestro detalleSiniestro;
     /**
      *
      */
     @Column
+    @BusinessKey
     private String numeroFactura;
     /**
      *
      */
     @Column
+    @BusinessKey
     private String numeroControl;
     /**
      *
@@ -89,103 +91,123 @@ public class Pago extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private Double sustraendo;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double posentajeReteniconIsrl;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoReteniconIsrl;
     /**
      * UT Unidad Tributaria
      */
     @Column
+    @BusinessKey
     private Double valorUT;
     /**
      * TM Timbre Municipal
      * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      */
     @Column
+    @BusinessKey
     private Double porcentajeTM;
     /**
      * TM Timbre Municipal
      * 
      */
     @Column
+    @BusinessKey
     private Double montoTM;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double procentajeIva;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoIva;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double porcenajeRetencionIva;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoRetencionIva;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoDescuentoProntoPago;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoDescuentoDesducible;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoSujetoRetencion;
     /**
      * //esto es a lo que se le retenie impuesto
      */
     @Column
+    @BusinessKey
     private Double gastosClinicos;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double honorariosMedicos;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoNoAmparado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalFacturado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalLiquidado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalRetenido;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalACancelar;
     /**
      *

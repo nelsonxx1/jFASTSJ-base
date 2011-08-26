@@ -55,6 +55,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
     protected DefaultGridInternalController controllerDiagnosticoSiniesto;
     private PersonaTipoLookupController lookupPersonaPago;
     private Class tipoDetalle;
+    private BeanVO beanVO;
 
     public DetalleSiniestroDetailFrame() {
     }
@@ -2294,8 +2295,9 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         return insertButtonPagos;
     }
 
-    public void setTipo(Class tipoDetalle) {
+    public void setTipo(Class tipoDetalle, BeanVO beanVO) {
         this.tipoDetalle = tipoDetalle;
+        this.beanVO = beanVO;
     }
 
     public void removeForms() {
