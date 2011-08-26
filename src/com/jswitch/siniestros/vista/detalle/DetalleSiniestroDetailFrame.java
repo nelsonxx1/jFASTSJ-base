@@ -2075,7 +2075,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridControl5.setGridDataLocator(controllerNotasTecnicas);
         gridControl5.setController(controllerNotasTecnicas);
 
-        controllerPagos = new PagoGridInternalController();
+        controllerPagos = new PagoGridInternalController(gridControl6);
         gridControl6.setGridDataLocator(controllerPagos);
         gridControl6.setController(controllerPagos);
 
