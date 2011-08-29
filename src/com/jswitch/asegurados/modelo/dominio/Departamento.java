@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -23,6 +24,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "ASEG_Departamento")
 public class Departamento extends BeanVO implements Serializable, Auditable {
 
     /**

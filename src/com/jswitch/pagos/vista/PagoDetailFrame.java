@@ -6,7 +6,7 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.CoberturaLookupController;
 import com.jswitch.pagos.controlador.DesgloseCoberturaGridInternalController;
 import com.jswitch.pagos.controlador.DesgloseSumaAseguradaGridInternalController;
-import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroLookupController;
@@ -116,7 +116,7 @@ public class PagoDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
 
-        form1.setVOClassName(Pago.class.getName());
+        form1.setVOClassName(Liquidacion.class.getName());
         form1.setEditButton(editButton1);
         form1.setReloadButton(reloadButton1);
         form1.setSaveButton(saveButton1);
@@ -440,12 +440,12 @@ public class PagoDetailFrame extends DefaultDetailFrame {
         initComponents();
 
         desgloseSumaAsegurada =
-                new DesgloseSumaAseguradaGridInternalController(Pago.class.getName(), "getDesgloseSumaAsegurada", gridControl5);
+                new DesgloseSumaAseguradaGridInternalController(Liquidacion.class.getName(), "getDesgloseSumaAsegurada", gridControl5);
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
 
         desgloseCobertura =
-                new DesgloseCoberturaGridInternalController(Pago.class.getName(), "getDesgloseCobertura", gridControl6);
+                new DesgloseCoberturaGridInternalController(Liquidacion.class.getName(), "getDesgloseCobertura", gridControl6);
         gridControl6.setGridDataLocator(desgloseCobertura);
         gridControl6.setController(desgloseCobertura);
 
@@ -490,7 +490,7 @@ public class PagoDetailFrame extends DefaultDetailFrame {
     public void setOwnerVO(BeanVO beanVO) {
         Long id = null;
         if (beanVO != null) {
-            id = ((Pago) beanVO).getId();
+            id = ((Liquidacion) beanVO).getId();
         }
         desgloseSumaAsegurada.setBeanVO(beanVO);
         desgloseCobertura.setBeanVO(beanVO);

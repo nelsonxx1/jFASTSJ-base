@@ -8,7 +8,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
-import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.vista.PagoDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -37,7 +37,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     public PagoDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-        detalleSiniestro = ((Pago) beanVO).getDetalleSiniestro();
+        detalleSiniestro = ((Liquidacion) beanVO).getDetalleSiniestro();
         ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
         ((DesgloseSumaAseguradaGridInternalController) (((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
@@ -51,7 +51,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        Pago pago = (Pago) newPersistentObject;
+        Liquidacion pago = (Liquidacion) newPersistentObject;
         pago.setEstatusPago(EstatusPago.PENDIENTE);
         pago.setDetalleSiniestro(detalleSiniestro);
         detalleSiniestro.getPagos().add(pago);
@@ -89,7 +89,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Pago sin = (Pago) s.get(Pago.class, ((Pago) beanVO).getId());
+        Liquidacion sin = (Liquidacion) s.get(Liquidacion.class, ((Liquidacion) beanVO).getId());
         Hibernate.initialize(sin.getDesgloseSumaAsegurada());
         Hibernate.initialize(sin.getDesgloseCobertura());
         s.close();
@@ -99,7 +99,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
-        Pago pago = (Pago) persistentObject;
+        Liquidacion pago = (Liquidacion) persistentObject;
         Date fF = pago.getFechaFactura();
         Date fR = pago.getFechaRecepcion();
         if (fF.compareTo(fR) > 0) {

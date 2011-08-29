@@ -10,6 +10,7 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -37,7 +39,8 @@ import javax.validation.constraints.Past;
  * @author Personal
  */
 @Entity
-public class Pago extends BeanVO implements Serializable, Auditable {
+@Table(name="SINI_Liquidacion")
+public class Liquidacion extends BeanVO implements Serializable, Auditable {
 
     /**
      * Pk autogenerado
@@ -256,7 +259,7 @@ public class Pago extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private AuditoriaBasica auditoria;
 
-    public Pago() {
+    public Liquidacion() {
     }
 
     public Long getId() {

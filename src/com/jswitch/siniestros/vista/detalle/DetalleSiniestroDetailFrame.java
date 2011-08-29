@@ -11,7 +11,7 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroGridInternalController;
 import com.jswitch.pagos.controlador.PagoGridInternalController;
-import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
@@ -1629,7 +1629,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridControl6.setMaxNumberOfRowsOnInsert(4);
         gridControl6.setReloadButton(reloadButtonPagos);
         gridControl6.setSaveButton(saveButtonPagos);
-        gridControl6.setValueObjectClassName(Pago.class.getName());
+        gridControl6.setValueObjectClassName(Liquidacion.class.getName());
 
         decimalColumn6.setColumnName("id");
         decimalColumn6.setColumnRequired(false);
