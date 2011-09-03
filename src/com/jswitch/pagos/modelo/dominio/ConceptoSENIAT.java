@@ -1,5 +1,3 @@
-
-
 package com.jswitch.pagos.modelo.dominio;
 
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
@@ -14,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -21,6 +20,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "CONF_ConceptoSENIAT")
 public class ConceptoSENIAT extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -35,18 +35,20 @@ public class ConceptoSENIAT extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String codigo;
     /**
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double porcentajeRetencionIslr;
-
     /**
      */
     @Version
@@ -61,9 +63,11 @@ public class ConceptoSENIAT extends BeanVO implements Serializable, Auditable {
     public ConceptoSENIAT() {
     }
 
-    public ConceptoSENIAT(String codigo, String nombre, AuditoriaBasica auditoria) {
+    public ConceptoSENIAT(String codigo, String nombre,
+            Double porcentajeRetencionIslr, AuditoriaBasica auditoria) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.porcentajeRetencionIslr = porcentajeRetencionIslr;
         this.auditoria = auditoria;
     }
 
@@ -114,5 +118,4 @@ public class ConceptoSENIAT extends BeanVO implements Serializable, Auditable {
     public void setPorcentajeRetencionIslr(Double porcentajeRetencionIslr) {
         this.porcentajeRetencionIslr = porcentajeRetencionIslr;
     }
-    
 }

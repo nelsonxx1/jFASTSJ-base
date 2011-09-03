@@ -27,7 +27,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
-@Table(name = "SINI_Epecialidad")
+@Table(name = "SINI_Especialidad")
 public class Especialidad extends BeanVO implements Serializable, Auditable {
 
     /**

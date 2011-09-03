@@ -41,7 +41,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      */
     @ManyToOne
     @BusinessKey
-    private Liquidacion pago;
+    private Liquidacion liquidacion;
     /**
      * 
      */
@@ -103,13 +103,15 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
         this.diagnosticoSiniestro = diagnosticoSiniestro;
     }
 
-    public Liquidacion getPago() {
-        return pago;
+    public Liquidacion getLiquidacion() {
+        return liquidacion;
     }
 
-    public void setPago(Liquidacion pago) {
-        this.pago = pago;
+    public void setLiquidacion(Liquidacion liquidacion) {
+        this.liquidacion = liquidacion;
     }
+
+    
 
     public String getDetalle() {
         return detalle;

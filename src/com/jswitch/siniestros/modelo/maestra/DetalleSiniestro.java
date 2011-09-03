@@ -63,6 +63,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
+     *
+     */
+    @Column
+    @BusinessKey
+    private Integer numero;
+    /**
      * para filtar la persona a la que se le va a pagar
      */
     @ManyToOne()
@@ -361,4 +367,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         String s = this.getClass().getName();
         return s.substring(s.lastIndexOf(".") + 1);
     }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+    
 }

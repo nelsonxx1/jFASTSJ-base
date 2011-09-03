@@ -51,11 +51,11 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        Liquidacion pago = (Liquidacion) newPersistentObject;
-        pago.setEstatusPago(EstatusPago.PENDIENTE);
-        pago.setDetalleSiniestro(detalleSiniestro);
-        detalleSiniestro.getPagos().add(pago);
-        agregarDesgloseCobertura(pago.getDesgloseCobertura());
+        Liquidacion liquidacion = (Liquidacion) newPersistentObject;
+        liquidacion.setEstatusPago(EstatusPago.PENDIENTE);
+        liquidacion.setDetalleSiniestro(detalleSiniestro);
+        detalleSiniestro.getPagos().add(liquidacion);
+        agregarDesgloseCobertura(liquidacion.getDesgloseCobertura());
         Response res = super.insertRecord(newPersistentObject);
         gridControl.getReloadButton().doClick();
         return res;
@@ -99,9 +99,9 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
-        Liquidacion pago = (Liquidacion) persistentObject;
-        Date fF = pago.getFechaFactura();
-        Date fR = pago.getFechaRecepcion();
+        Liquidacion liquidacion = (Liquidacion) persistentObject;
+        Date fF = liquidacion.getFechaFactura();
+        Date fR = liquidacion.getFechaRecepcion();
         if (fF.compareTo(fR) > 0) {
             return new ErrorResponse("errorFechaFacturaRecepcion");
         }
@@ -116,6 +116,6 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
             }
         }
         
-        return new VOResponse(pago);
+        return new VOResponse(liquidacion);
     }
 }

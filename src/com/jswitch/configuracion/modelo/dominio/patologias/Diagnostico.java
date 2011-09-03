@@ -53,7 +53,7 @@ public class Diagnostico extends BeanVO implements Serializable, Auditable {
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="diagnostico")
     @BusinessKey(exclude = Method.ALL)
     private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
     /**

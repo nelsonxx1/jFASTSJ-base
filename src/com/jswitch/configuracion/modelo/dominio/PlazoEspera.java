@@ -41,6 +41,7 @@ public class PlazoEspera extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      */
