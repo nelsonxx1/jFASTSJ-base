@@ -10,6 +10,7 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -37,7 +39,8 @@ import javax.validation.constraints.Past;
  * @author Personal
  */
 @Entity
-public class Pago extends BeanVO implements Serializable, Auditable {
+@Table(name="SINI_Liquidacion")
+public class Liquidacion extends BeanVO implements Serializable, Auditable {
 
     /**
      * Pk autogenerado
@@ -51,17 +54,19 @@ public class Pago extends BeanVO implements Serializable, Auditable {
      *
      */
     @ManyToOne()
-    @BusinessKey(exclude = Method.ALL)
+    @BusinessKey
     private DetalleSiniestro detalleSiniestro;
     /**
      *
      */
     @Column
+    @BusinessKey
     private String numeroFactura;
     /**
      *
      */
     @Column
+    @BusinessKey
     private String numeroControl;
     /**
      *
@@ -89,103 +94,123 @@ public class Pago extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private Double sustraendo;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double posentajeReteniconIsrl;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoReteniconIsrl;
     /**
      * UT Unidad Tributaria
      */
     @Column
+    @BusinessKey
     private Double valorUT;
     /**
      * TM Timbre Municipal
      * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      */
     @Column
+    @BusinessKey
     private Double porcentajeTM;
     /**
      * TM Timbre Municipal
      * 
      */
     @Column
+    @BusinessKey
     private Double montoTM;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double procentajeIva;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoIva;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double porcenajeRetencionIva;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoRetencionIva;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoDescuentoProntoPago;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoDescuentoDesducible;
     /**
      * base imponible
      */
     @Column
+    @BusinessKey
     private Double montoSujetoRetencion;
     /**
      * //esto es a lo que se le retenie impuesto
      */
     @Column
+    @BusinessKey
     private Double gastosClinicos;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double honorariosMedicos;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double montoNoAmparado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalFacturado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalLiquidado;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalRetenido;
     /**
      *
      */
     @Column
+    @BusinessKey
     private Double totalACancelar;
     /**
      *
@@ -214,7 +239,7 @@ public class Pago extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pago")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "liquidacion")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**
@@ -234,7 +259,7 @@ public class Pago extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private AuditoriaBasica auditoria;
 
-    public Pago() {
+    public Liquidacion() {
     }
 
     public Long getId() {

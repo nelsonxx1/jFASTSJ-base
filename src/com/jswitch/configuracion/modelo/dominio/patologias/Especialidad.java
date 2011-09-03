@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -26,6 +27,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "SINI_Especialidad")
 public class Especialidad extends BeanVO implements Serializable, Auditable {
 
     /**

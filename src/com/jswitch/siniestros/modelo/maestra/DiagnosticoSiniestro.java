@@ -17,8 +17,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -71,7 +71,7 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     /**
      * Detalles
      */
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
     /**
@@ -171,5 +171,4 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     public void setTratamientoEscrito(String tratamientoEscrito) {
         this.tratamientoEscrito = tratamientoEscrito;
     }
-    
 }

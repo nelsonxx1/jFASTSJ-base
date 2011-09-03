@@ -1,5 +1,6 @@
 package com.jswitch.siniestros.modelo.maestra;
 
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
@@ -13,7 +14,6 @@ import com.jswitch.fas.modelo.Dominios.TipoEnfermedad;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
-import com.jswitch.pagos.modelo.maestra.Pago;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -62,6 +62,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Column
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
+    /**
+     *
+     */
+    @Column
+    @BusinessKey
+    private Integer numero;
     /**
      * para filtar la persona a la que se le va a pagar
      */
@@ -144,7 +150,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
-    private Set<Pago> pagos = new HashSet<Pago>();
+    private Set<Liquidacion> pagos = new HashSet<Liquidacion>();
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -245,11 +251,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.personaPago = personaPago;
     }
 
-    public Set<Pago> getPagos() {
+    public Set<Liquidacion> getPagos() {
         return pagos;
     }
 
-    public void setPagos(Set<Pago> pagos) {
+    public void setPagos(Set<Liquidacion> pagos) {
         this.pagos = pagos;
     }
 
@@ -361,4 +367,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         String s = this.getClass().getName();
         return s.substring(s.lastIndexOf(".") + 1);
     }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+    
 }

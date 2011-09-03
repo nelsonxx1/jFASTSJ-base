@@ -13,11 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "SINI_Cobertura")
 public class Cobertura extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -67,14 +69,17 @@ public class Cobertura extends BeanVO implements Serializable, Auditable {
         this.auditoria = auditoria;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

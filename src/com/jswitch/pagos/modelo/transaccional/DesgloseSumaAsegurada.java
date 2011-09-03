@@ -5,7 +5,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -15,9 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "SINI_DesgloseSumaAsegurada")
 public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -39,7 +41,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      */
     @ManyToOne
     @BusinessKey
-    private Pago pago;
+    private Liquidacion liquidacion;
     /**
      * 
      */
@@ -101,13 +103,15 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
         this.diagnosticoSiniestro = diagnosticoSiniestro;
     }
 
-    public Pago getPago() {
-        return pago;
+    public Liquidacion getLiquidacion() {
+        return liquidacion;
     }
 
-    public void setPago(Pago pago) {
-        this.pago = pago;
+    public void setLiquidacion(Liquidacion liquidacion) {
+        this.liquidacion = liquidacion;
     }
+
+    
 
     public String getDetalle() {
         return detalle;

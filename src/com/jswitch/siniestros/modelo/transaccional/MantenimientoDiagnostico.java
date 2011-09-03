@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -20,6 +21,7 @@ import javax.persistence.Version;
  * @author Adrian
  */
 @Entity
+@Table(name="SINI_MantenimientoDiagnostico")
 public class MantenimientoDiagnostico extends BeanVO implements Auditable {
 
     /**

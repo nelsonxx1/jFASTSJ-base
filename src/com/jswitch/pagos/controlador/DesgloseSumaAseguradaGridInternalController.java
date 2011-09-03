@@ -5,7 +5,7 @@ import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
-import com.jswitch.pagos.modelo.maestra.Pago;
+import com.jswitch.pagos.modelo.maestra.Liquidacion;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
@@ -84,7 +84,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
 
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
-        Pago pago = (Pago) beanVO;
+        Liquidacion liquidacion = (Liquidacion) beanVO;
         for (int i = 0; i < newValueObjects.size(); i++) {
             Object object = newValueObjects.get(i);
             DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
@@ -93,8 +93,8 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                 i--;
                 continue;
             }
-            desgloseSumaAsegurada.setPago(pago);
-            pago.getDesgloseSumaAsegurada().add(desgloseSumaAsegurada);
+            desgloseSumaAsegurada.setLiquidacion(liquidacion);
+            liquidacion.getDesgloseSumaAsegurada().add(desgloseSumaAsegurada);
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
                     pagarDiagnostico(ds,
@@ -110,14 +110,14 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     }
 
     private boolean logicaNegocio(DesgloseSumaAsegurada asegurada) {
-        Pago pago = (Pago) beanVO;
+        Liquidacion liquidacion = (Liquidacion) beanVO;
         Double liquidado = asegurada.getMonto();
-        for (DesgloseSumaAsegurada desgloseSumaAsegurada : pago.getDesgloseSumaAsegurada()) {
+        for (DesgloseSumaAsegurada desgloseSumaAsegurada : liquidacion.getDesgloseSumaAsegurada()) {
             if (asegurada.getId() == null || desgloseSumaAsegurada.getId().compareTo(asegurada.getId()) != 0) {
                 liquidado += desgloseSumaAsegurada.getMonto();
             }
         }
-        return liquidado > pago.getTotalFacturado();
+        return liquidado > liquidacion.getTotalFacturado();
     }
 
     private void pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto) {

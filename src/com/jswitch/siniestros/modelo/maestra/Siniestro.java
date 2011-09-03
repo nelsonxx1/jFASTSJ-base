@@ -80,11 +80,6 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double montoTotal;
     /**
-     *
-     */
-    @ManyToOne
-    private Ramo ramo;
-    /**
      * Detalles
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "siniestro")
@@ -104,6 +99,7 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     public Siniestro() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -120,10 +116,12 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
         this.optLock = optLock;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }
@@ -166,14 +164,6 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
 
     public void setDetalleSiniestro(Set<DetalleSiniestro> detalleSiniestro) {
         this.detalleSiniestro = detalleSiniestro;
-    }
-
-    public Ramo getRamo() {
-        return ramo;
-    }
-
-    public void setRamo(Ramo ramo) {
-        this.ramo = ramo;
     }
 
     public Integer getAyo() {

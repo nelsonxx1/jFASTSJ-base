@@ -18,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +27,7 @@ import javax.validation.constraints.NotNull;
  * @author Personal
  */
 @Entity
+@Table(name = "SINI_Diagnostico")
 public class Diagnostico extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -51,7 +53,7 @@ public class Diagnostico extends BeanVO implements Serializable, Auditable {
     /**
      *
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="diagnostico")
     @BusinessKey(exclude = Method.ALL)
     private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
     /**

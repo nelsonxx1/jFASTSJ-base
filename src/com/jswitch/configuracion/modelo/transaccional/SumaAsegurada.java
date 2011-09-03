@@ -15,10 +15,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="CONF_SumaAsegurada")
 public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
 
     /**

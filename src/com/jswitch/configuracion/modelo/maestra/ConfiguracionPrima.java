@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -24,6 +25,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name="CONF_ConfiguracionPrima")
 public class ConfiguracionPrima extends BeanVO implements Serializable, Auditable {
 
     /**

@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -24,6 +25,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "SINI_Tratamiento")
 public class Tratamiento extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -41,7 +43,7 @@ public class Tratamiento extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String nombre;
     /**
-     *
+     * 
      */
     @ManyToOne
     @BusinessKey
@@ -60,6 +62,7 @@ public class Tratamiento extends BeanVO implements Serializable, Auditable {
     public Tratamiento() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -76,10 +79,12 @@ public class Tratamiento extends BeanVO implements Serializable, Auditable {
         this.optLock = optLock;
     }
 
+    @Override
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
+    @Override
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
     }

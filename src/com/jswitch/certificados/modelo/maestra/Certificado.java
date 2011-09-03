@@ -21,6 +21,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 
@@ -29,6 +30,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "ASEG_Certificado")
 public class Certificado extends BeanVO implements Serializable, Auditable {
 
     /**

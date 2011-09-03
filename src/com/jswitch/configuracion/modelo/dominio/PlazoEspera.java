@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -25,6 +26,7 @@ import javax.persistence.Version;
  * @author Personal
  */
 @Entity
+@Table(name = "ASEG_PlazoEspera")
 public class PlazoEspera extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -39,6 +41,7 @@ public class PlazoEspera extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      */
