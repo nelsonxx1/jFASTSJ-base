@@ -5,7 +5,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.pagos.modelo.maestra.Liquidacion;
+import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -41,7 +41,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
      */
     @ManyToOne
     @BusinessKey
-    private Liquidacion liquidacion;
+    private Factura factura;
     /**
      * 
      */
@@ -103,16 +103,15 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
         this.diagnosticoSiniestro = diagnosticoSiniestro;
     }
 
-    public Liquidacion getLiquidacion() {
-        return liquidacion;
+    public Factura getFactura() {
+        return factura;
     }
 
-    public void setLiquidacion(Liquidacion liquidacion) {
-        this.liquidacion = liquidacion;
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
 
     
-
     public String getDetalle() {
         return detalle;
     }
