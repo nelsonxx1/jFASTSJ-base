@@ -64,7 +64,8 @@ import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
-import com.jswitch.pagos.controlador.PagoDetailFrameController;
+import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
+import com.jswitch.pagos.controlador.FacturaDetailFrameController;
 import com.jswitch.persona.controlador.PersonasGridController;
 import com.jswitch.persona.controlador.mant.TipoPersonaGridFrameController;
 import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
@@ -92,7 +93,8 @@ import com.jswitch.rol.modelo.MenuByRol;
 import com.jswitch.rol.modelo.Rol;
 import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
-import com.jswitch.pagos.vista.PagoDetailFrame;
+import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
+import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.controlador.MantenimientoDiagnosticoDetailFrameController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
@@ -502,5 +504,7 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getTest() {
+        new OrdenDePagoDetailFrameController(OrdenDePagoDetailFrame.class.getName(), 
+                null, null, false);
     }
 }

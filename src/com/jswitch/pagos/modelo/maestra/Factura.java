@@ -10,7 +10,6 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -39,8 +38,8 @@ import javax.validation.constraints.Past;
  * @author Personal
  */
 @Entity
-@Table(name="SINI_Liquidacion")
-public class Liquidacion extends BeanVO implements Serializable, Auditable {
+@Table(name="SINI_Factura")
+public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * Pk autogenerado
@@ -239,7 +238,7 @@ public class Liquidacion extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "liquidacion")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**
@@ -259,7 +258,7 @@ public class Liquidacion extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private AuditoriaBasica auditoria;
 
-    public Liquidacion() {
+    public Factura() {
     }
 
     public Long getId() {

@@ -1,6 +1,6 @@
 package com.jswitch.siniestros.modelo.maestra;
 
-import com.jswitch.pagos.modelo.maestra.Liquidacion;
+import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
@@ -150,7 +150,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
-    private Set<Liquidacion> pagos = new HashSet<Liquidacion>();
+    private Set<Factura> pagos = new HashSet<Factura>();
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -251,11 +251,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.personaPago = personaPago;
     }
 
-    public Set<Liquidacion> getPagos() {
+    public Set<Factura> getPagos() {
         return pagos;
     }
 
-    public void setPagos(Set<Liquidacion> pagos) {
+    public void setPagos(Set<Factura> pagos) {
         this.pagos = pagos;
     }
 

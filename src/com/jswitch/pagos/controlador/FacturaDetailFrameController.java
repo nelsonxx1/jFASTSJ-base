@@ -8,9 +8,9 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
-import com.jswitch.pagos.modelo.maestra.Liquidacion;
+import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
-import com.jswitch.pagos.vista.PagoDetailFrame;
+import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
@@ -31,27 +31,27 @@ import org.openswing.swing.message.receive.java.ValueObject;
  *
  * @author Adrian
  */
-public class PagoDetailFrameController extends DefaultDetailFrameController {
+public class FacturaDetailFrameController extends DefaultDetailFrameController {
     
     private DetalleSiniestro detalleSiniestro;
     
-    public PagoDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+    public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-        detalleSiniestro = ((Liquidacion) beanVO).getDetalleSiniestro();
-        ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
-        ((DesgloseSumaAseguradaGridInternalController) (((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
+        detalleSiniestro = ((Factura) beanVO).getDetalleSiniestro();
+        ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
     
-    public PagoDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
+    public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
-        ((PagoDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
-        ((DesgloseSumaAseguradaGridInternalController) (((PagoDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
+        ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
     
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        Liquidacion liquidacion = (Liquidacion) newPersistentObject;
+        Factura liquidacion = (Factura) newPersistentObject;
         liquidacion.setEstatusPago(EstatusPago.PENDIENTE);
         liquidacion.setDetalleSiniestro(detalleSiniestro);
         detalleSiniestro.getPagos().add(liquidacion);
@@ -89,7 +89,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Liquidacion sin = (Liquidacion) s.get(Liquidacion.class, ((Liquidacion) beanVO).getId());
+        Factura sin = (Factura) s.get(Factura.class, ((Factura) beanVO).getId());
         Hibernate.initialize(sin.getDesgloseSumaAsegurada());
         Hibernate.initialize(sin.getDesgloseCobertura());
         s.close();
@@ -99,7 +99,7 @@ public class PagoDetailFrameController extends DefaultDetailFrameController {
     
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
-        Liquidacion liquidacion = (Liquidacion) persistentObject;
+        Factura liquidacion = (Factura) persistentObject;
         Date fF = liquidacion.getFechaFactura();
         Date fR = liquidacion.getFechaRecepcion();
         if (fF.compareTo(fR) > 0) {

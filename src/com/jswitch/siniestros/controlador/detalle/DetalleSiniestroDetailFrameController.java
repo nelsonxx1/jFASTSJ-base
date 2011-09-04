@@ -9,8 +9,8 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroDetailFrameController;
-import com.jswitch.pagos.controlador.PagoDetailFrameController;
-import com.jswitch.pagos.vista.PagoDetailFrame;
+import com.jswitch.pagos.controlador.FacturaDetailFrameController;
+import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -108,7 +108,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     @Override
     public void actionPerformed(ActionEvent e) {
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
-            new PagoDetailFrameController(PagoDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
+            new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
         }
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
             new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO, vista);

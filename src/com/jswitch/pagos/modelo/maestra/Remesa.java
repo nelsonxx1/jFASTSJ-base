@@ -36,8 +36,8 @@ import javax.validation.constraints.Past;
  * @author Personal
  */
 @Entity
-@Table(name = "PAGO_OrdenDePago")
-public class OrdenDePago extends BeanVO implements Serializable, Auditable {
+@Table(name = "PAGO_Remesa")
+public class Remesa extends BeanVO implements Serializable, Auditable {
 
     /**
      * Pk autogenerado
@@ -55,16 +55,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      *
      */
-    @ManyToOne()
-    private Persona personaPago;
-    /**
-     *
-     */
     @Column
     @Temporal(value = TemporalType.DATE)
     @Past
     @BusinessKey
-    private Date fechaPago;
+    private Date fechaPagoRemesa;
     /**
      *
      */
@@ -92,9 +87,9 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     @OneToMany(fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
-    private Set<DetalleSiniestro> detalleSiniestros = new HashSet<DetalleSiniestro>(0);
+    private Set<OrdenDePago> ordenDePagos = new HashSet<OrdenDePago>(0);
 
-    public OrdenDePago() {
+    public Remesa() {
     }
 
     @Override
@@ -124,12 +119,12 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.auditoria = auditoria;
     }
 
-    public Set<DetalleSiniestro> getDetalleSiniestros() {
-        return detalleSiniestros;
+    public Boolean getAutoSearch() {
+        return autoSearch;
     }
 
-    public void setDetalleSiniestros(Set<DetalleSiniestro> detalleSiniestros) {
-        this.detalleSiniestros = detalleSiniestros;
+    public void setAutoSearch(Boolean autoSearch) {
+        this.autoSearch = autoSearch;
     }
 
     public EstatusPago getEstatusPago() {
@@ -140,12 +135,12 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.estatusPago = estatusPago;
     }
 
-    public Date getFechaPago() {
-        return fechaPago;
+    public Date getFechaPagoRemesa() {
+        return fechaPagoRemesa;
     }
 
-    public void setFechaPago(Date fechaPago) {
-        this.fechaPago = fechaPago;
+    public void setFechaPagoRemesa(Date fechaPagoRemesa) {
+        this.fechaPagoRemesa = fechaPagoRemesa;
     }
 
     public String getNumero() {
@@ -156,20 +151,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.numero = numero;
     }
 
-    public Persona getPersonaPago() {
-        return personaPago;
+    public Set<OrdenDePago> getOrdenDePagos() {
+        return ordenDePagos;
     }
 
-    public void setPersonaPago(Persona personaPago) {
-        this.personaPago = personaPago;
+    public void setOrdenDePagos(Set<OrdenDePago> ordenDePagos) {
+        this.ordenDePagos = ordenDePagos;
     }
 
-    public Boolean getAutoSearch() {
-        return autoSearch;
-    }
-
-    public void setAutoSearch(Boolean autoSearch) {
-        this.autoSearch = autoSearch;
-    }
-    
+   
 }
