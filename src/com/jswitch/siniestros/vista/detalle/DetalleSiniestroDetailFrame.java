@@ -11,7 +11,6 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroGridInternalController;
 import com.jswitch.pagos.controlador.FacturaGridInternalController;
-import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
@@ -2081,7 +2080,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridControl6.setController(controllerPagos);
 
         controllerReportes =
-                new ReporteGridInternalController(Reembolso.class.getName(), "getReportes", gridReportes);
+                new ReporteGridInternalController(DetalleSiniestro.class.getName(), "getReportes", gridReportes);
         gridReportes.setGridDataLocator(controllerReportes);
         gridReportes.setController(controllerReportes);
 

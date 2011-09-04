@@ -7,8 +7,6 @@ import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
-import com.jswitch.persona.modelo.maestra.Persona;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,7 +20,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -32,7 +29,6 @@ import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
 /**
-
  * @author Personal
  */
 @Entity
@@ -51,7 +47,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
-    private String numero;
+    private String numeroRemesa;
     /**
      *
      */
@@ -143,14 +139,6 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
         this.fechaPagoRemesa = fechaPagoRemesa;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public Set<OrdenDePago> getOrdenDePagos() {
         return ordenDePagos;
     }
@@ -159,5 +147,11 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
         this.ordenDePagos = ordenDePagos;
     }
 
-   
+    public String getNumeroRemesa() {
+        return numeroRemesa;
+    }
+
+    public void setNumeroRemesa(String numeroRemesa) {
+        this.numeroRemesa = numeroRemesa;
+    }
 }
