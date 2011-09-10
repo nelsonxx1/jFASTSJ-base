@@ -1,14 +1,17 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
+import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Past;
 
 /**
@@ -42,7 +45,12 @@ public class Reembolso extends DetalleSiniestro {
     @Past
     @BusinessKey
     private Date fechaConstitucion;
-
+    /**
+     * 
+     */
+    @Transient
+    protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
+    
     public Reembolso() {
         setPresupuestadoAjustado(0d);
         setPresupuestadoInicial(0d);
@@ -72,9 +80,9 @@ public class Reembolso extends DetalleSiniestro {
         this.fechaOcurrencia = fechaOcurrencia;
     }
 
-    public static Set<Reporte> getReportes() {
+    public Set<Reporte> getReportes() {
         if (reportes.isEmpty()) {
-            //reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "APSprueba", "Reporte1--", "Reporte1", null, "Carta 8½ x 11 Vertical"));
+            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_Reembolso_001", "SINI_D_Reembolso_001", "SINI_D_Reembolso_001", null, "Carta 8½ x 11 Vertical"));
         }
         return reportes;
     }

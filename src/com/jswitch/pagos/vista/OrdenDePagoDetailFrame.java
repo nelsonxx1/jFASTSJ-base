@@ -29,6 +29,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel14 = new javax.swing.JPanel();
         gridControl5 = new org.openswing.swing.client.GridControl();
         decimalColumn5 = new org.openswing.swing.table.columns.client.DecimalColumn();
@@ -49,7 +50,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         form1 = new org.openswing.swing.form.client.Form();
-        checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
         codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
         dateControl1 = new org.openswing.swing.client.DateControl();
         textControl1 = new org.openswing.swing.client.TextControl();
@@ -58,6 +58,13 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         labelControl3 = new org.openswing.swing.client.LabelControl();
         comboBoxControl1 = new org.openswing.swing.client.ComboBoxControl();
         labelControl4 = new org.openswing.swing.client.LabelControl();
+        radioButtonControl1 = new org.openswing.swing.client.RadioButtonControl();
+        radioButtonControl2 = new org.openswing.swing.client.RadioButtonControl();
+        jPanel2 = new javax.swing.JPanel();
+        labelControl5 = new org.openswing.swing.client.LabelControl();
+        dateControl2 = new org.openswing.swing.client.DateControl();
+        labelControl6 = new org.openswing.swing.client.LabelControl();
+        dateControl3 = new org.openswing.swing.client.DateControl();
 
         setTitle("Orden de Pago");
 
@@ -123,7 +130,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
+                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -156,10 +163,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         form1.setReloadButton(reloadButton1);
         form1.setSaveButton(saveButton1);
 
-        checkBoxControl1.setSelected(true);
-        checkBoxControl1.setText("Busqueda Automatica");
-        checkBoxControl1.setAttributeName("autoSearch");
-
         codLookupControl1.setAttributeName("personaPago.nombreLargo");
 
         dateControl1.setAttributeName("fechaPago");
@@ -178,6 +181,65 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         labelControl4.setLabel("personaPago");
 
+        buttonGroup1.add(radioButtonControl1);
+        radioButtonControl1.setText("Todos");
+        radioButtonControl1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonControl1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioButtonControl2);
+        radioButtonControl2.setText("PorFechas");
+        radioButtonControl2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonControl2ActionPerformed(evt);
+            }
+        });
+
+        labelControl5.setLabel("fechaMinima");
+
+        dateControl2.setAttributeName("fechaMinima");
+
+        labelControl6.setLabel("fechaMaxima");
+
+        dateControl3.setAttributeName("fechaMaxima");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl5, labelControl6});
+
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl2, dateControl3, labelControl5, labelControl6});
+
         javax.swing.GroupLayout form1Layout = new javax.swing.GroupLayout(form1);
         form1.setLayout(form1Layout);
         form1Layout.setHorizontalGroup(
@@ -185,7 +247,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(form1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(form1Layout.createSequentialGroup()
                         .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +261,14 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                     .addGroup(form1Layout.createSequentialGroup()
                         .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))))
+                        .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+                    .addGroup(form1Layout.createSequentialGroup()
+                        .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioButtonControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radioButtonControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(4, 4, 4))))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl2, labelControl3, labelControl4});
@@ -224,12 +292,17 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(form1Layout.createSequentialGroup()
+                        .addComponent(radioButtonControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radioButtonControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, textControl1});
+        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, textControl1});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,28 +321,36 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+private void radioButtonControl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonControl2ActionPerformed
+    radioButtonControl1ActionPerformed(evt);
+}//GEN-LAST:event_radioButtonControl2ActionPerformed
+
+private void radioButtonControl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonControl1ActionPerformed
+    dateControl2.setEnabled(radioButtonControl2.isSelected());
+    dateControl3.setEnabled(radioButtonControl2.isSelected());
+}//GEN-LAST:event_radioButtonControl1ActionPerformed
 
     public GridControl getGridDesgloseSumaAsegurada() {
         return gridControl5;
     }
 
-
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
         detalleSiniestros =
-                new DefaultGridInternalController(OrdenDePago.class.getName(), 
-                        "getDetalleSiniestros", gridControl5);
+                new DefaultGridInternalController(OrdenDePago.class.getName(),
+                "getDetalleSiniestros", gridControl5);
         gridControl5.setGridDataLocator(detalleSiniestros);
         gridControl5.setController(detalleSiniestros);
 
-        PersonaLookupControllerPorNombre o= new PersonaLookupControllerPorNombre("CLI");
+        PersonaLookupControllerPorNombre o = new PersonaLookupControllerPorNombre("CLI");
         o.addLookup2ParentLink("personaPago");
         codLookupControl1.setLookupController(o);
 
@@ -330,11 +411,13 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         jPanel15.setVisible(enabled);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
-    private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
     private org.openswing.swing.client.DateControl dateControl1;
+    private org.openswing.swing.client.DateControl dateControl2;
+    private org.openswing.swing.client.DateControl dateControl3;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn4;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
@@ -348,10 +431,15 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel2;
     private org.openswing.swing.client.LabelControl labelControl1;
     private org.openswing.swing.client.LabelControl labelControl2;
     private org.openswing.swing.client.LabelControl labelControl3;
     private org.openswing.swing.client.LabelControl labelControl4;
+    private org.openswing.swing.client.LabelControl labelControl5;
+    private org.openswing.swing.client.LabelControl labelControl6;
+    private org.openswing.swing.client.RadioButtonControl radioButtonControl1;
+    private org.openswing.swing.client.RadioButtonControl radioButtonControl2;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.ReloadButton reloadButton7;
     private org.openswing.swing.client.SaveButton saveButton1;

@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /*
  * DetalleSiniestroChousser.java
@@ -10,7 +7,6 @@
  */
 package com.jswitch.siniestros.vista.detalle;
 
-import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
 import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;

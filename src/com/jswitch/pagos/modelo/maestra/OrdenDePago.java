@@ -32,7 +32,6 @@ import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
 /**
-
  * @author Personal
  */
 @Entity
@@ -51,7 +50,18 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      *
      */
     @Column
-    private String numero;
+    private String numeroOrden;
+    /**
+     *
+     */
+    @Column
+    private String referencia;
+    /**
+     *
+     */
+    @Column
+    private String codigoSIGECOF;
+    
     /**
      *
      */
@@ -65,6 +75,16 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaPago;
+    /**
+     *
+     */
+    @Transient
+    private transient Date fechaMinima;
+    /**
+     *
+     */
+    @Transient
+    private transient Date FechaMaxima;
     /**
      *
      */
@@ -148,14 +168,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.fechaPago = fechaPago;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public Persona getPersonaPago() {
         return personaPago;
     }
@@ -171,5 +183,44 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setAutoSearch(Boolean autoSearch) {
         this.autoSearch = autoSearch;
     }
-    
+
+    public Date getFechaMaxima() {
+        return FechaMaxima;
+    }
+
+    public void setFechaMaxima(Date FechaMaxima) {
+        this.FechaMaxima = FechaMaxima;
+    }
+
+    public Date getFechaMinima() {
+        return fechaMinima;
+    }
+
+    public void setFechaMinima(Date fechaMinima) {
+        this.fechaMinima = fechaMinima;
+    }
+
+    public String getCodigoSIGECOF() {
+        return codigoSIGECOF;
+    }
+
+    public void setCodigoSIGECOF(String codigoSIGECOF) {
+        this.codigoSIGECOF = codigoSIGECOF;
+    }
+
+    public String getNumeroOrden() {
+        return numeroOrden;
+    }
+
+    public void setNumeroOrden(String numeroOrden) {
+        this.numeroOrden = numeroOrden;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
 }

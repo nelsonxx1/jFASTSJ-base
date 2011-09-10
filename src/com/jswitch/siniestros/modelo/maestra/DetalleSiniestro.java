@@ -19,6 +19,7 @@ import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +40,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.validation.constraints.Past;
 
 /**
  *
@@ -130,6 +132,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey
     private Double presupuestadoAjustado;
     /**
+     *
+     */
+    @Column
+    @BusinessKey
+    @Past
+    private Date fechaLiquidado;
+    /**
      * 
      */
     @ManyToOne
@@ -177,7 +186,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * 
      */
     @Transient
-    protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
+    protected transient Set<Reporte> reportes;
     /**
      */
     @Version
@@ -375,5 +384,8 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     public void setNumero(Integer numero) {
         this.numero = numero;
     }
-    
+
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
 }
