@@ -2,6 +2,7 @@ package com.jswitch.siniestros.controlador.detalle.reportes;
 
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
+import com.jswitch.reporte.controlador.ReporteController;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.ArrayList;
@@ -41,24 +42,18 @@ public class ReporteGridInternalController extends DefaultGridInternalController
                     new String[]{
                         General.edition + " ",
                         General.contacto});
-            //parameters.put("reporteTitulo", titulo);
-            //parameters.put("reporteFile", archivo);
-            //parameters.put("reporteEstilo", estilo2);
-            //parameters.put("reporteParametros", parametrosFiltro);
+            parameters.put("reporteTitulo", reporte.getTitulo());
+            parameters.put("reporteFile", reporte.getFile());
+//            parameters.put("reporteEstilo", estilo2);
+//            parameters.put("reporteParametros", parametrosFiltro);
             parameters.put("usuario", General.usuario.getUserName());
 
-//            if (encabezado == null) {
-//                parameters.put("empresaNombre", General.empresa.getNombre());
-//                parameters.put("empresaRif", General.empresa.getRif2());
-//                parameters.put("empresaTelefono", General.empresa.getTelefonos());
-//                parameters.put("empresaLogo", getIcon(null));
-//                parameters.put("empresaObservacion", "");
-//            } else {
-//                parameters.put("empresaNombre", encabezado.getNombre());
-//                parameters.put("empresaRif", encabezado.getRif2());
-//                parameters.put("empresaLogo", getIcon(encabezado.getImagen()));
-//                parameters.put("empresaObservacion", encabezado.getObservacion());
-//            }
+                parameters.put("empresaNombre", General.empresa.getNombre());
+                parameters.put("empresaRif", General.empresa.getRif2());
+                parameters.put("empresaTelefono", General.empresa.getTelefonos());
+                parameters.put("empresaLogo", ReporteController.getIcon(null));
+                parameters.put("empresaObservacion", "");
+            
             Collection c = new ArrayList(1);
             c.add(beanVO);
             try {
