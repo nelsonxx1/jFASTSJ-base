@@ -6,7 +6,6 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -20,8 +19,8 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "CONF_SumaAsegurada")
-public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
+@Table(name = "CONF_SumaAmparada")
+public class SumaAmparada extends BeanVO implements Serializable, Auditable {
 
     /**
      *  PK autoincremtado
@@ -32,17 +31,16 @@ public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     * Diagnostico al cual se esta cubriendo
+     * Diagnostico al cual se esta cubriendo.
      */
-    @ManyToOne
+    @Column
     @BusinessKey
-    private Diagnostico diagnostico;
+    private String nombre;
     /**
      * 
      */
-    @ManyToOne
-    @BusinessKey
-    private SumaAmparada sumaAmparada;
+    @Column
+    private Double monto;
     /**
      * 
      */
@@ -62,7 +60,7 @@ public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private AuditoriaBasica auditoria;
 
-    public SumaAsegurada() {
+    public SumaAmparada() {
     }
 
     public AuditoriaBasica getAuditoria() {
@@ -89,12 +87,12 @@ public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
         this.optLock = optLock;
     }
 
-    public Diagnostico getDiagnostico() {
-        return diagnostico;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDiagnostico(Diagnostico diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Plan getPlan() {
@@ -105,11 +103,11 @@ public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
         this.plan = plan;
     }
 
-    public SumaAmparada getSumaAmparada() {
-        return sumaAmparada;
+    public Double getMonto() {
+        return monto;
     }
 
-    public void setSumaAmparada(SumaAmparada sumaAmparada) {
-        this.sumaAmparada = sumaAmparada;
+    public void setMonto(Double monto) {
+        this.monto = monto;
     }
 }

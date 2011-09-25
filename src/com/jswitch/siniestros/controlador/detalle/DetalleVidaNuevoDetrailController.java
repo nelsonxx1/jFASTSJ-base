@@ -16,8 +16,6 @@ import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
 import com.jswitch.siniestros.vista.detalle.DetalleVidaNuevoDetailFrame;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
@@ -98,7 +96,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
                     getPlan().getId()).
                     list();
             if (l != null && l.size() > 0) {
-                return l.get(0).getSumaAsegurada();
+                return l.get(0).getSumaAmparada().getMonto();
             }
 
         } catch (Exception ex) {

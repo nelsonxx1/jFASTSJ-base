@@ -1,13 +1,18 @@
 package com.jswitch.pagos.vista;
 
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
+import com.jswitch.base.controlador.util.DefaultLookupController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
-import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
+import com.jswitch.persona.controlador.PersonasDetailController;
+import com.jswitch.persona.modelo.maestra.Persona;
+import com.jswitch.persona.modelo.maestra.Rif;
+import com.jswitch.persona.vista.RifDialog;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import javax.swing.JCheckBox;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -65,6 +70,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         dateControl2 = new org.openswing.swing.client.DateControl();
         labelControl6 = new org.openswing.swing.client.LabelControl();
         dateControl3 = new org.openswing.swing.client.DateControl();
+        checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
 
         setTitle("Orden de Pago");
 
@@ -130,7 +136,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -164,8 +170,14 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         form1.setSaveButton(saveButton1);
 
         codLookupControl1.setAttributeName("personaPago.nombreLargo");
+        codLookupControl1.setEnabled(false);
+        codLookupControl1.setEnabledOnEdit(false);
+        codLookupControl1.setEnabledOnInsert(false);
+        codLookupControl1.setLookupButtonVisible(false);
+        codLookupControl1.setRequired(true);
 
         dateControl1.setAttributeName("fechaPago");
+        dateControl1.setRequired(true);
 
         textControl1.setAttributeName("fechaLiquidacion");
         textControl1.setRequired(true);
@@ -182,7 +194,11 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         labelControl4.setLabel("personaPago");
 
         buttonGroup1.add(radioButtonControl1);
+        radioButtonControl1.setSelected(true);
         radioButtonControl1.setText("Todos");
+        radioButtonControl1.setEnabled(false);
+        radioButtonControl1.setEnabledOnEdit(false);
+        radioButtonControl1.setEnabledOnInsert(false);
         radioButtonControl1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioButtonControl1ActionPerformed(evt);
@@ -191,6 +207,9 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         buttonGroup1.add(radioButtonControl2);
         radioButtonControl2.setText("PorFechas");
+        radioButtonControl2.setEnabled(false);
+        radioButtonControl2.setEnabledOnEdit(false);
+        radioButtonControl2.setEnabledOnInsert(false);
         radioButtonControl2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioButtonControl2ActionPerformed(evt);
@@ -200,10 +219,16 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         labelControl5.setLabel("fechaMinima");
 
         dateControl2.setAttributeName("fechaMinima");
+        dateControl2.setEnabled(false);
+        dateControl2.setEnabledOnEdit(false);
+        dateControl2.setEnabledOnInsert(false);
 
         labelControl6.setLabel("fechaMaxima");
 
         dateControl3.setAttributeName("fechaMaxima");
+        dateControl3.setEnabled(false);
+        dateControl3.setEnabledOnEdit(false);
+        dateControl3.setEnabledOnInsert(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -240,6 +265,14 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl2, dateControl3, labelControl5, labelControl6});
 
+        checkBoxControl1.setText("autoSearch");
+        checkBoxControl1.setAttributeName("autoSearch");
+        checkBoxControl1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxControl1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout form1Layout = new javax.swing.GroupLayout(form1);
         form1.setLayout(form1Layout);
         form1Layout.setHorizontalGroup(
@@ -268,7 +301,10 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                             .addComponent(radioButtonControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(4, 4, 4))))
+                        .addGap(4, 4, 4))
+                    .addGroup(form1Layout.createSequentialGroup()
+                        .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(605, Short.MAX_VALUE))))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl2, labelControl3, labelControl4});
@@ -292,7 +328,9 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(form1Layout.createSequentialGroup()
                         .addComponent(radioButtonControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,6 +375,15 @@ private void radioButtonControl1ActionPerformed(java.awt.event.ActionEvent evt) 
     dateControl3.setEnabled(radioButtonControl2.isSelected());
 }//GEN-LAST:event_radioButtonControl1ActionPerformed
 
+private void checkBoxControl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxControl1ActionPerformed
+    radioButtonControl1.setEnabled(((JCheckBox) evt.getSource()).isSelected());
+    radioButtonControl2.setEnabled(((JCheckBox) evt.getSource()).isSelected());
+    radioButtonControl1.setEnabledOnEdit(((JCheckBox) evt.getSource()).isSelected());
+    radioButtonControl2.setEnabledOnEdit(((JCheckBox) evt.getSource()).isSelected());
+    radioButtonControl1.setEnabledOnInsert(((JCheckBox) evt.getSource()).isSelected());
+    radioButtonControl2.setEnabledOnInsert(((JCheckBox) evt.getSource()).isSelected());
+}//GEN-LAST:event_checkBoxControl1ActionPerformed
+
     public GridControl getGridDesgloseSumaAsegurada() {
         return gridControl5;
     }
@@ -350,9 +397,12 @@ private void radioButtonControl1ActionPerformed(java.awt.event.ActionEvent evt) 
         gridControl5.setGridDataLocator(detalleSiniestros);
         gridControl5.setController(detalleSiniestros);
 
-        PersonaLookupControllerPorNombre o = new PersonaLookupControllerPorNombre("CLI");
-        o.addLookup2ParentLink("personaPago");
-        codLookupControl1.setLookupController(o);
+        PersonaLookupControllerPorNombre lookupPersonas =
+                new PersonaLookupControllerPorNombre("CLI");
+        lookupPersonas.addLookup2ParentLink("personaPago");
+        codLookupControl1.setLookupController(lookupPersonas);
+        codLookupControl1.setOpenDetail("personaPago", PersonasDetailController.class.getName(), new Class[]{GridControl.class, BeanVO.class, Rif.class}, new Object[]{null, null, null}, 1);
+      //  codLookupControl1.setNewDetail("personaPago", RifDialog.class.getName(), new Class[]{Form.class, String.class, Object[].class}, new Object[]{null, null, new Object[]{"ASE"}}, 0);
 
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
@@ -413,6 +463,7 @@ private void radioButtonControl1ActionPerformed(java.awt.event.ActionEvent evt) 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
+    private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
     private org.openswing.swing.client.DateControl dateControl1;

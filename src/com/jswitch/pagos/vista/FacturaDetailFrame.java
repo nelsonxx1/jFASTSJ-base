@@ -440,7 +440,9 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         initComponents();
 
         desgloseSumaAsegurada =
-                new DesgloseSumaAseguradaGridInternalController(Factura.class.getName(), "getDesgloseSumaAsegurada", gridControl5);
+                new DesgloseSumaAseguradaGridInternalController(
+                        Factura.class.getName(), "getDesgloseSumaAsegurada", 
+                        gridControl5);
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
 

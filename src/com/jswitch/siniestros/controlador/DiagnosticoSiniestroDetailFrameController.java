@@ -58,6 +58,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         detalleSin.getDiagnosticoSiniestros().remove((DiagnosticoSiniestro) beanVO);
         detalleSin.getDiagnosticoSiniestros().add(sin);
         beanVO = sin;
+        ((DiagnosticoSiniestroDetailFrame) vista).getjButton1().setEnabled(true);
         return new VOResponse(beanVO);
     }
 
@@ -103,7 +104,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         ds.setDetalleSiniestro(detalleSin);
         detalleSin.getDiagnosticoSiniestros().add(ds);
         Response res = super.insertRecord(ds);
-//        insertAlGrid(detalleSin);
+        if (res instanceof VOResponse) {
+            ((DiagnosticoSiniestroDetailFrame) vista).getjButton1().setEnabled(true);
+        }
         return res;
     }
 

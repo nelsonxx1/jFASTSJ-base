@@ -73,6 +73,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
         setPreferredSize(new java.awt.Dimension(675, 542));
 
         jButton1.setText(ClientSettings.getInstance().getResources().getResource("manteniminetoDiagnostico"));
+        jButton1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
