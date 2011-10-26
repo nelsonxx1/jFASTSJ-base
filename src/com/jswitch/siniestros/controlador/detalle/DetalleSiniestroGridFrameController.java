@@ -22,7 +22,7 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         if (persistentObject != null && persistentObject.getClass() != null) {
-            new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), gridFrame.getGridControl(), (BeanVO) persistentObject, false, persistentObject.getClass());
+            new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), gridFrame.getGridControl(), (BeanVO) persistentObject, true, persistentObject.getClass());
         }
     }
 }

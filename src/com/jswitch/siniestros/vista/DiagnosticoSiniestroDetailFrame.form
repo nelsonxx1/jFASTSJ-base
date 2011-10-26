@@ -92,6 +92,7 @@
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="ClientSettings.getInstance().getResources().getResource(&quot;manteniminetoDiagnostico&quot;)" type="code"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

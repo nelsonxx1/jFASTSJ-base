@@ -34,6 +34,7 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
         checkBoxColumn5 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn4 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
@@ -49,6 +50,12 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
 
         setTitle("Etapas del Siniestro");
+
+        deleteButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,6 +116,10 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
         textColumn1.setTrimText(true);
         textColumn1.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn1);
+
+        textColumn4.setColumnName("idPropio");
+        textColumn4.setEditableOnEdit(true);
+        gridData.getColumnContainer().add(textColumn4);
 
         codLookupColumn1.setColumnName("estatusSiniestro.nombre");
         codLookupColumn1.setEditableOnEdit(true);
@@ -195,7 +206,7 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -214,6 +225,11 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_deleteButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
@@ -239,6 +255,7 @@ public class EtapaSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     // End of variables declaration//GEN-END:variables
 
     @Override

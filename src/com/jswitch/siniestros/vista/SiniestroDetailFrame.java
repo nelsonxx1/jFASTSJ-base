@@ -367,7 +367,8 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         if (getBeanVO() == null) {
             jPanel3.setVisible(false);
         }
-        insertButton1.addActionListener((SiniestroDetailFrameController) formController);
+        insertButton1.addActionListener(
+                (SiniestroDetailFrameController) formController);
         lookupAsegurado = new TitularAseguradoLookupController();
         lookupAsegurado.addLookup2ParentLink("asegurado");
 

@@ -85,7 +85,9 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn3 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         jPanel17 = new javax.swing.JPanel();
+        insertButton8 = new org.openswing.swing.client.InsertButton();
         editButton8 = new org.openswing.swing.client.EditButton();
+        deleteButton8 = new org.openswing.swing.client.DeleteButton();
         saveButton8 = new org.openswing.swing.client.SaveButton();
         reloadButton8 = new org.openswing.swing.client.ReloadButton();
         filterButton8 = new org.openswing.swing.client.FilterButton();
@@ -318,8 +320,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addContainerGap(120, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel14);
@@ -327,8 +329,10 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         gridControl6.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
+        gridControl6.setDeleteButton(deleteButton8);
         gridControl6.setEditButton(editButton8);
         gridControl6.setFilterButton(filterButton8);
+        gridControl6.setInsertButton(insertButton8);
         gridControl6.setMaxNumberOfRowsOnInsert(4);
         gridControl6.setReloadButton(reloadButton8);
         gridControl6.setSaveButton(saveButton8);
@@ -379,7 +383,9 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         gridControl6.getColumnContainer().add(dateTimeColumn3);
 
         jPanel17.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
+        jPanel17.add(insertButton8);
         jPanel17.add(editButton8);
+        jPanel17.add(deleteButton8);
         jPanel17.add(saveButton8);
         jPanel17.add(reloadButton8);
         jPanel17.add(filterButton8);
@@ -397,8 +403,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addContainerGap(120, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
@@ -422,7 +428,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -440,7 +446,9 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         initComponents();
 
         desgloseSumaAsegurada =
-                new DesgloseSumaAseguradaGridInternalController(Factura.class.getName(), "getDesgloseSumaAsegurada", gridControl5);
+                new DesgloseSumaAseguradaGridInternalController(
+                        Factura.class.getName(), "getDesgloseSumaAsegurada", 
+                        gridControl5);
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
 
@@ -535,6 +543,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn7;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn8;
     private org.openswing.swing.client.DeleteButton deleteButton7;
+    private org.openswing.swing.client.DeleteButton deleteButton8;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.EditButton editButton7;
     private org.openswing.swing.client.EditButton editButton8;
@@ -544,6 +553,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.GridControl gridControl5;
     private org.openswing.swing.client.GridControl gridControl6;
     private org.openswing.swing.client.InsertButton insertButton7;
+    private org.openswing.swing.client.InsertButton insertButton8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;

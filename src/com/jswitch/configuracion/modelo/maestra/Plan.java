@@ -1,4 +1,3 @@
-
 package com.jswitch.configuracion.modelo.maestra;
 
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
@@ -6,6 +5,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -27,7 +27,7 @@ import javax.persistence.Version;
  * @author Adrian
  */
 @Entity
-@Table(name="ASEG_Plan")
+@Table(name = "ASEG_Plan")
 public class Plan extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -50,8 +50,12 @@ public class Plan extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
     @BusinessKey(exclude = Method.ALL)
     private Set<SumaAsegurada> sumasAseguradas = new HashSet<SumaAsegurada>(0);
-
-
+    /**
+     *
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
+    @BusinessKey(exclude = Method.ALL)
+    private Set<SumaAmparada> sumaAmparadas = new HashSet<SumaAmparada>(0);
     /**
      */
     @Version
@@ -113,5 +117,11 @@ public class Plan extends BeanVO implements Serializable, Auditable {
         this.sumasAseguradas = sumasAseguradas;
     }
 
-   
+    public Set<SumaAmparada> getSumaAmparadas() {
+        return sumaAmparadas;
+    }
+
+    public void setSumaAmparadas(Set<SumaAmparada> sumaAmparadas) {
+        this.sumaAmparadas = sumaAmparadas;
+    }
 }

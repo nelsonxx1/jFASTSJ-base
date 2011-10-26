@@ -24,6 +24,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -38,10 +39,6 @@ import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.java.Consts;
 
-/**
- *
- * @author orlandobcrra
- */
 public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameController {
 
     private HashMap<Class, String> etapaInicial;
@@ -67,8 +64,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         this.beanVO = beanVO;
         this.aplicarLogicaNegocio = aplicarLogicaNegocio;
         vista = new DetalleSiniestroDetailFrame();
-        ((DetalleSiniestroDetailFrame) vista).setTipo(tipoDetalle,beanVO);
-        
+        ((DetalleSiniestroDetailFrame) vista).setTipo(tipoDetalle, beanVO);
+
         vista.inicializar(this, true);
         if (beanVO != null) {
             vista.getMainPanel().reload();
@@ -78,13 +75,13 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         }
 
         etapaInicial = new HashMap<Class, String>(0);
-        etapaInicial.put(APS.class, "CARTA COMPROMISO");
-        etapaInicial.put(AyudaSocial.class, "CARTA COMPROMISO");
-        etapaInicial.put(CartaAval.class, "CARTA COMPROMISO");
-        etapaInicial.put(Emergencia.class, "CARTA COMPROMISO");
-        etapaInicial.put(Funerario.class, "CARTA COMPROMISO");
-        etapaInicial.put(Reembolso.class, "CARTA COMPROMISO");
-        etapaInicial.put(Vida.class, "CARTA COMPROMISO");
+        etapaInicial.put(APS.class, "CARTA");
+        etapaInicial.put(AyudaSocial.class, "CARTA");
+        etapaInicial.put(CartaAval.class, "CARTA");
+        etapaInicial.put(Emergencia.class, "CARTA");
+        etapaInicial.put(Funerario.class, "CARTA");
+        etapaInicial.put(Reembolso.class, "CARTA");
+        etapaInicial.put(Vida.class, "CARTA");
     }
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro, Class tipoDetalle) {
@@ -116,13 +113,16 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     }
 
     @Override
-    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+    public Response updateRecord(ValueObject antes, ValueObject ahora) throws Exception {
         TipoPersona tp = ((DetalleSiniestroDetailFrame) vista).getTipoPersonaSelected();
         if (tp != null) {
-            ((DetalleSiniestro) persistentObject).setTipoPersona(tp);
+            ((DetalleSiniestro) ahora).setTipoPersona(tp);
         }
-        System.out.println("ENTRO " + ((Auditable) persistentObject).getId() + " " + persistentObject);
-        return super.updateRecord(oldPersistentObject, persistentObject);
+        System.out.println("ENTRO " + ((Auditable) ahora).getId() + " " + ahora);
+        ((DetalleSiniestro) ahora).setSelected(
+                ((DetalleSiniestro) ahora).getEtapaSiniestro().getId().compareTo(
+                ((DetalleSiniestro) antes).getEtapaSiniestro().getId()) != 0);
+        return super.updateRecord(antes, ahora);
     }
 
     @Override
@@ -184,5 +184,28 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         } finally {
             s.close();
         }
+    }
+
+    @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+        DetalleSiniestro d = (DetalleSiniestro) persistentObject;
+        Session s = null;
+        EtapaSiniestro es = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            es = (EtapaSiniestro) s.createQuery("FROM "
+                    + EtapaSiniestro.class.getName() + " C WHERE "
+                    + "idPropio=?").setString(0, "LIQ").uniqueResult();
+        } catch (Exception e) {
+            LoggerUtil.error(this.getClass(), "logicade negocios", e);
+            return new ErrorResponse(e.getMessage());
+        } finally {
+            s.close();
+        }
+        if (d.getSelected() && d.getEtapaSiniestro().getId().compareTo(
+                es.getId()) == 0) {
+            d.setFechaLiquidado(new Date());
+        }
+        return new VOResponse(d);
     }
 }

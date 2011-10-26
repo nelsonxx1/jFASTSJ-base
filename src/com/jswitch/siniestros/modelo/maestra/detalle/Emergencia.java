@@ -35,7 +35,6 @@ public class Emergencia extends DetalleSiniestro {
      */
     @Column
     @Temporal(value = TemporalType.DATE)
-    @Future
     @BusinessKey
     private Date fechaSalida;
     /**
