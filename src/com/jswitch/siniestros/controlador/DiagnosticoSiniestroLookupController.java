@@ -26,7 +26,7 @@ import org.openswing.swing.util.server.HibernateUtils;
  */
 public class DiagnosticoSiniestroLookupController extends DefaultLookupController {
 
-    DetalleSiniestro detalleSiniestro;
+    private DetalleSiniestro detalleSiniestro;
 
     public DiagnosticoSiniestroLookupController() {
         this.detalleSiniestro = null;

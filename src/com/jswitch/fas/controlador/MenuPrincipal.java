@@ -63,7 +63,9 @@ import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
+import com.jswitch.pagos.controlador.BuscarDetallesGridFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
+import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
 import com.jswitch.persona.controlador.PersonasGridController;
 import com.jswitch.persona.controlador.mant.TipoPersonaGridFrameController;
 import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
@@ -92,6 +94,8 @@ import com.jswitch.rol.modelo.Rol;
 import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
+import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -485,6 +489,17 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
+    public void getNewPago() {
+        new BuscarPersonaDialog(null, OrdenDePagoDetailFrameController.class.getName(),
+                OrdenDePago.class.getName());
+    }
+
+    public void getPagosGrid() {
+        new OrdenDePagoGridFrameController(OrdenDePagoGridFrame.class.getName(),
+                OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(),
+                "Orden de Pago");
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Cambiar Pass">
     public void getCambiarPass() {
         CambiarPassDialog.showDialog();
@@ -497,11 +512,8 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
-    public void getTest() {
-        new BuscarPersonaDialog(null, OrdenDePagoDetailFrameController.class.getName(),
-                OrdenDePago.class.getName());
-
-//        new OrdenDePagoDetailFrameController(OrdenDePagoDetailFrame.class.getName(), 
-//                null, null, false);
+    public void getTest() { 
+//        "17930"
+        AUN_NO_FUN();
     }
 }

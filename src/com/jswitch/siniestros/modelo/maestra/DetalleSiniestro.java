@@ -155,6 +155,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Transient
     private transient String tipoDetalle;
     /**
+     * 
+     */
+    @Transient
+    private transient Boolean selected;
+    /**
      *
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
@@ -387,5 +392,24 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     public Set<Reporte> getReportes() {
         return reportes;
+    }
+
+    public Date getFechaLiquidado() {
+        return fechaLiquidado;
+    }
+
+    public void setFechaLiquidado(Date fechaLiquidado) {
+        this.fechaLiquidado = fechaLiquidado;
+    }
+
+    public Boolean getSelected() {
+        if (selected == null) {
+            selected = Boolean.FALSE;
+        }
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }

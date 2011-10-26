@@ -27,7 +27,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
@@ -61,7 +60,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     @Column
     private String codigoSIGECOF;
-    
     /**
      *
      */
@@ -75,16 +73,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaPago;
-    /**
-     *
-     */
-    @Transient
-    private transient Date fechaMinima;
-    /**
-     *
-     */
-    @Transient
-    private transient Date FechaMaxima;
     /**
      *
      */
@@ -105,8 +93,8 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * 
      */
-    @Transient
-    private transient Boolean autoSearch;
+    @Column
+    private Boolean autoSearch;
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
@@ -184,22 +172,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.autoSearch = autoSearch;
     }
 
-    public Date getFechaMaxima() {
-        return FechaMaxima;
-    }
-
-    public void setFechaMaxima(Date FechaMaxima) {
-        this.FechaMaxima = FechaMaxima;
-    }
-
-    public Date getFechaMinima() {
-        return fechaMinima;
-    }
-
-    public void setFechaMinima(Date fechaMinima) {
-        this.fechaMinima = fechaMinima;
-    }
-
     public String getCodigoSIGECOF() {
         return codigoSIGECOF;
     }
@@ -223,4 +195,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
+
+
 }

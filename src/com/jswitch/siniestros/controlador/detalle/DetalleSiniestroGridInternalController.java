@@ -30,7 +30,7 @@ public class DetalleSiniestroGridInternalController extends DefaultGridInternalC
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, false, persistentObject.getClass());
+        new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, true, persistentObject.getClass());
     }
 
     @Override

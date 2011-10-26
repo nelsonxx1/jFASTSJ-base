@@ -40,7 +40,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="form1" min="-2" pref="177" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="257" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="261" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -308,9 +308,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl5" alignment="0" pref="216" max="32767" attributes="2"/>
+                  <Component id="gridControl5" alignment="0" pref="220" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -506,9 +506,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl6" alignment="0" pref="216" max="32767" attributes="2"/>
+                  <Component id="gridControl6" alignment="0" pref="220" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -516,11 +516,17 @@
             <Container class="org.openswing.swing.client.GridControl" name="gridControl6">
               <Properties>
                 <Property name="defaultQuickFilterCriteria" type="int" value="1"/>
+                <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="deleteButton8"/>
+                </Property>
                 <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="editButton8"/>
                 </Property>
                 <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="filterButton8"/>
+                </Property>
+                <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="insertButton8"/>
                 </Property>
                 <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
                 <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -627,7 +633,11 @@
                 <Property name="verticalGap" type="int" value="2"/>
               </Layout>
               <SubComponents>
+                <Component class="org.openswing.swing.client.InsertButton" name="insertButton8">
+                </Component>
                 <Component class="org.openswing.swing.client.EditButton" name="editButton8">
+                </Component>
+                <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton8">
                 </Component>
                 <Component class="org.openswing.swing.client.SaveButton" name="saveButton8">
                 </Component>
