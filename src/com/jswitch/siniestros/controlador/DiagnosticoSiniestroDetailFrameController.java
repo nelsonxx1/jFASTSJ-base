@@ -164,4 +164,10 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
             }
         }
     }
+
+    @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+//TODO CALCULAR MONTOS FACTURADO Y LIQUIDADO
+        return new VOResponse(persistentObject);
+    }
 }

@@ -70,10 +70,10 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         if (beanVO != null) {
             vista.getMainPanel().reload();
             vista.getMainPanel().setMode(Consts.READONLY);
+            checkStatus();
         } else {
             vista.getMainPanel().setMode(Consts.INSERT);
         }
-
         etapaInicial = new HashMap<Class, String>(0);
         etapaInicial.put(APS.class, "CARTA");
         etapaInicial.put(AyudaSocial.class, "CARTA");
@@ -82,6 +82,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         etapaInicial.put(Funerario.class, "CARTA");
         etapaInicial.put(Reembolso.class, "CARTA");
         etapaInicial.put(Vida.class, "CARTA");
+
     }
 
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Siniestro siniestro, Class tipoDetalle) {
@@ -104,11 +105,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
             new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
-        }
-        if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
-            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), false, (DetalleSiniestro) beanVO, vista);
+        } else if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
+            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), true, (DetalleSiniestro) beanVO, vista);
         }
     }
 
@@ -118,7 +119,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         if (tp != null) {
             ((DetalleSiniestro) ahora).setTipoPersona(tp);
         }
-        System.out.println("ENTRO " + ((Auditable) ahora).getId() + " " + ahora);
         ((DetalleSiniestro) ahora).setSelected(
                 ((DetalleSiniestro) ahora).getEtapaSiniestro().getId().compareTo(
                 ((DetalleSiniestro) antes).getEtapaSiniestro().getId()) != 0);
@@ -133,6 +133,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
                     + " WHERE C.nombre='" + etapaInicial.get(newPersistentObject.getClass()) + "'");
+
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
 
@@ -207,5 +208,20 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             d.setFechaLiquidado(new Date());
         }
         return new VOResponse(d);
+    }
+
+    private void checkStatus() {
+        DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
+                compareTo("PENDIENTE") != 0) {
+            ((DetalleSiniestroDetailFrame) vista).getEditButton1().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getSaveButton1().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getjPanel11().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getjPanel13().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getjPanel15().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getjPanel16().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).getjPanel23().setVisible(false);
+        }
     }
 }
