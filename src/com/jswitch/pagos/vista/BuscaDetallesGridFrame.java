@@ -78,6 +78,7 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, filterButton1});
 
+        gridData.setAllowColumnsSortingInEdit(true);
         gridData.setEditButton(editButton1);
         gridData.setFilterButton(filterButton1);
         gridData.setInsertRowsOnTop(false);

@@ -31,9 +31,12 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 import org.openswing.swing.client.CodLookupControl;
+import org.openswing.swing.client.EditButton;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.client.InsertButton;
+import org.openswing.swing.client.SaveButton;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -2292,6 +2295,34 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
     public InsertButton getInsertButtonPagos() {
         return insertButtonPagos;
+    }
+
+    public EditButton getEditButton1() {
+        return editButton1;
+    }
+
+    public SaveButton getSaveButton1() {
+        return saveButton1;
+    }
+
+    public JPanel getjPanel11() {
+        return jPanel11;
+    }
+
+    public JPanel getjPanel13() {
+        return jPanel13;
+    }
+
+    public JPanel getjPanel15() {
+        return jPanel15;
+    }
+
+    public JPanel getjPanel16() {
+        return jPanel16;
+    }
+
+    public JPanel getjPanel23() {
+        return jPanel23;
     }
 
     public void setTipo(Class tipoDetalle, BeanVO beanVO) {
