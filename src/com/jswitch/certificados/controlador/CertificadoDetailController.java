@@ -37,7 +37,7 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
     Poliza padre;
 
     public CertificadoDetailController(
-            String detailFramePath, GridControl gridControl, BeanVO beanVO, BeanVO parentVO, boolean aplicarLogicaNegocio) {
+            String detailFramePath, GridControl gridControl, BeanVO beanVO, BeanVO parentVO, Boolean aplicarLogicaNegocio) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         if (parentVO != null) {
             padre = (Poliza) parentVO;

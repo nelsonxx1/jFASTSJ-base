@@ -49,7 +49,7 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     /**
      * HCM
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "certificado")
     @BusinessKey(exclude = Method.ALL)
     private Set<Asegurado> asegurados = new HashSet<Asegurado>(0);
     /**
@@ -149,5 +149,4 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     public void setFechaPrimaVida(Date fechaPrimaVida) {
         this.fechaPrimaVida = fechaPrimaVida;
     }
-
 }
