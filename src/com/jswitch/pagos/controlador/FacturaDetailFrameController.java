@@ -14,6 +14,7 @@ import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -32,23 +33,23 @@ import org.openswing.swing.message.receive.java.ValueObject;
  * @author Adrian
  */
 public class FacturaDetailFrameController extends DefaultDetailFrameController {
-    
+
     private DetalleSiniestro detalleSiniestro;
-    
+
     public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         detalleSiniestro = ((Factura) beanVO).getDetalleSiniestro();
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
         ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
-    
+
     public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
         ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
     }
-    
+
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Factura liquidacion = (Factura) newPersistentObject;
@@ -60,7 +61,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         gridControl.getReloadButton().doClick();
         return res;
     }
-    
+
     private void agregarDesgloseCobertura(Set<DesgloseCobertura> des) {
         String ramo = "HCM";
         if (detalleSiniestro instanceof Vida) {
@@ -83,9 +84,9 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         } finally {
             s.close();
         }
-        
+
     }
-    
+
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -96,7 +97,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         beanVO = sin;
         return new VOResponse(beanVO);
     }
-    
+
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         Factura liquidacion = (Factura) persistentObject;
@@ -115,7 +116,27 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                 return new ErrorResponse("user.aborted");
             }
         }
-        
+
+        Collection<Factura> fac = detalleSiniestro.getPagos();
+        double facturado = 0;
+        for (Factura factura : fac) {
+            if (liquidacion.getId() != null && factura.getId().compareTo(liquidacion.getId()) == 0) {
+                facturado += liquidacion.getTotalFacturado();
+            } else {
+                facturado += factura.getTotalFacturado();
+            }
+        }
+        detalleSiniestro.setMontoFacturado(facturado);
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        try {
+            s.beginTransaction();
+            s.update(detalleSiniestro);
+            s.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            s.close();
+        }
         return new VOResponse(liquidacion);
     }
 }

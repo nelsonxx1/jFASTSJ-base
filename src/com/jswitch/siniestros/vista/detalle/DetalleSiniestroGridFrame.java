@@ -37,9 +37,9 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
 
         setPreferredSize(new java.awt.Dimension(700, 540));
 
@@ -59,23 +59,32 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("personaPago.nombreLargo");
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("tipoPersona.nombre");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
+        textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("tratamientoEfectuado");
+        textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
+        textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("tipoSiniestro.nombre");
+        textColumn6.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn6);
 
+        textColumn7.setColumnFilterable(true);
         textColumn7.setColumnName("etapaSiniestro.nombre");
+        textColumn7.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn7);
 
+        checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("auditoria.activo");
         checkBoxColumn1.setColumnRequired(false);
         checkBoxColumn1.setColumnSortable(true);
@@ -87,11 +96,10 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
-        dateTimeColumn1.setColumnFilterable(true);
-        dateTimeColumn1.setColumnName("auditoria.fechaInsert");
-        dateTimeColumn1.setColumnRequired(false);
-        dateTimeColumn1.setColumnSortable(true);
-        gridData.getColumnContainer().add(dateTimeColumn1);
+        dateColumn1.setColumnFilterable(true);
+        dateColumn1.setColumnName("auditoria.fechaInsert");
+        dateColumn1.setColumnSortable(true);
+        gridData.getColumnContainer().add(dateColumn1);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
@@ -99,11 +107,10 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
-        dateTimeColumn2.setColumnFilterable(true);
-        dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
-        dateTimeColumn2.setColumnRequired(false);
-        dateTimeColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(dateTimeColumn2);
+        dateColumn2.setColumnFilterable(true);
+        dateColumn2.setColumnName("auditoria.fechaUpdate");
+        dateColumn2.setColumnSortable(true);
+        gridData.getColumnContainer().add(dateColumn2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,8 +200,8 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
-    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
-    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;

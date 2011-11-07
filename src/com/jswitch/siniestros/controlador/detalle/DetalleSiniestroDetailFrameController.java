@@ -119,9 +119,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         if (tp != null) {
             ((DetalleSiniestro) ahora).setTipoPersona(tp);
         }
-        ((DetalleSiniestro) ahora).setSelected(
-                ((DetalleSiniestro) ahora).getEtapaSiniestro().getId().compareTo(
-                ((DetalleSiniestro) antes).getEtapaSiniestro().getId()) != 0);
+        if (((DetalleSiniestro) antes).getEtapaSiniestro() != null) {
+            ((DetalleSiniestro) ahora).setSelected(
+                    ((DetalleSiniestro) ahora).getEtapaSiniestro().getId().compareTo(
+                    ((DetalleSiniestro) antes).getEtapaSiniestro().getId()) != 0);
+        }
         return super.updateRecord(antes, ahora);
     }
 
@@ -132,7 +134,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             vista.saveGridsData();
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
-                    + " WHERE C.nombre='" + etapaInicial.get(newPersistentObject.getClass()) + "'");
+                    + " WHERE C.idPropio='" + etapaInicial.get(newPersistentObject.getClass()) + "'");
 
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
