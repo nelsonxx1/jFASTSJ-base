@@ -14,8 +14,10 @@ import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -35,29 +37,29 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        //asegurado getMainPanel().getVOModel().getValueObject();
-        Session s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            List l = s.createQuery("FROM " + Siniestro.class.getName() + " S"
-                    + " WHERE asegurado.id=?").setLong(0, ((Asegurado) getMainPanel().getVOModel().getValueObject()).getId()).list();
-            if (!l.isEmpty()) {
-                if (l.size() < 2) {
-                    new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, (Siniestro) l.get(0), true);
+        if (e.getSource() instanceof JButton) {
+            //asegurado getMainPanel().getVOModel().getValueObject();
+            Session s = null;
+            try {
+                s = HibernateUtil.getSessionFactory().openSession();
+                List l = s.createQuery("FROM " + Siniestro.class.getName() + " S"
+                        + " WHERE asegurado.id=?").setLong(0, ((Asegurado) getMainPanel().getVOModel().getValueObject()).getId()).list();
+                if (!l.isEmpty()) {
+                    if (l.size() < 2) {
+                        new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, (Siniestro) l.get(0), true);
+                    } else {
+                        new SiniestroGridFrameController(new VOListResponse(l, false, l.size()));
+                    }
                 } else {
-                    new SiniestroGridFrameController(new VOListResponse(l, false, l.size()));
+                    new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, ((Asegurado) getMainPanel().getVOModel().getValueObject()));
                 }
-            } else {
-                new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, ((Asegurado) getMainPanel().getVOModel().getValueObject()));
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                s.close();
             }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            s.close();
         }
-
 
     }
     private Certificado familia;
@@ -73,6 +75,18 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
     public AseguradoDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Certificado familia) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.familia = familia;
+    }
+
+    @Override
+    public Response loadData(Class valueObjectClass) {
+ Session s = HibernateUtil.getSessionFactory().openSession();
+        Asegurado aseg = (Asegurado) s.get(Asegurado.class, ((Asegurado) beanVO).getId());
+        Hibernate.initialize(aseg.getNotasTecnicas());
+        Hibernate.initialize(aseg.getObservaciones());
+        Hibernate.initialize(aseg.getDocumentos());
+        s.close();
+        beanVO = aseg;
+        return new VOResponse(beanVO);
     }
 
     @Override
