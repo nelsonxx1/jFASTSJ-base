@@ -7,12 +7,15 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.asegurados.modelo.maestra.Titular;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionPrima;
 import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -79,7 +82,7 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
 
     @Override
     public Response loadData(Class valueObjectClass) {
- Session s = HibernateUtil.getSessionFactory().openSession();
+        Session s = HibernateUtil.getSessionFactory().openSession();
         Asegurado aseg = (Asegurado) s.get(Asegurado.class, ((Asegurado) beanVO).getId());
         Hibernate.initialize(aseg.getNotasTecnicas());
         Hibernate.initialize(aseg.getObservaciones());
@@ -93,10 +96,15 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
 
         if (canInsert((Asegurado) newPersistentObject)) {
+            ((Asegurado) beanVO).setCertificado(familia);
             Response res = super.insertRecord(newPersistentObject);
             if (res instanceof VOResponse && familia != null) {
                 familia.getAsegurados().add((Asegurado) beanVO);
-                ((Asegurado) beanVO).setCertificado(familia);
+                if (familia instanceof Auditable) {
+                    AuditoriaBasica ab = ((Auditable) familia).getAuditoria();
+                    ab.setFechaUpdate(new Date());
+                    ab.setUsuarioUpdate(General.usuario.getUserName());
+                }
                 Session s = null;
                 try {
                     s = HibernateUtil.getSessionFactory().openSession();

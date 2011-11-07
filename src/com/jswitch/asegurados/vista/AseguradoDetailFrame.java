@@ -6,7 +6,6 @@ import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.documentosAnexos.TipoDocumentoLookupController;
 import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
-import com.jswitch.base.controlador.util.DefaultLookupController;
 import com.jswitch.base.controlador.util.DefaultLookupControllerPorNombre;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
@@ -14,6 +13,7 @@ import com.jswitch.base.modelo.entidades.Observacion;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.certificados.controlador.CertificadoDetailController;
+import com.jswitch.certificados.controlador.CertificadoLookupController;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.certificados.vista.CertificadoDetailFrame;
 import com.jswitch.configuracion.modelo.maestra.Plan;
@@ -699,9 +699,9 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         codLookupControl1.setOpenDetail("persona", PersonasDetailController.class.getName(), new Class[]{GridControl.class, BeanVO.class, Rif.class}, new Object[]{null, null, null}, 1);
         codLookupControl1.setNewDetail("persona", RifDialog.class.getName(), new Class[]{Form.class, String.class, Object[].class}, new Object[]{null, null, new Object[]{"ASE"}}, 0);
 
-        DefaultLookupController loo = new DefaultLookupController(Certificado.class.getName());
+        CertificadoLookupController loo = new CertificadoLookupController(Certificado.class.getName());
         loo.addLookup2ParentLink("certificado");
-        codLookupControl5.setLookupController(lookupPersonas);
+        codLookupControl5.setLookupController(loo);
 
         codLookupControl5.setOpenDetail("certificado",
                 CertificadoDetailController.class.getName(),

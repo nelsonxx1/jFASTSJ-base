@@ -8,6 +8,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,6 +45,12 @@ public class Beneficiario extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
+    /**
+     *
+     */
+    @ManyToOne()
+    @BusinessKey
+    private Certificado certificado;
     /**
      *
      */
@@ -161,4 +168,13 @@ public class Beneficiario extends BeanVO implements Serializable, Auditable {
     public void setObservaciones(List<Observacion> observaciones) {
         this.observaciones = observaciones;
     }
+
+    public Certificado getCertificado() {
+        return certificado;
+    }
+
+    public void setCertificado(Certificado certificado) {
+        this.certificado = certificado;
+    }
+    
 }

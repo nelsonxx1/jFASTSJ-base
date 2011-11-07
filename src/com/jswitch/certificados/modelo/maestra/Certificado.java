@@ -62,7 +62,7 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     /**
      * Vida
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "certificado")
     @BusinessKey(exclude = Method.ALL)
     private Set<Beneficiario> beneficiarios = new HashSet<Beneficiario>(0);
     /**
