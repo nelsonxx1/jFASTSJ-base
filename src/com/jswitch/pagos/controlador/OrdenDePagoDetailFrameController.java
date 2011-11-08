@@ -58,6 +58,9 @@ public class OrdenDePagoDetailFrameController
         Session s = HibernateUtil.getSessionFactory().openSession();
         OrdenDePago sin = (OrdenDePago) s.get(OrdenDePago.class, ((OrdenDePago) beanVO).getId());
         Hibernate.initialize(sin.getDetalleSiniestros());
+        Hibernate.initialize(sin.getObservaciones());
+        Hibernate.initialize(sin.getDocumentos());
+        Hibernate.initialize(sin.getNotasTecnicas());
         s.close();
         beanVO = sin;
         return new VOResponse(beanVO);
@@ -90,7 +93,6 @@ public class OrdenDePagoDetailFrameController
         return super.insertRecord(newPersistentObject);
     }
 
-     
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("entro aqui");

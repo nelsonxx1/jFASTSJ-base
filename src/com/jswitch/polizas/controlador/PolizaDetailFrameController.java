@@ -1,5 +1,3 @@
-
-
 package com.jswitch.polizas.controlador;
 
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
@@ -53,12 +51,13 @@ public class PolizaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-//        Persona p=(Persona)s.createQuery("FROM " + Persona.class.getName()
-        //+ " P WHERE P.id=:id" +
-//                "").setLong("id", ((Persona) beanVO).getId()).uniqueResult();
+        
         Poliza p =
                 (Poliza) s.get(Poliza.class, ((Poliza) beanVO).getId());
         Hibernate.initialize(p.getCertificados());
+        Hibernate.initialize(p.getObservaciones());
+        Hibernate.initialize(p.getDocumentos());
+        Hibernate.initialize(p.getNotasTecnicas());
         s.close();
         beanVO = p;
         return new VOResponse(beanVO);
@@ -136,11 +135,11 @@ public class PolizaDetailFrameController extends DefaultDetailFrameController {
                 new CertificadoNuevoDetrailController(CertificadoNuevoDetailFrame.class.getName(), null, c, (Poliza) getBeanVO(), false);
 
             }
-            if (beanVO == null && busquedaDialog.getRif().getRif()!=null) {
+            if (beanVO == null && busquedaDialog.getRif().getRif() != null) {
                 CertificadoNuevoDetrailController c = new CertificadoNuevoDetrailController(CertificadoNuevoDetailFrame.class.getName(), null, null, (Poliza) getBeanVO(), false);
                 Form linkForm = c.getVista().getMainPanel();
                 String linkAttName = "asegurado.persona";
-                new PersonasDetailController(linkForm, linkAttName, new Object[]{"ASE","TIT"}, null, null, busquedaDialog.getRif());
+                new PersonasDetailController(linkForm, linkAttName, new Object[]{"ASE", "TIT"}, null, null, busquedaDialog.getRif());
             }
 
 
