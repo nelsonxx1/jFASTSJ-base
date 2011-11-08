@@ -146,25 +146,21 @@ public class PolizasGridFrame extends DefaultGridFrame {
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
-        textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
         dateTimeColumn1.setColumnFilterable(true);
         dateTimeColumn1.setColumnName("auditoria.fechaInsert");
-        dateTimeColumn1.setColumnRequired(false);
         dateTimeColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn1);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
-        textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
         dateTimeColumn2.setColumnFilterable(true);
         dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
-        dateTimeColumn2.setColumnRequired(false);
         dateTimeColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn2);
 
@@ -183,7 +179,7 @@ public class PolizasGridFrame extends DefaultGridFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
