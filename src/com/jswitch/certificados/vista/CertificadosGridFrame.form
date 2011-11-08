@@ -52,8 +52,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="editButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
@@ -63,23 +61,22 @@
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="292" max="32767" attributes="0"/>
+                  <EmptySpace pref="330" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="saveButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="editButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -93,8 +90,6 @@
         </Component>
         <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
         </Component>
-        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
-        </Component>
         <Component class="org.openswing.swing.client.SaveButton" name="saveButton1">
         </Component>
       </SubComponents>
@@ -102,7 +97,7 @@
     <Container class="org.openswing.swing.client.GridControl" name="gridData">
       <Properties>
         <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="editButton1"/>
+          <ComponentRef name="default"/>
         </Property>
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="exportButton1"/>
@@ -134,7 +129,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;id&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="preferredWidth" type="int" value="40"/>
           </Properties>
@@ -159,10 +153,11 @@
         </Component>
         <Component class="org.openswing.swing.table.columns.client.CheckBoxColumn" name="checkBoxColumn1">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.activo&quot;" type="code"/>
             </Property>
-            <Property name="editableOnEdit" type="boolean" value="true"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
@@ -171,7 +166,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.usuarioInsert&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -181,7 +175,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -191,7 +184,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.usuarioUpdate&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -201,7 +193,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>

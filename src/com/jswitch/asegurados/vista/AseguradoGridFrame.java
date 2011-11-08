@@ -27,7 +27,6 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         filterButton1 = new org.openswing.swing.client.FilterButton();
-        editButton1 = new org.openswing.swing.client.EditButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -46,9 +45,7 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -56,21 +53,19 @@ public class AseguradoGridFrame extends DefaultGridFrame {
                 .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(reloadButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(filterButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        gridData.setEditButton(editButton1);
         gridData.setExportButton(exportButton1);
         gridData.setFilterButton(filterButton1);
         gridData.setFunctionId("VehiculosGrid");
@@ -80,21 +75,32 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Asegurado.class.getName());
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setEditableOnEdit(true);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("persona.rif.rif");
+        textColumn1.setColumnRequired(false);
         textColumn1.setColumnSortable(true);
+        textColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(textColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("persona.nombreLargo");
+        textColumn2.setColumnRequired(false);
         textColumn2.setColumnSortable(true);
+        textColumn2.setEditableOnEdit(true);
         gridData.getColumnContainer().add(textColumn2);
 
+        checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("auditoria.activo");
+        checkBoxColumn1.setColumnRequired(false);
+        checkBoxColumn1.setColumnSortable(true);
         checkBoxColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
@@ -102,24 +108,28 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         textColumn4.setColumnName("auditoria.usuarioInsert");
         textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
+        textColumn4.setEditableOnEdit(true);
         gridData.getColumnContainer().add(textColumn4);
 
         dateTimeColumn1.setColumnFilterable(true);
         dateTimeColumn1.setColumnName("auditoria.fechaInsert");
         dateTimeColumn1.setColumnRequired(false);
         dateTimeColumn1.setColumnSortable(true);
+        dateTimeColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(dateTimeColumn1);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
         textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
+        textColumn5.setEditableOnEdit(true);
         gridData.getColumnContainer().add(textColumn5);
 
         dateTimeColumn2.setColumnFilterable(true);
         dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
         dateTimeColumn2.setColumnRequired(false);
         dateTimeColumn2.setColumnSortable(true);
+        dateTimeColumn2.setEditableOnEdit(true);
         gridData.getColumnContainer().add(dateTimeColumn2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +189,6 @@ public class AseguradoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
-    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.GridControl gridData;

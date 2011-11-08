@@ -27,7 +27,6 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         filterButton1 = new org.openswing.swing.client.FilterButton();
-        editButton1 = new org.openswing.swing.client.EditButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn5 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -46,9 +45,7 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -56,21 +53,20 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
                 .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(reloadButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(filterButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(6, Short.MAX_VALUE))
         );
 
-        gridData.setEditButton(editButton1);
         gridData.setExportButton(exportButton1);
         gridData.setFilterButton(filterButton1);
         gridData.setFunctionId("VehiculosGrid");
@@ -89,27 +85,32 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
 
         textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("persona.rif.rif");
+        textColumn2.setColumnRequired(false);
         textColumn2.setColumnSortable(true);
         textColumn2.setMaxCharacters(1024);
         gridData.getColumnContainer().add(textColumn2);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("persona.nombreLargo");
+        textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
         integerColumn2.setColumnFilterable(true);
         integerColumn2.setColumnName("persona.edad");
+        integerColumn2.setColumnRequired(false);
         integerColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(integerColumn2);
 
         decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("indemnizacion");
+        decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(decimalColumn1);
 
         checkBoxColumn2.setColumnFilterable(true);
         checkBoxColumn2.setColumnName("auditoria.activo");
+        checkBoxColumn2.setColumnRequired(false);
         checkBoxColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(checkBoxColumn2);
 
@@ -129,18 +130,18 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -182,7 +183,6 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
-    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.GridControl gridData;
