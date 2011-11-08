@@ -1,11 +1,15 @@
-
 package com.jswitch.asegurados.controlador;
 
 import com.jswitch.asegurados.modelo.maestra.Beneficiario;
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.certificados.modelo.maestra.Certificado;
+import java.util.Date;
+import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -30,17 +34,13 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
     public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
 
-    }
-
-    public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Certificado familia) {
-        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-        this.familia = familia;
         Double indem = 0d;
         if (beanVO != null) {
             Beneficiario b = (Beneficiario) this.beanVO;
             if (b != null) {
 //                b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
                 indem = b.getIndemnizacion();
+                this.familia = b.getCertificado();
             }
 
         }
@@ -48,15 +48,40 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         vista.getMainPanel().pull("porcentajeDisponible");
     }
 
+    public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Certificado familia) {
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+        if (this.familia == null) {
+            this.familia = familia;
+        }
+
+    }
+
+    public Response loadData(Class valueObjectClass) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Beneficiario benef = (Beneficiario) s.get(Beneficiario.class, ((Beneficiario) beanVO).getId());
+        Hibernate.initialize(benef.getNotasTecnicas());
+        Hibernate.initialize(benef.getObservaciones());
+        Hibernate.initialize(benef.getDocumentos());
+        s.close();
+        beanVO = benef;
+        return new VOResponse(beanVO);
+    }
+
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Beneficiario b = (Beneficiario) newPersistentObject;
         b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
-
+        b.setCertificado(familia);
         Response res = super.insertRecord(newPersistentObject);
 
         if (res instanceof VOResponse && familia != null) {
             familia.getBeneficiarios().add(b);
+            if (familia instanceof Auditable) {
+                AuditoriaBasica ab = ((Auditable) familia).getAuditoria();
+                ab.setFechaUpdate(new Date());
+                ab.setUsuarioUpdate(General.usuario.getUserName());
+            }
+
             Session s = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();

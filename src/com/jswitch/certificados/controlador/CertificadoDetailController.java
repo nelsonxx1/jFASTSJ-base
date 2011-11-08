@@ -37,7 +37,7 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
     Poliza padre;
 
     public CertificadoDetailController(
-            String detailFramePath, GridControl gridControl, BeanVO beanVO, BeanVO parentVO, boolean aplicarLogicaNegocio) {
+            String detailFramePath, GridControl gridControl, BeanVO beanVO, BeanVO parentVO, Boolean aplicarLogicaNegocio) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         if (parentVO != null) {
             padre = (Poliza) parentVO;
@@ -60,6 +60,9 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
                     (Certificado) s.get(Certificado.class, ((Certificado) beanVO).getId());
             Hibernate.initialize(p.getBeneficiarios());
             Hibernate.initialize(p.getAsegurados());
+            Hibernate.initialize(p.getDocumentos());
+            Hibernate.initialize(p.getObservaciones());
+            Hibernate.initialize(p.getNotasTecnicas());
             s.close();
             beanVO = p;
         }

@@ -14,9 +14,9 @@ import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.asegurados.modelo.maestra.Titular;
-import com.jswitch.base.modelo.entidades.auditoria.AuditLogInterceptor;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import org.hibernate.Hibernate;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 
@@ -28,6 +28,18 @@ public class TitularDetailFrameController extends DefaultDetailFrameController {
 
     public TitularDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+    }
+
+    @Override
+    public Response loadData(Class valueObjectClass) {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Titular titu = (Titular) s.get(Titular.class, ((Titular) beanVO).getId());
+        Hibernate.initialize(titu.getNotasTecnicas());
+        Hibernate.initialize(titu.getObservaciones());
+        Hibernate.initialize(titu.getDocumentos());
+        s.close();
+        beanVO = titu;
+        return new VOResponse(beanVO);
     }
 
     @Override

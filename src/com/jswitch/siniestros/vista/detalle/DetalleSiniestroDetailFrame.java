@@ -2051,6 +2051,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
         removeForms();
+        //<editor-fold defaultstate="collapsed" desc="modulo de obs, not and doc">
         org.openswing.swing.table.columns.client.PictureCaptureColumn pcc = new org.openswing.swing.table.columns.client.PictureCaptureColumn();
         pcc.setColumnName("file");
         pcc.setEditableOnInsert(true);
@@ -2062,22 +2063,22 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         buttonColumn1.addActionListener(controllerDocumentosAnexosX);
         gridControl3.setController(controllerDocumentosAnexosX);
         gridControl3.setGridDataLocator(controllerDocumentosAnexosX);
-
+        
         com.jswitch.base.controlador.documentosAnexos.TipoDocumentoLookupController lookupDocumentoAnexo2 =
                 new TipoDocumentoLookupController(com.jswitch.base.modelo.Dominios.Modulos.PERSONAS);
         lookupDocumentoAnexo2.addLookup2ParentLink("tipoDocumento");
         codLookupColumn2.setLookupController(lookupDocumentoAnexo2);
-
+        
         controllerObservaciones =
                 new DefaultGridInternalController(DetalleSiniestro.class.getName(), "getObservaciones", gridControl4);
         gridControl4.setGridDataLocator(controllerObservaciones);
         gridControl4.setController(controllerObservaciones);
-
+        
         controllerNotasTecnicas =
                 new DefaultGridInternalController(DetalleSiniestro.class.getName(), "getNotasTecnicas", gridControl5);
         gridControl5.setGridDataLocator(controllerNotasTecnicas);
         gridControl5.setController(controllerNotasTecnicas);
-
+        //</editor-fold>
         controllerPagos = new FacturaGridInternalController(gridControl6);
         gridControl6.setGridDataLocator(controllerPagos);
         gridControl6.setController(controllerPagos);

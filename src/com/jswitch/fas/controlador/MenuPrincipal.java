@@ -2,6 +2,7 @@ package com.jswitch.fas.controlador;
 
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.AseguradoGridFrameController;
+import com.jswitch.asegurados.controlador.BeneficiarioGridFrameController;
 import com.jswitch.asegurados.modelo.dominio.Departamento;
 import com.jswitch.asegurados.modelo.dominio.TipoContrato;
 import com.jswitch.certificados.vista.CertificadoDetailFrame;
@@ -36,11 +37,14 @@ import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.dominio.PlazoEspera;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
+import com.jswitch.asegurados.modelo.maestra.Beneficiario;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.polizas.modelo.maestra.Poliza;
 import com.jswitch.asegurados.modelo.maestra.Titular;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
 import com.jswitch.asegurados.vista.AseguradoGridFrame;
+import com.jswitch.asegurados.vista.BeneficiarioDetailFrame;
+import com.jswitch.asegurados.vista.BeneficiarioGridFrame;
 import com.jswitch.asegurados.vista.BuscarAseguradoDialog;
 import com.jswitch.certificados.vista.CertificadosGridFrame;
 import com.jswitch.configuracion.controlador.ConfiguracionPrimaAllGridFrameController;
@@ -53,6 +57,7 @@ import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.asegurados.vista.TitularGridFrame;
 import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
+import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
@@ -63,7 +68,6 @@ import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
-import com.jswitch.pagos.controlador.BuscarDetallesGridFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
 import com.jswitch.persona.controlador.PersonasGridController;
@@ -173,8 +177,6 @@ public class MenuPrincipal implements ClientFacade {
 
         DefaultTreeModel model = new DefaultTreeModel(root);
         {
-
-
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
                 Transaction t = s.beginTransaction();
@@ -188,7 +190,6 @@ public class MenuPrincipal implements ClientFacade {
                         MenuByRol mbr = addFuntion(root, it);
                         General.permisologiaModulo.put(it.getNombre(), mbr);
                     }
-
                 }
                 t.commit();
             } catch (Exception e) {
@@ -275,6 +276,10 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getAsegurados() {
         new AseguradoGridFrameController(AseguradoGridFrame.class.getName(), AseguradoDetailFrame.class.getName(), Asegurado.class.getName(), null);
+    }
+
+    public void getBeneficiarios() {
+        new BeneficiarioGridFrameController(BeneficiarioGridFrame.class.getName(), BeneficiarioDetailFrame.class.getName(), Beneficiario.class.getName(), null);
     }
     // </editor-fold>
 
@@ -512,7 +517,7 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
-    public void getTest() { 
+    public void getTest() {
 //        "17930"
         AUN_NO_FUN();
     }
