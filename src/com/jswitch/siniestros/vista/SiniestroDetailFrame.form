@@ -40,7 +40,7 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="269" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="442" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -189,7 +189,7 @@
                               <Component id="labelControl7" linkSize="4" min="-2" max="-2" attributes="0"/>
                               <Component id="textControl5" linkSize="4" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="80" max="32767" attributes="0"/>
+                          <EmptySpace pref="253" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -324,7 +324,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gridData" pref="142" max="32767" attributes="0"/>
+                      <Component id="gridData" pref="315" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -534,7 +534,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="241" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -569,16 +569,28 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="117" max="32767" attributes="0"/>
+                          <EmptySpace pref="290" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="217" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="390" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
                 <Container class="org.openswing.swing.client.GridControl" name="gridControlObs">
                   <Properties>
+                    <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="deleteButtonObs"/>
+                    </Property>
+                    <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="editButtonObs"/>
+                    </Property>
                     <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
+                    <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="reloadButtonObs"/>
+                    </Property>
+                    <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="saveButtonObs"/>
+                    </Property>
                     <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="Observacion.class.getName()" type="code"/>
                     </Property>
@@ -697,7 +709,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="241" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -732,16 +744,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="117" max="32767" attributes="0"/>
+                          <EmptySpace pref="290" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="217" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="390" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
                 <Container class="org.openswing.swing.client.GridControl" name="gridControlNot">
                   <Properties>
+                    <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="insertButtonNot"/>
+                    </Property>
                     <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
+                    <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="reloadButtonNot"/>
+                    </Property>
+                    <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="saveButtonNot"/>
+                    </Property>
                     <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="NotaTecnica.class.getName()" type="code"/>
                     </Property>
@@ -856,7 +877,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="241" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -892,16 +913,34 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel11" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="117" max="32767" attributes="0"/>
+                          <EmptySpace pref="290" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlDoc" alignment="0" pref="217" max="32767" attributes="1"/>
+                      <Component id="gridControlDoc" alignment="0" pref="390" max="32767" attributes="1"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
                 <Container class="org.openswing.swing.client.GridControl" name="gridControlDoc">
                   <Properties>
+                    <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="deleteButtonDoc"/>
+                    </Property>
+                    <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="editButtonDoc"/>
+                    </Property>
+                    <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="filterButtonDoc"/>
+                    </Property>
+                    <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="insertButtonDoc"/>
+                    </Property>
                     <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
+                    <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="reloadButtonDoc"/>
+                    </Property>
+                    <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="saveButtonDoc"/>
+                    </Property>
                     <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="Documento.class.getName()" type="code"/>
                     </Property>
