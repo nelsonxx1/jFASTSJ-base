@@ -57,6 +57,9 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         Session s = HibernateUtil.getSessionFactory().openSession();
         Siniestro sin = (Siniestro) s.get(Siniestro.class, ((Siniestro) beanVO).getId());
         Hibernate.initialize(sin.getDetalleSiniestro());
+        Hibernate.initialize(sin.getObservaciones());
+        Hibernate.initialize(sin.getDocumentos());
+        Hibernate.initialize(sin.getNotasTecnicas());
         s.close();
         beanVO = sin;
         return new VOResponse(beanVO);
