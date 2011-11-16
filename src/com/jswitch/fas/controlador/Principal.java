@@ -86,10 +86,12 @@ public class Principal implements MDIController, LoginController {
     public static DefaultData defaultData = new DefaultData();
 
     public Principal() {
-//        Properties p = System.getProperties();
-//        p.list(System.out);
-
-        System.out.println(General.usuarioOS);
+        ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "de.muntjak.tinylookandfeel.TinyLookAndFeel";
+        //ClientSettings.TREE_BACK = "background_tree.jpg";
+        //ClientSettings.BACKGROUND = "background3.png";        
+        //ClientSettings.BACK_IMAGE_DISPOSITION = Consts.BACK_IMAGE_CENTERED;
+        
+        //System.out.println(General.usuarioOS);
 
         splah = new Splash();
         splah.setValue("Inicializando log4j", 5);
@@ -146,12 +148,7 @@ public class Principal implements MDIController, LoginController {
                 new Spanish("Bs", true, props), dominios);
 
         splah.setValue("Configurando Aplicacion", 80);
-        //ClientSettings.BACKGROUND = "background3.png";
-        //ClientSettings.TREE_BACK = "background_tree.jpg";
-        //ClientSettings.TREE_BACK = "blanco.jpg";
-        //ClientSettings.BACKGROUND = "blanco.jpg";
-        //ClientSettings.BACKGROUND = "companyIcon.png";
-        //ClientSettings.BACK_IMAGE_DISPOSITION = Consts.BACK_IMAGE_CENTERED;
+        
         ClientSettings.DISABLED_INPUT_CONTROLS_FOCUSABLE = true;
         ClientSettings.FILL_FIND_FUNCTION_FIELD = true;
         ClientSettings.FILTER_SYMBOL = "filter2.png";
