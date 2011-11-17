@@ -34,9 +34,9 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
 
         setTitle("Siniestros");
         setPreferredSize(new java.awt.Dimension(700, 540));
@@ -84,20 +84,25 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Siniestro.class.getName());
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setColumnVisible(false);
+        decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("numero");
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
+        textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("certificado.titular.persona.nombreLargo");
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("asegurado.persona.nombreLargo");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
@@ -108,12 +113,8 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
-        dateTimeColumn1.setColumnFilterable(true);
-        dateTimeColumn1.setColumnName("auditoria.fechaInsert");
-        dateTimeColumn1.setColumnRequired(false);
-        dateTimeColumn1.setColumnSortable(true);
-        dateTimeColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
-        gridData.getColumnContainer().add(dateTimeColumn1);
+        dateColumn1.setColumnName("auditoria.fechaInsert");
+        gridData.getColumnContainer().add(dateColumn1);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
@@ -121,11 +122,8 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
-        dateTimeColumn2.setColumnFilterable(true);
-        dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
-        dateTimeColumn2.setColumnRequired(false);
-        dateTimeColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(dateTimeColumn2);
+        dateColumn2.setColumnName("auditoria.fechaUpdate");
+        gridData.getColumnContainer().add(dateColumn2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,8 +178,8 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
-    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;

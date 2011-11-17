@@ -229,7 +229,7 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         decimalColumn4.setColumnName("id");
         decimalColumn4.setColumnRequired(false);
-        decimalColumn4.setColumnVisible(false);
+        decimalColumn4.setGrouping(false);
         decimalColumn4.setPreferredWidth(40);
         gridControl4.getColumnContainer().add(decimalColumn4);
 

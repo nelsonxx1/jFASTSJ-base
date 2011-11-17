@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="332" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="336" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -102,13 +102,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn1">
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot">
               <Properties>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
-                <Property name="preferredWidth" type="int" value="60"/>
+                <Property name="grouping" type="boolean" value="false"/>
+                <Property name="preferredWidth" type="int" value="40"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
@@ -180,9 +181,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="204" max="32767" attributes="0"/>
+                      <EmptySpace pref="208" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl1" alignment="1" pref="304" max="32767" attributes="0"/>
+                  <Component id="gridControl1" alignment="1" pref="308" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -214,14 +215,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
-                <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn2">
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot1">
                   <Properties>
                     <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;id&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
-                    <Property name="columnVisible" type="boolean" value="false"/>
-                    <Property name="preferredWidth" type="int" value="60"/>
+                    <Property name="grouping" type="boolean" value="false"/>
+                    <Property name="preferredWidth" type="int" value="40"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
@@ -301,9 +302,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="204" max="32767" attributes="0"/>
+                      <EmptySpace pref="208" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl2" alignment="1" pref="304" max="32767" attributes="0"/>
+                  <Component id="gridControl2" alignment="1" pref="308" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -335,14 +336,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
-                <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn3">
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot2">
                   <Properties>
                     <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;id&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
-                    <Property name="columnVisible" type="boolean" value="false"/>
-                    <Property name="preferredWidth" type="int" value="60"/>
+                    <Property name="grouping" type="boolean" value="false"/>
+                    <Property name="preferredWidth" type="int" value="40"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">

@@ -35,7 +35,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
 
         jPanel3 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
-        integerColumn1 = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel7 = new javax.swing.JPanel();
         insertButton3 = new org.openswing.swing.client.InsertButton();
@@ -47,7 +47,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         gridControl1 = new org.openswing.swing.client.GridControl();
-        integerColumn2 = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -60,7 +60,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
         exportButton4 = new org.openswing.swing.client.ExportButton();
         jPanel4 = new javax.swing.JPanel();
         gridControl2 = new org.openswing.swing.client.GridControl();
-        integerColumn3 = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot2 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn2 = new org.openswing.swing.table.columns.client.CodLookupColumn();
@@ -86,10 +86,11 @@ public class PlanesGridFrame extends DefaultGridFrame {
         gridData.setSaveButton(saveButton3);
         gridData.setValueObjectClassName(Plan.class.getName());
 
-        integerColumn1.setColumnName("id");
-        integerColumn1.setColumnRequired(false);
-        integerColumn1.setPreferredWidth(60);
-        gridData.getColumnContainer().add(integerColumn1);
+        decimalColumnNot.setColumnName("id");
+        decimalColumnNot.setColumnRequired(false);
+        decimalColumnNot.setGrouping(false);
+        decimalColumnNot.setPreferredWidth(40);
+        gridData.getColumnContainer().add(decimalColumnNot);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("nombre");
@@ -135,11 +136,11 @@ public class PlanesGridFrame extends DefaultGridFrame {
         gridControl1.setSaveButton(saveButton4);
         gridControl1.setValueObjectClassName(SumaAmparada.class.getName());
 
-        integerColumn2.setColumnName("id");
-        integerColumn2.setColumnRequired(false);
-        integerColumn2.setColumnVisible(false);
-        integerColumn2.setPreferredWidth(60);
-        gridControl1.getColumnContainer().add(integerColumn2);
+        decimalColumnNot1.setColumnName("id");
+        decimalColumnNot1.setColumnRequired(false);
+        decimalColumnNot1.setGrouping(false);
+        decimalColumnNot1.setPreferredWidth(40);
+        gridControl1.getColumnContainer().add(decimalColumnNot1);
 
         textColumn4.setColumnName("nombre");
         textColumn4.setEditableOnEdit(true);
@@ -177,8 +178,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Cobertura Amparada", jPanel2);
@@ -191,11 +192,11 @@ public class PlanesGridFrame extends DefaultGridFrame {
         gridControl2.setSaveButton(saveButton5);
         gridControl2.setValueObjectClassName(SumaAsegurada.class.getName());
 
-        integerColumn3.setColumnName("id");
-        integerColumn3.setColumnRequired(false);
-        integerColumn3.setColumnVisible(false);
-        integerColumn3.setPreferredWidth(60);
-        gridControl2.getColumnContainer().add(integerColumn3);
+        decimalColumnNot2.setColumnName("id");
+        decimalColumnNot2.setColumnRequired(false);
+        decimalColumnNot2.setGrouping(false);
+        decimalColumnNot2.setPreferredWidth(40);
+        gridControl2.getColumnContainer().add(decimalColumnNot2);
 
         textColumn5.setColumnName("diagnostico.especialidad.ramo.nombre");
         gridControl2.getColumnContainer().add(textColumn5);
@@ -239,8 +240,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
-            .addComponent(gridControl2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE))
+            .addComponent(gridControl2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel4);
@@ -262,7 +263,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -332,6 +333,9 @@ public class PlanesGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot2;
     private org.openswing.swing.client.DeleteButton deleteButton3;
     private org.openswing.swing.client.DeleteButton deleteButton4;
     private org.openswing.swing.client.DeleteButton deleteButton5;
@@ -347,9 +351,6 @@ public class PlanesGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.InsertButton insertButton3;
     private org.openswing.swing.client.InsertButton insertButton4;
     private org.openswing.swing.client.InsertButton insertButton5;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn1;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn2;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -80,6 +80,7 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
         decimalColumn5.setColumnSortable(true);
+        decimalColumn5.setGrouping(false);
         decimalColumn5.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn5);
 
