@@ -105,7 +105,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         jPanelDoc = new javax.swing.JPanel();
         gridControlDoc = new org.openswing.swing.client.GridControl();
         buttonColumnDoc = new org.openswing.swing.table.columns.client.ButtonColumn();
-        integerColumnDoc = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         codLookupColumnDoc = new org.openswing.swing.table.columns.client.CodLookupColumn();
         textColumnDoc = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumnDoc = new org.openswing.swing.table.columns.client.DateColumn();
@@ -250,7 +250,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                     .addComponent(comboBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl1, dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, textControl1, textControl2, textControl3});
@@ -265,7 +265,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
-        decimalColumn5.setColumnVisible(false);
+        decimalColumn5.setGrouping(false);
         decimalColumn5.setPreferredWidth(40);
         gridControl5.getColumnContainer().add(decimalColumn5);
 
@@ -314,7 +314,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -333,7 +333,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         decimalColumnObs.setColumnName("id");
         decimalColumnObs.setColumnRequired(false);
-        decimalColumnObs.setColumnVisible(false);
+        decimalColumnObs.setGrouping(false);
         decimalColumnObs.setPreferredWidth(40);
         gridControlObs.getColumnContainer().add(decimalColumnObs);
 
@@ -386,8 +386,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -403,7 +403,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -424,7 +424,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
-        decimalColumnNot.setColumnVisible(false);
+        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
         gridControlNot.getColumnContainer().add(decimalColumnNot);
 
@@ -475,8 +475,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -492,7 +492,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -522,10 +522,11 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         buttonColumnDoc.setText("");
         gridControlDoc.getColumnContainer().add(buttonColumnDoc);
 
-        integerColumnDoc.setColumnName("id");
-        integerColumnDoc.setColumnRequired(false);
-        integerColumnDoc.setPreferredWidth(40);
-        gridControlDoc.getColumnContainer().add(integerColumnDoc);
+        decimalColumnNot1.setColumnName("id");
+        decimalColumnNot1.setColumnRequired(false);
+        decimalColumnNot1.setGrouping(false);
+        decimalColumnNot1.setPreferredWidth(40);
+        gridControlDoc.getColumnContainer().add(decimalColumnNot1);
 
         codLookupColumnDoc.setColumnName("tipoDocumento.nombre");
         codLookupColumnDoc.setControllerMethodName("getTipoDocAnex");
@@ -568,7 +569,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -585,7 +586,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -613,11 +614,11 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(56, 56, 56)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -756,6 +757,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnObs;
     private org.openswing.swing.client.DeleteButton deleteButton7;
     private org.openswing.swing.client.DeleteButton deleteButtonDoc;
@@ -773,7 +775,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
     private org.openswing.swing.client.InsertButton insertButtonObs;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumnDoc;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;

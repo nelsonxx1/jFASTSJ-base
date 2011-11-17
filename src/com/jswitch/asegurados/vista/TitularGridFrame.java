@@ -78,6 +78,7 @@ public class TitularGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 

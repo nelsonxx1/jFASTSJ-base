@@ -114,7 +114,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         jPanelDoc = new javax.swing.JPanel();
         gridControlDoc = new org.openswing.swing.client.GridControl();
         buttonColumnDoc = new org.openswing.swing.table.columns.client.ButtonColumn();
-        integerColumnDoc = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         codLookupColumnDoc = new org.openswing.swing.table.columns.client.CodLookupColumn();
         textColumnDoc = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumnDoc = new org.openswing.swing.table.columns.client.DateColumn();
@@ -327,6 +327,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -400,7 +401,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
         decimalColumnObs.setColumnName("id");
         decimalColumnObs.setColumnRequired(false);
-        decimalColumnObs.setColumnVisible(false);
+        decimalColumnObs.setGrouping(false);
         decimalColumnObs.setPreferredWidth(40);
         gridControlObs.getColumnContainer().add(decimalColumnObs);
 
@@ -491,7 +492,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
-        decimalColumnNot.setColumnVisible(false);
+        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
         gridControlNot.getColumnContainer().add(decimalColumnNot);
 
@@ -589,10 +590,11 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         buttonColumnDoc.setText("");
         gridControlDoc.getColumnContainer().add(buttonColumnDoc);
 
-        integerColumnDoc.setColumnName("id");
-        integerColumnDoc.setColumnRequired(false);
-        integerColumnDoc.setPreferredWidth(40);
-        gridControlDoc.getColumnContainer().add(integerColumnDoc);
+        decimalColumnNot1.setColumnName("id");
+        decimalColumnNot1.setColumnRequired(false);
+        decimalColumnNot1.setGrouping(false);
+        decimalColumnNot1.setPreferredWidth(40);
+        gridControlDoc.getColumnContainer().add(decimalColumnNot1);
 
         codLookupColumnDoc.setColumnName("tipoDocumento.nombre");
         codLookupColumnDoc.setControllerMethodName("getTipoDocAnex");
@@ -808,6 +810,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnObs;
     private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.DeleteButton deleteButtonDoc;
@@ -828,7 +831,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
     private org.openswing.swing.client.InsertButton insertButtonObs;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumnDoc;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;

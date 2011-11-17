@@ -73,7 +73,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
 
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
-        decimalColumn5.setColumnVisible(false);
+        decimalColumn5.setGrouping(false);
         decimalColumn5.setPreferredWidth(40);
         gridControl5.getColumnContainer().add(decimalColumn5);
 
@@ -217,7 +217,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addComponent(comboBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, dateControl1, labelControl1, labelControl2, labelControl4, textControl1});

@@ -28,7 +28,7 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
 
         jPanel2 = new javax.swing.JPanel();
         gridControl1 = new org.openswing.swing.client.GridControl();
-        integerColumn2 = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel8 = new javax.swing.JPanel();
@@ -40,7 +40,7 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
         exportButton4 = new org.openswing.swing.client.ExportButton();
         jPanel3 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
-        integerColumn1 = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnNot = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel7 = new javax.swing.JPanel();
         insertButton3 = new org.openswing.swing.client.InsertButton();
@@ -62,10 +62,11 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
         gridControl1.setSaveButton(saveButton4);
         gridControl1.setValueObjectClassName(Cobertura.class.getName());
 
-        integerColumn2.setColumnName("id");
-        integerColumn2.setColumnRequired(false);
-        integerColumn2.setPreferredWidth(60);
-        gridControl1.getColumnContainer().add(integerColumn2);
+        decimalColumnNot1.setColumnName("id");
+        decimalColumnNot1.setColumnRequired(false);
+        decimalColumnNot1.setGrouping(false);
+        decimalColumnNot1.setPreferredWidth(40);
+        gridControl1.getColumnContainer().add(decimalColumnNot1);
 
         textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("nombre");
@@ -103,8 +104,8 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addContainerGap(156, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ramos"));
@@ -117,10 +118,11 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
         gridData.setSaveButton(saveButton3);
         gridData.setValueObjectClassName(Ramo.class.getName());
 
-        integerColumn1.setColumnName("id");
-        integerColumn1.setColumnRequired(false);
-        integerColumn1.setPreferredWidth(60);
-        gridData.getColumnContainer().add(integerColumn1);
+        decimalColumnNot.setColumnName("id");
+        decimalColumnNot.setColumnRequired(false);
+        decimalColumnNot.setGrouping(false);
+        decimalColumnNot.setPreferredWidth(40);
+        gridData.getColumnContainer().add(decimalColumnNot);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("nombre");
@@ -154,8 +156,8 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
-            .addComponent(gridData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addContainerGap(153, Short.MAX_VALUE))
+            .addComponent(gridData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,6 +223,8 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.client.DeleteButton deleteButton3;
     private org.openswing.swing.client.DeleteButton deleteButton4;
     private org.openswing.swing.client.EditButton editButton3;
@@ -231,8 +235,6 @@ public class RamosCoberturasGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.GridControl gridData;
     private org.openswing.swing.client.InsertButton insertButton3;
     private org.openswing.swing.client.InsertButton insertButton4;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn1;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;

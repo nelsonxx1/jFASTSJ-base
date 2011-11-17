@@ -68,9 +68,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="154" max="32767" attributes="0"/>
+                  <EmptySpace pref="156" max="32767" attributes="0"/>
               </Group>
-              <Component id="gridControl1" alignment="1" pref="254" max="32767" attributes="0"/>
+              <Component id="gridControl1" alignment="1" pref="256" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -102,13 +102,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn2">
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot1">
               <Properties>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
-                <Property name="preferredWidth" type="int" value="60"/>
+                <Property name="grouping" type="boolean" value="false"/>
+                <Property name="preferredWidth" type="int" value="40"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
@@ -140,8 +141,8 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
-            <Property name="rows" type="int" value="3"/>
             <Property name="horizontalGap" type="int" value="2"/>
+            <Property name="rows" type="int" value="3"/>
             <Property name="verticalGap" type="int" value="2"/>
           </Layout>
           <SubComponents>
@@ -184,9 +185,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="151" max="32767" attributes="0"/>
+                  <EmptySpace pref="153" max="32767" attributes="0"/>
               </Group>
-              <Component id="gridData" alignment="1" pref="251" max="32767" attributes="0"/>
+              <Component id="gridData" alignment="1" pref="253" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -218,13 +219,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn1">
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot">
               <Properties>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
-                <Property name="preferredWidth" type="int" value="60"/>
+                <Property name="grouping" type="boolean" value="false"/>
+                <Property name="preferredWidth" type="int" value="40"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
@@ -248,8 +250,8 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
-            <Property name="rows" type="int" value="3"/>
             <Property name="horizontalGap" type="int" value="2"/>
+            <Property name="rows" type="int" value="3"/>
             <Property name="verticalGap" type="int" value="2"/>
           </Layout>
           <SubComponents>

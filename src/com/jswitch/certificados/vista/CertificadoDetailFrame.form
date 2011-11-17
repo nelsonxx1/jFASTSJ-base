@@ -43,12 +43,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="464" max="32767" attributes="0"/>
+              <EmptySpace pref="459" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                  <Component id="jTabbedPane2" pref="442" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane2" pref="437" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -121,13 +121,13 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="409" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="form1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" pref="265" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" pref="260" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -292,9 +292,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="137" max="32767" attributes="0"/>
+                              <EmptySpace pref="132" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="gridControl4" alignment="0" pref="237" max="32767" attributes="2"/>
+                          <Component id="gridControl4" alignment="0" pref="232" max="32767" attributes="2"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -333,6 +333,7 @@
                               <Connection code="&quot;id&quot;" type="code"/>
                             </Property>
                             <Property name="columnRequired" type="boolean" value="false"/>
+                            <Property name="grouping" type="boolean" value="false"/>
                             <Property name="preferredWidth" type="int" value="40"/>
                           </Properties>
                         </Component>
@@ -452,9 +453,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="124" max="32767" attributes="0"/>
+                              <EmptySpace pref="119" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="gridControl5" alignment="0" pref="224" max="32767" attributes="2"/>
+                          <Component id="gridControl5" alignment="0" pref="219" max="32767" attributes="2"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -492,6 +493,7 @@
                               <Connection code="&quot;id&quot;" type="code"/>
                             </Property>
                             <Property name="columnRequired" type="boolean" value="false"/>
+                            <Property name="grouping" type="boolean" value="false"/>
                             <Property name="preferredWidth" type="int" value="40"/>
                           </Properties>
                         </Component>
@@ -609,7 +611,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="409" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -644,9 +646,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="290" max="32767" attributes="0"/>
+                          <EmptySpace pref="285" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="390" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="385" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -787,7 +789,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="409" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -822,9 +824,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="290" max="32767" attributes="0"/>
+                          <EmptySpace pref="285" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="390" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="385" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -955,7 +957,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="414" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="409" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -992,7 +994,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControlDoc" alignment="0" pref="379" max="32767" attributes="1"/>
+                              <Component id="gridControlDoc" alignment="0" pref="374" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

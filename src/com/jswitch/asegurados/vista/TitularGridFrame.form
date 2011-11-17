@@ -90,9 +90,6 @@
     </Container>
     <Container class="org.openswing.swing.client.GridControl" name="gridData">
       <Properties>
-        <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="exportButton1"/>
         </Property>
@@ -123,6 +120,7 @@
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="grouping" type="boolean" value="false"/>
             <Property name="preferredWidth" type="int" value="40"/>
           </Properties>
         </Component>

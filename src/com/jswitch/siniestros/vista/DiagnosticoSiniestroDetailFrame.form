@@ -371,7 +371,7 @@
                       <Connection code="&quot;id&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
-                    <Property name="columnVisible" type="boolean" value="false"/>
+                    <Property name="grouping" type="boolean" value="false"/>
                     <Property name="preferredWidth" type="int" value="40"/>
                   </Properties>
                 </Component>

@@ -90,7 +90,7 @@ public class TipoSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setColumnVisible(false);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(50);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -187,7 +187,7 @@ public class TipoSiniestroGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
