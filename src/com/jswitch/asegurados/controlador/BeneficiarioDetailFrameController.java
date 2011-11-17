@@ -2,11 +2,13 @@ package com.jswitch.asegurados.controlador;
 
 import com.jswitch.asegurados.modelo.maestra.Beneficiario;
 import com.jswitch.base.controlador.General;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import java.util.Date;
 import org.hibernate.Hibernate;
@@ -18,44 +20,58 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.java.Consts;
 
 /**
  *
  * @author Adrian
  */
 public class BeneficiarioDetailFrameController extends DefaultDetailFrameController {
-
+    
     private Certificado familia;
-
+    
     public Form getMainPanel() {
         return vista.getMainPanel();
     }
-
+    
     public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
-        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-
-        Double indem = 0d;
-        if (beanVO != null) {
-            Beneficiario b = (Beneficiario) this.beanVO;
-            if (b != null) {
-//                b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
-                indem = b.getIndemnizacion();
-                this.familia = b.getCertificado();
-            }
-
-        }
-        vista.getMainPanel().getVOModel().setValue("porcentajeDisponible", getPorcentajeDisponible() - indem);
-        vista.getMainPanel().pull("porcentajeDisponible");
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, null);
     }
-
+    
     public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Certificado familia) {
-        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         if (this.familia == null) {
             this.familia = familia;
         }
-
+        if (this.familia == null && beanVO != null) {
+            Beneficiario b = (Beneficiario) beanVO;
+            if (b != null) {
+                this.familia = b.getCertificado();
+            }
+        }
+        this.gridControl = gridControl;
+        this.beanVO = beanVO;
+        this.aplicarLogicaNegocio = aplicarLogicaNegocio;
+        
+        try {
+            Class<DefaultDetailFrame> t = (Class<com.jswitch.base.vista.util.DefaultDetailFrame>) Class.forName(detailFramePath);
+            vista = t.newInstance();
+            vista.inicializar(this, true);
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "new", ex);
+        }
+        
+        if (beanVO != null) {
+            vista.getMainPanel().reload();
+            vista.getMainPanel().setMode(Consts.READONLY);
+        } else {
+            vista.getMainPanel().setMode(Consts.INSERT);
+            vista.getMainPanel().getVOModel().setValue(
+                    "porcentajeDisponible", getPorcentajeDisponible());
+            vista.getMainPanel().pull("porcentajeDisponible");
+        }
+        
     }
-
+    
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Beneficiario benef = (Beneficiario) s.get(Beneficiario.class, ((Beneficiario) beanVO).getId());
@@ -63,17 +79,18 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         Hibernate.initialize(benef.getObservaciones());
         Hibernate.initialize(benef.getDocumentos());
         s.close();
+        benef.setPorcentajeDisponible(getPorcentajeDisponible());
         beanVO = benef;
         return new VOResponse(beanVO);
     }
-
+    
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Beneficiario b = (Beneficiario) newPersistentObject;
-        b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
+        b.setPorcentajeDisponible(getPorcentajeDisponible());
         b.setCertificado(familia);
         Response res = super.insertRecord(newPersistentObject);
-
+        
         if (res instanceof VOResponse && familia != null) {
             familia.getBeneficiarios().add(b);
             if (familia instanceof Auditable) {
@@ -81,7 +98,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
                 ab.setFechaUpdate(new Date());
                 ab.setUsuarioUpdate(General.usuario.getUserName());
             }
-
+            
             Session s = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
@@ -97,39 +114,70 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         }
         return res;
     }
-
+    
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         Beneficiario b = (Beneficiario) persistentObject;
-        b.setPorcentajeDisponible(getPorcentajeDisponible() - b.getIndemnizacion());
-
+        b.setPorcentajeDisponible(getPorcentajeDisponible(b) - b.getIndemnizacion());
+        
         return super.updateRecord(oldPersistentObject, b);
     }
-
+    
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         // return super.logicaNegocio(persistentObject);
         Beneficiario b = (Beneficiario) persistentObject;
         String errorMsj = "";
-        if (getPorcentajeDisponible() - b.getIndemnizacion() < 0) {
+        if (b.getId() != null) {
+            if (getPorcentajeDisponible(b) - b.getIndemnizacion() < 0) {
+                errorMsj += "Valor Superior al 100%";
+            }
+        } else if (getPorcentajeDisponible() - b.getIndemnizacion() < 0) {
             errorMsj += "Valor Superior al 100%";
         }
+        
         if (errorMsj.length() > 0) {
             return new ErrorResponse(errorMsj);
         } else {
             return new VOResponse(persistentObject);
         }
     }
-
+    
     private Double getPorcentajeDisponible() {
-        Double porcentajeDisponible = 100d;
-        if (familia.getBeneficiarios() != null) {
-            for (Beneficiario beneficiario : familia.getBeneficiarios()) {
-                if (beneficiario != (Beneficiario) beanVO) {
-                    porcentajeDisponible -= beneficiario.getIndemnizacion();
-                }
-            }
+        Double porcentajeDisponible = 0d;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            porcentajeDisponible = (Double) session.createQuery("SELECT SUM(B.indemnizacion) FROM "
+                    + Certificado.class.getName() + " C LEFT JOIN C.beneficiarios"
+                    + " B WHERE C.id=?").setLong(0, familia.getId()).uniqueResult();
+        } catch (Exception ex) {
+            LoggerUtil.error(BeneficiarioDetailFrameController.class,
+                    "getPorcentajeDisponible()", ex);
+        } finally {
+            session.close();
         }
-        return porcentajeDisponible;
+        return 100 - (porcentajeDisponible == null ? 0d : porcentajeDisponible);
+    }
+    
+    private Double getPorcentajeDisponible(Beneficiario yo) {
+        Double porcentajeDisponible = 0d;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            porcentajeDisponible = (Double) session.createQuery("SELECT SUM(B.indemnizacion) FROM "
+                    + Certificado.class.getName() + " C LEFT JOIN C.beneficiarios"
+                    + " B WHERE C.id=? AND B.id <> ?").
+                    setLong(0, familia.getId()).
+                    setLong(1, yo.getId()).uniqueResult();
+        } catch (Exception ex) {
+            LoggerUtil.error(BeneficiarioDetailFrameController.class,
+                    "getPorcentajeDisponible()", ex);
+        } finally {
+            session.close();
+        }
+        
+        return 100 - (porcentajeDisponible == null ? 0d : porcentajeDisponible);
+        
     }
 }
