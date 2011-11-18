@@ -87,7 +87,7 @@ public class Poliza extends BeanVO implements Serializable, Auditable {
     /**
      * HCM
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "poliza")
     @BusinessKey(exclude = Method.ALL)
     private Set<Certificado> certificados = new HashSet<Certificado>(0);
     /**

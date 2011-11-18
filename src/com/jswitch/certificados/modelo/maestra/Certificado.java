@@ -11,6 +11,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.polizas.modelo.maestra.Poliza;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,6 +54,11 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
      */
     @ManyToOne()
     private Titular titular;
+    /**
+    */
+    @ManyToOne
+    @BusinessKey
+    private Poliza poliza;
     /**
      * HCM
      */
@@ -198,6 +204,12 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     public void setObservaciones(List<Observacion> observaciones) {
         this.observaciones = observaciones;
     }
-    
-    
+
+    public Poliza getPoliza() {
+        return poliza;
+    }
+
+    public void setPoliza(Poliza poliza) {
+        this.poliza = poliza;
+    }
 }
