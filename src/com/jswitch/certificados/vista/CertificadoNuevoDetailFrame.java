@@ -15,6 +15,7 @@ import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.persona.vista.RifDialog;
+import com.jswitch.polizas.controlador.PolizaLookupControllerPorNombre;
 import com.jswitch.polizas.modelo.maestra.Poliza;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
@@ -278,8 +279,8 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
 
         form1.getVOModel().setCreateInnerVO(true);
 
-        DefaultLookupControllerPorNombre polizaloo =
-                new DefaultLookupControllerPorNombre(Poliza.class.getName());
+        PolizaLookupControllerPorNombre polizaloo =
+                new PolizaLookupControllerPorNombre(Poliza.class.getName());
         polizaloo.addLookup2ParentLink("poliza");
         codLookupControl6.setLookupController(polizaloo);
         
