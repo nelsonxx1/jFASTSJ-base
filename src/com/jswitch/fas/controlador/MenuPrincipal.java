@@ -57,9 +57,14 @@ import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.asegurados.vista.TitularGridFrame;
 import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
-import com.jswitch.base.controlador.util.DefaultGridFrameController;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
+import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
+import com.jswitch.certificados.controlador.CertificadoNuevoDetrailController;
+import com.jswitch.certificados.modelo.utilitario.CertificadoNuevo;
+import com.jswitch.certificados.vista.CertificadoNuevoDetailFrame;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
@@ -100,6 +105,9 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
+import com.jswitch.persona.controlador.PersonasDetailController;
+import com.jswitch.persona.modelo.maestra.PersonaNatural;
+import com.jswitch.persona.vista.RifBusquedaDialog;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -118,6 +126,7 @@ import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import de.muntjak.tinylookandfeel.TinyLookAndFeel;
 import de.muntjak.tinylookandfeel.controlpanel.ControlPanel;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -127,6 +136,7 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.OptionPane;
+import org.openswing.swing.form.client.Form;
 import org.openswing.swing.mdi.client.*;
 import org.openswing.swing.mdi.java.ApplicationFunction;
 import org.openswing.swing.tree.java.OpenSwingTreeNode;
@@ -514,6 +524,129 @@ public class MenuPrincipal implements ClientFacade {
     // <editor-fold defaultstate="collapsed" desc="Auditoria">
     public void getLog() {
         new LogGridController(LogGridFrame.class.getName(), null, AuditLogRecord.class.getName(), null);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Certificado">
+    public void getCertificadoNuevo() {
+        RifBusquedaDialog busquedaDialog = new RifBusquedaDialog(
+                new String[]{
+                    Certificado.class.getName(),
+                    Titular.class.getName(),
+                    Asegurado.class.getName()},
+                new String[]{
+                    "titular.persona",
+                    "persona",
+                    "persona"});
+        BeanVO certif = busquedaDialog.getBenVO();
+
+        if (certif != null && certif instanceof Certificado) {
+            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, certif, null, false);
+        }
+        if (certif != null && certif instanceof Titular
+                && quitarAsegurado((Titular) certif)) {
+            Certificado cert = new Certificado();
+            cert.setTitular((Titular) certif);
+            try {
+                Session s = HibernateUtil.getSessionFactory().openSession();
+                s.beginTransaction();
+                Query q = s.createQuery("FROM " + Asegurado.class.getName()
+                        + " WHERE persona.rif.rif=?").
+                        setString(0, cert.getTitular().getPersona().getRif().getRif());
+                Asegurado a = (Asegurado) q.uniqueResult();
+                cert.getAsegurados().add(a);
+                cert.setAuditoria(new AuditoriaBasica(new Date(),
+                        General.usuario.getUserName(), true));
+                s.save(cert);
+                s.getTransaction().commit();
+                s.close();  
+                new CertificadoDetailController(
+                        CertificadoDetailFrame.class.getName(),
+                        null, cert, null, false);
+            } catch (Exception ex) {
+                LoggerUtil.error(this.getClass(), "actionPerformed", ex);
+            }
+
+        }
+        if (certif instanceof Asegurado) {
+            quitarAsegurado((Asegurado) certif);
+        }
+
+        if (certif instanceof Persona) {
+            Asegurado n = new Asegurado();
+            n.setPersona((PersonaNatural) certif);
+            certif = n;
+        }
+
+        if (certif instanceof Asegurado) {
+
+            CertificadoNuevo c = new CertificadoNuevo();
+            c.setAsegurado((Asegurado) certif);
+            new CertificadoNuevoDetrailController(CertificadoNuevoDetailFrame.class.getName(), null, c, null, false);
+
+        }
+        if (certif == null && busquedaDialog.getRif().getRif() != null) {
+            CertificadoNuevoDetrailController c =
+                    new CertificadoNuevoDetrailController(
+                    CertificadoNuevoDetailFrame.class.getName(), null, null, null, false);
+            Form linkForm = c.getVista().getMainPanel();
+            String linkAttName = "asegurado.persona";
+            new PersonasDetailController(linkForm, linkAttName, new Object[]{"ASE", "TIT"}, null, null, busquedaDialog.getRif());
+        }
+
+    }
+
+    private boolean quitarAsegurado(Titular titular) {
+        Session s = null;
+        Asegurado a = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Query q = s.createQuery("FROM " + Asegurado.class.getName()
+                    + " WHERE persona.rif.rif=:id").
+                    setString("id", ((Titular) titular).getPersona().getRif().getRif());
+            a = (Asegurado) q.uniqueResult();
+
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "quitarAsegurado(Titular titular)", ex);
+            return false;
+        } finally {
+            s.close();
+        }
+        return quitarAsegurado(a);
+    }
+
+    private boolean quitarAsegurado(Asegurado aseg) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            Query q = s.createQuery("SELECT a, C FROM " + Certificado.class.getName()
+                    + " C JOIN C.asegurados a WHERE a.persona.id=:id").
+                    setLong("id", ((Asegurado) aseg).getId());
+            Object[] a = (Object[]) q.uniqueResult();
+            if (a[0] != null) {
+                int res = JOptionPane.showConfirmDialog(
+                        MDIFrame.getInstance(),
+                        ((Asegurado) aseg).getPersona().getNombreLargo() + " esta asegurado\n"
+                        + "en el Certificado de "
+                        + ((Certificado) a[1]).getTitular().getPersona().getNombreLargo(),
+                        "Certificados", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (res == JOptionPane.YES_OPTION) {
+                    ((Certificado) a[1]).getAsegurados().remove((Asegurado) a[0]);
+                    s.update(a[1]);
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "quitarAsegurado(Asegurado aseg)", ex);
+            return false;
+        } finally {
+            s.getTransaction().commit();
+            s.close();
+        }
+        return true;
     }
     // </editor-fold>
 

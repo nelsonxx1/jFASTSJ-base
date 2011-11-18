@@ -2,14 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package com.jswitch.certificados.modelo.utilitario;
 
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.asegurados.modelo.maestra.Titular;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.certificados.modelo.maestra.Certificado;
+import com.jswitch.polizas.modelo.maestra.Poliza;
 
 /**
  *
@@ -20,6 +19,7 @@ public class CertificadoNuevo extends BeanVO {
     private Certificado certificado;
     private Titular titular;
     private Asegurado asegurado;
+    private Poliza poliza;
 
     public CertificadoNuevo() {
     }
@@ -46,5 +46,13 @@ public class CertificadoNuevo extends BeanVO {
 
     public void setTitular(Titular titular) {
         this.titular = titular;
+    }
+
+    public Poliza getPoliza() {
+        return poliza;
+    }
+
+    public void setPoliza(Poliza poliza) {
+        this.poliza = poliza;
     }
 }
