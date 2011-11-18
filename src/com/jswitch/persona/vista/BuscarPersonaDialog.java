@@ -71,6 +71,8 @@ public class BuscarPersonaDialog extends InternalFrame {
         MDIFrame.add(this);
     }
 
+   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

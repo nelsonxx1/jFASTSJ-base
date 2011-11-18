@@ -26,7 +26,7 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
  */
 public class TitularDetailFrameController extends DefaultDetailFrameController {
 
-    public TitularDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, boolean aplicarLogicaNegocio) {
+    public TitularDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
 

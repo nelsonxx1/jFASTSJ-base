@@ -1,6 +1,7 @@
 package com.jswitch.siniestros.vista;
 
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
+import com.jswitch.asegurados.controlador.TitularDetailFrameController;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -734,7 +735,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         codLookupControl1.setOpenDetail("asegurado", AseguradoDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{AseguradoDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 
         codLookupControl2.setLookupController(new LookupController());
-        codLookupControl2.setOpenDetail("asegurado.certificado.titular", DefaultDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
+        codLookupControl2.setOpenDetail("asegurado.certificado.titular", TitularDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 
         controller = new DetalleSiniestroGridInternalController(Siniestro.class.getName(), "getDetalleSiniestro", gridData);
         gridData.setController(controller);

@@ -57,7 +57,6 @@ import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.asegurados.vista.TitularGridFrame;
 import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
-import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
@@ -117,6 +116,7 @@ import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import de.muntjak.tinylookandfeel.TinyLookAndFeel;
 import de.muntjak.tinylookandfeel.controlpanel.ControlPanel;
+import java.awt.Component;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -495,8 +495,8 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getNewPago() {
-        new BuscarPersonaDialog(null, OrdenDePagoDetailFrameController.class.getName(),
-                OrdenDePago.class.getName());
+        new BuscarPersonaDialog((Component)null, OrdenDePagoDetailFrameController.class.getName(), OrdenDePago.class.getName());
+        
     }
 
     public void getPagosGrid() {
