@@ -57,6 +57,7 @@ import com.jswitch.asegurados.vista.TitularDetailFrame;
 import com.jswitch.asegurados.vista.TitularGridFrame;
 import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
