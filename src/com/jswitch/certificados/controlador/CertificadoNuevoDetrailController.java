@@ -1,5 +1,3 @@
-
-
 package com.jswitch.certificados.controlador;
 
 import com.jswitch.asegurados.modelo.dominio.Parentesco;
@@ -54,10 +52,17 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
             vista.getMainPanel().pull("asegurado");
         }
 
+        if (poliza != null) {
+            vista.getMainPanel().getVOModel().setValue("poliza", poliza);
+            vista.getMainPanel().pull("poliza");
+        }
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        if (poliza == null) {
+            poliza = ((CertificadoNuevo) newPersistentObject).getPoliza();
+        }
         Session s = null;
         try {
             vista.saveGridsData();
@@ -84,6 +89,7 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
             certificadoNuevo.getTitular().setPersona(certificadoNuevo.getAsegurado().getPersona());
             certificadoNuevo.getCertificado().setTitular(certificadoNuevo.getTitular());
             certificadoNuevo.getCertificado().getAsegurados().add(certificadoNuevo.getAsegurado());
+            certificadoNuevo.getCertificado().setPoliza(poliza);
             poliza.getCertificados().add(certificadoNuevo.getCertificado());
             s.saveOrUpdate(certificadoNuevo.getTitular());
             s.saveOrUpdate(certificadoNuevo.getAsegurado());
