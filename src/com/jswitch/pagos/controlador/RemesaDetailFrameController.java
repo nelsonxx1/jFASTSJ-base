@@ -6,6 +6,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -23,14 +24,14 @@ import org.openswing.swing.util.java.Consts;
  * Genera y mantiene la orden de pago 
  * @author Adrian
  */
-public class OrdenDePagoDetailFrameController
+public class RemesaDetailFrameController
         extends DefaultDetailFrameController {
 
     /**
      * crea la instancia del objeto de 
      * <code>OrdenDePagoDetailFrameController</code>
      */
-    public OrdenDePagoDetailFrameController() {
+    public RemesaDetailFrameController() {
     }
 
     /**
@@ -41,7 +42,7 @@ public class OrdenDePagoDetailFrameController
      * @param beanVO
      * @param aplicarLogicaNegocio 
      */
-    public OrdenDePagoDetailFrameController(String detailFramePath,
+    public RemesaDetailFrameController(String detailFramePath,
             GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
@@ -74,8 +75,8 @@ public class OrdenDePagoDetailFrameController
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        OrdenDePago sin = (OrdenDePago) s.get(OrdenDePago.class, ((OrdenDePago) beanVO).getId());
-        Hibernate.initialize(sin.getDetalleSiniestros());
+        Remesa sin = (Remesa) s.get(Remesa.class, ((Remesa) beanVO).getId());
+        Hibernate.initialize(sin.getOrdenDePagos());
         Hibernate.initialize(sin.getObservaciones());
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getNotasTecnicas());
@@ -86,24 +87,23 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        OrdenDePago p = (OrdenDePago) newPersistentObject;
-        p.setEstatusPago(EstatusPago.PENDIENTE);
+        Remesa p = (Remesa) newPersistentObject;
         if (p.getAutoSearch()) {
-            Session s = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                List l = s.createQuery("FROM "
-                        + DetalleSiniestro.class.getName() + " C WHERE "
-                        + "C.personaPago.id=? AND etapaSiniestro.idPropio=?").
-                        setLong(0, p.getPersonaPago().getId()).
-                        setString(1, "LIQ").list();
-                for (Object detalleSiniestro : l) {
-                    p.getDetalleSiniestros().add(
-                            (DetalleSiniestro) detalleSiniestro);
-                }
-            } finally {
-                s.close();
-            }
+//            Session s = null;
+//            try {
+//                s = HibernateUtil.getSessionFactory().openSession();
+//                List l = s.createQuery("FROM "
+//                        + DetalleSiniestro.class.getName() + " C WHERE "
+//                        + "C.personaPago.id=? AND etapaSiniestro.idPropio=?").
+//                        setLong(0, p.getPersonaPago().getId()).
+//                        setString(1, "LIQ").list();
+//                for (Object detalleSiniestro : l) {
+//                    p.getDetalleSiniestros().add(
+//                            (DetalleSiniestro) detalleSiniestro);
+//                }
+//            } finally {
+//                s.close();
+//            }
         }
         return super.insertRecord(newPersistentObject);
     }
@@ -143,7 +143,7 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        OrdenDePago op = (OrdenDePago) beanVO;
-        new BuscarDetallesGridFrameController(op.getPersonaPago(), op);
+//        OrdenDePago op = (OrdenDePago) beanVO;
+//        new BuscarDetallesGridFrameController(op.getPersonaPago(), op);
     }
 }

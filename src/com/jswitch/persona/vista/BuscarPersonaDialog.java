@@ -42,10 +42,10 @@ public class BuscarPersonaDialog extends InternalFrame {
     private String modelClass;
 
     public BuscarPersonaDialog(Component owner) {
-        this(owner, PersonaDetailFrame.class.getName(), Persona.class.getName());
+        this(PersonaDetailFrame.class.getName(), Persona.class.getName(), owner);
     }
 
-    public BuscarPersonaDialog(Component owner, String detailFramePath, String modelClass) {
+    public BuscarPersonaDialog(String detailFramePath, String modelClass, Component owner) {
 
         this.detailFramePath = detailFramePath;
         this.modelClass = modelClass;
@@ -70,8 +70,6 @@ public class BuscarPersonaDialog extends InternalFrame {
         }
         MDIFrame.add(this);
     }
-
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

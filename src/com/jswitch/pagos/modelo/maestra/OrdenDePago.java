@@ -102,13 +102,17 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     private Boolean autoSearch;
     /**
+     * monto a pagar
+     */
+    @Column
+    private Double montoPagar;
+    /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
     @OneToMany(fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<DetalleSiniestro> detalleSiniestros = new HashSet<DetalleSiniestro>(0);
-    
-        /**
+    /**
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
@@ -124,7 +128,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
-
 
     public OrdenDePago() {
     }
@@ -244,5 +247,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.observaciones = observaciones;
     }
 
+    public Double getMontoPagar() {
+        return montoPagar;
+    }
 
+    public void setMontoPagar(Double montoPagar) {
+        this.montoPagar = montoPagar;
+    }
 }

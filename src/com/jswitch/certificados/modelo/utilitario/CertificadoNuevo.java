@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jswitch.certificados.modelo.utilitario;
 
 import com.jswitch.asegurados.modelo.maestra.Asegurado;

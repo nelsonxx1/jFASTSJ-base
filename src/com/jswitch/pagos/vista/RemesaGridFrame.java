@@ -2,7 +2,7 @@ package com.jswitch.pagos.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
-import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
@@ -38,7 +38,7 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
 
-        setTitle("Siniestros");
+        setTitle("Remesa");
         setPreferredSize(new java.awt.Dimension(700, 540));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -82,7 +82,7 @@ public class RemesaGridFrame extends DefaultGridFrame {
         gridData.setReloadButton(reloadButton1);
         gridData.setSaveButton(saveButton1);
         gridData.setSearchAdditionalRows(true);
-        gridData.setValueObjectClassName(Siniestro.class.getName());
+        gridData.setValueObjectClassName(Remesa.class.getName());
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
@@ -90,15 +90,15 @@ public class RemesaGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn3.setColumnName("numero");
+        textColumn3.setColumnName("numRefLot");
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
-        textColumn1.setColumnName("certificado.titular.persona.nombreLargo");
+        textColumn1.setColumnName("numeroCuentaDebitar");
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
-        textColumn2.setColumnName("asegurado.persona.nombreLargo");
+        textColumn2.setColumnName("tipoCuenta.nombre");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 

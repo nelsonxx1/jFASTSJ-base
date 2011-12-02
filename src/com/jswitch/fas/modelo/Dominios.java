@@ -33,6 +33,12 @@ public class Dominios {
         domains.put(
                 Dominios.TipoEnfermedad().getDomainId(),
                 Dominios.TipoEnfermedad());
+        domains.put(
+                Dominios.TipoPago().getDomainId(),
+                Dominios.TipoPago());
+        domains.put(
+                Dominios.DuracionCheque().getDomainId(),
+                Dominios.DuracionCheque());
         return domains;
     }
 
@@ -119,6 +125,38 @@ public class Dominios {
     public static Domain TratamientoEfectuado() {
         Domain dominio = new Domain("TratamientoEfectuado");
         TratamientoEfectuado o[] = TratamientoEfectuado.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
+    }
+
+    public static enum TipoPago {
+
+        TRANSFERENCIA_SWIFT,
+        ABONO_EN_CUENTA_BANCO_DE_VENEZUELA,
+        CHEQUE_DE_GERENCIA
+    }
+
+    public static Domain TipoPago() {
+        Domain dominio = new Domain("TipoPago");
+        TipoPago o[] = TipoPago.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
+    }
+
+    public static enum DuracionCheque {
+
+        _30, _45, _60, _90, _120, _180
+    }
+
+    public static Domain DuracionCheque() {
+        Domain dominio = new Domain("DuracionCheque");
+        DuracionCheque o[] = DuracionCheque.values();
         for (int i = 0; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());

@@ -29,7 +29,9 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, true, persistentObject.getClass());
+        new DetalleSiniestroDetailFrameController(
+                DetalleSiniestroDetailFrame.class.getName(), miGrid,
+                (BeanVO) persistentObject, true, persistentObject.getClass());
     }
 
     @Override
@@ -50,9 +52,7 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
                     + "idPropio=?").setString(0, "LIQ").uniqueResult();
             for (Object object : persistentObjects) {
                 Long l = ((DetalleSiniestro) object).getId();
-                DetalleSiniestro sin = (DetalleSiniestro) s.createQuery("FROM "
-                        + DetalleSiniestro.class.getName() + " C WHERE "
-                        + "id=?").setLong(0, l).uniqueResult();
+                DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, l);
                 Hibernate.initialize(sin.getNotasTecnicas());
                 Hibernate.initialize(sin.getObservaciones());
                 Hibernate.initialize(sin.getPagos());
@@ -61,7 +61,6 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
                 sin.setEtapaSiniestro(es);
                 s.save(sin);
             }
-
             s.getTransaction().commit();
             return new VOResponse(true);
         } catch (Exception ex) {
