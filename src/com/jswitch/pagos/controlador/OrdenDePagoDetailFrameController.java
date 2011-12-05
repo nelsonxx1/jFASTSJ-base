@@ -112,6 +112,9 @@ public class OrdenDePagoDetailFrameController
     public Response logicaNegocio(ValueObject persistentObject) {
         Session s = null;
         OrdenDePago pago = (OrdenDePago) persistentObject;
+        if (pago.getCodigoSIGECOF() != null && pago.getCodigoSIGECOF().trim().isEmpty()) {
+            pago.setCodigoSIGECOF(null);
+        }
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
@@ -138,6 +141,14 @@ public class OrdenDePagoDetailFrameController
         } finally {
             s.close();
         }
+        if (pago.getCodigoSIGECOF() != null) {
+            pago.setMontoPagar(0d);
+            for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
+                pago.setMontoPagar(pago.getMontoPagar() + detalleSiniestro.getMontoLiquidado());
+            }
+        }
+
+
         return new VOResponse(persistentObject);
     }
 

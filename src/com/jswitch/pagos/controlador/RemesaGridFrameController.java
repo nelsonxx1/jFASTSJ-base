@@ -21,7 +21,7 @@ public class RemesaGridFrameController extends DefaultGridFrameController {
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
             if (detailFramePath != null) {
-            new RemesaDetailFrameController(detailFramePath, gridFrame.getGridControl(), (BeanVO) persistentObject, false);
+            new RemesaDetailFrameController(detailFramePath, gridFrame.getGridControl(), (BeanVO) persistentObject, true);
         }
     }
 }

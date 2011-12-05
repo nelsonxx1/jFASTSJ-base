@@ -522,10 +522,8 @@ public class MenuPrincipal implements ClientFacade {
     }
     
     public void getNewRemesa() {
-//        "17930"
-        //AUN_NO_FUN();
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
-                null, null, false);
+                null, null, true);
     }
     public void getGridRemesa()
     {
@@ -672,6 +670,6 @@ public class MenuPrincipal implements ClientFacade {
 //        "17930"
         //AUN_NO_FUN();
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
-                null, null, false);
+                null, null, true);
     }
 }

@@ -9,7 +9,7 @@ package com.jswitch.pagos.modelo.transaccional.lote;
  * @author Adrian
  */
 public class Total {
-    
+
     /**
      * Identificador del Registro
      * Valor fijo: TOTAL
@@ -18,26 +18,28 @@ public class Total {
     /**
      * Cantidad de Instrucciones de Débitos
      */
-    private String debitCount;
+    private Integer debitCount;
     /**
      * Cantidad de Instrucciones de Créditos
      */
-    private String creditCount;
+    private Integer creditCount;
     /**
      * Total monto lote
      */
     private Double totalMontoLote;
 
     public Total() {
-        recordID="TOTAL   ";
-        
+        recordID = "TOTAL   ";
+        creditCount = 0;
+        debitCount = 0;
+        totalMontoLote = 0d;
     }
 
     /**
      * Cantidad de Instrucciones de Créditos
      * @return the creditCount
      */
-    public String getCreditCount() {
+    public Integer getCreditCount() {
         return creditCount;
     }
 
@@ -45,7 +47,7 @@ public class Total {
      * Cantidad de Instrucciones de Débitos
      * @return the debitCount
      */
-    public String getDebitCount() {
+    public Integer getDebitCount() {
         return debitCount;
     }
 
@@ -70,7 +72,7 @@ public class Total {
      * Cantidad de Instrucciones de Créditos
      * @param creditCount the creditCount to set
      */
-    public void setCreditCount(String creditCount) {
+    public void setCreditCount(Integer creditCount) {
         this.creditCount = creditCount;
     }
 
@@ -78,7 +80,7 @@ public class Total {
      * Cantidad de Instrucciones de Débitos
      * @param debitCount the debitCount to set
      */
-    public void setDebitCount(String debitCount) {
+    public void setDebitCount(Integer debitCount) {
         this.debitCount = debitCount;
     }
 
@@ -87,7 +89,7 @@ public class Total {
      * Valor fijo: TOTAL
      * @param recordID the recordID to set
      */
-    public void setRecordID(String recordID) {
+    protected void setRecordID(String recordID) {
         this.recordID = recordID;
     }
 

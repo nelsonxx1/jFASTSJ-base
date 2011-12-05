@@ -317,7 +317,7 @@ public class BuscarPersonaDialog extends InternalFrame {
                             }
                             method.invoke(object, new Object[]{
                                         null, beanVO,
-                                        false});
+                                        true});
 
                         } catch (Exception ex) {
                             LoggerUtil.error(this.getClass(), "new", ex);

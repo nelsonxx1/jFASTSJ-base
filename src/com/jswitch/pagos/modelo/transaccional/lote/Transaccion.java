@@ -1,6 +1,7 @@
 package com.jswitch.pagos.modelo.transaccional.lote;
 
 import com.jswitch.base.controlador.General;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
@@ -9,7 +10,6 @@ import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
@@ -40,35 +40,71 @@ public class Transaccion {
      * Lista con las ordenes de pago q no se pudieron reportar por error
      */
     private List<OrdenDePago> error = new ArrayList<OrdenDePago>(0);
-
+    
     public Transaccion(Remesa remesa) {
         this.remesa = remesa;
         header = new Header();
         total = new Total();
         initTransaccion();
-
+        
     }
-
+    
     public void printReport(OutputStream stream) {
         PrintStream out = new PrintStream(stream);
-        out.format("%8s", header.getRecordID());
-
-    }
-
-    public static void main(String[] args) {
-//        ("%4$2s %3$2s %2$2s %1$2s", "a", "b", "c", "d")
-//        System.out.format("%4$05d %3$02d %2$2s %1$2s", "a", "b", 0, 1);
-        StringBuffer buf = new StringBuffer("V17931");
-        if (buf.length() < 10) {
-            char[] c = new char[10 - buf.length()];
-            Arrays.fill(c, '0');
-            buf.insert(1, c);
+        out.format("%8s%08d%08d%10s%5$td/%5$tm/%5$tY%6$td/%6$tm/%6$tY\n",
+                header.getRecordID(), header.getNumRefLot(), header.getNumNeg(),
+                header.getRif(), header.getFechaPagoPropuesta(), header.getFechaEnvio());
+        for (Body body : list) {
+            Credito cre = body.getCredito();
+            Debito deb = body.getDebito();
+            out.format("%1$8s%2$08d%3$10s%4$35s%5$td/%5$tm/%5$tY%6$2s%7$20s%8$015.2f%9$3s%10$2s\n",
+                    deb.getRecordID(), deb.getNumRefDeb(), deb.getRif(), deb.getNombre(),
+                    deb.getFechaValor(), deb.getTipoCuenta(), deb.getNumCuent(),
+                    deb.getMonto(), deb.getMoneda(), deb.getTipoPago());
+            out.format("%8s%08d%10s%30s%2s%20s%015.2f%2s%12s",
+                    cre.getRecordID(), cre.getNumRefCre(), cre.getRifBen(), cre.getNombre(),
+                    cre.getTipoCuenta(), cre.getNumCuent(),
+                    cre.getMonto(), cre.getTipoPago(), cre.getBanco());
+            if (cre.getTipoPago().equals("20")) {
+                out.format("%03d%4s", cre.getDuracionCheq(), cre.getAngenciaBancaria());
+            }
+            if (cre.getEmail() != null) {
+                out.format("%50s", cre.getEmail());
+            }
+            out.format("\n");
         }
-        System.out.println("asjh-0".substring(0, "asjh-0".lastIndexOf("-")));
+        out.format("%8s%05d%05d%015.2f\n",
+                total.getRecordID(), total.getDebitCount(), total.getCreditCount(), total.getTotalMontoLote());
+        out.close();
+        
+        
     }
+    
+    public static void main(String[] args) {
+        General.empresa.setNombre("TRIBUNAL SUPREMO DE JUSTICIA");
+        General.empresa.setRif2("G11000011-1");
+        
+        Session s = null;
+        Remesa rem = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            rem = (Remesa) s.get(Remesa.class, 57315L);
+            Hibernate.initialize(rem.getDocumentos());
+            Hibernate.initialize(rem.getNotasTecnicas());
+            Hibernate.initialize(rem.getObservaciones());
+            Hibernate.initialize(rem.getOrdenDePagos());
+        } catch (Exception hibernateException) {
+            System.out.println(hibernateException);
+            return;
+        } finally {
+            s.close();
+        }
+        Transaccion n = new Transaccion(rem);
 
+    }
+    
     private void initTransaccion() {
-
+        
         Double totalMontoLote = 0d;
         //<editor-fold defaultstate="collapsed" desc="Headers">
         header.setFechaEnvio(remesa.getFechaEnvio());
@@ -76,7 +112,7 @@ public class Transaccion {
         header.setNumNeg(remesa.getNumNeg());
         header.setNumRefLot(remesa.getNumRefLot());
         header.setRecordID("HEADER  ");
-        header.setRif(General.empresa.getRif2().replaceAll("-", ""));
+        header.setRif(General.empresa.getRif2());
         //</editor-fold>
 
         for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
@@ -108,11 +144,12 @@ public class Transaccion {
                 body.getCredito().setBanco(bancariaPersona.getBanco().getNombreCorto());
                 body.getCredito().setNumCuent(bancariaPersona.getNumero());
                 body.getCredito().setTipoCuenta(bancariaPersona.getTipoCuenta().getNumero());
-                
-                body.getCredito().setEmail(personaPago.getEmail());
+                if (personaPago.getEmail() != null) {
+                    body.getCredito().setEmail(personaPago.getEmail());
+                }
                 body.getCredito().setNombre(personaPago.getNombreCorto());
                 body.getCredito().setRifBen(personaPago.getRif().getRif());
-
+                
                 switch (remesa.getTipoPago()) {
                     case ABONO_EN_CUENTA_BANCO_DE_VENEZUELA:
                         body.getCredito().setTipoPago("10");
@@ -124,7 +161,7 @@ public class Transaccion {
                         body.getCredito().setTipoPago("00");
                         break;
                 }
-
+                
                 body.getCredito().setNumRefCre(remesa.getNumRefCre());
                 body.getCredito().setMonto(ordenDePago.getMontoPagar());
                 body.getCredito().setDuracionCheq(Integer.parseInt(
@@ -145,7 +182,7 @@ public class Transaccion {
             }
         }
         total.setTotalMontoLote(totalMontoLote);
-        total.setCreditCount(list.size() + "");
-        total.setDebitCount(list.size() + "");
+        total.setCreditCount(list.size());
+        total.setDebitCount(list.size());
     }
 }

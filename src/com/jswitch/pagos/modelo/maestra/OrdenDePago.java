@@ -33,6 +33,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
@@ -102,6 +103,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     private Boolean autoSearch;
     /**
+     * 
+     */
+    @Transient
+    private transient Boolean selected;
+    /**
      * monto a pagar
      */
     @Column
@@ -130,6 +136,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     private Set<Documento> documentos = new HashSet<Documento>(0);
 
     public OrdenDePago() {
+        montoPagar = 0d;
     }
 
     @Override
@@ -253,5 +260,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     public void setMontoPagar(Double montoPagar) {
         this.montoPagar = montoPagar;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }
