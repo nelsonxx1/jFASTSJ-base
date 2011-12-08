@@ -331,7 +331,7 @@ public class Credito {
         if (!rif.startsWith("J") && !rif.startsWith("G")) {
             rif = rif.substring(0, rif.lastIndexOf("-"));
         }
-        StringBuffer buf = new StringBuffer(rif);
+        StringBuffer buf = new StringBuffer(rif.replaceAll("-", ""));
         if (buf.length() < 10) {
             char[] c = new char[10 - buf.length()];
             Arrays.fill(c, '0');

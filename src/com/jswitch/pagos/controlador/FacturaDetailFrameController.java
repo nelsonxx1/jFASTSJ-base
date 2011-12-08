@@ -1,26 +1,15 @@
 package com.jswitch.pagos.controlador;
 
-import com.jswitch.base.controlador.General;
-import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.Factura;
-import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
-import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
-import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
-import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
@@ -40,50 +29,41 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         detalleSiniestro = ((Factura) beanVO).getDetalleSiniestro();
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
-        ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
+
     }
 
     public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
-        ((DesgloseSumaAseguradaGridInternalController) (((FacturaDetailFrame) vista).getGridDesgloseSumaAsegurada()).getController()).setDetalleSiniestro(detalleSiniestro);
+
+    }
+
+    @Override
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+        Response res = super.updateRecord(oldPersistentObject, persistentObject);
+        if (res instanceof VOResponse) {
+            updateDetalleSiniestro();
+            vista.getMainPanel().getReloadButton().doClick();
+        }
+        return res;
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Factura liquidacion = (Factura) newPersistentObject;
-        liquidacion.setEstatusPago(EstatusPago.PENDIENTE);
         liquidacion.setDetalleSiniestro(detalleSiniestro);
-        detalleSiniestro.getPagos().add(liquidacion);
-        agregarDesgloseCobertura(liquidacion.getDesgloseCobertura());
         Response res = super.insertRecord(newPersistentObject);
-        gridControl.getReloadButton().doClick();
+        if (res instanceof VOResponse) {
+            detalleSiniestro.getPagos().add(liquidacion);
+            updateDetalleSiniestro();
+        }
         return res;
     }
 
-    private void agregarDesgloseCobertura(Set<DesgloseCobertura> des) {
-        String ramo = "HCM";
-        if (detalleSiniestro instanceof Vida) {
-            ramo = "VIDA";
-        } else if (detalleSiniestro instanceof Funerario) {
-            ramo = "FUNE";
-        }
-        Session s = null;
-        try {
-            String sql = "FROM " + Cobertura.class.getName()
-                    + " C WHERE C.ramo.idPropio = ? AND C.auditoria.activo=?";
-            SessionFactory sf = HibernateUtil.getSessionFactory();
-            s = sf.openSession();
-            List<Cobertura> l = s.createQuery(sql).setString(0, ramo).setBoolean(1, Boolean.TRUE).list();
-            for (Cobertura cobertura : l) {
-                des.add(new DesgloseCobertura(cobertura, new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE)));
-            }
-        } catch (Exception ex) {
-            LoggerUtil.error(this.getClass(), "loadData", ex);
-        } finally {
-            s.close();
-        }
+    @Override
+    public void afterInsertData() {
+        vista.getMainPanel().getReloadButton().doClick();
 
     }
 
@@ -116,19 +96,39 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                 return new ErrorResponse("user.aborted");
             }
         }
+        return new VOResponse(liquidacion);
+    }
 
-        Collection<Factura> fac = detalleSiniestro.getPagos();
-        double facturado = 0;
-        for (Factura factura : fac) {
-            if (liquidacion.getId() != null && factura.getId().compareTo(liquidacion.getId()) == 0) {
-                facturado += liquidacion.getTotalFacturado();
-            } else {
+    public void updateDetalleSiniestro() {
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        DetalleSiniestro sin = null;
+        try {
+            sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, detalleSiniestro.getId());
+
+            Hibernate.initialize(sin.getPagos());
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            s.close();
+            s = null;
+        }
+        detalleSiniestro = sin;
+
+//            Hibernate.initialize(detalleSiniestro.getDiagnosticoSiniestros());
+//            Hibernate.initialize(detalleSiniestro.getDocumentos());
+//            Hibernate.initialize(detalleSiniestro.getObservaciones());
+//            Hibernate.initialize(detalleSiniestro.getNotasTecnicas());
+
+        s = HibernateUtil.getSessionFactory().openSession();
+        try {
+
+
+            Collection<Factura> fac = detalleSiniestro.getPagos();
+            Double facturado = 0d;
+            for (Factura factura : fac) {
                 facturado += factura.getTotalFacturado();
             }
-        }
-        detalleSiniestro.setMontoFacturado(facturado);
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        try {
+            detalleSiniestro.setMontoFacturado(facturado);
             s.beginTransaction();
             s.update(detalleSiniestro);
             s.getTransaction().commit();
@@ -137,6 +137,5 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         } finally {
             s.close();
         }
-        return new VOResponse(liquidacion);
     }
 }

@@ -234,9 +234,9 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         gridControl5.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
         gridControl5.setDeleteButton(deleteButton7);
         gridControl5.setEditButton(editButton7);
+        gridControl5.setEditOnSingleRow(true);
         gridControl5.setFilterButton(filterButton7);
         gridControl5.setInsertButton(insertButton7);
-        gridControl5.setMaxNumberOfRowsOnInsert(4);
         gridControl5.setReloadButton(reloadButton7);
         gridControl5.setSaveButton(saveButton7);
         gridControl5.setValueObjectClassName(DesgloseSumaAsegurada.class.getName());
@@ -293,7 +293,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         textColumn11.setColumnRequired(false);
         gridControl5.getColumnContainer().add(textColumn11);
 
-        dateTimeColumn4.setColumnName("auditoria.fechaInsert");
+        dateTimeColumn4.setColumnName("auditoria.fechaUpdate");
         dateTimeColumn4.setColumnRequired(false);
         gridControl5.getColumnContainer().add(dateTimeColumn4);
 
@@ -320,21 +320,20 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel14);
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        gridControl6.setAllowInsertInEdit(true);
         gridControl6.setDefaultQuickFilterCriteria(org.openswing.swing.util.java.Consts.CONTAINS);
         gridControl6.setDeleteButton(deleteButton8);
         gridControl6.setEditButton(editButton8);
+        gridControl6.setEditOnSingleRow(true);
         gridControl6.setFilterButton(filterButton8);
         gridControl6.setInsertButton(insertButton8);
-        gridControl6.setMaxNumberOfRowsOnInsert(4);
         gridControl6.setReloadButton(reloadButton8);
         gridControl6.setSaveButton(saveButton8);
         gridControl6.setValueObjectClassName(DesgloseCobertura.class.getName());
@@ -404,8 +403,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
@@ -429,7 +428,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -448,8 +447,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
 
         desgloseSumaAsegurada =
                 new DesgloseSumaAseguradaGridInternalController(
-                        Factura.class.getName(), "getDesgloseSumaAsegurada", 
-                        gridControl5);
+                Factura.class.getName(), "getDesgloseSumaAsegurada",
+                gridControl5);
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
 

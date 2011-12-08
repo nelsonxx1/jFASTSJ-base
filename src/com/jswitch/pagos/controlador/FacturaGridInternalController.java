@@ -24,7 +24,7 @@ public class FacturaGridInternalController extends DefaultGridInternalController
         super(miGrid);
         try {
             t = Class.forName(DetalleSiniestro.class.getName());
-            getMethod = t.getMethod("getPagos", new Class[0]);
+            getMethod = t.getMethod("getPagos");
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "new", ex);
         }
