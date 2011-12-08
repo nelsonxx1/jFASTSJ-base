@@ -16,8 +16,7 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-
         new OrdenDePagoDetailFrameController(detailFramePath, null,
-                (BeanVO) persistentObject, Boolean.FALSE);
+                (BeanVO) persistentObject, Boolean.TRUE);
     }
 }

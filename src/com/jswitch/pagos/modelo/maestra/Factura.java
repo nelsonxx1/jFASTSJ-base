@@ -38,7 +38,7 @@ import javax.validation.constraints.Past;
  * @author Personal
  */
 @Entity
-@Table(name="SINI_Factura")
+@Table(name = "SINI_Factura")
 public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -259,6 +259,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public Factura() {
+        estatusPago = EstatusPago.PENDIENTE;
     }
 
     public Long getId() {

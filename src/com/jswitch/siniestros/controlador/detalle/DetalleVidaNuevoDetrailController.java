@@ -42,6 +42,8 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        
+        //TODO CHECK VIDA
         Session s = HibernateUtil.getSessionFactory().openSession();
         Certificado sin = (Certificado) s.get(Certificado.class, (siniestro.getCertificado()).getId());
         Hibernate.initialize(sin.getBeneficiarios());

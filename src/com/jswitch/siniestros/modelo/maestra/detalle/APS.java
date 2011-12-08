@@ -4,6 +4,7 @@ import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +47,9 @@ public class APS extends DetalleSiniestro {
 
     public APS() {
         this.fechaEmision = new Date();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH, 15);
+        this.fechaVencimiento = c.getTime();
     }
 
     public Date getFechaEmision() {

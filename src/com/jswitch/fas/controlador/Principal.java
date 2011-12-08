@@ -534,7 +534,7 @@ public class Principal implements MDIController, LoginController {
     }
 
     public static Double truncar(Double d) {
-        BigDecimal b = new BigDecimal(123456789.1111).setScale(2, RoundingMode.DOWN).round(MathContext.UNLIMITED);
+        BigDecimal b = new BigDecimal(d).setScale(2, RoundingMode.DOWN).round(MathContext.UNLIMITED);
         return b.doubleValue();
     }
 }

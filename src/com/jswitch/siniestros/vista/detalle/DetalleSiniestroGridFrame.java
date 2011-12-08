@@ -32,6 +32,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
+        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -55,7 +56,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setColumnVisible(false);
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -68,6 +69,9 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         textColumn2.setColumnName("tipoPersona.nombre");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
+
+        decimalColumn2.setColumnName("montoFacturado");
+        gridData.getColumnContainer().add(decimalColumn2);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("tratamientoEfectuado");
@@ -203,6 +207,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;

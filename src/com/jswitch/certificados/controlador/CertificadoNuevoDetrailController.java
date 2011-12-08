@@ -60,13 +60,22 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        if (poliza == null) {
-            poliza = ((CertificadoNuevo) newPersistentObject).getPoliza();
-        }
+
         Session s = null;
         try {
             vista.saveGridsData();
             s = HibernateUtil.getSessionFactory().openSession();
+
+            if (poliza == null) {
+                poliza = (Poliza) s.get(Poliza.class,
+                        (((CertificadoNuevo) newPersistentObject).getPoliza()).getId());
+
+                Hibernate.initialize(poliza.getCertificados());
+                Hibernate.initialize(poliza.getDocumentos());
+                Hibernate.initialize(poliza.getNotasTecnicas());
+                Hibernate.initialize(poliza.getObservaciones());
+            }
+
             //s = HibernateUtil.getSessionFactory().openSession();
             Transaction t = s.beginTransaction();
             CertificadoNuevo certificadoNuevo = (CertificadoNuevo) newPersistentObject;
@@ -101,6 +110,7 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
             new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, certificadoNuevo.getCertificado(), poliza, false);
 
 
+            
             return new VOResponse(newPersistentObject);
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));

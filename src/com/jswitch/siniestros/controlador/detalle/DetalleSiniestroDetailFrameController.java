@@ -4,7 +4,6 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;

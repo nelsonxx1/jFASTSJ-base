@@ -75,6 +75,8 @@ import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
+import com.jswitch.pagos.controlador.RemesaDetailFrameController;
+import com.jswitch.pagos.controlador.RemesaGridFrameController;
 import com.jswitch.persona.controlador.PersonasGridController;
 import com.jswitch.persona.controlador.mant.TipoPersonaGridFrameController;
 import com.jswitch.persona.modelo.dominio.TipoActividadEconomica;
@@ -85,7 +87,6 @@ import com.jswitch.persona.modelo.dominio.TipoDireccion;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.persona.modelo.dominio.TipoTelefono2;
 import com.jswitch.persona.modelo.maestra.Persona;
-import com.jswitch.persona.vista.BuscarPersonaDialog;
 import com.jswitch.persona.vista.PersonaDetailFrame;
 import com.jswitch.persona.vista.Personas2GridFrame;
 import com.jswitch.persona.vista.RifDialog;
@@ -103,10 +104,14 @@ import com.jswitch.rol.modelo.Rol;
 import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
+import com.jswitch.pagos.vista.RemesaDetailFrame;
+import com.jswitch.pagos.vista.RemesaGridFrame;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
+import com.jswitch.persona.vista.BuscarPersonaDialog;
 import com.jswitch.persona.vista.RifBusquedaDialog;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
@@ -125,7 +130,6 @@ import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import de.muntjak.tinylookandfeel.TinyLookAndFeel;
 import de.muntjak.tinylookandfeel.controlpanel.ControlPanel;
-import java.awt.Component;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -244,11 +248,11 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getTipoCuentaBancaria() {
-        new DefaultAllGridFrameController(DefaultMantenimientoGridFrame.class.getName(), null, TipoCuentaBancaria.class.getName(), "Tipo Cuenta Bancaria");
+        new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCuentaBancaria.class.getName(), "Tipo Cuenta Bancaria");
     }
 
     public void getCodigoArea() {
-        new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCodigoArea.class.getName(), null);
+        new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCodigoArea.class.getName(), "Codigos de Area");
     }
 
     public void getBuscarPersona() {
@@ -506,14 +510,25 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getNewPago() {
-        new BuscarPersonaDialog((Component)null, OrdenDePagoDetailFrameController.class.getName(), OrdenDePago.class.getName());
-        
+        new BuscarPersonaDialog(
+                OrdenDePagoDetailFrameController.class.getName(),
+                OrdenDePago.class.getName(), null);
     }
 
     public void getPagosGrid() {
         new OrdenDePagoGridFrameController(OrdenDePagoGridFrame.class.getName(),
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(),
                 "Orden de Pago");
+    }
+    
+    public void getNewRemesa() {
+        new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
+                null, null, true);
+    }
+    public void getGridRemesa()
+    {
+        new RemesaGridFrameController(RemesaGridFrame.class.getName(), 
+                RemesaDetailFrame.class.getName(), Remesa.class.getName(), null);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Cambiar Pass">
@@ -560,7 +575,7 @@ public class MenuPrincipal implements ClientFacade {
                         General.usuario.getUserName(), true));
                 s.save(cert);
                 s.getTransaction().commit();
-                s.close();  
+                s.close();
                 new CertificadoDetailController(
                         CertificadoDetailFrame.class.getName(),
                         null, cert, null, false);
@@ -653,6 +668,8 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getTest() {
 //        "17930"
-        AUN_NO_FUN();
+        //AUN_NO_FUN();
+        new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
+                null, null, true);
     }
 }
