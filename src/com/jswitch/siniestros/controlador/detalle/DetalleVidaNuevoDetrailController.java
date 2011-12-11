@@ -5,6 +5,7 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.certificados.modelo.maestra.Certificado;
+import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.fas.controlador.Principal;
@@ -42,8 +43,8 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        
-        //TODO CHECK VIDA
+
+
         Session s = HibernateUtil.getSessionFactory().openSession();
         Certificado sin = (Certificado) s.get(Certificado.class, (siniestro.getCertificado()).getId());
         Hibernate.initialize(sin.getBeneficiarios());
@@ -61,12 +62,16 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
             vida.setSiniestro(siniestro);
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
-                    + " WHERE C.nombre='VIDA_INICIAL'");
+                    + " WHERE C.idPropio='VIDA'");
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             q = s.createQuery("FROM " + TipoPersona.class.getName() + " C"
                     + " WHERE C.idPropio='BEN'");
             TipoPersona tp = (TipoPersona) q.uniqueResult();
+            q = s.createQuery("FROM " + Ramo.class.getName() + " C "
+                    + "WHERE C.IdPropio='VIDA'");
+            Ramo ramo = (Ramo) q.uniqueResult();
             s.close();
+            vida.setRamo(ramo);
             vida.setEtapaSiniestro(et);
             vida.setTipoPersona(tp);
             vida.setTratamientoEfectuado(TratamientoEfectuado.DESCONOCIDO);

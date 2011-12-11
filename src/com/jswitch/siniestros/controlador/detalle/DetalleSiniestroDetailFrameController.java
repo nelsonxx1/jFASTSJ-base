@@ -9,6 +9,7 @@ import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.siniestros.controlador.DiagnosticoSiniestroDetailFrameController;
 import com.jswitch.pagos.controlador.FacturaDetailFrameController;
+import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -198,15 +199,25 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             es = (EtapaSiniestro) s.createQuery("FROM "
                     + EtapaSiniestro.class.getName() + " C WHERE "
                     + "idPropio=?").setString(0, "LIQ").uniqueResult();
+
+            if (  d.getEtapaSiniestro().getId().compareTo(
+                    es.getId()) == 0) {
+                Double l = 0d, f = 0d, c = 0d;
+                for (Factura factura : d.getPagos()) {
+                    l += factura.getTotalLiquidado();
+                    f += factura.getTotalFacturado();
+                    c += factura.getTotalACancelar();
+                }
+                d.setMontoACancelar(c);
+                d.setMontoFacturado(f);
+                d.setMontoLiquidado(l);
+                d.setFechaLiquidado(new Date());
+            }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "logicade negocios", e);
             return new ErrorResponse(e.getMessage());
         } finally {
             s.close();
-        }
-        if (d.getSelected() && d.getEtapaSiniestro().getId().compareTo(
-                es.getId()) == 0) {
-            d.setFechaLiquidado(new Date());
         }
         return new VOResponse(d);
     }

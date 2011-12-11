@@ -31,6 +31,7 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -100,6 +101,9 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
         checkBoxColumn1.setColumnRequired(false);
         checkBoxColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
+
+        textColumn1.setColumnName("siniestro.numero");
+        gridData.getColumnContainer().add(textColumn1);
 
         textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("personaPago.rif.rif");
@@ -225,6 +229,7 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.GridControl gridData;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton saveButton1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;

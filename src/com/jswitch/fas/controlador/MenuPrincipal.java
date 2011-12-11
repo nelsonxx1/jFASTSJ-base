@@ -105,6 +105,7 @@ import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
+import com.jswitch.pagos.vista.ConceptoSENIATGridFrame;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
 import com.jswitch.pagos.vista.RemesaDetailFrame;
@@ -460,7 +461,7 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getConceptoSENIAT() {
-        new DefaultAllGridFrameController(DefaultMantenimientoGridFrame.class.getName(), null, ConceptoSENIAT.class.getName(), "Concepto SENIAT");
+        new DefaultAllGridFrameController(ConceptoSENIATGridFrame.class.getName(), null, ConceptoSENIAT.class.getName(), "Concepto SENIAT");
     }
 
     public void getSiniestros() {

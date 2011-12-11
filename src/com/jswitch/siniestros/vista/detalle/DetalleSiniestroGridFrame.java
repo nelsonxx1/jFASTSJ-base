@@ -30,9 +30,12 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -60,6 +63,9 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn8.setColumnName("siniestro.numero");
+        gridData.getColumnContainer().add(textColumn8);
+
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("personaPago.nombreLargo");
         textColumn1.setColumnSortable(true);
@@ -72,6 +78,12 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         decimalColumn2.setColumnName("montoFacturado");
         gridData.getColumnContainer().add(decimalColumn2);
+
+        decimalColumn3.setColumnName("montoLiquidado");
+        gridData.getColumnContainer().add(decimalColumn3);
+
+        decimalColumn4.setColumnName("montoACancelar");
+        gridData.getColumnContainer().add(decimalColumn4);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("tratamientoEfectuado");
@@ -208,6 +220,8 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn4;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
@@ -223,5 +237,6 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
     // End of variables declaration//GEN-END:variables
 }
