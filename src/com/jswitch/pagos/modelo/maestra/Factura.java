@@ -1,5 +1,6 @@
 package com.jswitch.pagos.modelo.maestra;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -50,25 +51,26 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     *
+     * Detalle al que pertenece la factura
      */
     @ManyToOne()
     @BusinessKey
     private DetalleSiniestro detalleSiniestro;
     /**
-     *
+     * identificador de la factura
      */
     @Column
     @BusinessKey
     private String numeroFactura;
     /**
-     *
+     * numero de control de la factura
+     * si no existe coloque N/A
      */
     @Column
     @BusinessKey
     private String numeroControl;
     /**
-     *
+     * fecha en que fue facturado
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -76,7 +78,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fechaFactura;
     /**
-     *
+     * fecha en la que se recibio la factura
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -84,25 +86,21 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fechaRecepcion;
     /**
-     *
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
      */
     @ManyToOne()
     @BusinessKey
     private ConceptoSENIAT tipoConceptoSeniat;
     /**
-     *
+     * sustraendo aplica al ISLR
+     * //TODO FIX JAVADOC
      */
     @Column
     @BusinessKey
     private Double sustraendo;
     /**
-     *
-     */
-    @Column
-    @BusinessKey
-    private Double posentajeReteniconIsrl;
-    /**
-     *
+     * monto de islr q sera retenido
      */
     @Column
     @BusinessKey
@@ -128,37 +126,37 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double montoTM;
     /**
-     *
+     * porcentaje de iva para la fecha de facturacion
      */
     @Column
     @BusinessKey
-    private Double procentajeIva;
+    private Double porcentajeIva;
     /**
-     *
+     * total IVA
      */
     @Column
     @BusinessKey
     private Double montoIva;
     /**
-     *
+     * porcentaje de iva que sera retenido
      */
     @Column
     @BusinessKey
-    private Double porcenajeRetencionIva;
+    private Double porcentajeRetencionIva;
     /**
-     * base imponible
+     * cuanto sera retenido por iva
      */
     @Column
     @BusinessKey
     private Double montoRetencionIva;
     /**
-     * base imponible
+     * decuento pronto pago
      */
     @Column
     @BusinessKey
     private Double montoDescuentoProntoPago;
     /**
-     * base imponible
+     * descuento deducible
      */
     @Column
     @BusinessKey
@@ -170,49 +168,52 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double montoSujetoRetencion;
     /**
-     * //esto es a lo que se le retenie impuesto
+     * total de gastos clinicos
+     * //TODO VER Q HAGO CON ESTO
+     * esto es a lo que se le retenie impuesto
      */
     @Column
     @BusinessKey
     private Double gastosClinicos;
     /**
-     *
+     * Total por honorarios medicos
+     * //TODO VER Q HAGO CON ESTO
      */
     @Column
     @BusinessKey
     private Double honorariosMedicos;
     /**
-     *
+     * monto que la empresa no apara registrados en la factura
      */
     @Column
     @BusinessKey
     private Double montoNoAmparado;
     /**
-     *
+     * total facturado
      */
     @Column
     @BusinessKey
     private Double totalFacturado;
     /**
-     *
+     * total liquidado por la empresa
      */
     @Column
     @BusinessKey
     private Double totalLiquidado;
     /**
-     *
+     * total retenido entre IVA e ISLR
      */
     @Column
     @BusinessKey
     private Double totalRetenido;
     /**
-     *
+     * totalLiquidado - totalRetenido
      */
     @Column
     @BusinessKey
     private Double totalACancelar;
     /**
-     *
+     * Estatus en el que se encuentra el pago de la factura
      */
     @Column
     @NotNull
@@ -220,7 +221,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private EstatusPago estatusPago;
     /**
-     *
+     * fecha en q la seleccionan para ser pagada
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -228,7 +229,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fechaSeleccionado;
     /**
-     *
+     * Fecha en que se paga
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -236,23 +237,25 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fechaPagado;
     /**
-     * Coleccion de etapas de siniestro y las fechas de los cambios
+     * Coleccion de gastos por diagnostico
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**
-     * Coleccion de etapas de siniestro y las fechas de los cambios
+     * Coleccion de desglose de pagos por cobertura espesifica
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseCobertura> desgloseCobertura = new HashSet<DesgloseCobertura>();
     /**
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * auditoria Bitacora
      */
     @Embedded
     @BusinessKey
@@ -260,277 +263,576 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     public Factura() {
         estatusPago = EstatusPago.PENDIENTE;
+        montoDescuentoDesducible = 0d;
+        montoDescuentoProntoPago = 0d;
+        montoIva = 0d;
+        montoNoAmparado = 0d;
+        montoRetencionIva = 0d;
+        montoReteniconIsrl = 0d;
+        montoSujetoRetencion = 0d;
+        montoTM = 0d;
+        totalACancelar = 0d;
+        totalFacturado = 0d;
+        totalLiquidado = 0d;
+        totalRetenido = 0d;
+        if (General.configuracionesGenerales != null && General.configuracionesGenerales.getPorcentajeIVA() != null) {
+            porcentajeIva = General.configuracionesGenerales.getPorcentajeIVA();
+        } else {
+            porcentajeIva = 0d;
+        }
+        porcentajeRetencionIva = 0d;
+        porcentajeTM = 0d;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
+    /**
+     * auditoria Bitacora
+     * @return the auditoria
+     */
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
-    }
-
-    public Date getFechaFactura() {
-        return fechaFactura;
-    }
-
-    public void setFechaFactura(Date fechaFactura) {
-        this.fechaFactura = fechaFactura;
-    }
-
-    public Date getFechaRecepcion() {
-        return fechaRecepcion;
-    }
-
-    public void setFechaRecepcion(Date fechaRecepcion) {
-        this.fechaRecepcion = fechaRecepcion;
-    }
-
-    public String getNumeroControl() {
-        return numeroControl;
-    }
-
-    public void setNumeroControl(String numeroControl) {
-        this.numeroControl = numeroControl;
-    }
-
-    public String getNumeroFactura() {
-        return numeroFactura;
-    }
-
-    public void setNumeroFactura(String numeroFactura) {
-        this.numeroFactura = numeroFactura;
-    }
-
+    /**
+     * Coleccion de desglose de pagos por cobertura espesifica
+     * @return the desgloseCobertura
+     */
     public Set<DesgloseCobertura> getDesgloseCobertura() {
         return desgloseCobertura;
     }
 
-    public void setDesgloseCobertura(Set<DesgloseCobertura> desgloseCobertura) {
-        this.desgloseCobertura = desgloseCobertura;
-    }
-
+    /**
+     * Coleccion de gastos por diagnostico
+     * @return the desgloseSumaAsegurada
+     */
     public Set<DesgloseSumaAsegurada> getDesgloseSumaAsegurada() {
         return desgloseSumaAsegurada;
     }
 
-    public void setDesgloseSumaAsegurada(Set<DesgloseSumaAsegurada> desgloseSumaAsegurada) {
-        this.desgloseSumaAsegurada = desgloseSumaAsegurada;
-    }
-
-    public EstatusPago getEstatusPago() {
-        return estatusPago;
-    }
-
-    public void setEstatusPago(EstatusPago estatusPago) {
-        this.estatusPago = estatusPago;
-    }
-
-    public Date getFechaPagado() {
-        return fechaPagado;
-    }
-
-    public void setFechaPagado(Date fechaPagado) {
-        this.fechaPagado = fechaPagado;
-    }
-
-    public Date getFechaSeleccionado() {
-        return fechaSeleccionado;
-    }
-
-    public void setFechaSeleccionado(Date fechaSeleccionado) {
-        this.fechaSeleccionado = fechaSeleccionado;
-    }
-
-    public Double getGastosClinicos() {
-        return gastosClinicos;
-    }
-
-    public void setGastosClinicos(Double gastosClinicos) {
-        this.gastosClinicos = gastosClinicos;
-    }
-
-    public Double getHonorariosMedicos() {
-        return honorariosMedicos;
-    }
-
-    public void setHonorariosMedicos(Double honorariosMedicos) {
-        this.honorariosMedicos = honorariosMedicos;
-    }
-
-    public Double getMontoDescuentoDesducible() {
-        return montoDescuentoDesducible;
-    }
-
-    public void setMontoDescuentoDesducible(Double montoDescuentoDesducible) {
-        this.montoDescuentoDesducible = montoDescuentoDesducible;
-    }
-
-    public Double getMontoDescuentoProntoPago() {
-        return montoDescuentoProntoPago;
-    }
-
-    public void setMontoDescuentoProntoPago(Double montoDescuentoProntoPago) {
-        this.montoDescuentoProntoPago = montoDescuentoProntoPago;
-    }
-
-    public Double getMontoIva() {
-        return montoIva;
-    }
-
-    public void setMontoIva(Double montoIva) {
-        this.montoIva = montoIva;
-    }
-
-    public Double getMontoNoAmparado() {
-        return montoNoAmparado;
-    }
-
-    public void setMontoNoAmparado(Double montoNoAmparado) {
-        this.montoNoAmparado = montoNoAmparado;
-    }
-
-    public Double getMontoRetencionIva() {
-        return montoRetencionIva;
-    }
-
-    public void setMontoRetencionIva(Double montoRetencionIva) {
-        this.montoRetencionIva = montoRetencionIva;
-    }
-
-    public Double getMontoReteniconIsrl() {
-        return montoReteniconIsrl;
-    }
-
-    public void setMontoReteniconIsrl(Double montoReteniconIsrl) {
-        this.montoReteniconIsrl = montoReteniconIsrl;
-    }
-
-    public Double getMontoSujetoRetencion() {
-        return montoSujetoRetencion;
-    }
-
-    public void setMontoSujetoRetencion(Double montoSujetoRetencion) {
-        this.montoSujetoRetencion = montoSujetoRetencion;
-    }
-
-    public Double getMontoTM() {
-        return montoTM;
-    }
-
-    public void setMontoTM(Double montoTM) {
-        this.montoTM = montoTM;
-    }
-
-    public Double getPorcenajeRetencionIva() {
-        return porcenajeRetencionIva;
-    }
-
-    public void setPorcenajeRetencionIva(Double porcenajeRetencionIva) {
-        this.porcenajeRetencionIva = porcenajeRetencionIva;
-    }
-
-    public Double getPorcentajeTM() {
-        return porcentajeTM;
-    }
-
-    public void setPorcentajeTM(Double porcentajeTM) {
-        this.porcentajeTM = porcentajeTM;
-    }
-
-    public Double getPosentajeReteniconIsrl() {
-        return posentajeReteniconIsrl;
-    }
-
-    public void setPosentajeReteniconIsrl(Double posentajeReteniconIsrl) {
-        this.posentajeReteniconIsrl = posentajeReteniconIsrl;
-    }
-
-    public Double getProcentajeIva() {
-        return procentajeIva;
-    }
-
-    public void setProcentajeIva(Double procentajeIva) {
-        this.procentajeIva = procentajeIva;
-    }
-
-    public Double getSustraendo() {
-        return sustraendo;
-    }
-
-    public void setSustraendo(Double sustraendo) {
-        this.sustraendo = sustraendo;
-    }
-
-    public ConceptoSENIAT getTipoConceptoSeniat() {
-        return tipoConceptoSeniat;
-    }
-
-    public void setTipoConceptoSeniat(ConceptoSENIAT tipoConceptoSeniat) {
-        this.tipoConceptoSeniat = tipoConceptoSeniat;
-    }
-
-    public Double getTotalACancelar() {
-        return totalACancelar;
-    }
-
-    public void setTotalACancelar(Double totalACancelar) {
-        this.totalACancelar = totalACancelar;
-    }
-
-    public Double getTotalFacturado() {
-        return totalFacturado;
-    }
-
-    public void setTotalFacturado(Double totalFacturado) {
-        this.totalFacturado = totalFacturado;
-    }
-
-    public Double getTotalLiquidado() {
-        return totalLiquidado;
-    }
-
-    public void setTotalLiquidado(Double totalLiquidado) {
-        this.totalLiquidado = totalLiquidado;
-    }
-
-    public Double getTotalRetenido() {
-        return totalRetenido;
-    }
-
-    public void setTotalRetenido(Double totalRetenido) {
-        this.totalRetenido = totalRetenido;
-    }
-
-    public Double getValorUT() {
-        return valorUT;
-    }
-
-    public void setValorUT(Double valorUT) {
-        this.valorUT = valorUT;
-    }
-
+    /**
+     * Detalle al que pertenece la factura
+     * @return the detalleSiniestro
+     */
     public DetalleSiniestro getDetalleSiniestro() {
         return detalleSiniestro;
     }
 
+    /**
+     * Estatus en el que se encuentra el pago de la factura
+     * @return the estatusPago
+     */
+    public EstatusPago getEstatusPago() {
+        return estatusPago;
+    }
+
+    /**
+     * fecha en que fue facturado
+     * @return the fechaFactura
+     */
+    public Date getFechaFactura() {
+        return fechaFactura;
+    }
+
+    /**
+     * Fecha en que se paga
+     * @return the fechaPagado
+     */
+    public Date getFechaPagado() {
+        return fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
+     * @return the fechaRecepcion
+     */
+    public Date getFechaRecepcion() {
+        return fechaRecepcion;
+    }
+
+    /**
+     * fecha en q la seleccionan para ser pagada
+     * @return the fechaSeleccionado
+     */
+    public Date getFechaSeleccionado() {
+        return fechaSeleccionado;
+    }
+
+    /**
+     * total de gastos clinicos
+     * //TODO VER Q HAGO CON ESTO
+     * esto es a lo que se le retenie impuesto
+     * @return the gastosClinicos
+     */
+    public Double getGastosClinicos() {
+        return gastosClinicos;
+    }
+
+    /**
+     * Total por honorarios medicos
+     * //TODO VER Q HAGO CON ESTO
+     * @return the honorariosMedicos
+     */
+    public Double getHonorariosMedicos() {
+        return honorariosMedicos;
+    }
+
+    /**
+     * Pk autogenerado
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * descuento deducible
+     * @return the montoDescuentoDesducible
+     */
+    public Double getMontoDescuentoDesducible() {
+        return montoDescuentoDesducible;
+    }
+
+    /**
+     * decuento pronto pago
+     * @return the montoDescuentoProntoPago
+     */
+    public Double getMontoDescuentoProntoPago() {
+        return montoDescuentoProntoPago;
+    }
+
+    /**
+     * total IVA
+     * @return the montoIva
+     */
+    public Double getMontoIva() {
+        return montoIva;
+    }
+
+    /**
+     * monto que la empresa no apara registrados en la factura
+     * @return the montoNoAmparado
+     */
+    public Double getMontoNoAmparado() {
+        return montoNoAmparado;
+    }
+
+    /**
+     * cuanto sera retenido por iva
+     * @return the montoRetencionIva
+     */
+    public Double getMontoRetencionIva() {
+        return montoRetencionIva;
+    }
+
+    /**
+     * monto de islr q sera retenido
+     * @return the montoReteniconIsrl
+     */
+    public Double getMontoReteniconIsrl() {
+        return montoReteniconIsrl;
+    }
+
+    /**
+     * base imponible
+     * @return the montoSujetoRetencion
+     */
+    public Double getMontoSujetoRetencion() {
+        return montoSujetoRetencion;
+    }
+
+    /**
+     * TM Timbre Municipal
+     * @return the montoTM
+     */
+    public Double getMontoTM() {
+        return montoTM;
+    }
+
+    /**
+     * numero de control de la factura
+     * si no existe coloque N/A
+     * @return the numeroControl
+     */
+    public String getNumeroControl() {
+        return numeroControl;
+    }
+
+    /**
+     * identificador de la factura
+     * @return the numeroFactura
+     */
+    public String getNumeroFactura() {
+        return numeroFactura;
+    }
+
+    /**
+     * version
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
+    }
+
+    /**
+     * porcentaje de iva que sera retenido
+     * @return the porcentajeRetencionIva
+     */
+    public Double getPorcentajeRetencionIva() {
+        return porcentajeRetencionIva;
+    }
+
+    /**
+     * porcentaje de iva para la fecha de facturacion
+     * @return the porcentajeIva
+     */
+    public Double getPorcentajeIva() {
+        return porcentajeIva;
+    }
+
+    /**
+     * TM Timbre Municipal
+     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
+     * @return the porcentajeTM
+     */
+    public Double getPorcentajeTM() {
+        return porcentajeTM;
+    }
+
+    /**
+     * sustraendo aplica al ISLR
+     * //TODO FIX JAVADOC
+     * @return the sustraendo
+     */
+    public Double getSustraendo() {
+        return sustraendo;
+    }
+
+    /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     * @return the tipoConceptoSeniat
+     */
+    public ConceptoSENIAT getTipoConceptoSeniat() {
+        return tipoConceptoSeniat;
+    }
+
+    /**
+     * totalLiquidado - totalRetenido
+     * @return the totalACancelar
+     */
+    public Double getTotalACancelar() {
+        return totalACancelar;
+    }
+
+    /**
+     * total facturado
+     * @return the totalFacturado
+     */
+    public Double getTotalFacturado() {
+        return totalFacturado;
+    }
+
+    /**
+     * total liquidado por la empresa
+     * @return the totalLiquidado
+     */
+    public Double getTotalLiquidado() {
+        return totalLiquidado;
+    }
+
+    /**
+     * total retenido entre IVA e ISLR
+     * @return the totalRetenido
+     */
+    public Double getTotalRetenido() {
+        return totalRetenido;
+    }
+
+    /**
+     * UT Unidad Tributaria
+     * @return the valorUT
+     */
+    public Double getValorUT() {
+        return valorUT;
+    }
+
+    /**
+     * auditoria Bitacora
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * Coleccion de desglose de pagos por cobertura espesifica
+     * @param desgloseCobertura the desgloseCobertura to set
+     */
+    public void setDesgloseCobertura(Set<DesgloseCobertura> desgloseCobertura) {
+        this.desgloseCobertura = desgloseCobertura;
+    }
+
+    /**
+     * Coleccion de gastos por diagnostico
+     * @param desgloseSumaAsegurada the desgloseSumaAsegurada to set
+     */
+    public void setDesgloseSumaAsegurada(Set<DesgloseSumaAsegurada> desgloseSumaAsegurada) {
+        this.desgloseSumaAsegurada = desgloseSumaAsegurada;
+    }
+
+    /**
+     * Detalle al que pertenece la factura
+     * @param detalleSiniestro the detalleSiniestro to set
+     */
     public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
         this.detalleSiniestro = detalleSiniestro;
+    }
+
+    /**
+     * Estatus en el que se encuentra el pago de la factura
+     * @param estatusPago the estatusPago to set
+     */
+    public void setEstatusPago(EstatusPago estatusPago) {
+        this.estatusPago = estatusPago;
+    }
+
+    /**
+     * fecha en que fue facturado
+     * @param fechaFactura the fechaFactura to set
+     */
+    public void setFechaFactura(Date fechaFactura) {
+        this.fechaFactura = fechaFactura;
+    }
+
+    /**
+     * Fecha en que se paga
+     * @param fechaPagado the fechaPagado to set
+     */
+    public void setFechaPagado(Date fechaPagado) {
+        this.fechaPagado = fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
+     * @param fechaRecepcion the fechaRecepcion to set
+     */
+    public void setFechaRecepcion(Date fechaRecepcion) {
+        this.fechaRecepcion = fechaRecepcion;
+    }
+
+    /**
+     * fecha en q la seleccionan para ser pagada
+     * @param fechaSeleccionado the fechaSeleccionado to set
+     */
+    public void setFechaSeleccionado(Date fechaSeleccionado) {
+        this.fechaSeleccionado = fechaSeleccionado;
+    }
+
+    /**
+     * total de gastos clinicos
+     * //TODO VER Q HAGO CON ESTO
+     * esto es a lo que se le retenie impuesto
+     * @param gastosClinicos the gastosClinicos to set
+     */
+    public void setGastosClinicos(Double gastosClinicos) {
+        this.gastosClinicos = gastosClinicos;
+    }
+
+    /**
+     * Total por honorarios medicos
+     * //TODO VER Q HAGO CON ESTO
+     * @param honorariosMedicos the honorariosMedicos to set
+     */
+    public void setHonorariosMedicos(Double honorariosMedicos) {
+        this.honorariosMedicos = honorariosMedicos;
+    }
+
+    /**
+     * Pk autogenerado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * descuento deducible
+     * @param montoDescuentoDesducible the montoDescuentoDesducible to set
+     */
+    public void setMontoDescuentoDesducible(Double montoDescuentoDesducible) {
+        this.montoDescuentoDesducible = montoDescuentoDesducible;
+    }
+
+    /**
+     * decuento pronto pago
+     * @param montoDescuentoProntoPago the montoDescuentoProntoPago to set
+     */
+    public void setMontoDescuentoProntoPago(Double montoDescuentoProntoPago) {
+        this.montoDescuentoProntoPago = montoDescuentoProntoPago;
+    }
+
+    /**
+     * total IVA
+     * @param montoIva the montoIva to set
+     */
+    public void setMontoIva(Double montoIva) {
+        this.montoIva = montoIva;
+    }
+
+    /**
+     * monto que la empresa no apara registrados en la factura
+     * @param montoNoAmparado the montoNoAmparado to set
+     */
+    public void setMontoNoAmparado(Double montoNoAmparado) {
+        this.montoNoAmparado = montoNoAmparado;
+    }
+
+    /**
+     * cuanto sera retenido por iva
+     * @param montoRetencionIva the montoRetencionIva to set
+     */
+    public void setMontoRetencionIva(Double montoRetencionIva) {
+        this.montoRetencionIva = montoRetencionIva;
+    }
+
+    /**
+     * monto de islr q sera retenido todo el ISLR se retiene
+     * @param montoReteniconIsrl the montoReteniconIsrl to set
+     */
+    public void setMontoReteniconIsrl(Double montoReteniconIsrl) {
+        this.montoReteniconIsrl = montoReteniconIsrl;
+    }
+
+    /**
+     * base imponible
+     * @param montoSujetoRetencion the montoSujetoRetencion to set
+     */
+    public void setMontoSujetoRetencion(Double montoSujetoRetencion) {
+        this.montoSujetoRetencion = montoSujetoRetencion;
+    }
+
+    /**
+     * TM Timbre Municipal
+     * @param montoTM the montoTM to set
+     */
+    public void setMontoTM(Double montoTM) {
+        this.montoTM = montoTM;
+    }
+
+    /**
+     * numero de control de la factura
+     * si no existe coloque N/A
+     * @param numeroControl the numeroControl to set
+     */
+    public void setNumeroControl(String numeroControl) {
+        this.numeroControl = numeroControl;
+    }
+
+    /**
+     * identificador de la factura
+     * @param numeroFactura the numeroFactura to set
+     */
+    public void setNumeroFactura(String numeroFactura) {
+        this.numeroFactura = numeroFactura;
+    }
+
+    /**
+     * version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
+    }
+
+    /**
+     * porcentaje de iva que sera retenido
+     * si es mayor que 100% se estable 100% y si es menor a 0 
+     * se establese 0
+     * @param porcentajeRetencionIva the porcenajeRetencionIva to set
+     */
+    public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
+        if (porcentajeRetencionIva < 1) {
+            if (porcentajeRetencionIva < 0) {
+                this.porcentajeRetencionIva = 0d;
+            } else {
+                this.porcentajeRetencionIva = porcentajeRetencionIva;
+            }
+        } else {
+            this.porcentajeRetencionIva = 1d;
+        }
+    }
+
+    /**
+     * porcentaje de iva para la fecha de facturacion
+     * @param porcentajeIva the porcentajeIva to set
+     */
+    public void setPorcentajeIva(Double porcentajeIva) {
+        this.porcentajeIva = porcentajeIva;
+    }
+
+    /**
+     * TM Timbre Municipal
+     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
+     * @param porcentajeTM the porcentajeTM to set
+     */
+    public void setPorcentajeTM(Double porcentajeTM) {
+        this.porcentajeTM = porcentajeTM;
+    }
+
+    /**
+     * sustraendo aplica al ISLR
+     * //TODO FIX JAVADOC
+     * @param sustraendo the sustraendo to set
+     */
+    public void setSustraendo(Double sustraendo) {
+        this.sustraendo = sustraendo;
+    }
+
+    /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     * @param tipoConceptoSeniat the tipoConceptoSeniat to set
+     */
+    public void setTipoConceptoSeniat(ConceptoSENIAT tipoConceptoSeniat) {
+        this.tipoConceptoSeniat = tipoConceptoSeniat;
+    }
+
+    /**
+     * totalLiquidado - totalRetenido
+     * @param totalACancelar the totalACancelar to set
+     */
+    public void setTotalACancelar(Double totalACancelar) {
+        this.totalACancelar = totalACancelar;
+    }
+
+    /**
+     * total facturado
+     * @param totalFacturado the totalFacturado to set
+     */
+    public void setTotalFacturado(Double totalFacturado) {
+        this.totalFacturado = totalFacturado;
+    }
+
+    /**
+     * total liquidado por la empresa
+     * @param totalLiquidado the totalLiquidado to set
+     */
+    public void setTotalLiquidado(Double totalLiquidado) {
+        this.totalLiquidado = totalLiquidado;
+    }
+
+    /**
+     * total retenido entre IVA e ISLR
+     * @param totalRetenido the totalRetenido to set
+     */
+    public void setTotalRetenido(Double totalRetenido) {
+        this.totalRetenido = totalRetenido;
+    }
+
+    /**
+     * UT Unidad Tributaria
+     * @param valorUT the valorUT to set
+     */
+    public void setValorUT(Double valorUT) {
+        this.valorUT = valorUT;
     }
 }

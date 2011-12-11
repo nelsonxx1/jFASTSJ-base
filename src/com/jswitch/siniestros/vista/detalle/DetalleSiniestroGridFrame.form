@@ -135,6 +135,13 @@
                 <Property name="preferredWidth" type="int" value="40"/>
               </Properties>
             </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
@@ -157,6 +164,20 @@
               <Properties>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;montoFacturado&quot;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn3">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;montoLiquidado&quot;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn4">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;montoACancelar&quot;" type="code"/>
                 </Property>
               </Properties>
             </Component>

@@ -105,7 +105,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                 if (c.equals(Vida.class)) {
                     new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, (Siniestro) beanVO, false);
                 } else {
-                    new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, false, (Siniestro) beanVO, c);
+                    new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
                 }
             }
         }

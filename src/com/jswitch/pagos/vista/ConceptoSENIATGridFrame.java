@@ -1,22 +1,18 @@
-package com.jswitch.configuracion.vista;
+package com.jswitch.pagos.vista;
 
-import com.jswitch.base.controlador.util.DefaultLookupControllerPorNombre;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
 import com.jswitch.base.vista.util.DefaultGridFrame;
-import com.jswitch.configuracion.controlador.CoberturaLookupController;
-import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 
 /**
  * 
  * @author Orlando Becerra
  */
-public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
+public class ConceptoSENIATGridFrame extends DefaultGridFrame {
 
-    public ConfiguracionCoberturaGridFrame() {
+    public ConceptoSENIATGridFrame() {
     }
 
     @SuppressWarnings("unchecked")
@@ -33,18 +29,16 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
-        codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
-        checkBoxColumn2 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
-        checkBoxColumn5 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
-        checkBoxColumn4 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
 
-        setTitle("Configuracion Cobertura");
+        setTitle("Mantenimiento");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,7 +57,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,49 +78,48 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         gridData.setExportButton(exportButton1);
         gridData.setFunctionId("Mantenimiento");
         gridData.setInsertButton(insertButton1);
-        gridData.setMaxNumberOfRowsOnInsert(20);
         gridData.setReloadButton(reloadButton1);
         gridData.setSaveButton(saveButton1);
-        gridData.setValueObjectClassName(ConfiguracionCobertura.class.getName());
+        gridData.setValueObjectClassName("");
 
         decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(50);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn1.setColumnName("cobertura.ramo.nombre");
+        textColumn4.setColumnName("codigo");
+        textColumn4.setColumnSortable(true);
+        textColumn4.setEditableOnEdit(true);
+        textColumn4.setEditableOnInsert(true);
+        textColumn4.setPreferredWidth(70);
+        gridData.getColumnContainer().add(textColumn4);
+
+        textColumn1.setColumnFilterable(true);
+        textColumn1.setColumnName("nombre");
+        textColumn1.setColumnSortable(true);
+        textColumn1.setEditableOnEdit(true);
+        textColumn1.setEditableOnInsert(true);
+        textColumn1.setMaxCharacters(100);
+        textColumn1.setPreferredWidth(300);
+        textColumn1.setTrimText(true);
+        textColumn1.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn1);
 
-        codLookupColumn1.setColumnName("cobertura.nombre");
-        codLookupColumn1.setEditableOnEdit(true);
-        codLookupColumn1.setEditableOnInsert(true);
-        gridData.getColumnContainer().add(codLookupColumn1);
-
-        checkBoxColumn2.setColumnName("baseImponible");
-        checkBoxColumn2.setEditableOnEdit(true);
-        checkBoxColumn2.setEditableOnInsert(true);
-        checkBoxColumn2.setPreferredWidth(70);
-        gridData.getColumnContainer().add(checkBoxColumn2);
-
-        checkBoxColumn5.setColumnName("islr");
-        checkBoxColumn5.setColumnRequired(false);
-        checkBoxColumn5.setEditableOnEdit(true);
-        checkBoxColumn5.setEditableOnInsert(true);
-        checkBoxColumn5.setPreferredWidth(70);
-        gridData.getColumnContainer().add(checkBoxColumn5);
-
-        checkBoxColumn4.setColumnName("iva");
-        checkBoxColumn4.setColumnRequired(false);
-        checkBoxColumn4.setEditableOnEdit(true);
-        checkBoxColumn4.setEditableOnInsert(true);
-        checkBoxColumn4.setPreferredWidth(70);
-        gridData.getColumnContainer().add(checkBoxColumn4);
+        currencyColumn1.setColumnName("porcentajeRetencionIslr");
+        currencyColumn1.setColumnSortable(true);
+        currencyColumn1.setCurrencySymbol("%");
+        currencyColumn1.setDecimals(2);
+        currencyColumn1.setEditableOnEdit(true);
+        currencyColumn1.setEditableOnInsert(true);
+        currencyColumn1.setMaxValue(1.0);
+        currencyColumn1.setPreferredWidth(70);
+        gridData.getColumnContainer().add(currencyColumn1);
 
         checkBoxColumn1.setColumnName("auditoria.activo");
         checkBoxColumn1.setEditableOnEdit(true);
         checkBoxColumn1.setEditableOnInsert(true);
+        checkBoxColumn1.setPreferredWidth(70);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
         dateTimeColumn1.setColumnName("auditoria.fechaInsert");
@@ -149,16 +142,16 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,10 +171,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn4;
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn5;
-    private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
@@ -197,22 +187,17 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void inicializar(GridDataLocator gridDataLocator,
-            GridController gridController, String valueObjectClassName, String titulo, boolean addToMDIFrame) {
+            GridController gridController, String valueObjectClassName, String titulo, boolean addToMDIFrame ) {
         initComponents();
-        if (titulo != null) {
-            this.setTitle(titulo);
-        }
+        this.setTitle(titulo);
         gridData.setValueObjectClassName(valueObjectClassName);
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-        CoberturaLookupController l = new CoberturaLookupController();
-        l.addLookup2ParentLink("cobertura");
-        codLookupColumn1.setLookupController(l);
-
         if (addToMDIFrame) {
             pack();
         } else {

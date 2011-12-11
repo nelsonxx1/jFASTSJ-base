@@ -11,9 +11,12 @@ import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
@@ -115,6 +118,13 @@ public class OrdenDePagoDetailFrameController
         if (pago.getCodigoSIGECOF() != null && pago.getCodigoSIGECOF().trim().isEmpty()) {
             pago.setCodigoSIGECOF(null);
         }
+        if (pago.getCodigoSIGECOF() != null) {
+            Pattern p = Pattern.compile("[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+");
+            Matcher m = p.matcher(pago.getCodigoSIGECOF());
+            if (!m.matches()) {
+                return new ErrorResponse("CODIGO SIGECOF INVALIDO");
+            }
+        }
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
@@ -144,7 +154,7 @@ public class OrdenDePagoDetailFrameController
         if (pago.getCodigoSIGECOF() != null) {
             pago.setMontoPagar(0d);
             for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
-                pago.setMontoPagar(pago.getMontoPagar() + detalleSiniestro.getMontoLiquidado());
+                pago.setMontoPagar(pago.getMontoPagar() + detalleSiniestro.getMontoACancelar());
             }
         }
 

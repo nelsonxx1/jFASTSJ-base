@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="CONF_ConfiguracionPrima")
+@Table(name = "CONF_ConfiguracionCobertura")
 public class ConfiguracionCobertura extends BeanVO implements Serializable, Auditable {
 
     /**
@@ -39,87 +39,146 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
      * booleano que dice si aplica no para la base imponible
      */
     @Column
-    private Boolean baseInponible;
+    private Boolean baseImponible;
     /**
-     * 
+     * aplica IVA
      */
     @Column
     private Boolean iva;
     /**
-     *
+     * aplica ISLR
      */
     @Column
     private Boolean islr;
     /**
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * Auditoria
      */
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
 
     public ConfiguracionCobertura() {
+        islr = Boolean.FALSE;
+        iva = Boolean.FALSE;
+        baseImponible = Boolean.TRUE;
     }
 
-    @Override
+    /**
+     * Auditoria
+     * @return the auditoria
+     */
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
-    @Override
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
+    /**
+     * booleano que dice si aplica no para la base imponible
+     * @return the baseImponible
+     */
+    public Boolean getBaseImponible() {
+        return baseImponible;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
+    /**
+     * Diagnostico al cual se esta cubriendo
+     * @return the cobertura
+     */
     public Cobertura getCobertura() {
         return cobertura;
     }
 
-    public void setCobertura(Cobertura cobertura) {
-        this.cobertura = cobertura;
+    /**
+     * PK autoincremtado
+     * @return the id
+     */
+    public Long getId() {
+        return id;
     }
 
+    /**
+     * aplica ISLR
+     * @return the islr
+     */
     public Boolean getIslr() {
         return islr;
     }
 
-    public void setIslr(Boolean islr) {
-        this.islr = islr;
-    }
-
+    /**
+     * aplica IVA
+     * @return the iva
+     */
     public Boolean getIva() {
         return iva;
     }
 
+    /**
+     * version
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
+    }
+
+    /**
+     * Auditoria
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * booleano que dice si aplica no para la base imponible
+     * @param baseImponible the baseImponible to set
+     */
+    public void setBaseImponible(Boolean baseImponible) {
+        this.baseImponible = baseImponible;
+    }
+
+    /**
+     * Diagnostico al cual se esta cubriendo
+     * @param cobertura the cobertura to set
+     */
+    public void setCobertura(Cobertura cobertura) {
+        this.cobertura = cobertura;
+    }
+
+    /**
+     * PK autoincremtado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * aplica ISLR
+     * @param islr the islr to set
+     */
+    public void setIslr(Boolean islr) {
+        this.islr = islr;
+    }
+
+    /**
+     * aplica IVA
+     * @param iva the iva to set
+     */
     public void setIva(Boolean iva) {
         this.iva = iva;
     }
 
-    public Boolean getBaseInponible() {
-        return baseInponible;
+    /**
+     * version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
     }
 
-    public void setBaseInponible(Boolean baseInponible) {
-        this.baseInponible = baseInponible;
-    }
 }
