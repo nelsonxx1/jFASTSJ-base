@@ -200,7 +200,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                     + EtapaSiniestro.class.getName() + " C WHERE "
                     + "idPropio=?").setString(0, "LIQ").uniqueResult();
 
-            if (  d.getEtapaSiniestro().getId().compareTo(
+            if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
                 Double l = 0d, f = 0d, c = 0d;
                 for (Factura factura : d.getPagos()) {
@@ -225,6 +225,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
         if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0 
                 || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
                 compareTo("PENDIENTE") != 0) {
             ((DetalleSiniestroDetailFrame) vista).getEditButton1().setVisible(false);

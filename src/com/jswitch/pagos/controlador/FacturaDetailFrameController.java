@@ -128,7 +128,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 ConfiguracionCobertura c = getConfiCober(dc.getCobertura());
-                double iva = c.getIva() ? 0
+                double iva = !c.getIva() ? 0
                         : (factura.getPorcentajeIva());
                 montoNoAmparado += dc.getMontoNoAmparado() * (1 - iva);
                 montoSujeto += dc.getMontoAmparado() * (1 - iva);

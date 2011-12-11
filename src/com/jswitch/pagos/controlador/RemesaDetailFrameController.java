@@ -60,7 +60,6 @@ public class RemesaDetailFrameController
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
 
-
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -100,22 +99,32 @@ public class RemesaDetailFrameController
     public Response logicaNegocio(ValueObject persistentObject) {
         Session s = null;
         Remesa remesa = (Remesa) persistentObject;
+        EstatusPago etS = null;
+
+        if (remesa.getEstatusPago() == EstatusPago.ANULADO) {
+            etS = EstatusPago.PENDIENTE;
+        } else if (remesa.getEstatusPago() == EstatusPago.PENDIENTE
+                || remesa.getEstatusPago() == EstatusPago.SELECCIONADO) {
+            etS = EstatusPago.SELECCIONADO;
+
+        } else if (remesa.getEstatusPago() == EstatusPago.PAGADO) {
+            etS = EstatusPago.PAGADO;
+        }
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
-            EstatusPago etS = null;
-            if (remesa.getEstatusPago() == EstatusPago.ANULADO) {
-                etS = EstatusPago.PENDIENTE;
-            } else if (remesa.getEstatusPago() == EstatusPago.PENDIENTE
-                    || remesa.getEstatusPago() == EstatusPago.SELECCIONADO) {
-                etS = EstatusPago.SELECCIONADO;
-
-            } else if (remesa.getEstatusPago() == EstatusPago.PAGADO) {
-                etS = EstatusPago.PAGADO;
-            }
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
+                if (etS == EstatusPago.PAGADO) {
+                    ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
+                    Hibernate.initialize(ordenDePago.getDetalleSiniestros());
+                    for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
+                        detalleSiniestro.setEtapaSiniestro(null);
+                    }
+                }
                 ordenDePago.setEstatusPago(etS);
                 s.update(ordenDePago);
+
+
             }
             s.getTransaction().commit();
         } finally {
