@@ -58,6 +58,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
+import java.util.List;
 import oracle.help.Help;
 import oracle.help.library.helpset.HelpSet;
 import oracle.help.library.helpset.HelpSetParseException;
@@ -126,7 +127,10 @@ public class Principal implements MDIController, LoginController {
             s = HibernateUtil.getSessionFactory().openSession();
             defaultData.persona = (DefaultPersona) s.createQuery("FROM " + DefaultPersona.class.getName()).uniqueResult();
             General.defaultPersona = defaultData.persona;
-            General.configuracionesGenerales = (ConfiguracionesGenerales) s.createQuery("FROM " + ConfiguracionesGenerales.class.getName()).uniqueResult();
+            List<ConfiguracionesGenerales> l = (List<ConfiguracionesGenerales>) s.createQuery("FROM " + ConfiguracionesGenerales.class.getName()).list();
+            for (ConfiguracionesGenerales c : l) {
+                General.parametros.put(c.getNombre(), c);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(MDIFrame.getInstance(), "Error Cargando Datos por Defecto.\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             LoggerUtil.error(Principal.class, "new", ex);

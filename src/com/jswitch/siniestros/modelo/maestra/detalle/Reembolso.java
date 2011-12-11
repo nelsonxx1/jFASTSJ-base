@@ -1,9 +1,12 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.Dominios;
+import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,10 +53,17 @@ public class Reembolso extends DetalleSiniestro {
      */
     @Transient
     protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
-    
+
     public Reembolso() {
         setPresupuestadoAjustado(0d);
         setPresupuestadoInicial(0d);
+        this.fechaNotificacion = new Date();
+        if (General.parametros != null && General.parametros.get("reembolso.diasVencimiento") != null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(this.fechaNotificacion);
+            c.add(Calendar.DAY_OF_MONTH, General.parametros.get("reembolso.diasVencimiento").getValorInteger());
+            setFechaVencimiento(c.getTime());
+        }
     }
 
     public Date getFechaConstitucion() {

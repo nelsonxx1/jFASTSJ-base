@@ -1,5 +1,6 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
@@ -13,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 /**
@@ -32,14 +32,6 @@ public class APS extends DetalleSiniestro {
     @BusinessKey
     private Date fechaEmision;
     /**
-     *
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Future
-    @BusinessKey
-    private Date fechaVencimiento;
-    /**
      * 
      */
     @Transient
@@ -47,9 +39,12 @@ public class APS extends DetalleSiniestro {
 
     public APS() {
         this.fechaEmision = new Date();
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DAY_OF_MONTH, 15);
-        this.fechaVencimiento = c.getTime();
+        if (General.parametros != null && General.parametros.get("aps.diasVencimiento") != null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(this.fechaEmision);
+            c.add(Calendar.DAY_OF_MONTH, General.parametros.get("aps.diasVencimiento").getValorInteger());
+            setFechaVencimiento(c.getTime());
+        }
     }
 
     public Date getFechaEmision() {
@@ -58,14 +53,6 @@ public class APS extends DetalleSiniestro {
 
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     public Set<Reporte> getReportes() {

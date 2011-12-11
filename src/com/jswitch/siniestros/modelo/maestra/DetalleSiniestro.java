@@ -38,8 +38,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 /**
@@ -135,11 +138,20 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * fecha en q se liquida el siniestro
      */
     @Column
+    @Temporal(value = TemporalType.DATE)
     @BusinessKey
     @Past
     private Date fechaLiquidado;
     /**
-     * ramo al q pertenece el siniestro
+     *
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @Future
+    @BusinessKey
+    private Date fechaVencimiento;
+    /**
+     * 
      */
     @ManyToOne
     @BusinessKey(exclude = Method.ALL)
@@ -633,12 +645,19 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.tipoPersona = tipoPersona;
     }
 
-    /**
-     * Tipo de siniestro
-     * @param tipoSiniestro the tipoSiniestro to set
-     */
-    public void setTipoSiniestro(TipoSiniestro tipoSiniestro) {
-        this.tipoSiniestro = tipoSiniestro;
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public Boolean getSelected() {
+        if (selected == null) {
+            selected = Boolean.FALSE;
+        }
+        return selected;
     }
 
     /**

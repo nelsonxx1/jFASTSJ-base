@@ -100,7 +100,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double sustraendo;
     /**
-     * monto de islr q sera retenido
+     *
+     */
+    @Column
+    @BusinessKey
+    private Double porcentajeReteniconIsrl;
+    /**
+     *
      */
     @Column
     @BusinessKey
@@ -275,21 +281,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         totalFacturado = 0d;
         totalLiquidado = 0d;
         totalRetenido = 0d;
-        if (General.configuracionesGenerales != null && General.configuracionesGenerales.getPorcentajeIVA() != null) {
-            porcentajeIva = General.configuracionesGenerales.getPorcentajeIVA();
+        if (General.parametros != null && General.parametros.get("iva") != null) {
+            porcentajeIva = General.parametros.get("iva").getValorDouble();
         } else {
             porcentajeIva = 0d;
         }
-        porcentajeRetencionIva = 0d;
+        porcenajeRetencionIva = 0d;
         porcentajeTM = 0d;
-    }
-
-    /**
-     * auditoria Bitacora
-     * @return the auditoria
-     */
-    public AuditoriaBasica getAuditoria() {
-        return auditoria;
+        porcentajeReteniconIsrl = 0d;
     }
 
     /**
@@ -727,44 +726,18 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         this.numeroControl = numeroControl;
     }
 
-    /**
-     * identificador de la factura
-     * @param numeroFactura the numeroFactura to set
-     */
-    public void setNumeroFactura(String numeroFactura) {
-        this.numeroFactura = numeroFactura;
+    public Double getPorcentajeReteniconIsrl() {
+        return porcentajeReteniconIsrl;
     }
 
-    /**
-     * version
-     * @param optLock the optLock to set
-     */
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
+    public void setPorcentajeReteniconIsrl(Double porcentajeReteniconIsrl) {
+        this.porcentajeReteniconIsrl = porcentajeReteniconIsrl;
     }
 
-    /**
-     * porcentaje de iva que sera retenido
-     * si es mayor que 100% se estable 100% y si es menor a 0 
-     * se establese 0
-     * @param porcentajeRetencionIva the porcenajeRetencionIva to set
-     */
-    public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
-        if (porcentajeRetencionIva < 1) {
-            if (porcentajeRetencionIva < 0) {
-                this.porcentajeRetencionIva = 0d;
-            } else {
-                this.porcentajeRetencionIva = porcentajeRetencionIva;
-            }
-        } else {
-            this.porcentajeRetencionIva = 1d;
-        }
+    public Double getPorcentajeIva() {
+        return porcentajeIva;
     }
 
-    /**
-     * porcentaje de iva para la fecha de facturacion
-     * @param porcentajeIva the porcentajeIva to set
-     */
     public void setPorcentajeIva(Double porcentajeIva) {
         this.porcentajeIva = porcentajeIva;
     }

@@ -1,9 +1,12 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.Dominios;
+import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 /**
@@ -31,22 +33,19 @@ public class CartaAval extends DetalleSiniestro {
     @BusinessKey
     private Date fechaEmision;
     /**
-     *
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Future
-    @BusinessKey
-    private Date fechaVencimiento;
-    /**
      * 
      */
     @Transient
     protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
-    
+
     public CartaAval() {
         this.fechaEmision = new Date();
-
+        if (General.parametros != null && General.parametros.get("cartaAval.diasVencimiento") != null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(this.fechaEmision);
+            c.add(Calendar.DAY_OF_MONTH, General.parametros.get("cartaAval.diasVencimiento").getValorInteger());
+            setFechaVencimiento(c.getTime());
+        }
     }
 
     public Date getFechaEmision() {
@@ -55,14 +54,6 @@ public class CartaAval extends DetalleSiniestro {
 
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     public Set<Reporte> getReportes() {
