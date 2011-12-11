@@ -2,7 +2,6 @@ package com.jswitch.siniestros.modelo.maestra.detalle;
 
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.Dominios;
-import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -41,10 +40,18 @@ public class CartaAval extends DetalleSiniestro {
     public CartaAval() {
         this.fechaEmision = new Date();
         if (General.parametros != null && General.parametros.get("cartaAval.diasVencimiento") != null) {
-            Calendar c = Calendar.getInstance();
-            c.setTime(this.fechaEmision);
-            c.add(Calendar.DAY_OF_MONTH, General.parametros.get("cartaAval.diasVencimiento").getValorInteger());
-            setFechaVencimiento(c.getTime());
+            Calendar c1 = Calendar.getInstance();
+            c1.setTime(this.fechaEmision);
+            c1.add(Calendar.DAY_OF_MONTH, General.parametros.get("cartaAval.diasVencimiento").getValorInteger());
+            super.setFechaVencimiento(c1.getTime());
+            c1.setTime(this.fechaEmision);
+
+            Calendar c2 = Calendar.getInstance();
+            c2.setTime(super.getFechaVencimiento());
+            if (c2.get(Calendar.YEAR) > c1.get(Calendar.YEAR)) {
+                c2.set(c1.get(Calendar.YEAR), 11, 31);
+                super.setFechaVencimiento(c2.getTime());
+            }
         }
     }
 

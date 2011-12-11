@@ -8,8 +8,6 @@ import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.BuscaOrdenDePagoGridFrame;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
-import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -50,9 +48,11 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         Session s = null;
         try {
-            String sql = "FROM " + claseModeloFullPath
+            
+             String sql = "FROM " + claseModeloFullPath
                     + " C WHERE C.estatusPago=? "
                     + "AND C.codigoSIGECOF is not null";
+             
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getAllFromQuery(filteredColumns,
