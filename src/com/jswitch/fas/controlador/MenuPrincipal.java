@@ -510,9 +510,9 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getNewPago() {
-        new BuscarPersonaDialog(
+        new BuscarPersonaDialog((java.awt.Component)null,
                 OrdenDePagoDetailFrameController.class.getName(),
-                OrdenDePago.class.getName(), null);
+                OrdenDePago.class.getName());
     }
 
     public void getPagosGrid() {

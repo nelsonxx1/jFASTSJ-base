@@ -1,5 +1,6 @@
 package com.jswitch.pagos.modelo.maestra;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -100,7 +101,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
-    private Double posentajeReteniconIsrl;
+    private Double porcentajeReteniconIsrl;
     /**
      *
      */
@@ -132,7 +133,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
-    private Double procentajeIva;
+    private Double porcentajeIva;
     /**
      *
      */
@@ -260,6 +261,26 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     public Factura() {
         estatusPago = EstatusPago.PENDIENTE;
+        montoDescuentoDesducible = 0d;
+        montoDescuentoProntoPago = 0d;
+        montoIva = 0d;
+        montoNoAmparado = 0d;
+        montoRetencionIva = 0d;
+        montoReteniconIsrl = 0d;
+        montoSujetoRetencion = 0d;
+        montoTM = 0d;
+        totalACancelar = 0d;
+        totalFacturado = 0d;
+        totalLiquidado = 0d;
+        totalRetenido = 0d;
+        if (General.parametros != null && General.parametros.get("iva") != null) {
+            porcentajeIva = General.parametros.get("iva").getValorDouble();
+        } else {
+            porcentajeIva = 0d;
+        }
+        porcenajeRetencionIva = 0d;
+        porcentajeTM = 0d;
+        porcentajeReteniconIsrl = 0d;
     }
 
     public Long getId() {
@@ -454,20 +475,20 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         this.porcentajeTM = porcentajeTM;
     }
 
-    public Double getPosentajeReteniconIsrl() {
-        return posentajeReteniconIsrl;
+    public Double getPorcentajeReteniconIsrl() {
+        return porcentajeReteniconIsrl;
     }
 
-    public void setPosentajeReteniconIsrl(Double posentajeReteniconIsrl) {
-        this.posentajeReteniconIsrl = posentajeReteniconIsrl;
+    public void setPorcentajeReteniconIsrl(Double porcentajeReteniconIsrl) {
+        this.porcentajeReteniconIsrl = porcentajeReteniconIsrl;
     }
 
-    public Double getProcentajeIva() {
-        return procentajeIva;
+    public Double getPorcentajeIva() {
+        return porcentajeIva;
     }
 
-    public void setProcentajeIva(Double procentajeIva) {
-        this.procentajeIva = procentajeIva;
+    public void setPorcentajeIva(Double porcentajeIva) {
+        this.porcentajeIva = porcentajeIva;
     }
 
     public Double getSustraendo() {

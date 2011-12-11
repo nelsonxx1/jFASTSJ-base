@@ -30,6 +30,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.Empresa;
 import com.jswitch.base.modelo.entidades.Licencia;
 import com.jswitch.base.modelo.entidades.Usuario;
+import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.entidades.defaultData.DefaultData;
 import com.jswitch.base.modelo.entidades.defaultData.DefaultPersona;
 import com.jswitch.base.modelo.entidades.helpcenter.maestra.Mensaje;
@@ -57,6 +58,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
+import java.util.List;
 import oracle.help.Help;
 import oracle.help.library.helpset.HelpSet;
 import oracle.help.library.helpset.HelpSetParseException;
@@ -90,7 +92,7 @@ public class Principal implements MDIController, LoginController {
         //ClientSettings.TREE_BACK = "background_tree.jpg";
         //ClientSettings.BACKGROUND = "background3.png";        
         //ClientSettings.BACK_IMAGE_DISPOSITION = Consts.BACK_IMAGE_CENTERED;
-        
+
         //System.out.println(General.usuarioOS);
 
         splah = new Splash();
@@ -120,9 +122,15 @@ public class Principal implements MDIController, LoginController {
         //ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "com.lipstikLF.LipstikLookAndFeel";
         //ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "oracle.bali.ewt.olaf.OracleLookAndFeel";
         splah.setValue("Cargando Datos por Defecto", 30);
+        Session s = null;
         try {
-            defaultData.persona = (DefaultPersona) HibernateUtil.getSessionFactory().openSession().createQuery("FROM " + DefaultPersona.class.getName()).uniqueResult();
+            s = HibernateUtil.getSessionFactory().openSession();
+            defaultData.persona = (DefaultPersona) s.createQuery("FROM " + DefaultPersona.class.getName()).uniqueResult();
             General.defaultPersona = defaultData.persona;
+            List<ConfiguracionesGenerales> l = (List<ConfiguracionesGenerales>) s.createQuery("FROM " + ConfiguracionesGenerales.class.getName()).list();
+            for (ConfiguracionesGenerales c : l) {
+                General.parametros.put(c.getNombre(), c);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(MDIFrame.getInstance(), "Error Cargando Datos por Defecto.\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             LoggerUtil.error(Principal.class, "new", ex);
@@ -148,7 +156,7 @@ public class Principal implements MDIController, LoginController {
                 new Spanish("Bs", true, props), dominios);
 
         splah.setValue("Configurando Aplicacion", 80);
-        
+
         ClientSettings.DISABLED_INPUT_CONTROLS_FOCUSABLE = true;
         ClientSettings.FILL_FIND_FUNCTION_FIELD = true;
         ClientSettings.FILTER_SYMBOL = "filter2.png";

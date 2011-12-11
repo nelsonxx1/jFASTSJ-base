@@ -41,12 +41,7 @@ public class BuscarPersonaDialog extends InternalFrame {
     private String detailFramePath;
     private String modelClass;
 
-    public BuscarPersonaDialog(Component owner) {
-        this(PersonaDetailFrame.class.getName(), Persona.class.getName(), owner);
-    }
-
-    public BuscarPersonaDialog(String detailFramePath, String modelClass, Component owner) {
-
+    public BuscarPersonaDialog(Component owner, String detailFramePath, String modelClass) {
         this.detailFramePath = detailFramePath;
         this.modelClass = modelClass;
         initComponents();
@@ -69,6 +64,10 @@ public class BuscarPersonaDialog extends InternalFrame {
             setLocation((owner.getWidth() - this.getWidth()) / 2 + (int) owner.getLocationOnScreen().getX(), (owner.getHeight() - this.getHeight()) / 2 + (int) owner.getLocationOnScreen().getY());
         }
         MDIFrame.add(this);
+    }
+
+    public BuscarPersonaDialog(Component owner) {
+        this(owner, PersonaDetailFrame.class.getName(), Persona.class.getName());
     }
 
     @SuppressWarnings("unchecked")
