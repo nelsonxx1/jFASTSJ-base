@@ -31,21 +31,13 @@ public class AyudaSocial extends DetalleSiniestro {
     @BusinessKey
     private Date fechaEmision;
     /**
-     *
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Future
-    @BusinessKey
-    private Date fechaVencimiento;
-    /**
      * 
      */
     @Transient
     protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
     
     public AyudaSocial() {
-        this.fechaEmision = new Date();
+        this.fechaEmision = new Date();        
     }
 
     public Date getFechaEmision() {
@@ -53,15 +45,7 @@ public class AyudaSocial extends DetalleSiniestro {
     }
 
     public void setFechaEmision(Date fechaEmision) {
-        this.fechaEmision = fechaEmision;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+        this.fechaEmision = new Date();
     }
 
     public Set<Reporte> getReportes() {

@@ -4,6 +4,8 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.pagos.modelo.maestra.Factura;
+import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
+import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.Collection;
@@ -44,7 +46,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         Response res = super.updateRecord(oldPersistentObject, persistentObject);
         if (res instanceof VOResponse) {
             updateDetalleSiniestro();
-            vista.getMainPanel().getReloadButton().doClick();
         }
         return res;
     }
@@ -64,7 +65,11 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public void afterInsertData() {
         vista.getMainPanel().getReloadButton().doClick();
+    }
 
+    @Override
+    public void afterEditData() {
+        vista.getMainPanel().getReloadButton().doClick();
     }
 
     @Override
@@ -96,6 +101,21 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                 return new ErrorResponse("user.aborted");
             }
         }
+
+        Double x = 0d;
+        for (DesgloseCobertura li : liquidacion.getDesgloseCobertura()) {
+            x += li.getMontoFacturado();
+        }
+        if (x.doubleValue() > liquidacion.getTotalFacturado().doubleValue()) {
+            return new ErrorResponse("monto menor al reflejado");
+        }
+        x = 0d;
+        for (DesgloseSumaAsegurada li : liquidacion.getDesgloseSumaAsegurada()) {
+            x += li.getMonto();
+        }
+        if (x.doubleValue() > liquidacion.getTotalFacturado().doubleValue()) {
+            return new ErrorResponse("monto menor al reflejado");
+        }
         return new VOResponse(liquidacion);
     }
 
@@ -114,15 +134,8 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         }
         detalleSiniestro = sin;
 
-//            Hibernate.initialize(detalleSiniestro.getDiagnosticoSiniestros());
-//            Hibernate.initialize(detalleSiniestro.getDocumentos());
-//            Hibernate.initialize(detalleSiniestro.getObservaciones());
-//            Hibernate.initialize(detalleSiniestro.getNotasTecnicas());
-
         s = HibernateUtil.getSessionFactory().openSession();
         try {
-
-
             Collection<Factura> fac = detalleSiniestro.getPagos();
             Double facturado = 0d;
             for (Factura factura : fac) {

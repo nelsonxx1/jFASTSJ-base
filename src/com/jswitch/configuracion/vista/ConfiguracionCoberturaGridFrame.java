@@ -35,6 +35,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
+        checkBoxColumn2 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn5 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn4 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
@@ -103,6 +104,12 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         codLookupColumn1.setEditableOnInsert(true);
         gridData.getColumnContainer().add(codLookupColumn1);
 
+        checkBoxColumn2.setColumnName("baseImponible");
+        checkBoxColumn2.setEditableOnEdit(true);
+        checkBoxColumn2.setEditableOnInsert(true);
+        checkBoxColumn2.setPreferredWidth(70);
+        gridData.getColumnContainer().add(checkBoxColumn2);
+
         checkBoxColumn5.setColumnName("islr");
         checkBoxColumn5.setColumnRequired(false);
         checkBoxColumn5.setEditableOnEdit(true);
@@ -150,7 +157,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
 
@@ -171,6 +178,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn4;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn5;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;

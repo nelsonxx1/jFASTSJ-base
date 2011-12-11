@@ -98,7 +98,9 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         Double liquidado = asegurada.getMonto();
         for (DesgloseSumaAsegurada desgloseSumaAsegurada : liquidacion.getDesgloseSumaAsegurada()) {
             if (asegurada.getId() == null || desgloseSumaAsegurada.getId().compareTo(asegurada.getId()) != 0) {
-                liquidado += desgloseSumaAsegurada.getMonto();
+                if (desgloseSumaAsegurada.getAuditoria().getActivo()) {
+                    liquidado += desgloseSumaAsegurada.getMonto();
+                }
             }
         }
         return liquidado > liquidacion.getTotalFacturado();
