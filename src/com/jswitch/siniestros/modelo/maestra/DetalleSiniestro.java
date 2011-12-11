@@ -239,7 +239,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Boolean getSelected() {
         if (selected == null) {
-            selected = Boolean.FALSE;
+            setSelected(Boolean.FALSE);
         }
         return selected;
     }
@@ -290,6 +290,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Date getFechaLiquidado() {
         return fechaLiquidado;
+    }
+
+    /**
+     *
+     * @return the fechaVencimiento
+     */
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
     /**
@@ -389,7 +397,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * ramo al q pertenece el siniestro
+     *
      * @return the ramo
      */
     public Ramo getRamo() {
@@ -493,6 +501,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     *
+     * @param fechaVencimiento the fechaVencimiento to set
+     */
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    /**
      * Pk autogenerado
      * @param id the id to set
      */
@@ -589,7 +605,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * ramo al q pertenece el siniestro
+     *
      * @param ramo the ramo to set
      */
     public void setRamo(Ramo ramo) {
@@ -645,19 +661,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.tipoPersona = tipoPersona;
     }
 
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public Boolean getSelected() {
-        if (selected == null) {
-            selected = Boolean.FALSE;
-        }
-        return selected;
+    /**
+     * Tipo de siniestro
+     * @param tipoSiniestro the tipoSiniestro to set
+     */
+    public void setTipoSiniestro(TipoSiniestro tipoSiniestro) {
+        this.tipoSiniestro = tipoSiniestro;
     }
 
     /**
@@ -667,4 +676,5 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     public void setTratamientoEfectuado(TratamientoEfectuado tratamientoEfectuado) {
         this.tratamientoEfectuado = tratamientoEfectuado;
     }
+
 }

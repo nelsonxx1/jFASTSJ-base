@@ -286,9 +286,17 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         } else {
             porcentajeIva = 0d;
         }
-        porcenajeRetencionIva = 0d;
+        porcentajeRetencionIva = 0d;
         porcentajeTM = 0d;
         porcentajeReteniconIsrl = 0d;
+    }
+
+    /**
+     * auditoria Bitacora
+     * @return the auditoria
+     */
+    public AuditoriaBasica getAuditoria() {
+        return auditoria;
     }
 
     /**
@@ -423,7 +431,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * monto de islr q sera retenido
+     *
      * @return the montoReteniconIsrl
      */
     public Double getMontoReteniconIsrl() {
@@ -472,6 +480,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * porcentaje de iva para la fecha de facturacion
+     * @return the porcentajeIva
+     */
+    public Double getPorcentajeIva() {
+        return porcentajeIva;
+    }
+
+    /**
      * porcentaje de iva que sera retenido
      * @return the porcentajeRetencionIva
      */
@@ -480,11 +496,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * porcentaje de iva para la fecha de facturacion
-     * @return the porcentajeIva
+     *
+     * @return the porcentajeReteniconIsrl
      */
-    public Double getPorcentajeIva() {
-        return porcentajeIva;
+    public Double getPorcentajeReteniconIsrl() {
+        return porcentajeReteniconIsrl;
     }
 
     /**
@@ -694,7 +710,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * monto de islr q sera retenido todo el ISLR se retiene
+     *
      * @param montoReteniconIsrl the montoReteniconIsrl to set
      */
     public void setMontoReteniconIsrl(Double montoReteniconIsrl) {
@@ -726,20 +742,44 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         this.numeroControl = numeroControl;
     }
 
-    public Double getPorcentajeReteniconIsrl() {
-        return porcentajeReteniconIsrl;
+    /**
+     * identificador de la factura
+     * @param numeroFactura the numeroFactura to set
+     */
+    public void setNumeroFactura(String numeroFactura) {
+        this.numeroFactura = numeroFactura;
     }
 
-    public void setPorcentajeReteniconIsrl(Double porcentajeReteniconIsrl) {
-        this.porcentajeReteniconIsrl = porcentajeReteniconIsrl;
+    /**
+     * version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
     }
 
-    public Double getPorcentajeIva() {
-        return porcentajeIva;
-    }
-
+    /**
+     * porcentaje de iva para la fecha de facturacion
+     * @param porcentajeIva the porcentajeIva to set
+     */
     public void setPorcentajeIva(Double porcentajeIva) {
         this.porcentajeIva = porcentajeIva;
+    }
+
+    /**
+     * porcentaje de iva que sera retenido
+     * @param porcentajeRetencionIva the porcentajeRetencionIva to set
+     */
+    public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
+        this.porcentajeRetencionIva = porcentajeRetencionIva;
+    }
+
+    /**
+     *
+     * @param porcentajeReteniconIsrl the porcentajeReteniconIsrl to set
+     */
+    public void setPorcentajeReteniconIsrl(Double porcentajeReteniconIsrl) {
+        this.porcentajeReteniconIsrl = porcentajeReteniconIsrl;
     }
 
     /**
@@ -808,4 +848,5 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public void setValorUT(Double valorUT) {
         this.valorUT = valorUT;
     }
+
 }
