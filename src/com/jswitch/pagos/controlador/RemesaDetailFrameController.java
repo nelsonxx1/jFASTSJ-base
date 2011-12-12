@@ -205,6 +205,9 @@ public class RemesaDetailFrameController
                         tr.printReport(new FileOutputStream(file));
                         try {
                             java.awt.Desktop.getDesktop().open(file);
+                            if (tr.hasError()) {
+                                java.awt.Desktop.getDesktop().open(error);
+                            }
                         } catch (Exception ex) {
 
                             JOptionPane.showMessageDialog(new JFrame(),
