@@ -16,7 +16,6 @@ import java.util.Map;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.CheckBoxControl;
@@ -33,8 +32,15 @@ import org.openswing.swing.util.server.HibernateUtils;
 public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameController
         implements ActionListener {
 
+    /**
+     * remesa para guardar 
+     */
     private Remesa remesa;
 
+    /**
+     * crea una instancia de BuscarOrdenDePagoGridFrameController
+     * @param remesa 
+     */
     public BuscarOrdenDePagoGridFrameController(Remesa remesa) {
         super(BuscaOrdenDePagoGridFrame.class.getName(),
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(), null);
@@ -123,6 +129,7 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
                 s.getTransaction().commit();
                 gridFrame.dispose();
             } catch (Exception ex) {
+                System.out.println(ex);
             } finally {
                 s.close();
             }

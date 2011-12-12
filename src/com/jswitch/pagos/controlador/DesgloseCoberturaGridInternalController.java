@@ -88,7 +88,7 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
      * @param  factura 
      */
     private void updateFactura(Factura factura) {
-        Double islr = factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr() ;
+        Double islr = factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr();
         Double montoNoAmparado = 0d;
         Double montoSujeto = 0d;
         Double montoIva = 0d;
@@ -96,11 +96,14 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 ConfiguracionCobertura c = getConfiCober(dc.getCobertura());
-                double iva = !c.getIva() ? 0
-                        : (factura.getPorcentajeIva());
-                montoNoAmparado += dc.getMontoNoAmparado() * (1 - iva);
-                montoSujeto += dc.getMontoAmparado() * (1 - iva);
-                montoIva += dc.getMontoFacturado() * iva;
+                if (c.getBaseImponible()) {
+                    double iva = !c.getIva() ? 0
+                            : (factura.getPorcentajeIva());
+                    double isl = !c.getIslr() ? 0 : islr;
+                    montoNoAmparado += dc.getMontoNoAmparado() * (1 - iva) * (1 - isl);
+                    montoSujeto += dc.getMontoAmparado() * (1 - iva) * (1 - isl);
+                    montoIva += dc.getMontoFacturado() * iva;
+                }
             }
         }
 

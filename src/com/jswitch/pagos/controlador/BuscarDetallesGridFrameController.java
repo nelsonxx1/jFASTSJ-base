@@ -38,7 +38,7 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
 
     public BuscarDetallesGridFrameController(Persona persona, OrdenDePago ordenDePago) {
         super(BuscaDetallesGridFrame.class.getName(), DetalleSiniestroDetailFrame.class.getName(),
-              ordenDePago.getTipoDetalleSiniestro().getClase(), null);
+                ordenDePago.getTipoDetalleSiniestro().getClase(), null);
         this.persona = persona;
         this.ordenDePago = ordenDePago;
 //        gridFrame.getGridControl().setMode(Consts.EDIT);
@@ -65,15 +65,6 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                     new Object[]{persona.getId(), "LIQ"},
                     new Type[]{new LongType(), new StringType()},
                     "C", sf, s);
-//            List list = ((VOListResponse) res).getRows();
-//            for (Object obj : list) {
-//                DetalleSiniestro sin = (DetalleSiniestro) obj;
-//                Hibernate.initialize(sin.getNotasTecnicas());
-//                Hibernate.initialize(sin.getObservaciones());
-//                Hibernate.initialize(sin.getPagos());
-//                Hibernate.initialize(sin.getDiagnosticoSiniestros());
-//                Hibernate.initialize(sin.getDocumentos());
-//            }
             return res;
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "loadData", ex);

@@ -4,6 +4,7 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.modelo.transaccional.lote.Transaccion;
@@ -21,6 +22,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.ExportButton;
 import org.openswing.swing.client.GridControl;
@@ -78,10 +80,25 @@ public class RemesaDetailFrameController
             Session s = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
-                List l = s.createQuery("FROM "
-                        + OrdenDePago.class.getName() + " C WHERE "
-                        + "C.estatusPago.id=? AND is not null").
-                        setString(0, EstatusPago.PENDIENTE.toString()).list();
+                String sql = null;
+                if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                    sql = "FROM "
+                            + OrdenDePago.class.getName() + " C WHERE "
+                            + "C.estatusPago.id=? AND C.codigoSIGECOF is not null";
+                } else {
+                    sql = "FROM "
+                            + OrdenDePago.class.getName() + " C WHERE "
+                            + "C.estatusPago.id=? AND C.codigoSIGECOF is not null"
+                            + "C.tipoDetalleSiniestro=?";
+                }
+                Query q = s.createQuery(sql);
+                List l = null;
+                if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                    l = q.setString(0, EstatusPago.PENDIENTE.toString()).list();
+                } else {
+                    l = q.setString(0, EstatusPago.PENDIENTE.toString()).setString(1, p.getTipoDetalleSiniestro().toString()).list();
+                }
+
                 for (Object detalleSiniestro : l) {
                     p.getOrdenDePagos().add(
                             (OrdenDePago) detalleSiniestro);

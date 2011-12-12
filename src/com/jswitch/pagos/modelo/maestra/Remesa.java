@@ -9,9 +9,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
-import com.jswitch.fas.modelo.Dominios.DuracionCheque;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
-import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 /**
  * @author Personal
@@ -54,34 +52,27 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     *
-     */
-    @Column
-    private String numeroRemesa;
-    /**
-     *
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Past
-    @BusinessKey
-    private Date fechaPagoRemesa;
-    /**
-     *
+     * Estado en el que se encuentra el pago
      */
     @Column
     @Enumerated(EnumType.STRING)
     @BusinessKey
     private Dominios.EstatusPago estatusPago;
     /**
-     *
+     * Fecha de Envio
+     * Para uso interno de la empresa, con el objeto de identificar la 
+     * fecha de envío del archivo de pago. 
+     * Formato: dd/mm/aaaa 
      */
     @Column
     @Temporal(value = TemporalType.DATE)
     @BusinessKey
     private Date fechaEnvio;
     /**
-     *
+     * Fecha de Pago Propuesta
+     * Para uso interno de la empresa a objeto de identificar la fecha 
+     * de generación del archivo de pago.
+     * Formato: dd/mm/aaaa
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -104,7 +95,12 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Integer numRefLot;
     /**
-     *
+     * Tipo de Pago
+     * Valor:
+     * 40 – Proveedores
+     * 00 – Transferencia SWIFT
+     * 10– Abono en Cuenta Banco de Venezuela
+     * 20– Cheque de Gerencia
      */
     @Column
     @Enumerated(EnumType.STRING)
@@ -119,7 +115,9 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Dominios.DuracionCheque duracionCheque;
     /**
-     *
+     * Fecha Valor:
+     * Fecha efectiva del Débito.
+     * dd/mm/aaaa
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -129,6 +127,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * cuenta de la empresa
      */
     @Column
+    @Pattern(regexp = "\\d{20}", message = "Solo se permiten 20 numeros")
     @BusinessKey
     private String numeroCuentaDebitar;
     /**
@@ -157,22 +156,26 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private TipoCuentaBancaria tipoCuenta;
     /**
+     * Busqueda automatica de Ordenes de Pago
+     */
+    @Transient
+    private transient Boolean autoSearch;
+    /**
+     * Version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * Auditoria bitacora
      */
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
     /**
-     * 
-     */
-    @Transient
-    private transient Boolean autoSearch;
-    /**
-     *
+     * Tipos de detalle siniestro q buscnara en las ordenes de pago
+     * where this.tipoDetalleSiniestro.equals(
+     *                          ordenDePago.getTipoDetalleSiniestro())
      */
     @Column
     @Enumerated(EnumType.STRING)
@@ -185,11 +188,13 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey(exclude = Method.ALL)
     private Set<OrdenDePago> ordenDePagos = new HashSet<OrdenDePago>(0);
     /**
+     * coleccion de Observaciones Generales
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private List<Observacion> observaciones = new ArrayList<Observacion>(0);
     /**
+     * nota interna de la empresa
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
@@ -203,11 +208,11 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
 
     public Remesa() {
         estatusPago = EstatusPago.PENDIENTE;
-
+        tipoDetalleSiniestro = Dominios.TipoDetalleSiniestro.Todos;
     }
 
     /**
-     *
+     * Auditoria bitacora
      * @return the auditoria
      */
     public AuditoriaBasica getAuditoria() {
@@ -215,15 +220,24 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     *
-     * @return the autoSearch
+     * Coleccion de documentos anexos
+     * @return the documentos
      */
-    public Boolean getAutoSearch() {
-        return autoSearch;
+    public Set<Documento> getDocumentos() {
+        return documentos;
     }
 
     /**
-     *
+     * duracion del cheque
+     * puede ser 30 60 120 180
+     * @return the duracionCheque
+     */
+    public Dominios.DuracionCheque getDuracionCheque() {
+        return duracionCheque;
+    }
+
+    /**
+     * Estado en el que se encuentra el pago
      * @return the estatusPago
      */
     public Dominios.EstatusPago getEstatusPago() {
@@ -231,7 +245,10 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     *
+     * Fecha de Envio
+     * Para uso interno de la empresa, con el objeto de identificar la
+     * fecha de envío del archivo de pago.
+     * Formato: dd/mm/aaaa
      * @return the fechaEnvio
      */
     public Date getFechaEnvio() {
@@ -239,15 +256,10 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     *
-     * @return the fechaPagoRemesa
-     */
-    public Date getFechaPagoRemesa() {
-        return fechaPagoRemesa;
-    }
-
-    /**
-     *
+     * Fecha de Pago Propuesta
+     * Para uso interno de la empresa a objeto de identificar la fecha
+     * de generación del archivo de pago.
+     * Formato: dd/mm/aaaa
      * @return the fechaPropuestaPago
      */
     public Date getFechaPropuestaPago() {
@@ -255,7 +267,9 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     *
+     * Fecha Valor:
+     * Fecha efectiva del Débito.
+     * dd/mm/aaaa
      * @return the fechaValor
      */
     public Date getFechaValor() {
@@ -271,6 +285,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * nota interna de la empresa
+     * @return the notasTecnicas
+     */
+    public List<NotaTecnica> getNotasTecnicas() {
+        return notasTecnicas;
+    }
+
+    /**
      * Numero de negociacion
      * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
      * Ej. 00002100
@@ -278,195 +300,6 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     public Integer getNumNeg() {
         return numNeg;
-    }
-
-    /**
-     * Numero de referencia de lote
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
-     * Ej. 00002100
-     * @return the numRefLot
-     */
-    public Integer getNumRefLot() {
-        return numRefLot;
-    }
-
-    /**
-     * cuenta de la empresa
-     * @return the numeroCuentaDebitar
-     */
-    public String getNumeroCuentaDebitar() {
-        return numeroCuentaDebitar;
-    }
-
-    /**
-     *
-     * @return the numeroRemesa
-     */
-    public String getNumeroRemesa() {
-        return numeroRemesa;
-    }
-
-    /**
-     *
-     * @return the optLock
-     */
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    /**
-     * Coleccion de etapas de siniestro y las fechas de los cambios
-     * @return the ordenDePagos
-     */
-    public Set<OrdenDePago> getOrdenDePagos() {
-        return ordenDePagos;
-    }
-
-    /**
-     *
-     * @return the tipoPago
-     */
-    public Dominios.TipoPago getTipoPago() {
-        return tipoPago;
-    }
-
-    /**
-     *
-     * @param auditoria the auditoria to set
-     */
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
-    }
-
-    /**
-     *
-     * @param autoSearch the autoSearch to set
-     */
-    public void setAutoSearch(Boolean autoSearch) {
-        this.autoSearch = autoSearch;
-    }
-
-    /**
-     *
-     * @param estatusPago the estatusPago to set
-     */
-    public void setEstatusPago(Dominios.EstatusPago estatusPago) {
-        this.estatusPago = estatusPago;
-    }
-
-    /**
-     *
-     * @param fechaEnvio the fechaEnvio to set
-     */
-    public void setFechaEnvio(Date fechaEnvio) {
-        this.fechaEnvio = fechaEnvio;
-    }
-
-    /**
-     *
-     * @param fechaPagoRemesa the fechaPagoRemesa to set
-     */
-    public void setFechaPagoRemesa(Date fechaPagoRemesa) {
-        this.fechaPagoRemesa = fechaPagoRemesa;
-    }
-
-    /**
-     *
-     * @param fechaPropuestaPago the fechaPropuestaPago to set
-     */
-    public void setFechaPropuestaPago(Date fechaPropuestaPago) {
-        this.fechaPropuestaPago = fechaPropuestaPago;
-    }
-
-    /**
-     *
-     * @param fechaValor the fechaValor to set
-     */
-    public void setFechaValor(Date fechaValor) {
-        this.fechaValor = fechaValor;
-    }
-
-    /**
-     * Pk autogenerado
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * Numero de negociacion
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
-     * Ej. 00002100
-     * @param numNeg the numNeg to set
-     */
-    public void setNumNeg(Integer numNeg) {
-        this.numNeg = numNeg;
-    }
-
-    /**
-     * Numero de referencia de lote
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
-     * Ej. 00002100
-     * @param numRefLot the numRefLot to set
-     */
-    public void setNumRefLot(Integer numRefLot) {
-        this.numRefLot = numRefLot;
-    }
-
-    /**
-     * cuenta de la empresa
-     * @param numeroCuentaDebitar the numeroCuentaDebitar to set
-     */
-    public void setNumeroCuentaDebitar(String numeroCuentaDebitar) {
-        this.numeroCuentaDebitar = numeroCuentaDebitar;
-    }
-
-    /**
-     *
-     * @param numeroRemesa the numeroRemesa to set
-     */
-    public void setNumeroRemesa(String numeroRemesa) {
-        this.numeroRemesa = numeroRemesa;
-    }
-
-    /**
-     *
-     * @param optLock the optLock to set
-     */
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
-    /**
-     * Coleccion de etapas de siniestro y las fechas de los cambios
-     * @param ordenDePagos the ordenDePagos to set
-     */
-    public void setOrdenDePagos(Set<OrdenDePago> ordenDePagos) {
-        this.setOrdenDePagos(ordenDePagos);
-    }
-
-    /**
-     *
-     * @param tipoPago the tipoPago to set
-     */
-    public void setTipoPago(Dominios.TipoPago tipoPago) {
-        this.tipoPago = tipoPago;
-    }
-
-    /**
-     * 
-     * @return duracionCheque
-     */
-    public DuracionCheque getDuracionCheque() {
-        return duracionCheque;
-    }
-
-    /**
-     * @param duracionCheque the duracionCheque to 
-     */
-    public void setDuracionCheque(DuracionCheque duracionCheque) {
-        this.duracionCheque = duracionCheque;
     }
 
     /**
@@ -493,6 +326,173 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Numero de referencia de lote
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     * @return the numRefLot
+     */
+    public Integer getNumRefLot() {
+        return numRefLot;
+    }
+
+    /**
+     * cuenta de la empresa
+     * @return the numeroCuentaDebitar
+     */
+    public String getNumeroCuentaDebitar() {
+        return numeroCuentaDebitar;
+    }
+
+    /**
+     * coleccion de Observaciones Generales
+     * @return the observaciones
+     */
+    public List<Observacion> getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * Version
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
+    }
+
+    /**
+     * Coleccion de etapas de siniestro y las fechas de los cambios
+     * @return the ordenDePagos
+     */
+    public Set<OrdenDePago> getOrdenDePagos() {
+        return ordenDePagos;
+    }
+
+    /**
+     * tipo de cuenta
+     * corriente 00
+     * ahorro    10
+     * default   00
+     * @return the tipoCuenta
+     */
+    public TipoCuentaBancaria getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    /**
+     * Tipos de detalle siniestro q buscnara en las ordenes de pago
+     * where this.tipoDetalleSiniestro.equals(
+     * ordenDePago.getTipoDetalleSiniestro())
+     * @return the tipoDetalleSiniestro
+     */
+    public Dominios.TipoDetalleSiniestro getTipoDetalleSiniestro() {
+        return tipoDetalleSiniestro;
+    }
+
+    /**
+     * Tipo de Pago
+     * Valor:
+     * 40 – Proveedores
+     * 00 – Transferencia SWIFT
+     * 10– Abono en Cuenta Banco de Venezuela
+     * 20– Cheque de Gerencia
+     * @return the tipoPago
+     */
+    public Dominios.TipoPago getTipoPago() {
+        return tipoPago;
+    }
+
+    /**
+     * Auditoria bitacora
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * Coleccion de documentos anexos
+     * @param documentos the documentos to set
+     */
+    public void setDocumentos(Set<Documento> documentos) {
+        this.setDocumentos(documentos);
+    }
+
+    /**
+     * duracion del cheque
+     * puede ser 30 60 120 180
+     * @param duracionCheque the duracionCheque to set
+     */
+    public void setDuracionCheque(Dominios.DuracionCheque duracionCheque) {
+        this.duracionCheque = duracionCheque;
+    }
+
+    /**
+     * Estado en el que se encuentra el pago
+     * @param estatusPago the estatusPago to set
+     */
+    public void setEstatusPago(Dominios.EstatusPago estatusPago) {
+        this.estatusPago = estatusPago;
+    }
+
+    /**
+     * Fecha de Envio
+     * Para uso interno de la empresa, con el objeto de identificar la
+     * fecha de envío del archivo de pago.
+     * Formato: dd/mm/aaaa
+     * @param fechaEnvio the fechaEnvio to set
+     */
+    public void setFechaEnvio(Date fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
+    }
+
+    /**
+     * Fecha de Pago Propuesta
+     * Para uso interno de la empresa a objeto de identificar la fecha
+     * de generación del archivo de pago.
+     * Formato: dd/mm/aaaa
+     * @param fechaPropuestaPago the fechaPropuestaPago to set
+     */
+    public void setFechaPropuestaPago(Date fechaPropuestaPago) {
+        this.fechaPropuestaPago = fechaPropuestaPago;
+    }
+
+    /**
+     * Fecha Valor:
+     * Fecha efectiva del Débito.
+     * dd/mm/aaaa
+     * @param fechaValor the fechaValor to set
+     */
+    public void setFechaValor(Date fechaValor) {
+        this.fechaValor = fechaValor;
+    }
+
+    /**
+     * Pk autogenerado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * nota interna de la empresa
+     * @param notasTecnicas the notasTecnicas to set
+     */
+    public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
+        this.setNotasTecnicas(notasTecnicas);
+    }
+
+    /**
+     * Numero de negociacion
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     * @param numNeg the numNeg to set
+     */
+    public void setNumNeg(Integer numNeg) {
+        this.numNeg = numNeg;
+    }
+
+    /**
      * numero referencia Credito
      * Número asignado por la empresa que identifica el crédito. Es
      * utilizado para identificar la nota de crédito en el estado de
@@ -516,14 +516,45 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * tipo de cuenta
-     * corriente 00
-     * ahorro    10
-     * default   00
-     * @return tipoCuenta
+     * Numero de referencia de lote
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     * @param numRefLot the numRefLot to set
      */
-    public TipoCuentaBancaria getTipoCuenta() {
-        return tipoCuenta;
+    public void setNumRefLot(Integer numRefLot) {
+        this.numRefLot = numRefLot;
+    }
+
+    /**
+     * cuenta de la empresa
+     * @param numeroCuentaDebitar the numeroCuentaDebitar to set
+     */
+    public void setNumeroCuentaDebitar(String numeroCuentaDebitar) {
+        this.numeroCuentaDebitar = numeroCuentaDebitar;
+    }
+
+    /**
+     * coleccion de Observaciones Generales
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(List<Observacion> observaciones) {
+        this.setObservaciones(observaciones);
+    }
+
+    /**
+     * Version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
+    }
+
+    /**
+     * Coleccion de etapas de siniestro y las fechas de los cambios
+     * @param ordenDePagos the ordenDePagos to set
+     */
+    public void setOrdenDePagos(Set<OrdenDePago> ordenDePagos) {
+        this.setOrdenDePagos(ordenDePagos);
     }
 
     /**
@@ -531,41 +562,48 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * corriente 00
      * ahorro    10
      * default   00
-     * @param tipoCuenta the TipoCuenta to set
+     * @param tipoCuenta the tipoCuenta to set
      */
     public void setTipoCuenta(TipoCuentaBancaria tipoCuenta) {
         this.tipoCuenta = tipoCuenta;
     }
 
-    public Set<Documento> getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(Set<Documento> documentos) {
-        this.documentos = documentos;
-    }
-
-    public List<NotaTecnica> getNotasTecnicas() {
-        return notasTecnicas;
-    }
-
-    public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
-        this.notasTecnicas = notasTecnicas;
-    }
-
-    public List<Observacion> getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(List<Observacion> observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public TipoDetalleSiniestro getTipoDetalleSiniestro() {
-        return tipoDetalleSiniestro;
-    }
-
-    public void setTipoDetalleSiniestro(TipoDetalleSiniestro tipoDetalleSiniestro) {
+    /**
+     * Tipos de detalle siniestro q buscnara en las ordenes de pago
+     * where this.tipoDetalleSiniestro.equals(
+     * ordenDePago.getTipoDetalleSiniestro())
+     * @param tipoDetalleSiniestro the tipoDetalleSiniestro to set
+     */
+    public void setTipoDetalleSiniestro(Dominios.TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
+    }
+
+    /**
+     * Tipo de Pago
+     * Valor:
+     * 40 – Proveedores
+     * 00 – Transferencia SWIFT
+     * 10– Abono en Cuenta Banco de Venezuela
+     * 20– Cheque de Gerencia
+     * @param tipoPago the tipoPago to set
+     */
+    public void setTipoPago(Dominios.TipoPago tipoPago) {
+        this.tipoPago = tipoPago;
+    }
+
+    /**
+     * Busqueda automatica de Ordenes de Pago
+     * @return the autoSearch
+     */
+    public Boolean getAutoSearch() {
+        return autoSearch;
+    }
+
+    /**
+     * Busqueda automatica de Ordenes de Pago
+     * @param autoSearch the autoSearch to set
+     */
+    public void setAutoSearch(Boolean autoSearch) {
+        this.autoSearch = autoSearch;
     }
 }
