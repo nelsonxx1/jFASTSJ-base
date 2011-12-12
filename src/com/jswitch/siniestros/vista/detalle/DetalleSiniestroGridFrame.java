@@ -63,7 +63,9 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn8.setColumnFilterable(true);
         textColumn8.setColumnName("siniestro.numero");
+        textColumn8.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn8);
 
         textColumn1.setColumnFilterable(true);

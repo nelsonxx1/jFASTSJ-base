@@ -329,7 +329,10 @@ public class Credito {
     public void setRifBen(String rifBen) {
         String rif = rifBen;
         if (!rif.startsWith("J") && !rif.startsWith("G")) {
-            rif = rif.substring(0, rif.lastIndexOf("-"));
+            int i = rif.lastIndexOf("-");
+            if (i > 1) {
+                rif = rif.substring(0, i);
+            }
         }
         StringBuffer buf = new StringBuffer(rif.replaceAll("-", ""));
         if (buf.length() < 10) {

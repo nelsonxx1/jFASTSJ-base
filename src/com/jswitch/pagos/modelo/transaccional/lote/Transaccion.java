@@ -40,15 +40,15 @@ public class Transaccion {
      * Lista con las ordenes de pago q no se pudieron reportar por error
      */
     private List<OrdenDePago> error = new ArrayList<OrdenDePago>(0);
-    
+
     public Transaccion(Remesa remesa) {
         this.remesa = remesa;
         header = new Header();
         total = new Total();
         initTransaccion();
-        
+
     }
-    
+
     public void printReport(OutputStream stream) {
         PrintStream out = new PrintStream(stream);
         out.format("%8s%08d%08d%10s%5$td/%5$tm/%5$tY%6$td/%6$tm/%6$tY\n",
@@ -76,14 +76,14 @@ public class Transaccion {
         out.format("%8s%05d%05d%015.2f\n",
                 total.getRecordID(), total.getDebitCount(), total.getCreditCount(), total.getTotalMontoLote());
         out.close();
-        
-        
+
+
     }
-    
+
     public static void main(String[] args) {
         General.empresa.setNombre("TRIBUNAL SUPREMO DE JUSTICIA");
         General.empresa.setRif2("G11000011-1");
-        
+
         Session s = null;
         Remesa rem = null;
         try {
@@ -102,9 +102,9 @@ public class Transaccion {
         Transaccion n = new Transaccion(rem);
 
     }
-    
+
     private void initTransaccion() {
-        
+
         Double totalMontoLote = 0d;
         //<editor-fold defaultstate="collapsed" desc="Headers">
         header.setFechaEnvio(remesa.getFechaEnvio());
@@ -144,12 +144,12 @@ public class Transaccion {
                 body.getCredito().setBanco(bancariaPersona.getBanco().getNombreCorto());
                 body.getCredito().setNumCuent(bancariaPersona.getNumero());
                 body.getCredito().setTipoCuenta(bancariaPersona.getTipoCuenta().getNumero());
-                if (personaPago.getEmail() != null) {
+                if (personaPago.getEmail() != null && !personaPago.getEmail().isEmpty()) {
                     body.getCredito().setEmail(personaPago.getEmail());
                 }
                 body.getCredito().setNombre(personaPago.getNombreCorto());
                 body.getCredito().setRifBen(personaPago.getRif().getRif());
-                
+
                 switch (remesa.getTipoPago()) {
                     case ABONO_EN_CUENTA_BANCO_DE_VENEZUELA:
                         body.getCredito().setTipoPago("10");
@@ -161,7 +161,7 @@ public class Transaccion {
                         body.getCredito().setTipoPago("00");
                         break;
                 }
-                
+
                 body.getCredito().setNumRefCre(remesa.getNumRefCre());
                 body.getCredito().setMonto(ordenDePago.getMontoPagar());
                 body.getCredito().setDuracionCheq(Integer.parseInt(

@@ -108,6 +108,7 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
                 s.getTransaction().commit();
                 gridFrame.dispose();
             } catch (Exception ex) {
+                System.out.println(ex);
             } finally {
                 s.close();
             }
