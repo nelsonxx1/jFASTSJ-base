@@ -1,5 +1,13 @@
 package com.jswitch.fas.modelo;
 
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.modelo.maestra.detalle.APS;
+import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
+import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
+import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
+import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
+import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
+import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import java.util.Hashtable;
 import org.openswing.swing.domains.java.Domain;
 
@@ -39,6 +47,9 @@ public class Dominios {
         domains.put(
                 Dominios.DuracionCheque().getDomainId(),
                 Dominios.DuracionCheque());
+        domains.put(
+                Dominios.TipoDetalleSiniestro().getDomainId(),
+                Dominios.TipoDetalleSiniestro());
         return domains;
     }
 
@@ -172,6 +183,37 @@ public class Dominios {
     public static Domain TipoEnfermedad() {
         Domain dominio = new Domain("TipoEnfermedad");
         TipoEnfermedad o[] = TipoEnfermedad.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
+    }
+
+    public static enum TipoDetalleSiniestro {
+
+        Todos(DetalleSiniestro.class.getName()),
+        Reembolso(Reembolso.class.getName()),
+        Aps(APS.class.getName()),
+        CartaAval(CartaAval.class.getName()),
+        AyudaSocial(AyudaSocial.class.getName()),
+        Emergencia(Emergencia.class.getName()),
+        Funerario(Funerario.class.getName()),
+        Vida(Vida.class.getName());
+        private String clase;
+
+        private TipoDetalleSiniestro(String clase) {
+            this.clase = clase;
+        }
+
+        public String getClase() {
+            return clase;
+        }
+    }
+
+    public static Domain TipoDetalleSiniestro() {
+        Domain dominio = new Domain("TipoDetalleSiniestro");
+        TipoDetalleSiniestro o[] = TipoDetalleSiniestro.values();
         for (int i = 0; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());

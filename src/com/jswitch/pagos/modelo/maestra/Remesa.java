@@ -11,6 +11,7 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.DuracionCheque;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -170,6 +171,13 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     @Transient
     private transient Boolean autoSearch;
+    /**
+     *
+     */
+    @Column
+    @Enumerated(EnumType.STRING)
+    @BusinessKey
+    private Dominios.TipoDetalleSiniestro tipoDetalleSiniestro;
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
@@ -551,5 +559,13 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
 
     public void setObservaciones(List<Observacion> observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public TipoDetalleSiniestro getTipoDetalleSiniestro() {
+        return tipoDetalleSiniestro;
+    }
+
+    public void setTipoDetalleSiniestro(TipoDetalleSiniestro tipoDetalleSiniestro) {
+        this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
 }

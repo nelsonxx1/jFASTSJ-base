@@ -10,6 +10,7 @@ import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.io.Serializable;
@@ -113,6 +114,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     private Double montoPagar;
     /**
+     *
+     */
+    @Column
+    @Enumerated(EnumType.STRING)
+    @BusinessKey
+    private Dominios.TipoDetalleSiniestro tipoDetalleSiniestro;
+    /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
     @OneToMany(fetch = FetchType.LAZY)
@@ -137,6 +145,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     public OrdenDePago() {
         montoPagar = 0d;
+        tipoDetalleSiniestro=TipoDetalleSiniestro.Todos;
     }
 
     @Override
@@ -269,4 +278,14 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setSelected(Boolean selected) {
         this.selected = selected;
     }
+
+    public TipoDetalleSiniestro getTipoDetalleSiniestro() {
+        return tipoDetalleSiniestro;
+    }
+
+    public void setTipoDetalleSiniestro(TipoDetalleSiniestro tipoDetalleSiniestro) {
+        this.tipoDetalleSiniestro = tipoDetalleSiniestro;
+    }
+
+    
 }
