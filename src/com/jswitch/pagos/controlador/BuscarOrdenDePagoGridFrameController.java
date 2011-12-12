@@ -4,6 +4,7 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.BuscaOrdenDePagoGridFrame;
@@ -48,21 +49,35 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         Session s = null;
         try {
-            
-             String sql = "FROM " + claseModeloFullPath
+
+            String sql = "FROM " + claseModeloFullPath
                     + " C WHERE C.estatusPago=? "
-                    + "AND C.codigoSIGECOF is not null";
-             
+                    + "AND C.codigoSIGECOF is not null ";
+
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
+
+            Object[] ob = null;
+            Type[] ty = null;
+
+            if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                ob = new Object[]{
+                    EstatusPago.PENDIENTE.toString()};
+                ty = new Type[]{new StringType()};
+            } else {
+                sql += "AND (C.tipoDetalleSiniestro=?)";
+                ob = new Object[]{
+                    EstatusPago.PENDIENTE.toString(),
+                    remesa.getTipoDetalleSiniestro().toString()};
+                ty = new Type[]{new StringType(), new StringType()};
+            }
             Response res = HibernateUtils.getAllFromQuery(filteredColumns,
                     currentSortedColumns,
                     currentSortedVersusColumns,
                     valueObjectType,
                     sql,
-                    new Object[]{
-                        EstatusPago.PENDIENTE.toString()},
-                    new Type[]{new StringType()},
+                    ob,
+                    ty,
                     "C", sf, s);
             return res;
         } catch (Exception ex) {
