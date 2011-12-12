@@ -505,7 +505,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * TM Timbre Municipal
-     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      * @return the porcentajeTM
      */
     public Double getPorcentajeTM() {
@@ -654,7 +653,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * Total por honorarios medicos
-     * //TODO VER Q HAGO CON ESTO
      * @param honorariosMedicos the honorariosMedicos to set
      */
     public void setHonorariosMedicos(Double honorariosMedicos) {

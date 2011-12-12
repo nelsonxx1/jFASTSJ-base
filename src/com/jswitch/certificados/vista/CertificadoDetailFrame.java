@@ -1,6 +1,5 @@
 package com.jswitch.certificados.vista;
 
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
@@ -9,6 +8,7 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.certificados.controlador.CertificadoDetailController;
 import com.jswitch.asegurados.controlador.AseguradosGridInternalController;
 import com.jswitch.asegurados.controlador.BeneficiariosGridInternalController;
+import com.jswitch.asegurados.controlador.TitularDetailFrameController;
 import com.jswitch.asegurados.controlador.TitularLookupController;
 import com.jswitch.asegurados.modelo.maestra.Beneficiario;
 import com.jswitch.asegurados.vista.TitularDetailFrame;
@@ -34,7 +34,6 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
-//    private DefaultGridInternalController controllerBeneficiarios;
     private TitularLookupController lookupTitular;
 
     public CertificadoDetailFrame() {
@@ -779,7 +778,10 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         lookupTitular = new TitularLookupController();
         lookupTitular.addLookup2ParentLink("titular");
         codLookupControl1.setLookupController(lookupTitular);
-        codLookupControl1.setOpenDetail("titular", DefaultDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
+        codLookupControl1.setOpenDetail("titular",
+                TitularDetailFrameController.class.getName(),
+                new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
+                new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 //        codLookupControl1.setNewDetail("titular"
 //                , DefaultDetailFrameController.class.getName()
 //                , new Class[]{String.class , GridControl.class, BeanVO.class , Boolean.class}

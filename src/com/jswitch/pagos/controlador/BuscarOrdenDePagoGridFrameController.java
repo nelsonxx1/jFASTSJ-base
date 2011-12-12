@@ -33,8 +33,15 @@ import org.openswing.swing.util.server.HibernateUtils;
 public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameController
         implements ActionListener {
 
+    /**
+     * remesa para guardar 
+     */
     private Remesa remesa;
 
+    /**
+     * crea una instancia de BuscarOrdenDePagoGridFrameController
+     * @param remesa 
+     */
     public BuscarOrdenDePagoGridFrameController(Remesa remesa) {
         super(BuscaOrdenDePagoGridFrame.class.getName(),
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(), null);

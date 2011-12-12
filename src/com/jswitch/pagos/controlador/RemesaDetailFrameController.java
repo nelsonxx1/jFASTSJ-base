@@ -80,7 +80,7 @@ public class RemesaDetailFrameController
                 s = HibernateUtil.getSessionFactory().openSession();
                 List l = s.createQuery("FROM "
                         + OrdenDePago.class.getName() + " C WHERE "
-                        + "C.estatusPago.id=? AND is not null").
+                        + "C.estatusPago.id=? AND C.codigoSIGECOF is not null").
                         setString(0, EstatusPago.PENDIENTE.toString()).list();
                 for (Object detalleSiniestro : l) {
                     p.getOrdenDePagos().add(
