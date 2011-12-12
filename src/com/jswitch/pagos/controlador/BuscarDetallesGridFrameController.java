@@ -37,7 +37,8 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
     private OrdenDePago ordenDePago;
 
     public BuscarDetallesGridFrameController(Persona persona, OrdenDePago ordenDePago) {
-        super(BuscaDetallesGridFrame.class.getName(), DetalleSiniestroDetailFrame.class.getName(), DetalleSiniestro.class.getName(), null);
+        super(BuscaDetallesGridFrame.class.getName(), DetalleSiniestroDetailFrame.class.getName(),
+              ordenDePago.getTipoDetalleSiniestro().getClase(), null);
         this.persona = persona;
         this.ordenDePago = ordenDePago;
 //        gridFrame.getGridControl().setMode(Consts.EDIT);
