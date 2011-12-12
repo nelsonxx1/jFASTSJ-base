@@ -1,7 +1,6 @@
 package com.jswitch.pagos.modelo.transaccional.lote;
 
 import com.jswitch.base.controlador.General;
-import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
@@ -10,7 +9,9 @@ import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 
@@ -39,7 +40,7 @@ public class Transaccion {
     /**
      * Lista con las ordenes de pago q no se pudieron reportar por error
      */
-    private List<OrdenDePago> error = new ArrayList<OrdenDePago>(0);
+    private Set<Persona> error = new HashSet<Persona>(0);
 
     public Transaccion(Remesa remesa) {
         this.remesa = remesa;
@@ -78,6 +79,15 @@ public class Transaccion {
         out.close();
 
 
+    }
+
+    public void printError(OutputStream stream) {
+        PrintStream out = new PrintStream(stream);
+        out.println("Personas que no tienen Numero de cuenta Domiciliado:\n");
+        for (Persona persona : error) {
+            out.println(persona.getRif().getRif() + " " + persona.getNombreLargo());
+        }
+        out.close();
     }
 
     public static void main(String[] args) {
@@ -178,11 +188,15 @@ public class Transaccion {
                 list.add(body);
                 //</editor-fold>
             } else {
-                error.add(ordenDePago);
+                error.add(ordenDePago.getPersonaPago());
             }
         }
         total.setTotalMontoLote(totalMontoLote);
         total.setCreditCount(list.size());
         total.setDebitCount(list.size());
+    }
+
+    public boolean hasError() {
+        return !error.isEmpty();
     }
 }
