@@ -16,7 +16,6 @@ import java.util.Map;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.CheckBoxControl;

@@ -93,7 +93,7 @@ public class OrdenDePagoDetailFrameController
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
                 List l = s.createQuery("FROM "
-                        + DetalleSiniestro.class.getName() + " C WHERE "
+                        + p.getTipoDetalleSiniestro().getClase() + " C WHERE "
                         + "C.personaPago.id=? AND etapaSiniestro.idPropio=?").
                         setLong(0, p.getPersonaPago().getId()).
                         setString(1, "LIQ").list();
