@@ -837,8 +837,8 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         controllerAsegurados.setBeanVO(beanVO);
         Long id = null;
         if (beanVO != null) {
-            System.out.println("beanVO - diferente de NULL");
-            //id = ((Vehiculo) beanVO).getId();
+//            System.out.println("beanVO - diferente de NULL");
+            id = ((Certificado) beanVO).getId();
         }
 
         controllerDocumentosAnexosX.setBeanVO(beanVO, id);

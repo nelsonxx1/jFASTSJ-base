@@ -32,7 +32,7 @@ public class ConfiguracionPrimaAllGridFrameController extends DefaultAllGridFram
 
     @Override
     public boolean isCellEditable(GridControl grid, int row, String attributeName) {
-        System.out.println(attributeName);
+//        System.out.println(attributeName);
         if (attributeName.equals("maternidad")) {
             ConfiguracionPrima configuracionPrima = (ConfiguracionPrima) grid.getVOListTableModel().getObjectForRow(row);
             if (configuracionPrima != null) {

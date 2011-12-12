@@ -183,6 +183,7 @@ public class RemesaDetailFrameController
             });
             f.showSaveDialog(new JFrame());
             File file = f.getSelectedFile();
+            File error = new File(file.getAbsoluteFile() + "-Fallos.txt");
             if (!file.getName().contains(".")) {
                 file = new File(file.getAbsoluteFile() + ".txt");
             }
@@ -198,6 +199,9 @@ public class RemesaDetailFrameController
                 }
                 if (!file.exists()) {
                     if (file.createNewFile()) {
+                        if (tr.hasError()) {
+                            tr.printError(new FileOutputStream(error));
+                        }
                         tr.printReport(new FileOutputStream(file));
                         try {
                             java.awt.Desktop.getDesktop().open(file);
