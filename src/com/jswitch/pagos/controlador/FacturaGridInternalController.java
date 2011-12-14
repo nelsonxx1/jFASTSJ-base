@@ -11,6 +11,7 @@ import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.ArrayList;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.ReloadButton;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.ValueObject;
 
@@ -20,8 +21,10 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class FacturaGridInternalController extends DefaultGridInternalController {
 
-    public FacturaGridInternalController(GridControl miGrid) {
+    ReloadButton reload;
+    public FacturaGridInternalController(GridControl miGrid,ReloadButton reload) {
         super(miGrid);
+        this.reload=reload;
         try {
             t = Class.forName(DetalleSiniestro.class.getName());
             getMethod = t.getMethod("getPagos");
@@ -38,6 +41,6 @@ public class FacturaGridInternalController extends DefaultGridInternalController
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.TRUE);
+        new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject,(DetalleSiniestro)beanVO, Boolean.TRUE,reload);
     }
 }

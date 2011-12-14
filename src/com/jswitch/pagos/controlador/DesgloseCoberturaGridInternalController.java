@@ -7,6 +7,7 @@ import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
+import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import java.util.ArrayList;
 import org.hibernate.classic.Session;
@@ -15,7 +16,7 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 
 /**
- *
+ * 
  * @author Adrian
  */
 public class DesgloseCoberturaGridInternalController extends DefaultGridInternalController {
@@ -31,9 +32,16 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
         for (Object object : persistentObjects) {
             DesgloseCobertura dc = (DesgloseCobertura) object;
+            if (dc.getMontoAmparado() == null) {
+                dc.setMontoAmparado(dc.getMontoFacturado());
+            }
             dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
-            if (logicaNegocio(dc)) {
-                return new ErrorResponse("Valor Supera a La Factura");
+            if (dc.getMontoAmparado() > dc.getMontoFacturado()) {
+                return new ErrorResponse("monto amparado mayor al monto facturado");
+            }
+            String logica = logicaNegocio(dc);
+            if (logica != null) {
+                return new ErrorResponse(logica);
             }
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
@@ -44,8 +52,16 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         for (Object object : newValueObjects) {
             DesgloseCobertura dc = (DesgloseCobertura) object;
             dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
-            if (logicaNegocio(dc)) {
-                return new ErrorResponse("Valor Supera a La Factura");
+            if (dc.getMontoAmparado() == null) {
+                dc.setMontoAmparado(dc.getMontoFacturado());
+            }
+            dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
+            if (dc.getMontoAmparado() > dc.getMontoFacturado()) {
+                return new ErrorResponse("No se puede amparar mas del monto facturado");
+            }
+            String logica = logicaNegocio(dc);
+            if (logica != null) {
+                return new ErrorResponse(logica);
             }
         }
         return super.insertRecords(rowNumbers, newValueObjects);
@@ -56,16 +72,28 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
      * @param cobertura
      * @return boolean si falla la verificacion 
      */
-    private boolean logicaNegocio(DesgloseCobertura cobertura) {
-        Factura liquidacion = (Factura) beanVO;
-        Double liquidado = cobertura.getMontoFacturado();
-        for (DesgloseCobertura desgloseCobertura : liquidacion.getDesgloseCobertura()) {
+    private String logicaNegocio(DesgloseCobertura cobertura) {
+        Factura factura = (Factura) beanVO;
+        Double facturado = cobertura.getMontoFacturado();
+        Double amparado = cobertura.getMontoAmparado();
+        for (DesgloseCobertura desgloseCobertura : factura.getDesgloseCobertura()) {
             if (cobertura.getId() == null
                     || (desgloseCobertura.getId().compareTo(cobertura.getId()) != 0 && desgloseCobertura.getAuditoria().getActivo())) {
-                liquidado += desgloseCobertura.getMontoFacturado();
+                facturado += desgloseCobertura.getMontoFacturado();
+                amparado += desgloseCobertura.getMontoAmparado();
             }
         }
-        return liquidado > liquidacion.getTotalFacturado();
+        if (facturado > factura.getTotalFacturado()) {
+            return "Valor Supera a La Factura";
+        }
+        Double liquidado = 0d;
+        for (DesgloseSumaAsegurada desgloseSumaAsegurada : factura.getDesgloseSumaAsegurada()) {
+            liquidado += desgloseSumaAsegurada.getMonto();
+        }
+        if (liquidado < amparado) {
+            return "Cantidad no puede ser amparada";
+        }
+        return null;
     }
 
     @Override
@@ -131,8 +159,6 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
             s.close();
         }
         vista.getMainPanel().getReloadButton().doClick();
-        ((FacturaDetailFrameController) vista.getMainPanel().getFormController()).getVista().
-                getMainPanel().getReloadButton().doClick();
     }
 
     /**

@@ -279,6 +279,9 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      * @return the selected
      */
     public Boolean getSelected() {
+        if (selected == null) {
+            selected = Boolean.FALSE;
+        }
         return selected;
     }
 
@@ -425,5 +428,4 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setTipoDetalleSiniestro(Dominios.TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
-
 }

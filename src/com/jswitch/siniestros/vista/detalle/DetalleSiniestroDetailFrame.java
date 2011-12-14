@@ -2100,7 +2100,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridControl5.setGridDataLocator(controllerNotasTecnicas);
         gridControl5.setController(controllerNotasTecnicas);
         //</editor-fold>
-        controllerPagos = new FacturaGridInternalController(gridControl6);
+        controllerPagos = new FacturaGridInternalController(gridControl6, reloadButton1);
         gridControl6.setGridDataLocator(controllerPagos);
         gridControl6.setController(controllerPagos);
 

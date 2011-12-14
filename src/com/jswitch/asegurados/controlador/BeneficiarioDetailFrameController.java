@@ -15,6 +15,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.ReloadButton;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -27,18 +28,24 @@ import org.openswing.swing.util.java.Consts;
  * @author Adrian
  */
 public class BeneficiarioDetailFrameController extends DefaultDetailFrameController {
-    
+
     private Certificado familia;
-    
+    private ReloadButton reload;
+
     public Form getMainPanel() {
         return vista.getMainPanel();
     }
-    
+
     public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
-        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, null);
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, null, null);
     }
-    
-    public BeneficiarioDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Certificado familia) {
+
+    public BeneficiarioDetailFrameController(String detailFramePath,
+            GridControl gridControl,
+            BeanVO beanVO,
+            Boolean aplicarLogicaNegocio,
+            Certificado familia,
+            ReloadButton reload) {
         if (this.familia == null) {
             this.familia = familia;
         }
@@ -51,7 +58,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         this.gridControl = gridControl;
         this.beanVO = beanVO;
         this.aplicarLogicaNegocio = aplicarLogicaNegocio;
-        
+        this.reload = reload;
         try {
             Class<DefaultDetailFrame> t = (Class<com.jswitch.base.vista.util.DefaultDetailFrame>) Class.forName(detailFramePath);
             vista = t.newInstance();
@@ -59,7 +66,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "new", ex);
         }
-        
+
         if (beanVO != null) {
             vista.getMainPanel().reload();
             vista.getMainPanel().setMode(Consts.READONLY);
@@ -69,9 +76,9 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
                     "porcentajeDisponible", getPorcentajeDisponible());
             vista.getMainPanel().pull("porcentajeDisponible");
         }
-        
+
     }
-    
+
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Beneficiario benef = (Beneficiario) s.get(Beneficiario.class, ((Beneficiario) beanVO).getId());
@@ -83,14 +90,14 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         beanVO = benef;
         return new VOResponse(beanVO);
     }
-    
+
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Beneficiario b = (Beneficiario) newPersistentObject;
         b.setPorcentajeDisponible(getPorcentajeDisponible());
         b.setCertificado(familia);
         Response res = super.insertRecord(newPersistentObject);
-        
+
         if (res instanceof VOResponse && familia != null) {
             familia.getBeneficiarios().add(b);
             if (familia instanceof Auditable) {
@@ -98,7 +105,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
                 ab.setFechaUpdate(new Date());
                 ab.setUsuarioUpdate(General.usuario.getUserName());
             }
-            
+
             Session s = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
@@ -114,15 +121,29 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         }
         return res;
     }
-    
+
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         Beneficiario b = (Beneficiario) persistentObject;
         b.setPorcentajeDisponible(getPorcentajeDisponible(b) - b.getIndemnizacion());
-        
+
         return super.updateRecord(oldPersistentObject, b);
     }
-    
+
+    @Override
+    public void afterEditData() {
+        if (reload != null) {
+            reload.doClick();
+        }
+    }
+
+    @Override
+    public void afterInsertData() {
+        if (reload != null) {
+            reload.doClick();
+        }
+    }
+
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         // return super.logicaNegocio(persistentObject);
@@ -135,14 +156,14 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         } else if (getPorcentajeDisponible() - b.getIndemnizacion() < 0) {
             errorMsj += "Valor Superior al 100%";
         }
-        
+
         if (errorMsj.length() > 0) {
             return new ErrorResponse(errorMsj);
         } else {
             return new VOResponse(persistentObject);
         }
     }
-    
+
     private Double getPorcentajeDisponible() {
         Double porcentajeDisponible = 0d;
         Session session = null;
@@ -159,7 +180,7 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         }
         return 100 - (porcentajeDisponible == null ? 0d : porcentajeDisponible);
     }
-    
+
     private Double getPorcentajeDisponible(Beneficiario yo) {
         Double porcentajeDisponible = 0d;
         Session session = null;
@@ -176,8 +197,8 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         } finally {
             session.close();
         }
-        
+
         return 100 - (porcentajeDisponible == null ? 0d : porcentajeDisponible);
-        
+
     }
 }

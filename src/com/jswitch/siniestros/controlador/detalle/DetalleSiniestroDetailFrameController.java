@@ -24,6 +24,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -107,7 +108,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     public void actionPerformed(ActionEvent e) {
 
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
-            new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(), (DetalleSiniestro) beanVO, true);
+            new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(),
+                    (DetalleSiniestro) beanVO, true, vista.getMainPanel().getReloadButton());
         } else if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
             new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), true, (DetalleSiniestro) beanVO, vista);
         }
@@ -225,7 +227,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
         if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
-                || ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0 
+                || ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
                 || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
                 compareTo("PENDIENTE") != 0) {
             ((DetalleSiniestroDetailFrame) vista).getEditButton1().setVisible(false);

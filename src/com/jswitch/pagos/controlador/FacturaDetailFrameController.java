@@ -18,10 +18,14 @@ import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.OptionPane;
+import org.openswing.swing.client.ReloadButton;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.client.ClientSettings;
+import org.openswing.swing.util.client.ClientUtils;
 
 /**
  *
@@ -30,19 +34,44 @@ import org.openswing.swing.message.receive.java.ValueObject;
 public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
     private DetalleSiniestro detalleSiniestro;
+    private ReloadButton reload;
 
-    public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+    public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, DetalleSiniestro detalleSiniestro, Boolean aplicarLogicaNegocio, ReloadButton reloadButton) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
-        detalleSiniestro = ((Factura) beanVO).getDetalleSiniestro();
-        ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        this.detalleSiniestro = detalleSiniestro;
+        ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(this.detalleSiniestro);
 
     }
 
-    public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, DetalleSiniestro beanVO, Boolean aplicarLogicaNegocio) {
+    public FacturaDetailFrameController(String detailFramePath,
+            GridControl gridControl, DetalleSiniestro beanVO,
+            Boolean aplicarLogicaNegocio, ReloadButton reload) {
         super(detailFramePath, gridControl, (BeanVO) null, aplicarLogicaNegocio);
         this.detalleSiniestro = beanVO;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+        this.reload = reload;
+    }
 
+    public DetalleSiniestro getDetalleSiniestro() {
+        return detalleSiniestro;
+    }
+
+    @Override
+    protected Response logicaNegocioConCambioEnVista(ValueObject persistentObject, boolean mostrarMensajeError) {
+        Response response = null;
+            response = logicaNegocio(persistentObject);
+            if (!response.isError()) {
+                vista.getMainPanel().getVOModel().setValueObject((ValueObject) ((VOResponse) response).getVo());
+                vista.getMainPanel().pull();
+            } else if (mostrarMensajeError) {
+                OptionPane.showMessageDialog(
+                        ClientUtils.getParentFrame(vista.getMainPanel()),
+                        ClientSettings.getInstance().getResources().getResource("Error aplicando la logica del negocio:") + "\n"
+                        + ClientSettings.getInstance().getResources().getResource(response.getErrorMessage()),
+                        ClientSettings.getInstance().getResources().getResource("Error Logica de Negocio"),
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        return response;
     }
 
     @Override
@@ -69,11 +98,24 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public void afterInsertData() {
         vista.getMainPanel().getReloadButton().doClick();
+        if (reload != null) {
+            reload.doClick();
+        }
     }
 
     @Override
     public void afterEditData() {
         vista.getMainPanel().getReloadButton().doClick();
+        if (reload != null) {
+            reload.doClick();
+        }
+    }
+
+    @Override
+    public void afterReloadData() {
+        if (reload != null) {
+            reload.doClick();
+        }
     }
 
     @Override
@@ -154,22 +196,10 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     }
 
     public void updateDetalleSiniestro() {
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        DetalleSiniestro sin = null;
-        try {
-            sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, detalleSiniestro.getId());
+        Session s = null;
 
-            Hibernate.initialize(sin.getPagos());
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            s.close();
-            s = null;
-        }
-        detalleSiniestro = sin;
-
-        s = HibernateUtil.getSessionFactory().openSession();
         try {
+            s = HibernateUtil.getSessionFactory().openSession();
             Collection<Factura> fac = detalleSiniestro.getPagos();
             Double facturado = 0d;
             for (Factura factura : fac) {
