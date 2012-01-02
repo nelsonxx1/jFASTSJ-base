@@ -142,7 +142,11 @@ public class Beneficiario extends BeanVO implements Serializable, Auditable {
     }
 
     public void setIndemnizacion(Double indemnizacion) {
-        this.indemnizacion = indemnizacion;
+        if (indemnizacion < 0) {
+            this.indemnizacion = 0d;
+        } else {
+            this.indemnizacion = indemnizacion;
+        }
     }
 
     public Set<Documento> getDocumentos() {
@@ -176,5 +180,4 @@ public class Beneficiario extends BeanVO implements Serializable, Auditable {
     public void setCertificado(Certificado certificado) {
         this.certificado = certificado;
     }
-    
 }

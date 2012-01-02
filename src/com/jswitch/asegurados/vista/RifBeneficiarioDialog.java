@@ -338,7 +338,8 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
                 if (!editarRegistro) {
                     int r = JOptionPane.showConfirmDialog(MDIFrame.getInstance(), "RIF ya existe. Desea editar la Beneficiario?", "Mensaje", JOptionPane.YES_NO_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
-                        new BeneficiarioDetailFrameController(BeneficiarioDetailFrame.class.getName(), vista.getGridBeneficiario(), (BeanVO) p, true, (Certificado) vista.getBeanVO());
+                        new BeneficiarioDetailFrameController(BeneficiarioDetailFrame.class.getName(), vista.getGridBeneficiario(), (BeanVO) p, true,
+                                (Certificado) vista.getBeanVO(), vista.getMainPanel().getReloadButton());
                     }
                     agregarAlGrid(p);
                 } else {
@@ -351,7 +352,9 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
                 rif = (Rif) newPersistentObject;
                 RifBeneficiarioDialog.this.dispose();
                 if (!editarRegistro) {
-                    BeneficiarioDetailFrameController con = new BeneficiarioDetailFrameController(BeneficiarioDetailFrame.class.getName(), vista.getGridBeneficiario(), null, true, (Certificado) vista.getBeanVO());
+                    BeneficiarioDetailFrameController con =
+                            new BeneficiarioDetailFrameController(BeneficiarioDetailFrame.class.getName(),
+                            vista.getGridBeneficiario(), null, true, (Certificado) vista.getBeanVO(), vista.getMainPanel().getReloadButton());
                     linkForm = con.getMainPanel();
                     linkAttName = "persona";
                     insertPersona(newPersistentObject);

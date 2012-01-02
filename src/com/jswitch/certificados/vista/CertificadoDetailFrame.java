@@ -46,6 +46,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         jPanel1 = new javax.swing.JPanel();
         editButton1 = new org.openswing.swing.client.EditButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
+        reloadButton1 = new org.openswing.swing.client.ReloadButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         form1 = new org.openswing.swing.form.client.Form();
@@ -150,13 +151,16 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
                 .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(521, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -164,6 +168,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
 
         form1.setVOClassName(Certificado.class.getName());
         form1.setEditButton(editButton1);
+        form1.setReloadButton(reloadButton1);
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -338,8 +343,6 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         gridControl5.getColumnContainer().add(decimalColumn5);
 
         textColumn2.setColumnName("persona.rif.rif");
-        textColumn2.setEditableOnEdit(true);
-        textColumn2.setEditableOnInsert(true);
         textColumn2.setMaxCharacters(1024);
         gridControl5.getColumnContainer().add(textColumn2);
 
@@ -796,7 +799,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         insertButton6.addActionListener((CertificadoDetailController) formController);
 
         controllerBeneficiarios =
-                new BeneficiariosGridInternalController(Certificado.class.getName(), "getBeneficiarios", gridControl5, null);
+                new BeneficiariosGridInternalController(Certificado.class.getName(), "getBeneficiarios", gridControl5, reloadButton1, null);
         gridControl5.setGridDataLocator(controllerBeneficiarios);
         gridControl5.setController(controllerBeneficiarios);
 
@@ -939,6 +942,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel notasTecnicas;
     private org.openswing.swing.client.NumericControl numericControl1;
     private javax.swing.JPanel observaciones;
+    private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.ReloadButton reloadButton6;
     private org.openswing.swing.client.ReloadButton reloadButton7;
     private org.openswing.swing.client.ReloadButton reloadButtonDoc;

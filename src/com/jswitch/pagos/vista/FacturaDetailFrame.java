@@ -7,6 +7,7 @@ import com.jswitch.configuracion.controlador.CoberturaLookupController;
 import com.jswitch.pagos.controlador.ConceptoSENIATLookupControllerPorNombre;
 import com.jswitch.pagos.controlador.DesgloseCoberturaGridInternalController;
 import com.jswitch.pagos.controlador.DesgloseSumaAseguradaGridInternalController;
+import com.jswitch.pagos.controlador.FacturaDetailFrameController;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
@@ -455,8 +456,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addContainerGap(160, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel14);
@@ -491,6 +492,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         gridControl6.getColumnContainer().add(decimalColumn2);
 
         decimalColumn4.setColumnName("montoAmparado");
+        decimalColumn4.setColumnRequired(false);
         decimalColumn4.setDecimals(2);
         decimalColumn4.setEditableOnEdit(true);
         decimalColumn4.setEditableOnInsert(true);
@@ -498,6 +500,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
 
         decimalColumn8.setColumnName("montoNoAmparado");
         decimalColumn8.setColumnRequired(false);
+        decimalColumn8.setDecimals(2);
         gridControl6.getColumnContainer().add(decimalColumn8);
 
         textColumn6.setColumnName("detalle");
@@ -538,8 +541,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addContainerGap(160, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
@@ -563,7 +566,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -587,7 +590,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         desgloseSumaAsegurada =
                 new DesgloseSumaAseguradaGridInternalController(
                 Factura.class.getName(), "getDesgloseSumaAsegurada",
-                gridControl5);
+                gridControl5, (FacturaDetailFrameController) formController);
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
 

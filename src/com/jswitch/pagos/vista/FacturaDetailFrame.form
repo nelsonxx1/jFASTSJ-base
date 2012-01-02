@@ -40,7 +40,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="form1" min="-2" pref="177" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="297" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="305" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -491,9 +491,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace pref="164" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl5" alignment="0" pref="256" max="32767" attributes="2"/>
+                  <Component id="gridControl5" alignment="0" pref="264" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -689,9 +689,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace pref="164" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl6" alignment="0" pref="256" max="32767" attributes="2"/>
+                  <Component id="gridControl6" alignment="0" pref="264" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -759,6 +759,7 @@
                     <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;montoAmparado&quot;" type="code"/>
                     </Property>
+                    <Property name="columnRequired" type="boolean" value="false"/>
                     <Property name="decimals" type="int" value="2"/>
                     <Property name="editableOnEdit" type="boolean" value="true"/>
                     <Property name="editableOnInsert" type="boolean" value="true"/>
@@ -770,6 +771,7 @@
                       <Connection code="&quot;montoNoAmparado&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
+                    <Property name="decimals" type="int" value="2"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">

@@ -68,7 +68,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
                     + " WHERE C.idPropio='BEN'");
             TipoPersona tp = (TipoPersona) q.uniqueResult();
             q = s.createQuery("FROM " + Ramo.class.getName() + " C "
-                    + "WHERE C.IdPropio='VIDA'");
+                    + "WHERE C.idPropio='VIDA'");
             Ramo ramo = (Ramo) q.uniqueResult();
             s.close();
             vida.setRamo(ramo);

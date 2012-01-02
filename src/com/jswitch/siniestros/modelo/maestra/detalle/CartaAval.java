@@ -45,13 +45,6 @@ public class CartaAval extends DetalleSiniestro {
             c1.add(Calendar.DAY_OF_MONTH, General.parametros.get("cartaAval.diasVencimiento").getValorInteger());
             super.setFechaVencimiento(c1.getTime());
             c1.setTime(this.fechaEmision);
-
-            Calendar c2 = Calendar.getInstance();
-            c2.setTime(super.getFechaVencimiento());
-            if (c2.get(Calendar.YEAR) > c1.get(Calendar.YEAR)) {
-                c2.set(c1.get(Calendar.YEAR), 11, 31);
-                super.setFechaVencimiento(c2.getTime());
-            }
         }
     }
 
