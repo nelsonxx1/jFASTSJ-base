@@ -1,5 +1,6 @@
 package com.jswitch.siniestros.controlador;
 
+import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
@@ -9,11 +10,16 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
+import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
+import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
+import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
+import com.jswitch.vistasbd.Agotamiento;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 import java.util.Date;
 import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
@@ -24,12 +30,16 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.java.Consts;
 
 /**
  *
  * @author Adrian
  */
 public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFrameController {
+
+    private DetalleSiniestro detalleSin;
+    private DefaultDetailFrame frame;
 
     public DiagnosticoSiniestroDetailFrameController(String detailFramePath, GridControl gridControl,
             BeanVO beanVO, Boolean aplicarLogicaNegocio, DefaultDetailFrame frame) {
@@ -38,11 +48,41 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
     }
-    private DetalleSiniestro detalleSin;
-    private DefaultDetailFrame frame;
 
-    public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin, DefaultDetailFrame frame) {
-        super(DiagnosticoSiniestroDetailFrame.class.getName(), migrid, null, b);
+    public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin, DefaultDetailFrame frame, Diagnostico diagnostico) {
+        this.gridControl = migrid;
+        this.beanVO = null;
+        this.aplicarLogicaNegocio = b;
+        try {
+            Class<DefaultDetailFrame> t = (Class<com.jswitch.base.vista.util.DefaultDetailFrame>) Class.forName(DiagnosticoSiniestroDetailFrame.class.getName());
+            vista = t.newInstance();
+            vista.inicializar(this, true);
+
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "new", ex);
+        }
+        if (beanVO != null) {
+            vista.getMainPanel().reload();
+            vista.getMainPanel().setMode(Consts.READONLY);
+        } else {
+            vista.getMainPanel().setMode(Consts.INSERT);
+            vista.getMainPanel().getVOModel().setValue("diagnostico", diagnostico);
+            vista.getMainPanel().pull("diagnostico");
+            AgotamientoActual agotamiento = getAgotamiento(diagnostico,
+                    detalleSin.getSiniestro().getAsegurado());
+
+            vista.getMainPanel().getVOModel().setValue("totalUtilizado", agotamiento.agotamiento.getMontoPagado());
+            vista.getMainPanel().pull("totalUtilizado");
+
+            vista.getMainPanel().getVOModel().setValue("totalReservado", agotamiento.agotamiento.getMontoPendiente());
+            vista.getMainPanel().pull("totalReservado");
+
+            vista.getMainPanel().getVOModel().setValue("totalDisponible",
+                    agotamiento.montoAmparado - (agotamiento.agotamiento.getMontoPagado()
+                    + agotamiento.agotamiento.getMontoPendiente()));
+            vista.getMainPanel().pull("totalDisponible");
+        }
+
         this.detalleSin = detalleSin;
         this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
@@ -57,6 +97,13 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         s.close();
         detalleSin.getDiagnosticoSiniestros().remove((DiagnosticoSiniestro) beanVO);
         detalleSin.getDiagnosticoSiniestros().add(sin);
+        AgotamientoActual agotamiento = getAgotamiento(sin.getDiagnostico(),
+                detalleSin.getSiniestro().getAsegurado());
+        sin.setTotalUtilizado(agotamiento.agotamiento.getMontoPagado());
+        sin.setTotalReservado(agotamiento.agotamiento.getMontoPendiente());
+        sin.setTotalDisponible(
+                agotamiento.montoAmparado - (agotamiento.agotamiento.getMontoPagado()
+                + agotamiento.agotamiento.getMontoPendiente()));
         beanVO = sin;
         ((DiagnosticoSiniestroDetailFrame) vista).getjButton1().setEnabled(true);
         return new VOResponse(beanVO);
@@ -114,7 +161,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(((DiagnosticoSiniestroDetailFrame) vista).getjButton1())) {
-            new MantenimientoDiagnosticoDetailFrameController(frame,
+            new MantenimientoDiagnosticoDetailFrameController(vista,
                     false, (DiagnosticoSiniestro) vista.getMainPanel().getVOModel().getValueObject(), detalleSin);
             vista.dispose();
             return;
@@ -125,6 +172,25 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         vista.reloadGridsData();
     }
 
+    @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+        DiagnosticoSiniestro d = ((DiagnosticoSiniestro) persistentObject);
+        if (d.getMontoPendiente() > d.getTotalDisponible()) {
+            return new ErrorResponse("Exeso de Cobertura");
+        }
+        return new VOResponse(persistentObject);
+    }
+
+    @Override
+    public void afterInsertData() {
+        vista.getMainPanel().getReloadButton().doClick();
+    }
+
+    @Override
+    public void afterReloadData() {
+         frame.getMainPanel().getReloadButton().doClick();
+    }
+ 
     private class TratamientoLookupParent implements LookupParent {
 
         @Override
@@ -165,9 +231,48 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         }
     }
 
-    @Override
-    public Response logicaNegocio(ValueObject persistentObject) {
-//TODO CALCULAR MONTOS FACTURADO Y LIQUIDADO
-        return new VOResponse(persistentObject);
+    private class AgotamientoActual {
+
+        Agotamiento agotamiento;
+        Double montoAmparado;
+
+        public AgotamientoActual(Agotamiento agotamiento, Double montoAmparado) {
+            this.agotamiento = agotamiento;
+            this.montoAmparado = montoAmparado;
+        }
+    }
+
+    private AgotamientoActual getAgotamiento(Diagnostico diagnostico, Asegurado asegurado) {
+
+        Session s = null;
+        Agotamiento agotamiento = null;
+        Double montoAmparado = 0d;
+        AgotamientoActual a = null;
+
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            agotamiento = (Agotamiento) s.createQuery("FROM "
+                    + Agotamiento.class.getName()
+                    + " WHERE ayo=:ayo AND asegurado.id=:aseg AND diagnostico.id=:diag").
+                    setInteger("ayo", Calendar.getInstance().get(Calendar.YEAR) - 1).
+                    setLong("aseg", asegurado.getId()).
+                    setLong("diag", diagnostico.getId()).
+                    uniqueResult();
+            if (agotamiento == null) {
+                agotamiento = new Agotamiento(0d, 0d);
+            }
+            montoAmparado = (Double) s.createQuery("SELECT C.sumaAmparada.monto FROM "
+                    + SumaAsegurada.class.getName()
+                    + " C WHERE C.sumaAmparada.plan.id=?  AND C.diagnostico.id=?").
+                    setLong(0, asegurado.getPlan().getId()).
+                    setLong(1, diagnostico.getId()).uniqueResult();
+            a = new AgotamientoActual(agotamiento, montoAmparado);
+        } catch (Exception ex) {
+//            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+        return a;
     }
 }
