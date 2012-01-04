@@ -117,7 +117,7 @@ public class MantenimientoDiagnosticoDetailFrameController extends DefaultDetail
             s.close();
         }
         Response res = super.insertRecord(newPersistentObject);
-        frame.reloadGridsData();
+        frame.getMainPanel().getReloadButton().doClick();
         return res;
     }
 }
