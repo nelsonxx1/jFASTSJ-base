@@ -36,6 +36,16 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
     @BusinessKey
     private Cobertura cobertura;
     /**
+     * si es un Gasto clinico
+     */
+    @Column
+    private Boolean gastosClinicos;
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     */
+    @Column
+    private Boolean honorariosMedicos;
+    /**
      * booleano que dice si aplica no para la base imponible
      */
     @Column
@@ -181,4 +191,37 @@ public class ConfiguracionCobertura extends BeanVO implements Serializable, Audi
         this.optLock = optLock;
     }
 
+    /**
+     * si es un Gasto clinico
+     * @return the gastosClinicos
+     */
+    public Boolean getGastosClinicos() {
+        return gastosClinicos;
+    }
+
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     * @return the honorariosMedicos
+     */
+    public Boolean getHonorariosMedicos() {
+        return honorariosMedicos;
+    }
+
+    /**
+     * si es un Gasto clinico
+     * @param gastosClinicos the gastosClinicos to set
+     */
+    public void setGastosClinicos(Boolean gastosClinicos) {
+        this.gastosClinicos = gastosClinicos;
+    }
+
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     * @param honorariosMedicos the honorariosMedicos to set
+     */
+    public void setHonorariosMedicos(Boolean honorariosMedicos) {
+        this.honorariosMedicos = honorariosMedicos;
+    }
+
+    
 }
