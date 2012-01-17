@@ -12,6 +12,7 @@ import com.jswitch.pagos.controlador.FacturaDetailFrameController;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
+import com.jswitch.siniestros.controlador.DiagnosticoPorRamoGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
@@ -111,7 +112,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(),
                     (DetalleSiniestro) beanVO, true, vista.getMainPanel().getReloadButton());
         } else if (((DetalleSiniestroDetailFrame) vista).getInsertButtonDiagnostico().equals(e.getSource())) {
-            new DiagnosticoSiniestroDetailFrameController(((DetalleSiniestroDetailFrame) vista).getGridDiagnosticos(), true, (DetalleSiniestro) beanVO, vista);
+            new DiagnosticoPorRamoGridFrameController((DetalleSiniestroDetailFrame) vista, (DetalleSiniestro) beanVO);
         }
     }
 
