@@ -50,7 +50,7 @@ public class AyudaSocial extends DetalleSiniestro {
 
     public Set<Reporte> getReportes() {
         if (reportes.isEmpty()) {
-            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_AyudaSocial_001", "SINI_D_AyudaSocial_001", "SINI_D_AyudaSocial_001", null, "Carta 8½ x 11 Vertical"));
+            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_AyudaSocial_001", "SINI_D_AyudaSocial_001", "SINI_D_AyudaSocial_001", null, "Carta 8½ x 11 Vertical",false));
         }
         return reportes;
     }
