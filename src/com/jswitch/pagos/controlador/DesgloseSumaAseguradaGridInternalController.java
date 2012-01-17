@@ -181,7 +181,6 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
             } else {
                 return new ErrorResponse("Cancelado por el usuario");
             }
-            montoPendiente = 0d;
         }
         diagnosticoSiniestro.setMontoPagado(montoPagado);
         diagnosticoSiniestro.setMontoPendiente(montoPendiente);
@@ -209,6 +208,19 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
 
     private void loadDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
         this.detalleSiniestro = vista.getDetalleSiniestro();
+
+//        Session s = null;
+//        try {
+//            s = HibernateUtil.getSessionFactory().openSession();
+//            this.detalleSiniestro = (DetalleSiniestro) s.get(DetalleSiniestro.class, detalleSiniestro.getId());
+//            Hibernate.initialize(this.detalleSiniestro.getDiagnosticoSiniestros());
+//            Hibernate.initialize(this.detalleSiniestro.getNotasTecnicas());
+//            Hibernate.initialize(this.detalleSiniestro.getPagos());
+//        } catch (Exception exception) {
+//            System.out.println(exception);
+//        } finally {
+//            s.close();
+//        }
     }
 
     @Override

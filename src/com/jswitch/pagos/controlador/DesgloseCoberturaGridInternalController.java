@@ -111,11 +111,6 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         updateFactura((Factura) beanVO);
     }
 
-    @Override
-    public void afterReloadGrid() {
-        updateFactura((Factura) beanVO);
-    }
-
     /**
      * actualiza los valores de la factura
      * @param  factura 

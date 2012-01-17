@@ -84,25 +84,24 @@ public class RemesaDetailFrameController
                 if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                     sql = "FROM "
                             + OrdenDePago.class.getName() + " C WHERE "
-                            + "C.estatusPago=? AND C.codigoSIGECOF is not null";
+                            + "C.estatusPago.id=? AND C.codigoSIGECOF is not null";
                 } else {
                     sql = "FROM "
                             + OrdenDePago.class.getName() + " C WHERE "
-                            + "C.estatusPago=? AND C.codigoSIGECOF is not null AND "
+                            + "C.estatusPago.id=? AND C.codigoSIGECOF is not null"
                             + "C.tipoDetalleSiniestro=?";
                 }
                 Query q = s.createQuery(sql);
-                List ordenes = null;
+                List l = null;
                 if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
-                    ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).list();
+                    l = q.setString(0, EstatusPago.PENDIENTE.toString()).list();
                 } else {
-                    ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).
-                            setString(1, p.getTipoDetalleSiniestro().toString()).list();
+                    l = q.setString(0, EstatusPago.PENDIENTE.toString()).setString(1, p.getTipoDetalleSiniestro().toString()).list();
                 }
 
-                for (Object objeto : ordenes) {
+                for (Object detalleSiniestro : l) {
                     p.getOrdenDePagos().add(
-                            (OrdenDePago) objeto);
+                            (OrdenDePago) detalleSiniestro);
                 }
             } finally {
                 s.close();

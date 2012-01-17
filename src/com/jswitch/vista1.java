@@ -1,4 +1,4 @@
-package com.jswitch.vistasbd;
+package com.jswitch;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
