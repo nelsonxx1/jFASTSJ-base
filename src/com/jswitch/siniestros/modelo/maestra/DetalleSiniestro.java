@@ -101,6 +101,76 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Column
     private Double montoACancelar;
     /**
+     * total gastos medicos
+     */
+    @Column
+    private Double montoGastosMedicos;
+    /**
+     * total gastos clinicos
+     */
+    @Column
+    private Double montoGastosClinicos;
+    /**
+     * total monto no amparado
+     */
+    @Column
+    private Double montoNoAmparado;
+    /**
+     * total base de la base del iva
+     */
+    @Column
+    private Double montoBaseIva;
+    /**
+     * total monto del iva
+     */
+    @Column
+    private Double montoIva;
+    /**
+     * porcentaje del iva
+     */
+    @Column
+    private Double porcentajeIva;
+    /**
+     * porcentaje retencion iva
+     */
+    @Column
+    private Double porcentajeRetencionIva;
+    /**
+     * total base de la base del islr
+     */
+    @Column
+    private Double montoBaseIslr;
+    /**
+     * total monto del Islr
+     */
+    @Column
+    private Double montoIslr;
+    /**
+     * porcentaje del Islr
+     */
+    @Column
+    private Double porcentajeIslr;
+    /**
+     * porcentaje retencion Islr
+     */
+    @Column
+    private Double porcentajeRetencionIslr;
+    /**
+     * total monto Pronto Pago
+     */
+    @Column
+    private Double montoProntoPago;
+    /**
+     * porcentaje pronto pago
+     */
+    @Column
+    private Double porcentajeProntoPago;
+    /**
+     * total monto timbre municipal
+     */
+    @Column
+    private Double timbreMunicipal;
+    /**
      * tipo de enfermedad
      */
     @Column
@@ -676,5 +746,4 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     public void setTratamientoEfectuado(TratamientoEfectuado tratamientoEfectuado) {
         this.tratamientoEfectuado = tratamientoEfectuado;
     }
-
 }

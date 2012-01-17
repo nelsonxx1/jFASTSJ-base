@@ -42,6 +42,7 @@ public class BuscarPersonaDialog extends InternalFrame {
     private String modelClass;
 
     public BuscarPersonaDialog(Component owner, String detailFramePath, String modelClass) {
+        
         this.detailFramePath = detailFramePath;
         this.modelClass = modelClass;
         initComponents();

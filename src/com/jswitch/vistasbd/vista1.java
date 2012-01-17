@@ -13,7 +13,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class vista1 extends BeanVO implements Serializable {
-//asdfasdf
+
     /**
      *
      */
@@ -21,7 +21,7 @@ public class vista1 extends BeanVO implements Serializable {
     @BusinessKey
     @Id
     private String nombre;
-   
+    
     /**
      *
      */
@@ -39,8 +39,6 @@ public class vista1 extends BeanVO implements Serializable {
     public void setSuma(Double suma) {
         this.suma = suma;
     }
-
-  
 
     public String getNombre() {
         return nombre;
